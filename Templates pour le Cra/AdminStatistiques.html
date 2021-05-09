@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="./css/bootstrap.css" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  background-color: #FFECC7;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color:white;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #FF5733;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #FFC300;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <img class="logo" src="https://www.infocom-group.fr/dist/img/logo_symbole.png" width="200">
+  <a class="active" href="#home">Accueil</a>
+  <a href="#news">Statistiques</a>
+  <a href="#contact">Gestions</a>
+</div>
+
+<br><br><br><br>
+
+
+<div class="content">
+
+ <div class="container">
+    <h1 class="display-6">Statistiques 1</h1>
+
+        <hr>
+      <div class="row">
+        <div class="col-md-4">
+    <img  src="https://www.editions-eni.fr/Open/download/b32083e3-6c8e-4ace-a906-d7f2870e1fa1/images/06SOB08.png" width="400">
+
+     
+        </div>
+        <div class="col-md-4">
+     <img  src="https://www.editions-eni.fr/Open/download/b32083e3-6c8e-4ace-a906-d7f2870e1fa1/images/06SOB08.png" width="400">
+
+       </div>
+        <div class="col-md-4">
+           <img  src="https://www.editions-eni.fr/Open/download/b32083e3-6c8e-4ace-a906-d7f2870e1fa1/images/06SOB08.png" width="400">
+
+        </div>
+      </div>
+</div>
+
+<br><br>
+ <div class="container">
+    <h1 class="display-6">Statistiques 2</h1>
+
+        <hr>
+      <div class="row">
+        <div class="col-md-4">
+    <img  src="https://www.editions-eni.fr/Open/download/b32083e3-6c8e-4ace-a906-d7f2870e1fa1/images/06SOB08.png" width="400">
+
+     
+        </div>
+        <div class="col-md-4">
+     <img  src="https://www.editions-eni.fr/Open/download/b32083e3-6c8e-4ace-a906-d7f2870e1fa1/images/06SOB08.png" width="400">
+
+       </div>
+        <div class="col-md-4">
+           <img  src="https://www.editions-eni.fr/Open/download/b32083e3-6c8e-4ace-a906-d7f2870e1fa1/images/06SOB08.png" width="400">
+
+        </div>
+      </div>
+</div>
+
+</body>
+</html>
