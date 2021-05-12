@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgserviceService } from '../../../y-service/ngservice-service';
-import { Collaborator } from '../../../z-model/collaborator';
+import { NgserviceService } from '../../y-service/ngservice-service';
+import { Collaborator } from '../../z-model/collaborator';
 
 @Component({
   selector: 'app-list-collaborateur',
