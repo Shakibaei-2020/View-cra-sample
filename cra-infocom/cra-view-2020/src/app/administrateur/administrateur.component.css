@@ -21,18 +21,11 @@
         margin-top: -1px;
       }
 
-      .lesLiens{
-          margin-left: 8%;
-      }
-
-    .lesLiens:hover{
-        color:white;
-    }
-      .lesLiens2:hover{
-          background-color:#571845;
-      }
 
 
+.lien-pos{
+    margin-left: 8%;
+}
 
 .dropdown-submenu {
     position: relative;
