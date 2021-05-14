@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddCollaborateurComponent } from './Admin/Gestion collaborateur/add-collaborateur/add-collaborateur.component';
-import { DeleteCollaborateurComponent } from './Admin/Gestion collaborateur/delete-collaborateur/delete-collaborateur.component';
-import { EditCollaborateurComponent } from './Admin/Gestion collaborateur/edit-collaborateur/edit-collaborateur.component';
+import { AddCollaborateurComponent } from './administrateur/add-collaborateur/add-collaborateur.component'
+import { DeleteCollaborateurComponent } from './administrateur/delete-collaborateur/delete-collaborateur.component'
+import { EditCollaborateurComponent} from './administrateur/edit-collaborateur/edit-collaborateur.component'
 import { ListCollaborateurComponent } from './administrateur/list-collaborateur/list-collaborateur.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 
