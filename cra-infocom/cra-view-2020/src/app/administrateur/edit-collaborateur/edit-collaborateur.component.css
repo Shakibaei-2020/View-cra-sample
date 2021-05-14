@@ -1,0 +1,151 @@
+.container {
+    height: 100vh;
+}
+
+.card {
+	   	border-radius: 45px;
+
+    width: 100%;
+    padding: 30px;
+
+}
+
+.form {
+    padding: 20px
+}
+
+.form-control {
+    height: 50px;
+    background-color: #eee
+
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #f50057;
+    outline: 0;
+    box-shadow: none;
+    background-color: #eee
+}
+
+.inputbox {
+    margin-bottom: 15px
+}
+
+
+.test{
+    width: 900px;
+}
+
+.div-edit{
+    margin-top: 4%;
+}
+
+  .btnEditer{
+width: 100%;
+padding: 13px;
+background: #FF5733;
+color: white;
+font-size: 15px;
+border: 1px solid grey;
+border-radius: 15px;
+margin-top: 6.5%;
+}
+
+.btnUpdated{
+    width: 100.12%;
+padding: 13px;
+background: #FF5733;
+color: white;
+font-size: 15px;
+border: 0px solid grey;
+margin-top: 6.5%;
+margin-left: -0.75px;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+
+
+}
+
+.btnEditer:hover{
+float: left;
+background: #FFC300;
+color: white;
+font-size: 15px;
+border: 1px solid grey;
+
+}
+
+
+
+.profile-nav, .profile-info{
+    margin-top:30px;   
+}
+
+.profile-nav .user-heading {
+    background: #900C3E;
+    color: #fff;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    text-align: center;
+    height:125px;
+    padding-top: 52px;
+    border-radius: 15px;
+
+}
+
+.profile-nav .user-heading.round a  {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 10px solid rgba(255,255,255,0.3);
+    display: inline-block;
+}
+
+.profile-nav .user-heading h1 {
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 5px;
+
+}
+
+.bio-graph-heading {
+    background: #900C3E;
+    color: #fff;
+    text-align: center;
+    font-style: italic;
+    padding: 40px 110px;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    font-size: 16px;
+    font-weight: 300;
+    height:125px;
+    border-radius: 15px;
+
+}
+
+.bio-row {
+    width: 50%;
+    float: left;
+    margin-bottom: 10px;
+    padding:0 30px;
+}
+
+.bio-row p span {
+    width: 100px;
+    display: inline-block;
+    
+}
+
+
+
+.modal-title{
+    margin-top: 2%;
+    margin-left:2%;
+}
+
+.font-modal{
+
+    border-radius: 20px;
+
+}
