@@ -1,0 +1,70 @@
+.font-div1{
+    margin-top: 180px;;
+}
+
+
+* {
+    box-sizing: border-box;
+  }
+  
+  form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+
+  }
+  
+  form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #C70039;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; 
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+  }
+  
+  form.example button:hover {
+    background:#FF5733;
+  }
+  
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .btnEditer{
+         float: left;
+    padding: 10px;
+    background: #FF5733;
+    color: white;
+    font-size: 15px;
+    border: 1px solid grey;
+    border-radius: 15px;
+
+    
+  }
+
+  .btnEditer:hover{
+    float: left;
+padding: 10px;
+background: #FFC300;
+color: white;
+font-size: 15px;
+border: 1px solid grey;
+
+}
+
+.modal-title{
+    margin-top: 50px;
+}
