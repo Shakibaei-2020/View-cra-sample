@@ -15,6 +15,7 @@ import { EditFraisComponent } from './Admin/Gestion notes de frais/edit-frais/ed
 import { ListFraisComponent } from './Admin/Gestion notes de frais/list-frais/list-frais.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SecurityComponent } from './security/security.component';
 
 
 
@@ -32,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     DeleteFraisComponent,
     EditFraisComponent,
     ListFraisComponent,
+    SecurityComponent,
   ],
   imports: [
     BrowserModule,
