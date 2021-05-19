@@ -13,28 +13,34 @@ import { AdministrateurComponent } from './administrateur/administrateur.compone
 import { SearchCollaborateurComponent } from './administrateur/search-collaborateur/search-collaborateur.component';
 import { AddFraisComponent } from './administrateur/add-frais/add-frais.component';
 import { EditFraisComponent } from './administrateur/edit-frais/edit-frais.component';
+import { SearchFraisComponent } from './administrateur/search-frais/search-frais.component';
 
 
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AdministrateurComponent,
     ConnexionComponent,
+
     AddCollaborateurComponent,
     EditCollaborateurComponent,
-    AdministrateurComponent,
     SearchCollaborateurComponent,
+
     AddFraisComponent,
     EditFraisComponent,
+    SearchFraisComponent,
+
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
