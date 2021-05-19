@@ -4,7 +4,13 @@
   }
 
   .navbar{
-      background-color: #571845;
+      background-color: #252525;
+
+    }
+
+    .text-nav{
+        margin-left: 70%;
+
     }
 
     .link-page{
@@ -74,3 +80,8 @@
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
+
+.logo{
+    margin-left: 8%;
+}
+

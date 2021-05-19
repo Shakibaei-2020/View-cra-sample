@@ -1,5 +1,5 @@
 .font-div1{
-    margin-top: 180px;;
+    margin-top: 10%;
 }
 
 
@@ -16,14 +16,16 @@
     background: #f1f1f1;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
+    height:47px;
 
   }
   
   form.example button {
     float: left;
     width: 20%;
-    padding: 10px;
-    background: #C70039;
+    padding-top: 12px;
+
+    background: #363636;
     color: white;
     font-size: 17px;
     border: 1px solid grey;
@@ -34,7 +36,7 @@
   }
   
   form.example button:hover {
-    background:#FF5733;
+    background:#464646;
   }
   
   form.example::after {
@@ -43,28 +45,29 @@
     display: table;
   }
 
-  .btnEditer{
-         float: left;
-    padding: 10px;
-    background: #FF5733;
-    color: white;
-    font-size: 15px;
-    border: 1px solid grey;
+
+
+.btnEditer {
+    padding: 10px 25px;
+    padding-bottom: 29px;
+    margin-left: 5%;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
     border-radius: 15px;
-
-    
+    box-shadow: 0 9px #999;
+    height: 5px;
   }
-
-  .btnEditer:hover{
-    float: left;
-padding: 10px;
-background: #FFC300;
-color: white;
-font-size: 15px;
-border: 1px solid grey;
-
-}
-
-.modal-title{
-    margin-top: 50px;
-}
+  
+  .btnEditer:hover {background-color: #464646}
+  
+  .btnEditer:active {
+    background-color: #252525;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }

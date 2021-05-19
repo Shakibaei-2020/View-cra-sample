@@ -1,0 +1,31 @@
+.div-add{
+    margin-top: 4%;
+}
+
+.btnEditer{
+    width: 100%;
+    padding: 13px;
+    background: #FF5733;
+    color: white;
+    font-size: 15px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    margin-top: 6.5%;
+}
+
+.btnEditer:hover{
+    float: left;
+    background: #FFC300;
+    color: white;
+    font-size: 15px;
+    border: 1px solid grey;
+}    
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid red;
+  }

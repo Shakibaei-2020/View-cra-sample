@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
 import { SearchCollaborateurComponent } from './administrateur/search-collaborateur/search-collaborateur.component';
+import { AddFraisComponent } from './administrateur/add-frais/add-frais.component';
+import { EditFraisComponent } from './administrateur/edit-frais/edit-frais.component';
+
 
 
 
@@ -18,11 +21,12 @@ import { SearchCollaborateurComponent } from './administrateur/search-collaborat
   declarations: [
     AppComponent,
     ConnexionComponent,
-
     AddCollaborateurComponent,
     EditCollaborateurComponent,
     AdministrateurComponent,
     SearchCollaborateurComponent,
+    AddFraisComponent,
+    EditFraisComponent,
   ],
   imports: [
     BrowserModule,
