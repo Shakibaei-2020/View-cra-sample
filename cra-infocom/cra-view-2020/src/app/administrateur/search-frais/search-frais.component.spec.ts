@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListCollaborateurComponent } from './list-collaborateur.component';
+import { SearchFraisComponent } from './search-frais.component';
 
-describe('ListCollaborateurComponent', () => {
-  let component: ListCollaborateurComponent;
-  let fixture: ComponentFixture<ListCollaborateurComponent>;
+describe('SearchFraisComponent', () => {
+  let component: SearchFraisComponent;
+  let fixture: ComponentFixture<SearchFraisComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListCollaborateurComponent ]
+      declarations: [ SearchFraisComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListCollaborateurComponent);
+    fixture = TestBed.createComponent(SearchFraisComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -23,5 +23,3 @@ describe('ListCollaborateurComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
-

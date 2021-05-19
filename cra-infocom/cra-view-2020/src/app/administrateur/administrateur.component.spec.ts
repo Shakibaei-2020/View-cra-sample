@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteFraisComponent } from './delete-frais.component';
+import { AdministrateurComponent } from './administrateur.component';
 
-describe('DeleteFraisComponent', () => {
-  let component: DeleteFraisComponent;
-  let fixture: ComponentFixture<DeleteFraisComponent>;
+describe('AdministrateurComponent', () => {
+  let component: AdministrateurComponent;
+  let fixture: ComponentFixture<AdministrateurComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteFraisComponent ]
+      declarations: [ AdministrateurComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteFraisComponent);
+    fixture = TestBed.createComponent(AdministrateurComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
