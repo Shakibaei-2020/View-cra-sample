@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgserviceService } from '../y-service/ngservice-service';
+import { Collaborator } from '../z-model/collaborator';
 
 @Component({
   selector: 'app-connexion',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnexionComponent implements OnInit {
 
-  constructor() { }
+  collaborator = new Collaborator();
+
+  nvcollaborator = new Collaborator();
+
+  constructor(private _route:Router,private _service:NgserviceService) { }
 
   ngOnInit(): void {
   }
 
-}
+  connexionCollabFormSubmit(){
+
+    this._service.fetchOneCollabByMailFromRemote(this.collaborator.email).subscribe(
+      data=> this.nvcollaborator = data,
+      error=>console.log("exception" +error)
+      )
+
+      if(this.nvcollaborator.email == this.collaborator.email && this.nvcollaborator.passward == this.collaborator.passward ){
+
+
+      }
+    }
+    
+  }
+

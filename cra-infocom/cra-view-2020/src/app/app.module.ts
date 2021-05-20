@@ -11,9 +11,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
 import { SearchCollaborateurComponent } from './administrateur/search-collaborateur/search-collaborateur.component';
-import { AddFraisComponent } from './administrateur/add-frais/add-frais.component';
 import { EditFraisComponent } from './administrateur/edit-frais/edit-frais.component';
 import { SearchFraisComponent } from './administrateur/search-frais/search-frais.component';
+
+
+import {MatNativeDateModule} from '@angular/material/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+
+
 
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -28,7 +35,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditCollaborateurComponent,
     SearchCollaborateurComponent,
 
-    AddFraisComponent,
     EditFraisComponent,
     SearchFraisComponent,
 

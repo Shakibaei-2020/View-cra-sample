@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddCollaborateurComponent } from './administrateur/add-collaborateur/add-collaborateur.component';
-import { AddFraisComponent } from './administrateur/add-frais/add-frais.component';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
 import { EditCollaborateurComponent } from './administrateur/edit-collaborateur/edit-collaborateur.component';
 import { EditFraisComponent } from './administrateur/edit-frais/edit-frais.component';
@@ -22,7 +21,6 @@ const routes: Routes = [
   {path:'searchCollaborateur',component:SearchCollaborateurComponent },
 
   {path:'editFrais',component: EditFraisComponent},
-  {path:'addFrais',component: AddFraisComponent},
   {path:'searchFrais',component:SearchFraisComponent},
   
   

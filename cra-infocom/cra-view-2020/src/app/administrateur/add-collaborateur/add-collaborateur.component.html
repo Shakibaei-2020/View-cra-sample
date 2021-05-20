@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form">
-            <div class="inputbox mt-3"> <span for="lastName" >Nom :</span> <input type="text" placeholder="Nom de famille" required [(ngModel)]="collaborator.lastName" name="nom" > </div>
+            <div class="inputbox mt-3"> <span for="lastName" >Nom :</span> <input type="text" placeholder="Nom de famille" required [(ngModel)]="collaborator.lastName" name="lastName" > </div>
             <div class="inputbox mt-3"> <span for="firstName" >Prenom :</span> <input type="text" placeholder="Prenom"  required [(ngModel)]="collaborator.firstName" name="firstName" > </div>
             <div class="inputbox mt-3"> <span for="email" >Adresse mail:</span> <input type="text" placeholder="Adresse mail"  required [(ngModel)]="collaborator.email" name="email" > </div>
             <div class="inputbox mt-3"> <span for="passward" >Mot de passe :</span> <input type="text" placeholder="Mot de passe" required [(ngModel)]="collaborator.passward" name="passward"  > </div>
@@ -18,10 +18,9 @@
     </div>
     <div class="col-md-6">
         <div class="form">
-            <!--
             <div class="inputbox mt-3"> <span for="dateOfEntry" >Date entrée :</span> <input type="date" required [(ngModel)]="collaborator.dateOfEntry" name="dateOfEntry" > </div>
             <div class="inputbox mt-3"> <span for="dateOfRelease">Date sortie :</span> <input type="date" required [(ngModel)]="collaborator.dateOfRelease" name="dateOfRelease"> </div>
-            -->
+            
         <div class="inputbox mt-3"><span>Type :</span><br>
             <select class="form-input" aria-label="Default select example">
             <option value="1">Admin</option>

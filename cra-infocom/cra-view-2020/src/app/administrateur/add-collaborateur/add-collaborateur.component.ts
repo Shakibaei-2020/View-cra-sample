@@ -18,8 +18,6 @@ export class AddCollaborateurComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  
   addCollabFormSubmit(){
 
     this._service.addCollabToRemote(this.collaborator).subscribe(
@@ -32,5 +30,7 @@ export class AddCollaborateurComponent implements OnInit {
       }
     )
     }
+
+    
 
 }

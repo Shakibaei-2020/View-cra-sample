@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
+import { Collaborator } from 'src/app/z-model/collaborator';
 
 @Component({
   selector: 'app-edit-frais',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-frais.component.css']
 })
 export class EditFraisComponent implements OnInit {
+
 
   constructor() { }
 

@@ -4,12 +4,13 @@
 
 <div class="font-div1">
     <div class="container mt-3">
-        <form class="example" action="action_page.php">
-            <input type="text" placeholder="Search by name.." name="search">
+        <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchOneCollab()">
+            <input type="text" placeholder="Search by name.."  required [(ngModel)]="collaboratorInputId.id" name="id">
             <button type="submit"><p>Chercher</p></button>
           </form>
+
         <br><br>
-        <h2>Resultat</h2>
+        <h2>Resultat  </h2>  {{message}}
         <table class="table table-condensed">
             <thead>
               <tr>
@@ -23,19 +24,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Shakibaei</td>
-                <td>Mohammad</td>
-                <td>mohashakibaei@outlook.fr</td>
-                <td>14/02/2000</td>
-                <td>22/03/2021</td>
+                <tr>
+                    <td>{{collaborators.firstName}}</td>
+                    <td>{{collaborators.lastName}}</td>
+                    <td>{{collaborators.email}}</td>
+                    <td>{{collaborators.dateOfEntry}}</td>
+                    <td>{{collaborators.dateOfRelease}}</td>
+
                 <td>
                     <button class="btnEditer" type="submit" (click)="goToEditCollab()">Editer</button>
                 </td>
             </tr>
-     
             </tbody>
           </table>
-  
         </div>
     </div>
+

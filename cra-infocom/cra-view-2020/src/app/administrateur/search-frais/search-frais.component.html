@@ -2,23 +2,51 @@
 
 
 
+
 <div class="font-div1">
-    <div class="container mt-3">
-        <form class="example" action="action_page.php">
-            <input type="text" placeholder="Search Frais by name.." name="search">
-            <button type="submit"><p>Chercher</p></button>
-          </form>
-        <br><br>
+          <div class="container">
+            <h1>Gestion des notes de frais</h1>
+            <hr>
+  
+          <form >
+
+
+        </form>
+
+
+
+  
+
+      <div class="container">
+        <div class="row">
+            <div class="col-sm-4"><input type="date"></div>
+            <div class="col-sm-4"><input type="date"></div>
+            <div class="col-sm-4"><button class="btnSearch" type="submit">Chercher</button></div>
+            <div class="col-sm-8">
+              <select class="form-input" aria-label="Default select example">
+              <option value="1">En-cours</option>
+              <option value="2">Refusé</option>
+              <option value="2">Validé</option>
+
+            </select>
+            </div>
+
+    </div>
+
+        <br><br><br><br>
+
         <h2>Resultat</h2>
-        <table class="table table-condensed">
+        <hr>
+        <table class="table ">
             <thead>
               <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Mail</th>
-                <th>Date entrée</th>
-                <th>Date Sortie</th>
-                <th>Actions</th>
+                <th><p class="titreTable">Nom </p></th>
+                <th><p class="titreTable">Prénom</p></th>
+                <th><p class="titreTable">Date demande</p></th>
+                <th><p class="titreTable">Date Frais</p></th>
+                <th><p class="titreTable">Status</p></th>
+
+                <th ><p class="commande titreTable">Actions</p></th>
 
               </tr>
             </thead>
@@ -26,15 +54,18 @@
               <tr>
                 <td>Shakibaei</td>
                 <td>Mohammad</td>
-                <td>mohashakibaei@outlook.fr</td>
                 <td>14/02/2000</td>
                 <td>22/03/2021</td>
+                <td>En-cours</td>
                 <td>
-                    <button class="btnEditer" type="submit">Editer</button>
+                    <button class="btnEditer" type="submit"  (click)="goToEditFrais()">Gerer</button>
                 </td>
             </tr>
-     
             </tbody>
           </table>
+
+
+          
+       
         </div>
     </div>
