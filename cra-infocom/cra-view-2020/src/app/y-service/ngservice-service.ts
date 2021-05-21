@@ -14,15 +14,11 @@ import { Leave } from '../z-model/leave';
 })
 export class NgserviceService {
 
-  private messageSource = new BehaviorSubject('default message');
-  currentMessage = this.messageSource.asObservable();
-
+ 
 
   constructor(private _http:HttpClient) {}
 
-  changeMessage(message: string) {
-    this.messageSource.next(message)
-  }
+
 
 
 /** START Controller for Collaborateur interactions */

@@ -9,25 +9,26 @@ import { Router } from '@angular/router';
   templateUrl: './edit-collaborateur.component.html',
   styleUrls: ['./edit-collaborateur.component.css']
 })
-export class EditCollaborateurComponent implements OnInit, OnDestroy{
+export class EditCollaborateurComponent implements OnInit{
 
   message!:string;
   subscription!: Subscription;
 
-  constructor(private _service:NgserviceService, private _route:Router) { }
+  @Input() childMessage!: string;
+
+
+  constructor(private _service:NgserviceService, private _route:Router) { 
+
+  }
 
 
 
   ngOnInit() {
-    this.subscription = this._service.currentMessage.subscribe(message => this.message = message)
+    console.log(this.childMessage)
+
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 
-  newMessage() {
-    this._service.changeMessage("Hello from Sibling")
-  }
+
 
 }

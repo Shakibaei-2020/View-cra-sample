@@ -17,17 +17,15 @@ export class CollaborateurComponent implements OnInit {
   collaboratorInputId = new Collaborator();
   public collaborators!:Collaborator;  
 
+  parentMessage = "message from parent"
+
   constructor(private _service:NgserviceService, private _route:Router) { }
 
 
   ngOnInit() {
-    this.subscription = this._service.currentMessage.subscribe(message => this.message = message)
   }
   
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
 
-  }
   /** fin test */
 
 
@@ -47,6 +45,5 @@ export class CollaborateurComponent implements OnInit {
     error=>console.log("exception" +error)
     )
   }
-
 
 }

@@ -46,7 +46,9 @@
   }
 
 
-
+.toHide{
+    display:none;
+}
 .btnEditer {
     padding: 10px 25px;
     padding-bottom: 29px;
