@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MissionSearchComponent } from './mission-search.component';
+import { CollaborateurComponent } from './collaborateur.component';
 
-describe('MissionSearchComponent', () => {
-  let component: MissionSearchComponent;
-  let fixture: ComponentFixture<MissionSearchComponent>;
+describe('CollaborateurComponent', () => {
+  let component: CollaborateurComponent;
+  let fixture: ComponentFixture<CollaborateurComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MissionSearchComponent ]
+      declarations: [ CollaborateurComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MissionSearchComponent);
+    fixture = TestBed.createComponent(CollaborateurComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

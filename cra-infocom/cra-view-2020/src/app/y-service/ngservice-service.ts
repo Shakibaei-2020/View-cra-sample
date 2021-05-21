@@ -6,7 +6,6 @@ import { TypeCollaborator } from '../z-model/type-collaborator';
 import { Expense } from '../z-model/expense';
 import { BehaviorSubject } from 'rxjs';
 import { Subject } from 'rxjs';
-import { SearchCollaborateurComponent } from '../administrateur/collaborateur-search/search-collaborateur.component';
 import { Leave } from '../z-model/leave';
 
 

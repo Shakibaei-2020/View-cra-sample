@@ -1,16 +1,15 @@
-import { Component, OnDestroy, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Collaborator } from 'src/app/z-model/collaborator';
-import { Subscription } from 'rxjs';
-
 
 @Component({
-  selector: 'app-search-collaborateur',
-  templateUrl: './search-collaborateur.component.html',
-  styleUrls: ['./search-collaborateur.component.css']
+  selector: 'app-collaborateur',
+  templateUrl: './collaborateur.component.html',
+  styleUrls: ['./collaborateur.component.css']
 })
-export class SearchCollaborateurComponent implements OnInit , OnDestroy {
+export class CollaborateurComponent implements OnInit {
 
 
   message!:String;
@@ -18,9 +17,8 @@ export class SearchCollaborateurComponent implements OnInit , OnDestroy {
   collaboratorInputId = new Collaborator();
   public collaborators!:Collaborator;  
 
-
-
   constructor(private _service:NgserviceService, private _route:Router) { }
+
 
   ngOnInit() {
     this.subscription = this._service.currentMessage.subscribe(message => this.message = message)
@@ -50,9 +48,5 @@ export class SearchCollaborateurComponent implements OnInit , OnDestroy {
     )
   }
 
-
-
-
-  
 
 }
