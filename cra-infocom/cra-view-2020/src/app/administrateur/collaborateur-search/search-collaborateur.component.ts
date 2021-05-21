@@ -15,6 +15,10 @@ export class SearchCollaborateurComponent implements OnInit , OnDestroy {
 
   message!:String;
   subscription!: Subscription;
+  collaboratorInputId = new Collaborator();
+  public collaborators!:Collaborator;  
+
+
 
   constructor(private _service:NgserviceService, private _route:Router) { }
 
@@ -30,12 +34,11 @@ export class SearchCollaborateurComponent implements OnInit , OnDestroy {
 
 
   goToEditCollab(){
+
     this._route.navigate(['/editCollaborateur']);
   }
 
-  public collaborators!:Collaborator;  
 
-  collaboratorInputId = new Collaborator();
 
 
 

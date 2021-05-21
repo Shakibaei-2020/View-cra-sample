@@ -18,7 +18,6 @@ export class EditCollaborateurComponent implements OnInit, OnDestroy{
 
 
 
-  //child componante
   ngOnInit() {
     this.subscription = this._service.currentMessage.subscribe(message => this.message = message)
   }
