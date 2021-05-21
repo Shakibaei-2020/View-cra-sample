@@ -1,1 +1,71 @@
-<p>mission-search works!</p>
+<app-administrateur></app-administrateur>
+
+
+
+
+<div class="font-div1">
+          <div class="container">
+            <h1>Gestion des missions</h1>
+            <hr>
+  
+          <form >
+
+
+        </form>
+
+
+
+  
+
+      <div class="container">
+        <div class="row">
+            <div class="col-sm-4"><input type="date"></div>
+            <div class="col-sm-4"><input type="date"></div>
+            <div class="col-sm-4"><button class="btnSearch" type="submit">Chercher</button></div>
+            <div class="col-sm-8">
+              <select class="form-input" aria-label="Default select example">
+              <option value="1">Client1</option>
+              <option value="2">Client2</option>
+              <option value="2">Client3</option>
+              <option value="2">Client4</option>
+
+
+            </select>
+            </div>
+
+    </div>
+
+        <br><br><br><br>
+
+        <h2>Resultat</h2>
+        <hr>
+        <table class="table ">
+            <thead>
+              <tr>
+                <th><p class="titreTable">Client </p></th>
+                <th><p class="titreTable">Date début</p></th>
+                <th><p class="titreTable">Date fin</p></th>
+ 
+
+
+                <th ><p class="commande titreTable">Actions</p></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Shakibaei</td>
+                <td>22/03/2021</td>
+                <td>22/03/2021</td>
+                <td>
+                    <button class="btnEditer" type="submit"  (click)="goToEditMission()" >Gerer</button>
+                </td>
+            </tr>
+            </tbody>
+          </table>
+
+
+          
+       
+        </div>
+    </div>

@@ -25,6 +25,7 @@ import { CongeSearchComponent } from './administrateur/conge-search/conge-search
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { CongeDemandeComponent } from './utilisateur/conge-demande/conge-demande.component';
 import { DeclarationActiviteComponent } from './utilisateur/declaration-activite/declaration-activite.component';
+import { MissionAddComponent } from './administrateur/mission-add/mission-add.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { DeclarationActiviteComponent } from './utilisateur/declaration-activite
 
     CongeDemandeComponent,
     DeclarationActiviteComponent,
+    MissionAddComponent,
 
   ],
   imports: [

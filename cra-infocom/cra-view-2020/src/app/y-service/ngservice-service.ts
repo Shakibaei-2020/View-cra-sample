@@ -7,6 +7,7 @@ import { Expense } from '../z-model/expense';
 import { BehaviorSubject } from 'rxjs';
 import { Subject } from 'rxjs';
 import { SearchCollaborateurComponent } from '../administrateur/collaborateur-search/search-collaborateur.component';
+import { Leave } from '../z-model/leave';
 
 
 @Injectable({
@@ -59,10 +60,26 @@ export class NgserviceService {
     /** END Controller for Collaborateur interactions */
 
 
-    /**START Controller for note de Frais interactions  */
+    /**START EXPENSE */
 
     
-    /**END Controller for note de Frais interactions  */
+    /**END EXPENSE  */
+
+
+    /**START LEAVE  */
+
+
+    addLeaveRequestToRemote(leave: Leave ):Observable<any>{
+      return  this._http.post<any>("http://localhost:8950/demandesdeconge/ajouter",leave);
+    }
+    
+
+    fetchLeaveRequestOfOneFromRemote(id: number):Observable<Leave[]>{
+      return  this._http.get<Leave[]>("http://localhost:8950/demandesdeconge/lister/"+id);
+     }
+  
+   
+    /**END LEAVE  */
 
   }
 

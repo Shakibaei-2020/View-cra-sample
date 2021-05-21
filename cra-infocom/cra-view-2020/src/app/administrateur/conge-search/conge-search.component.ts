@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgserviceService } from 'src/app/y-service/ngservice-service';
 
 @Component({
   selector: 'app-conge-search',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CongeSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _service:NgserviceService, private _route:Router) { }
 
   ngOnInit(): void {
+  }
+
+  goToEditConge(){
+    this._route.navigate(['/editConge']);
   }
 
 }

@@ -14,6 +14,7 @@ import { MissionSearchComponent } from './administrateur/mission-search/mission-
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { CongeDemandeComponent } from './utilisateur/conge-demande/conge-demande.component';
 import { DeclarationActiviteComponent } from './utilisateur/declaration-activite/declaration-activite.component';
+import { MissionAddComponent } from './administrateur/mission-add/mission-add.component';
 
 
 
@@ -35,10 +36,12 @@ const routes: Routes = [
 {path:'administrateur',component:AdministrateurComponent },
 
   {path:'editConge',component:CongeEditComponent },
-  {path:'searchcongé',component:CongeSearchComponent},
+  {path:'searchconge',component:CongeSearchComponent},
 
   {path:'editMission',component: MissionEditComponent},
   {path:'searchMission',component: MissionSearchComponent},
+  {path:'addMission',component: MissionAddComponent},
+
 
   {path:'editCollaborateur',component:EditCollaborateurComponent },
   {path:'addCollaborateur',component:AddCollaborateurComponent },

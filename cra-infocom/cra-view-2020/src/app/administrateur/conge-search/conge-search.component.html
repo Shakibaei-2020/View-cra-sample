@@ -1,1 +1,74 @@
-<p>conge-search works!</p>
+<app-administrateur></app-administrateur>
+
+
+
+
+<div class="font-div1">
+          <div class="container">
+            <h1>Gestion des congées</h1>
+            <hr>
+  
+      
+
+
+
+  
+
+      <div class="container">
+        <div class="row">
+            <div class="col-sm-4"><input type="date"></div>
+            <div class="col-sm-4"><input type="date"></div>
+            <div class="col-sm-4"><button class="btnSearch" type="submit">Chercher</button></div>
+            <div class="col-sm-8">
+              <select class="form-input" aria-label="Default select example">
+              <option value="1">En-cours</option>
+              <option value="2">Refusé</option>
+              <option value="2">Validé</option>
+              <option value="2">Toutes</option>
+
+
+            </select>
+            </div>
+
+    </div>
+
+        <br><br><br><br>
+
+        <h2>Resultat</h2>
+        <hr>
+        <table class="table ">
+            <thead>
+              <tr>
+                <th><p class="titreTable">Nom </p></th>
+                <th><p class="titreTable">Prénom</p></th>
+                <th><p class="titreTable">Date demande</p></th>
+                <th><p class="titreTable">Date Départ</p></th>
+                <th><p class="titreTable">Date retour</p></th>
+                <th><p class="titreTable">Status</p></th>
+
+
+                <th ><p class="commande titreTable">Actions</p></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Shakibaei</td>
+                <td>Mohammad</td>
+                <td>14/02/2000</td>
+                <td>22/03/2021</td>
+                <td>22/03/2021</td>
+
+                <td>En-cours</td>
+                <td>
+                    <button class="btnEditer" type="submit" (click)="goToEditConge()">Gerer</button>
+                </td>
+            </tr>
+            </tbody>
+          </table>
+
+
+          
+       
+        </div>
+    </div>

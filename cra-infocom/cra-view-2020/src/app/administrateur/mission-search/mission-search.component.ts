@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgserviceService } from 'src/app/y-service/ngservice-service';
 
 @Component({
   selector: 'app-mission-search',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MissionSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _service:NgserviceService, private _route:Router) { }
 
   ngOnInit(): void {
   }
+
+
+  goToEditMission(){
+    this._route.navigate(['/editMission']);
+  }
+
 
 }

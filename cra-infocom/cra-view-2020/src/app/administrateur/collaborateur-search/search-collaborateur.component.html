@@ -1,8 +1,11 @@
 <app-administrateur></app-administrateur>
 
 
-
 <div class="font-div1">
+  <div class="container">
+    <h1>Gestion des collaborateurs</h1>
+    <hr>
+<div>
     <div class="container mt-3">
         <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchOneCollab()">
             <input type="text" placeholder="Search by name.."  required [(ngModel)]="collaboratorInputId.id" name="id">

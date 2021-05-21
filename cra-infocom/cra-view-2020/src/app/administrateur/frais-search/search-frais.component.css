@@ -1,97 +1,97 @@
 .font-div1{
-    margin-top: 10%;
+  margin-top: 10%;
 }
 
 
 * {
-    box-sizing: border-box;
-  }
-  
-  
+  box-sizing: border-box;
+}
+
+
 
 
 
 
 .btnEditer {
-    padding: 10px 25px;
-    padding-bottom: 29px;
-    margin-left: 5%;
-    width: 100%;
-    font-size: 14px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #363636;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    height: 5px;
-  }
-  
-  .btnEditer:hover {background-color: #464646}
-  
-  .btnEditer:active {
-    background-color: #252525;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
-
-  .commande{
-    margin-left:40%;
-  }
-
-  .titreTable{
-    margin-top: 3px;
-    margin-bottom: -3px;
-  }
-
-  .btnSearch {
-    padding: 10px 25px;
-    padding-bottom: 29px;
-    margin-top: 20px;
-    width: 100%;
-    font-size: 14px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #363636;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    height: 5px;
-  }
-  
-  .btnSearch:hover {background-color: #464646}
-  
-  .btnSearch:active {
-    background-color: #252525;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
-
-
-  
-  input[type=date] {
-    width: 100%;
-    padding: 12px 20px;
-    margin-top: 10px;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid #464646;
-  }
-
-.au{
-  margin-top: 25px;
+  padding: 10px 25px;
+  padding-bottom: 29px;
+  margin-left: 5%;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #363636;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  height: 5px;
 }
 
-.form-input{
+.btnEditer:hover {background-color: #464646}
+
+.btnEditer:active {
+  background-color: #252525;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.commande{
+  margin-left:40%;
+}
+
+.titreTable{
+  margin-top: 3px;
+  margin-bottom: -3px;
+}
+
+.btnSearch {
+  padding: 10px 25px;
+  padding-bottom: 29px;
+  margin-top: 20px;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #363636;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  height: 5px;
+}
+
+.btnSearch:hover {background-color: #464646}
+
+.btnSearch:active {
+  background-color: #252525;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+input[type=date] {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin-top: 10px;
   box-sizing: border-box;
   border: none;
   border-bottom: 2px solid #464646;
+}
+
+.au{
+margin-top: 25px;
+}
+
+.form-input{
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+box-sizing: border-box;
+border: none;
+border-bottom: 2px solid #464646;
 
 }

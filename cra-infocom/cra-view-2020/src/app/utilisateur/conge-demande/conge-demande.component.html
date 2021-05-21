@@ -1,2 +1,60 @@
 <app-utilisateur></app-utilisateur>
-<p>conge-demande works!</p>
+
+
+
+<form  #addLeaveForm="ngForm" (ngSubmit)="addLeaveFormSubmit()" >
+
+    <div class="div-add">
+    <div class="container ">
+        <h3>Demande de congées </h3>
+        <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form">
+
+                <div class="inputbox mt-3"> <span>Clent informé :</span>
+                    <select class="form-input" aria-label="Default select example"   required [(ngModel)]="leave.clientInformed" name="clientInformed">
+                    <option value="true">Oui</option>
+                    <option value="false">Non</option>
+                  </select> </div>
+ 
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form">
+                <div class="inputbox mt-3"> <span  >Date début :</span> <input type="date" required [(ngModel)]="leave.dateOfStartLeave" name="dateOfStartLeave" > </div>
+                <div class="inputbox mt-3"> <span >Date fin :</span> <input type="date" required [(ngModel)]="leave.dateOfEndLeave" name="dateOfEndLeave" > </div>
+            </div>
+        </div>
+    
+        <button class="btnEditer" >Ajouter demande de congé</button>
+    </div>
+    </div>
+    </div>
+    </form>
+
+    <div class="container">
+        <p>List demandes</p>
+        <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Date début</th>
+                <th>Date Fin</th>
+           
+
+              </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor="let leave of leaves">
+                    <td>{{leave.dateOfEndLeave}}</td>
+                    <td>{{leave.dateOfEndLeave}}</td>
+                    <td>{{leaves}}</td>
+
+            </tr>
+            </tbody>
+          </table>
+        <hr>    
+
+
+    </div>
+<br><br><br><br><br><br>

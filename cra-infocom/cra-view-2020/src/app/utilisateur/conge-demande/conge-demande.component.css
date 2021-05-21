@@ -1,0 +1,78 @@
+.div-add{
+    margin-top: 4%;
+}
+
+.btnEditer{
+    width: 100%;
+    padding: 13px;
+    background: #FF5733;
+    color: white;
+    font-size: 15px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    margin-top: 6.5%;
+}
+   
+
+.btnEditer {
+    float: left;
+    padding: 10px 25px;
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    margin-bottom: 5%;
+  }
+  
+  .btnEditer:hover {background-color: #464646}
+  
+  .btnEditer:active {
+    background-color: #363636;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid#464646;
+  }
+
+
+
+  input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+    
+  }
+
+  input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+  }
+
+  .form-input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+
+  }
