@@ -28,6 +28,7 @@ import { MissionAddComponent } from './administrateur/mission/add/mission-add.co
 import { FraisComponent } from './administrateur/frais/frais.component';
 import { CongeComponent } from './administrateur/conge/conge.component';
 import { CollaborateurComponent } from './administrateur/collaborateur/collaborateur.component';
+import { ChildComponent } from './administrateur/collaborateur/child/child.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CollaborateurComponent } from './administrateur/collaborateur/collabora
     FraisComponent,
     CongeComponent,
     CollaborateurComponent,
+    ChildComponent,
 
   ],
   imports: [
@@ -65,7 +67,7 @@ import { CollaborateurComponent } from './administrateur/collaborateur/collabora
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent]

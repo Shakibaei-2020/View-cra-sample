@@ -14,7 +14,21 @@ export class EditCollaborateurComponent implements OnInit{
   message!:string;
   subscription!: Subscription;
 
-  @Input() childMessage!: string;
+  @Input() childMessage!: string ;
+
+  @Input()
+  id!: number;
+
+  public array: any;
+  @Input() name!: string;
+  @Input()
+  set myArray(value: any) {
+    if(value) { 
+      this.array = value;
+    }
+  }
+
+    
 
 
   constructor(private _service:NgserviceService, private _route:Router) { 
@@ -25,7 +39,7 @@ export class EditCollaborateurComponent implements OnInit{
 
   ngOnInit() {
     console.log(this.childMessage)
-
+    console.log('array is', this.array);
   }
 
 

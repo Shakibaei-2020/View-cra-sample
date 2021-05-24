@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Collaborator } from 'src/app/z-model/collaborator';
+import{ ChildComponent} from './child/child.component'
 
 @Component({
   selector: 'app-collaborateur',
@@ -17,9 +18,13 @@ export class CollaborateurComponent implements OnInit {
   collaboratorInputId = new Collaborator();
   public collaborators!:Collaborator;  
 
-  parentMessage = "message from parent"
+  
+  parentMessage = "message from parent";
 
-  constructor(private _service:NgserviceService, private _route:Router) { }
+  constructor(private _service:NgserviceService, private _route:Router) { 
+
+
+  }
 
 
   ngOnInit() {
