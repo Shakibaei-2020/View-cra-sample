@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
@@ -13,21 +13,27 @@ import{ ChildComponent} from './child/child.component'
 export class CollaborateurComponent implements OnInit {
 
 
-  message!:String;
   subscription!: Subscription;
-  collaboratorInputId = new Collaborator();
+  collaboratorInputLastName = new Collaborator();
   public collaborators!:Collaborator;  
 
   
-  parentMessage = "message from parent";
+  parentMessage = "message from parent dqsdqsd";
+  @ViewChild(ChildComponent) child: any;
+
 
   constructor(private _service:NgserviceService, private _route:Router) { 
 
 
   }
 
+  message!:string;
+
+
 
   ngOnInit() {
+    this.message = this.child.message
+
   }
   
 
@@ -45,7 +51,7 @@ export class CollaborateurComponent implements OnInit {
 
   searchOneCollab(){
 
-  this._service.fetchOneCollabFromRemote(this.collaboratorInputId.id).subscribe(
+  this._service.fetchOneCollabByNameFromRemote(this.collaboratorInputLastName.lastName).subscribe(
     data=> this.collaborators = data,
     error=>console.log("exception" +error)
     )

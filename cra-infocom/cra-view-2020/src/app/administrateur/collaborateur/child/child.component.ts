@@ -16,4 +16,7 @@ export class ChildComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  message = 'Hola Mundo!';
+
+
 }
