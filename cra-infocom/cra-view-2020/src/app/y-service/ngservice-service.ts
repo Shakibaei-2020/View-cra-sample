@@ -58,7 +58,7 @@ export class NgserviceService {
     /**START EXPENSE */
 
     searchExpense(date1 : Date, date2 :Date ,status :String):Observable<Expense[]>{
-      return  this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpense/{date1}/{date2}/{status}" + date1 +date2 +status);
+      return  this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpense/{date1}"+ date1 +"/{date2}"+date2 +"/{status}"+status);
      }
      
      listExpenseByCollabId(id:number):Observable<Expense[]>{
