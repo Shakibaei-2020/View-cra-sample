@@ -23,33 +23,33 @@ export class NgserviceService {
 
 /** START Controller for Collaborateur interactions */
 
-   fetchOneCollabFromRemote(id: number):Observable<Collaborator>{
+   selectOneCollabById(id: number):Observable<Collaborator>{
     return  this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/"+id);
    }
 
-   fetchOneCollabByNameFromRemote(lastName :String):Observable<any>{
-    return  this._http.get<any>("http://localhost:8900/collaborateurs/lister/N/{lastName}"+lastName);
+   selectCollabByName(lastName :String):Observable<Collaborator>{
+    return  this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/Nom/"+lastName);
    }
 
-   fetchOneCollabByMailFromRemote(email :String):Observable<Collaborator>{
+   selectCollabByMail(email :String):Observable<Collaborator>{
     return  this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/email/{email}"+email);
    }
 
-    fetchCollabListFromRemote():Observable<Collaborator[]>{
+    selectAllCollab():Observable<Collaborator[]>{
      return  this._http.get<Collaborator[]>("http://localhost:8900/collaborateurs/lister");
     }
  
-    addCollabToRemote(collaborator: Collaborator ):Observable<any>{
+    addCollab(collaborator: Collaborator ):Observable<any>{
       return  this._http.post<any>("http://localhost:8900/collaborateurs/ajouter",collaborator);
      }
 
 
-     updateCollabToRemote(collaborator: Collaborator ):Observable<any>{
+     updateCollab(collaborator: Collaborator ):Observable<any>{
       return  this._http.post<any>("http://localhost:8900/collaborateurs/update",collaborator);
      }
 
-     deleteCollabToRemote(collaborator: Collaborator):Observable<Collaborator>{
-      return this._http.delete<Collaborator>("http://localhost:8900/collaborateurs/supprimer"+ collaborator);
+     deleteCollab(collaborator: Collaborator):Observable<Collaborator>{
+      return this._http.delete<Collaborator>("http://localhost:8900/collaborateurs/supprimer" + collaborator);
     }
 
     /** END Controller for Collaborateur interactions */
@@ -57,6 +57,29 @@ export class NgserviceService {
 
     /**START EXPENSE */
 
+    searchExpense(date1 : Date, date2 :Date ,status :String):Observable<Expense[]>{
+      return  this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpense/{date1}/{date2}/{status}" + date1 +date2 +status);
+     }
+     
+     listExpenseByCollabId(id:number):Observable<Expense[]>{
+
+            return  this._http.get<Expense[]>("http://localhost:7672/expenses/lister/expense/collab/"+id);
+
+     }
+
+
+     addOneExpense(expense: Expense ):Observable<any>{
+      return  this._http.post<any>("http://localhost:7672/expenses/ajouter",expense);
+    }
+
+    deleteOneExpense(expense: Expense ):Observable<any>{
+      return  this._http.delete<any>("http://localhost:7672/expenses/supprimer"+ expense);
+    }
+    
+
+    selectOneExpenseById(id: number):Observable<Expense>{
+      return  this._http.get<Expense>("http://localhost:7672/expenses/lister/"+id);
+     }
     
     /**END EXPENSE  */
 
@@ -64,14 +87,29 @@ export class NgserviceService {
     /**START LEAVE  */
 
 
-    addLeaveRequestToRemote(leave: Leave ):Observable<any>{
-      return  this._http.post<any>("http://localhost:8950/demandesdeconge/ajouter",leave);
+    addOneLeaveRequest(leave: Leave ):Observable<any>{
+      return  this._http.post<any>("http://localhost:8950/conge/ajouter",leave);
+    }
+
+    deleteOneLeaveRequest(leave: Leave ):Observable<any>{
+      return  this._http.delete<any>("http://localhost:8950/conge/supprimer"+ leave);
     }
     
 
-    fetchLeaveRequestOfOneFromRemote(id: number):Observable<Leave[]>{
-      return  this._http.get<Leave[]>("http://localhost:8950/demandesdeconge/lister/"+id);
+    selectOneLeaveRequestById(id: number):Observable<Leave>{
+      return  this._http.get<Leave>("http://localhost:8950/conge/lister/"+id);
      }
+
+     selectLeaveByCollabId(id:number):Observable<Leave[]>{
+
+      return  this._http.get<Leave[]>("http://localhost:8950/conge/lister/leave/collab/"+id);
+    }
+
+
+  searchLeave(date1 : Date, date2 :Date ,status :String):Observable<Leave[]>{
+  return  this._http.get<Leave[]>("http://localhost:8950/conge/searchLeave/{date1}/{date2}/{status}" + date1 +date2 +status);
+ }
+
   
    
     /**END LEAVE  */

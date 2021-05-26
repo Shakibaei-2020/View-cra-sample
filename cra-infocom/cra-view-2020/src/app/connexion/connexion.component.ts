@@ -21,7 +21,7 @@ export class ConnexionComponent implements OnInit {
 
   connexionCollabFormSubmit(){
 
-    this._service.fetchOneCollabByMailFromRemote(this.collaborator.email).subscribe(
+    this._service.selectCollabByMail(this.collaborator.email).subscribe(
       data=> this.nvcollaborator = data,
       error=>console.log("exception" +error)
       )

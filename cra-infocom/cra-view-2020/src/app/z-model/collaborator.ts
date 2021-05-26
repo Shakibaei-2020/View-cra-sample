@@ -7,5 +7,7 @@ export class Collaborator {
     public passward!:string;
     public dateOfEntry!:Date;
     public dateOfRelease!:Date;
-    public type!:boolean;
+    public typeCollaborator!:boolean;
+
+
 }

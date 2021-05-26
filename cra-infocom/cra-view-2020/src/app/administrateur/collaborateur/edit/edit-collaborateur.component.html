@@ -21,38 +21,43 @@
           
           <div class="panel-body bio-graph-info">
                 <br>
-             <div class="row">
 
+        
+             <div class="row">
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Prenom :</span> <input type="text" placeholder="13 juillet 1983" name="" > </div>
+                    <div class="inputbox mt-1"><span class="input-title">Prenom :</span> <input type="text" placeholder={{collaborateur.firstName}}  required [(ngModel)]="updatedCollaborateur.firstName" name="firstName"> </div>
 
                   </div>
+
+                                  <!-- 
+
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Date entrée :</span> <input type="text" placeholder="13 juillet 1983" name="" > </div>
-                </div>
+                    <div class="inputbox mt-1"><span class="input-title">Date entrée :</span> <input type="text" placeholder={{collaborateur.dateOfEntry}}  required [(ngModel)]="updatedCollaborateur.dateOfEntry" name="dateOfEntry"> </div>
+                </div>-->
                 
                   <div class="bio-row">
                     
-                    <div class="inputbox mt-1"><span class="input-title">Nom de famille :</span><input type="text" placeholder="SHAKIBAEI" name="" > </div>
+                    <div class="inputbox mt-1"><span class="input-title">Nom de famille :</span><input type="text" placeholder={{collaborateur.lastName}}  required [(ngModel)]="updatedCollaborateur.lastName" name="lastName"  > </div>
                 </div>
+                <!-- 
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Date sortie :</span> <input type="text" placeholder="13 juillet 1983" name=""> </div>
-
-                  </div>
+                    <div class="inputbox mt-1"><span class="input-title">Date sortie :</span> <input type="date" placeholder={{collaborateur.dateOfRelease}}  required [(ngModel)]="updatedCollaborateur.dateOfRelease" name="dateOfRelease"> </div>
+                  </div> -->
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Adresse mail :</span> <input type="text" placeholder="mohashakibaei@outlook.fr" name="" > </div>
+                    <div class="inputbox mt-1"><span class="input-title">Adresse mail : </span> <input type="text" placeholder={{collaborateur.email}}  required [(ngModel)]="updatedCollaborateur.email" name="email"  > </div>
                 </div>
 
                 <div class="bio-row">
                 </div>
                 <div class="bio-row">
           
-
                 </div>
                 <div class="bio-row">
 
-                    <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+                    <button class="button" data-toggle="modal" data-target="#updateModal" (click)="updateCollab()" >Mettre à jour</button>
 
+                
+<!-- 
                     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -73,10 +78,10 @@
                       </div>
                     </div>
 
+-->
 
-
-                    <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
-
+                    <button class="button" data-toggle="modal" data-target="#DeleteModal" (click)="deleteCollab()">Supprimer</button>
+<!-- 
                     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -96,10 +101,11 @@
                         </div>
                       </div>
                     </div>
+                  -->
                    
                 </div>
-
               </div>
+            
           </div>
       </div>
 
@@ -109,8 +115,8 @@
      </div>
       <table class="table table-condensed">
         <thead>
-          <tr>
-            <th>Date demande</th>
+          <tr >
+            <th>dateRequest</th>
             <th>date de frais</th>
             <th>Facturable</th>
             <th>Cout HT</th>
@@ -121,16 +127,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>14/02/2000</td>
-            <td>22/03/2021</td>
-            <td>Oui</td>
-            <td>55,35€</td>
-            <td>5,35€</td>
-            <td>En cours</td>
+          <tr *ngFor="let expense of expenses">
+
+       
+            <td>   <input type="text" value={{expense.dateRequest}} required [(ngModel)]="expense.dateRequest" name="dateRequest" > </td>
+            <td>   <input type="text" value={{expense.dateExpense}} required [(ngModel)]="expense.dateExpense" name="dateExpense"> </td>
+            <td>   <input type="text" value={{expense.billable}} required [(ngModel)]="expense.billable" name="billable"> </td>
+            <td>   <input type="text" value={{expense.costHT}} required [(ngModel)]="expense.costHT" name="costHT"> </td>
+            <td>   <input type="text" value={{expense.costTVA}} required [(ngModel)]="expense.costTVA" name="costTVA"> </td>
+            <td>   <input type="text" value={{expense.status}} required [(ngModel)]="expense.status" name="status"> </td>
        
             <td>
-                <button class="btnTab" type="submit">Editer</button>
+                <button class="btnTab" type="submit"  (click)="updateLeaveFromCollab(expense.id)">update</button><br><br>
+                <button class="btnTab" type="submit"  (click)="updateLeaveFromCollab(expense.id)">delete</button>
 
             </td>
         </tr>
@@ -154,29 +163,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>14/02/2000</td>
-            <td>22/03/2021</td>
-            <td>22/03/2021</td>
-            <td>En cours</td>
-            <td>Oui</td>
+          <tr *ngFor="let leave of leaves">
+            
+            <td>   <input type="text" placeholder={{leave.dateOfDemand}} required [(ngModel)]="updatedLeave.dateOfDemand" name="dateOfDemand"> </td>
+            <td>   <input type="text" placeholder={{leave.dateOfStartLeave}} required [(ngModel)]="updatedLeave.dateOfStartLeave" name="dateOfStartLeave"> </td>
+            <td>   <input type="text" placeholder={{leave.dateOfEndLeave}} required [(ngModel)]="updatedLeave.dateOfEndLeave" name="dateOfEndLeave"> </td>
+            <td>   <input type="text" placeholder={{leave.status}} required [(ngModel)]="updatedLeave.status" name="status"> </td>
+            <td>   <input type="text" placeholder={{leave.clientInformed}} required [(ngModel)]="updatedLeave.clientInformed" name="clientInformed"> </td>
+       
             <td>
-                <button class="btnTab" type="submit">Editer</button>
+                <button class="btnTab" type="submit" (click)="updateLeaveFromCollab(leave.id)">update</button><br><br>
+                <button class="btnTab" type="submit" (click)="deleteLeaveFromCollab(leave.id)">delete</button>
 
             </td>
         </tr>
 
-            <tr>
-            <td>14/02/2000</td>
-            <td>22/03/2021</td>
-            <td>22/03/2021</td>
-            <td>En cours</td>
-            <td>Oui</td>
-            <td>
-                <button class="btnTab" type="submit">Editer</button>
-
-            </td>
-        </tr>
         </tbody>
       </table>
 
@@ -189,13 +190,4 @@
 
 </div>
 </div>
-say {{childMessage}}
 
-<div style="text-align: center;">
-  <h2>child component</h2>
-  
-  
-  parent id is {{id}}
-  </div>
-
-  <h1>Hello {{name}}!</h1>

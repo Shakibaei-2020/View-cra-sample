@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Collaborator } from 'src/app/z-model/collaborator';
-import{ ChildComponent} from './child/child.component'
 
 @Component({
   selector: 'app-collaborateur',
@@ -17,9 +16,14 @@ export class CollaborateurComponent implements OnInit {
   collaboratorInputLastName = new Collaborator();
   public collaborators!:Collaborator;  
 
+
+  /** test communication between componente */
   
   parentMessage = "message from parent dqsdqsd";
-  @ViewChild(ChildComponent) child: any;
+
+
+    /** END test communication between componente */
+
 
 
   constructor(private _service:NgserviceService, private _route:Router) { 
@@ -27,12 +31,10 @@ export class CollaborateurComponent implements OnInit {
 
   }
 
-  message!:string;
 
 
 
   ngOnInit() {
-    this.message = this.child.message
 
   }
   
@@ -51,7 +53,7 @@ export class CollaborateurComponent implements OnInit {
 
   searchOneCollab(){
 
-  this._service.fetchOneCollabByNameFromRemote(this.collaboratorInputLastName.lastName).subscribe(
+  this._service.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
     data=> this.collaborators = data,
     error=>console.log("exception" +error)
     )

@@ -24,9 +24,7 @@ import { EditFraisComponent } from './administrateur/frais/edit/edit-frais.compo
 
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 
-import { CongeDemandeComponent } from './utilisateur/conge-demande/conge-demande.component';
 import { DeclarationActiviteComponent } from './utilisateur/declaration-activite/declaration-activite.component';
-import { ChildComponent } from './administrateur/collaborateur/child/child.component';
 
 
 
@@ -41,7 +39,6 @@ const routes: Routes = [
 /** utilisateur componente */
   {path:'utilisateur',component:UtilisateurComponent },
   
-  {path:'congeDemande',component:CongeDemandeComponent },
   {path:'declarationActivite',component:DeclarationActiviteComponent },
 
 
@@ -62,8 +59,10 @@ const routes: Routes = [
 
   {path:'editFrais',component: EditFraisComponent},
   {path:'searchFrais',component:FraisComponent},
-  {path:'child',component:ChildComponent},
 
+
+
+  
 
 ];
 

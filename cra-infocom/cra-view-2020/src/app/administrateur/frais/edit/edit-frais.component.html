@@ -59,7 +59,9 @@
           <div class="bio-row">
             <br>    <br>
 
-            <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+            <button class="button" data-toggle="modal" data-target="#updateModal" >Mettre à jour</button>
+
+       
 
             <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -75,7 +77,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="MajFrais()"  >Sauvgarder</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="updateExpense()" >Sauvgarder</button>
                   </div>
                 </div>
               </div>
@@ -83,7 +85,8 @@
 
 
 
-            <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
+            <button class="button" data-toggle="modal" data-target="#DeleteModal" >Supprimer</button>
+        
 
             <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -99,13 +102,14 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteFrais()"  >Supprimer</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"   (click)="deleteExpense()">Supprimer</button>
                   </div>
                 </div>
               </div>
             </div>
            
     
+
              
           </div>
     

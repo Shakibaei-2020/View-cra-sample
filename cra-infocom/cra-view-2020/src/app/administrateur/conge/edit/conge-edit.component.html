@@ -19,39 +19,44 @@
           <br>
        <div class="row">
     
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span>clientInformed :</span><br>
+            <select class="form-input" aria-label="Default select example"  required [(ngModel)]="updatedLeave.clientInformed" name="clientInformed">
+            <option value="1">Oui</option>
+            <option value="2">Non</option>
+          </select></div>
+        </div>
+
+
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Cout HT :</span> <input type="text" placeholder="55€" name="" > </div>
-    
-            </div>
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Date Frais :</span> <input type="Date" placeholder="13 juillet 1983" name="" > </div>
+              <div class="inputbox mt-1"><span class="input-title">dateOfDemand :</span> <input type="Date" placeholder={{leave.dateOfDemand}} required [(ngModel)]="updatedLeave.dateOfDemand" name="dateOfDemand" > </div>
           </div>
           
-            <div class="bio-row">
-              
-              <div class="inputbox mt-1"><span class="input-title">Cout TVA :</span><input type="text" placeholder="180€" name="" > </div>
-          </div>
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Date demande :</span> <input type="Date" placeholder="13 juillet 1983" name=""> </div>
-    
-            </div>
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span>Facturable :</span><br>
-                <select class="form-input" aria-label="Default select example">
-                <option value="1">Oui</option>
-                <option value="2">Non</option>
-              </select></div>
-    </div>
           <div class="bio-row">
-       
-            <div class="inputbox mt-1"><span>Status :</span><br>
-                <select class="form-input" aria-label="Default select example">
-                <option value="1">Traité</option>
-                <option value="2">En-cours</option>
+            <div class="inputbox mt-1"><span>LeaveType :</span><br>
+              <select class="form-input" aria-label="Default select example" required [(ngModel)]="updatedLeave.LeaveType" name="LeaveType">
+              <option value="1">Oui</option>
+              <option value="2">Non</option>
+            </select></div>
+      </div>
 
-              </select>
-          </div>          
-        </div>
+            <div class="bio-row">
+              <div class="inputbox mt-1"><span class="input-title">dateOfStartLeave :</span> <input type="Date" placeholder={{leave.dateOfStartLeave}}   required [(ngModel)]="updatedLeave.dateOfStartLeave" name="dateOfStartLeave"> </div>
+            </div>
+
+            <div class="bio-row">
+                <div class="inputbox mt-1"><span>Status :</span><br>
+                  <select class="form-input" aria-label="Default select example" required [(ngModel)]="updatedLeave.status" name="status">
+                  <option value="1">Oui</option>
+                  <option value="2">Non</option>
+                </select></div>
+          </div>
+
+          <div class="bio-row">
+            <div class="inputbox mt-1"><span class="input-title">dateOfEndLeave :</span> <input type="Date" placeholder={{leave.dateOfEndLeave}}   required [(ngModel)]="updatedLeave.dateOfEndLeave" name="dateOfEndLeave"> </div>
+          </div>
+
+        
 
 
         <div class="bio-row"></div>
@@ -75,7 +80,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" >Sauvgarder</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="updateLeave()" >Sauvgarder</button>
                   </div>
                 </div>
               </div>
@@ -99,7 +104,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"  >Supprimer</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteLeave()" >Supprimer</button>
                   </div>
                 </div>
               </div>

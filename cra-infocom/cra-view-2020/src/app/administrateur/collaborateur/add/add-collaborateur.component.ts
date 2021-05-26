@@ -20,7 +20,7 @@ export class AddCollaborateurComponent implements OnInit {
 
   addCollabFormSubmit(){
 
-    this._service.addCollabToRemote(this.collaborator).subscribe(
+    this._service.addCollab(this.collaborator).subscribe(
       data =>{
         console.log("ajout effectué");
         this._route.navigate(['listCollab']);
