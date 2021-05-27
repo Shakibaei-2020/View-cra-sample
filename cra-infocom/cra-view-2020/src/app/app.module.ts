@@ -29,6 +29,14 @@ import { CollaborateurComponent } from './administrateur/collaborateur/collabora
 import { ActiviteComponent } from './administrateur/activite/activite.component';
 import { AddComponent } from './administrateur/activite/add/add.component';
 import { EditComponent } from './administrateur/activite/edit/edit.component';
+import { ClientComponent } from './administrateur/client/client.component';
+import { AddClientComponent } from './administrateur/client/add/add-client.component';
+import { EditClientComponent } from './administrateur/client/edit/edit-client.component';
+import { MissionComponent } from './administrateur/mission/mission.component';
+import { AddMissionComponent } from './administrateur/mission/add/add-mission.component';
+import { EditMissionComponent } from './administrateur/mission/edit/edit-mission.component';
+
+
 
 @NgModule({
   declarations: [
@@ -48,6 +56,12 @@ import { EditComponent } from './administrateur/activite/edit/edit.component';
     ActiviteComponent,
     AddComponent,
     EditComponent,
+    ClientComponent,
+    AddClientComponent,
+    EditClientComponent,
+    MissionComponent,
+    AddMissionComponent,
+    EditMissionComponent,
 
   ],
   imports: [

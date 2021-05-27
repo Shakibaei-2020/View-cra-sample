@@ -26,6 +26,13 @@ import{ CongeDemandeComponent} from './utilisateur/conge-demande/conge-demande.c
 import {ActiviteComponent} from './administrateur/activite/activite.component';
 import {AddComponent } from './administrateur/activite/add/add.component';
 import {EditComponent} from './administrateur/activite//edit/edit.component';
+import { AddClientComponent } from './administrateur/client/add/add-client.component';
+import { EditClientComponent } from './administrateur/client/edit/edit-client.component';
+
+import { ClientComponent } from './administrateur/client/client.component';
+import { EditMissionComponent } from './administrateur/mission/edit/edit-mission.component';
+import { AddMissionComponent } from './administrateur/mission/add/add-mission.component';
+import { MissionComponent } from './administrateur/mission/mission.component';
 
 
 
@@ -37,14 +44,12 @@ const routes: Routes = [
   {path:'',component:ConnexionComponent },
   {path:'connexion',component:ConnexionComponent },
 
-/** utilisateur componente */
   {path:'utilisateur',component:UtilisateurComponent },
   
   {path:'declarationActivite',component:DeclarationActiviteComponent },
   {path:'demandeConge',component: CongeDemandeComponent},
 
 
-/** Administrateur  componente */
 {path:'administrateur',component:AdministrateurComponent },
 
   {path:'editConge',component:CongeEditComponent },
@@ -62,6 +67,14 @@ const routes: Routes = [
   {path:'editFrais',component: EditFraisComponent},
   {path:'searchFrais',component:FraisComponent},
 
+  {path:'editClient',component: EditClientComponent },
+  {path:'addClient',component:AddClientComponent },
+  {path:'client',component:ClientComponent },
+
+
+  {path:'editMission',component: EditMissionComponent },
+  {path:'addMission',component:AddMissionComponent },
+  {path:'mission',component:MissionComponent },
 
 
   

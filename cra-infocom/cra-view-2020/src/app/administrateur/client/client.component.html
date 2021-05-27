@@ -3,12 +3,12 @@
 
 <div class="font-div1">
   <div class="container">
-    <h2>Gestion des collaborateurs</h2>
+    <h2>Gestion des clients</h2>
     <hr>
 <div>
     <div class="container mt-3">
         <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchOneCollab()">
-            <input type="text" placeholder="Search by name.."  required [(ngModel)]="collaboratorInputLastName.lastName" name="lastName">
+            <input type="text" placeholder="Search by name.."  name="lastName">
             <button type="submit"><p>Chercher</p></button>
           </form>
 
@@ -18,24 +18,21 @@
             <thead>
               <tr>
                 <th>Nom</th>
-                <th>Prénom</th>
-                <th>Mail</th>
-                <th>Date entrée</th>
-                <th>Date Sortie</th>
-                <th>Actions</th>
+                <th>Mission</th>
+                <th>Type</th>
+                <th>Action</th>
+
 
               </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{collaborators.firstName}}</td>
-                    <td>{{collaborators.lastName}}</td>
-                    <td>{{collaborators.email}}</td>
-                    <td>{{collaborators.dateOfEntry}}</td>
-                    <td>{{collaborators.dateOfRelease}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                 
 
                 <td>
-                    <button class="btnEditer" type="submit" (click)="goToEditCollab()">Editer</button>
                 </td>
             </tr>
             </tbody>
@@ -45,6 +42,12 @@
     </div>
     </div>
     
+
+
+    <button  (click)="goToEditCollab()">Editer</button>
+
     
 <!--     <app-child [childMessage]="parentMessage"></app-child>
+        <button class="btnEditer" type="submit" (click)="goToEditCollab()">Editer</button>
+
  -->
