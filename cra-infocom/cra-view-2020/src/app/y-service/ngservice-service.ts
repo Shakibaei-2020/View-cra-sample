@@ -7,6 +7,7 @@ import { Expense } from '../z-model/expense';
 import { BehaviorSubject } from 'rxjs';
 import { Subject } from 'rxjs';
 import { Leave } from '../z-model/leave';
+import { Activity } from '../z-model/activity';
 
 
 @Injectable({
@@ -58,7 +59,7 @@ export class NgserviceService {
     /**START EXPENSE */
 
     searchExpense(date1 : Date, date2 :Date ,status :String):Observable<Expense[]>{
-      return  this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpense/{date1}"+ date1 +"/{date2}"+date2 +"/{status}"+status);
+      return  this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpense/"+ date1 +"/"+date2 +"/"+status);
      }
      
      listExpenseByCollabId(id:number):Observable<Expense[]>{
@@ -107,12 +108,20 @@ export class NgserviceService {
 
 
   searchLeave(date1 : Date, date2 :Date ,status :String):Observable<Leave[]>{
-  return  this._http.get<Leave[]>("http://localhost:8950/conge/searchLeave/{date1}/{date2}/{status}" + date1 +date2 +status);
+  return  this._http.get<Leave[]>("http://localhost:8950/conge/searchLeave/" + date1+"/" +date2 +"/"+status);
  }
 
   
    
     /**END LEAVE  */
 
+
+    /** START ACTIVITY */
+
+    searchActivity(date1 : Date, date2 :Date ,lastName :String):Observable<Activity[]>{
+      return  this._http.get<Activity[]>("http://localhost:8800/activity/searchActivity/"+ date1 +"/"+date2 +"/"+lastName);
+     }
+     
+     /** END ACTIVITY */
   }
 

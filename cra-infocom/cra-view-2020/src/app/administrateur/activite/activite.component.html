@@ -5,7 +5,7 @@
 
 <div class="font-div1">
           <div class="container">
-            <h1>Gestion des missions</h1>
+            <h1>Gestion activite</h1>
             <hr>
   
           <form >
@@ -19,18 +19,11 @@
 
       <div class="container">
         <div class="row">
-            <div class="col-sm-4"><input type="date"></div>
-            <div class="col-sm-4"><input type="date"></div>
-            <div class="col-sm-4"><button class="btnSearch" type="submit">Chercher</button></div>
+            <div class="col-sm-4"><input type="date" required [(ngModel)]="date1" name="date1"></div>
+            <div class="col-sm-4"><input type="date" required [(ngModel)]="date2" name="date2"> </div>
+            <div class="col-sm-4"><button class="btnSearch" type="submit"  (click)="searchActivity()">Chercher</button></div>
             <div class="col-sm-8">
-              <select class="form-input" aria-label="Default select example">
-              <option value="1">Client1</option>
-              <option value="2">Client2</option>
-              <option value="2">Client3</option>
-              <option value="2">Client4</option>
-
-
-            </select>
+            <input type="text" required [(ngModel)]="lastName" name="lastName">
             </div>
 
     </div>
@@ -53,10 +46,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Shakibaei</td>
-                <td>22/03/2021</td>
-                <td>22/03/2021</td>
+              <tr *ngFor="let activity of activitys">
+                <td>{{activity.startDate}}</td>
+                <td>{{activity.duration}}</td>
+                <td>{{activity.remote}}</td>
                 <td>
                     <button class="btnEditer" type="submit" >Gerer</button>
                 </td>
@@ -69,3 +62,4 @@
        
         </div>
     </div>
+    <button  type="submit"  (click)="goGerer()">Gerer</button>

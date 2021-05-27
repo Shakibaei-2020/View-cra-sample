@@ -26,6 +26,7 @@ export class CongeComponent implements OnInit {
       data=> this.leaves = data,
       error=>console.log("exception" +error)
       )
+      console.log(this.leaves)
   }
   
   goGerer(){

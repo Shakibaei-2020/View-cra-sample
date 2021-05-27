@@ -29,20 +29,21 @@
 
                   </div>
 
-                                  <!-- 
+                            
 
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Date entrée :</span> <input type="text" placeholder={{collaborateur.dateOfEntry}}  required [(ngModel)]="updatedCollaborateur.dateOfEntry" name="dateOfEntry"> </div>
-                </div>-->
+                    <div class="inputbox mt-1"><span class="input-title">Date entrée :</span> <input type="date" placeholder={{collaborateur.dateOfEntry}}  required [(ngModel)]="updatedCollaborateur.dateOfEntry" name="dateOfEntry"> </div>
+                </div>
                 
                   <div class="bio-row">
                     
                     <div class="inputbox mt-1"><span class="input-title">Nom de famille :</span><input type="text" placeholder={{collaborateur.lastName}}  required [(ngModel)]="updatedCollaborateur.lastName" name="lastName"  > </div>
                 </div>
-                <!-- 
+              
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Date sortie :</span> <input type="date" placeholder={{collaborateur.dateOfRelease}}  required [(ngModel)]="updatedCollaborateur.dateOfRelease" name="dateOfRelease"> </div>
-                  </div> -->
+                    <div class="inputbox mt-1"><span class="input-title">Date sortie : </span> <input type="date" placeholder={{collaborateur.dateOfRelease}}  required [(ngModel)]="updatedCollaborateur.dateOfRelease" name="dateOfRelease"> </div>
+                  </div> 
+
                   <div class="bio-row">
                     <div class="inputbox mt-1"><span class="input-title">Adresse mail : </span> <input type="text" placeholder={{collaborateur.email}}  required [(ngModel)]="updatedCollaborateur.email" name="email"  > </div>
                 </div>
@@ -54,10 +55,10 @@
                 </div>
                 <div class="bio-row">
 
-                    <button class="button" data-toggle="modal" data-target="#updateModal" (click)="updateCollab()" >Mettre à jour</button>
+                    <button class="button" data-toggle="modal" data-target="#updateModal"  >Mettre à jour</button>
 
                 
-<!-- 
+
                     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -72,16 +73,16 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary">Sauvgarder</button>
+                            <button type="button" class="btn btn-primary" (click)="updateCollab()">Sauvgarder</button>
                           </div>
                         </div>
                       </div>
                     </div>
 
--->
 
-                    <button class="button" data-toggle="modal" data-target="#DeleteModal" (click)="deleteCollab()">Supprimer</button>
-<!-- 
+
+                    <button class="button" data-toggle="modal" data-target="#DeleteModal" >Supprimer</button>
+
                     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -96,12 +97,12 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary">Supprimer</button>
+                            <button type="button" class="btn btn-primary" (click)="deleteCollab()">Supprimer</button>
                           </div>
                         </div>
                       </div>
                     </div>
-                  -->
+                 
                    
                 </div>
               </div>

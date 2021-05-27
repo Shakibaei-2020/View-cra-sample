@@ -21,7 +21,7 @@
             <div class="col-sm-4"><button class="btnSearch" type="submit" (click)="searchConge()">Chercher</button></div>
             <div class="col-sm-8">
               <select class="form-input" aria-label="Default select example"  required [(ngModel)]="status" name="status">
-              <option value="1">En-cours</option>
+              <option value="en-cours">En-cours</option>
               <option value="2">Refusé</option>
               <option value="2">Validé</option>
               <option value="2">Toutes</option>
@@ -53,7 +53,7 @@
               <tr *ngFor="let leave of leaves">
                 <td>{{leave.dateOfDemand}}</td>
                 <td>{{leave.dateOfStartLeave}}</td>
-                <td>{{leave.dateOfEndLeave}}0</td>
+                <td>{{leave.dateOfEndLeave}}</td>
        
 
                 <td>
@@ -64,7 +64,6 @@
           </table>
 
 
-          <button class="btnEditer" type="submit" (click)="goGerer()" >Gerer</button>
 
        
         </div>

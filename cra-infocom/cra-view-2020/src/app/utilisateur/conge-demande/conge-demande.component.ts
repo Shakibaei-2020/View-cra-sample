@@ -19,7 +19,7 @@ export class CongeDemandeComponent implements OnInit {
 
   
   ngOnInit() {
-    this._service.fetchLeaveRequestOfOneFromRemote(1).subscribe(
+    this._service.selectLeaveByCollabId(1).subscribe(
       data=> this.leaves = data,
       error=>console.log("exception" +error)
       )
@@ -27,7 +27,7 @@ export class CongeDemandeComponent implements OnInit {
 
   addLeaveFormSubmit(){
 
-    this._service.addLeaveRequestToRemote(this.leave).subscribe(
+    this._service.addOneLeaveRequest(this.leave).subscribe(
       data =>{
         console.log("ajout effectué");
         this._route.navigate(['listCollab']);

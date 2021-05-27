@@ -25,7 +25,7 @@
               <select class="form-input" aria-label="Default select example"  required [(ngModel)]="status" name="status">
               <option value="1">En-cours</option>
               <option value="2">Refusé</option>
-              <option value="2">Validé</option>
+              <option value="valider">Validé</option>
               <option value="2">Toutes</option>
             </select>
           </div>  
@@ -52,12 +52,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Shakibaei</td>
-                <td>Mohammad</td>
-                <td>14/02/2000</td>
-                <td>22/03/2021</td>
-                <td>En-cours</td>
+              <tr *ngFor="let expense of expenses">
+                <td>{{expense.costTVA}}</td>
+                <td>{{expense.billable}}</td>
+                <td>{{expense.dateRequest}}</td>
+                <td>{{expense.dateExpense}}</td>
+                <td>{{expense.status}}</td>
                 <td>
                     <button class="btnEditer" type="submit" (click)="goToEditFrais()">Gerer</button>
                 </td>
@@ -70,3 +70,6 @@
        
         </div>
     </div>
+
+    <br><br><br>    <br><br><br>
+

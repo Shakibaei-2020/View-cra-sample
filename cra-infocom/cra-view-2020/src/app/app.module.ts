@@ -20,43 +20,34 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { DeclarationActiviteComponent } from './utilisateur/declaration-activite/declaration-activite.component';
 
-import { MissionComponent } from './administrateur/mission/mission.component';
-import { MissionEditComponent } from './administrateur/mission/edit/mission-edit.component';
-import { MissionAddComponent } from './administrateur/mission/add/mission-add.component';
 import { FraisComponent } from './administrateur/frais/frais.component';
 import { CongeComponent } from './administrateur/conge/conge.component';
 import { CongeEditComponent } from './administrateur/conge/edit/conge-edit.component';
+import{ CongeDemandeComponent} from './utilisateur/conge-demande/conge-demande.component';
 
 import { CollaborateurComponent } from './administrateur/collaborateur/collaborateur.component';
+import { ActiviteComponent } from './administrateur/activite/activite.component';
+import { AddComponent } from './administrateur/activite/add/add.component';
+import { EditComponent } from './administrateur/activite/edit/edit.component';
 
 @NgModule({
   declarations: [
-
-    /** Componente commun */
     AppComponent,
     ConnexionComponent,
-
-    /**  administrateur Componente */
     AdministrateurComponent,
-
     AddCollaborateurComponent,
     EditCollaborateurComponent,
-
     EditFraisComponent,
-
-    MissionEditComponent,
-
+    CongeDemandeComponent,
     CongeEditComponent,
-
-    /**  utilisateur Componente */
     UtilisateurComponent,
-
     DeclarationActiviteComponent,
-    MissionAddComponent,
-    MissionComponent,
     FraisComponent,
     CongeComponent,
     CollaborateurComponent,
+    ActiviteComponent,
+    AddComponent,
+    EditComponent,
 
   ],
   imports: [

@@ -15,16 +15,17 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { CongeEditComponent } from './administrateur/conge/edit/conge-edit.component';
 import { CongeComponent } from './administrateur/conge/conge.component';
 
-import {MissionComponent} from './administrateur/mission/mission.component';
-import {MissionEditComponent } from './administrateur/mission/edit/mission-edit.component';
-import {MissionAddComponent} from './administrateur/mission/add/mission-add.component'
 
 import { FraisComponent } from './administrateur/frais/frais.component';
 import { EditFraisComponent } from './administrateur/frais/edit/edit-frais.component';
 
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
-
 import { DeclarationActiviteComponent } from './utilisateur/declaration-activite/declaration-activite.component';
+import{ CongeDemandeComponent} from './utilisateur/conge-demande/conge-demande.component';
+
+import {ActiviteComponent} from './administrateur/activite/activite.component';
+import {AddComponent } from './administrateur/activite/add/add.component';
+import {EditComponent} from './administrateur/activite//edit/edit.component';
 
 
 
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path:'utilisateur',component:UtilisateurComponent },
   
   {path:'declarationActivite',component:DeclarationActiviteComponent },
+  {path:'demandeConge',component: CongeDemandeComponent},
 
 
 /** Administrateur  componente */
@@ -48,9 +50,9 @@ const routes: Routes = [
   {path:'editConge',component:CongeEditComponent },
   {path:'searchconge',component:CongeComponent},
 
-  {path:'editMission',component: MissionEditComponent},
-  {path:'addMission',component: MissionAddComponent},
-  {path:'mission',component: MissionComponent},
+  {path:'editActivite',component:EditComponent },
+  {path:'addActivite',component:AddComponent },
+  {path:'activite',component: ActiviteComponent},
 
 
   {path:'editCollaborateur',component:EditCollaborateurComponent },
