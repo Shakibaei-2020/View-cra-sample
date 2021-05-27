@@ -10,7 +10,10 @@
 
 
   
-
+.inputNum{
+  width: 30px;
+  height: 18px;
+}
   
 input[type=text] {
     width: 100%;
