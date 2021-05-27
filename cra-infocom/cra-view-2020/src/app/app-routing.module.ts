@@ -33,6 +33,7 @@ import { ClientComponent } from './administrateur/client/client.component';
 import { EditMissionComponent } from './administrateur/mission/edit/edit-mission.component';
 import { AddMissionComponent } from './administrateur/mission/add/add-mission.component';
 import { MissionComponent } from './administrateur/mission/mission.component';
+import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
 
 
 
@@ -77,6 +78,8 @@ const routes: Routes = [
   {path:'mission',component:MissionComponent },
 
 
+
+  {path:'monProfile',component:MonProfileComponent },
   
 
 ];

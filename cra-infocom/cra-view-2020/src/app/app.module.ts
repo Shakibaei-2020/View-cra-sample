@@ -35,6 +35,7 @@ import { EditClientComponent } from './administrateur/client/edit/edit-client.co
 import { MissionComponent } from './administrateur/mission/mission.component';
 import { AddMissionComponent } from './administrateur/mission/add/add-mission.component';
 import { EditMissionComponent } from './administrateur/mission/edit/edit-mission.component';
+import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
 
 
 
@@ -62,6 +63,7 @@ import { EditMissionComponent } from './administrateur/mission/edit/edit-mission
     MissionComponent,
     AddMissionComponent,
     EditMissionComponent,
+    MonProfileComponent,
 
   ],
   imports: [
