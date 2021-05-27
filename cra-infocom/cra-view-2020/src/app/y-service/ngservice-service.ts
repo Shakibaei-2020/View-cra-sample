@@ -28,8 +28,8 @@ export class NgserviceService {
     return  this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/"+id);
    }
 
-   selectCollabByName(lastName :String):Observable<Collaborator>{
-    return  this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/Nom/"+lastName);
+   selectCollabByName(lastName :String):Observable<Collaborator[]>{
+    return  this._http.get<Collaborator[]>("http://localhost:8900/collaborateurs/lister/Nom/"+lastName);
    }
 
    selectCollabByMail(email :String):Observable<Collaborator>{

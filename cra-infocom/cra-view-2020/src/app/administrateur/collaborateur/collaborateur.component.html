@@ -14,7 +14,7 @@
 
         <br><br>
         <h2>Resultat  </h2> 
-        <table class="table table-condensed">
+        <table class="table ">
             <thead>
               <tr>
                 <th>Nom</th>
@@ -27,12 +27,12 @@
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>{{collaborators.firstName}}</td>
-                    <td>{{collaborators.lastName}}</td>
-                    <td>{{collaborators.email}}</td>
-                    <td>{{collaborators.dateOfEntry}}</td>
-                    <td>{{collaborators.dateOfRelease}}</td>
+                <tr  *ngFor="let collaborator of collaborators">
+                    <td>{{collaborator.firstName}}</td>
+                    <td>{{collaborator.lastName}}</td>
+                    <td>{{collaborator.email}}</td>
+                    <td>{{collaborator.dateOfEntry}}</td>
+                    <td>{{collaborator.dateOfRelease}}</td>
 
                 <td>
                     <button class="btnEditer" type="submit" (click)="goToEditCollab()">Editer </button>

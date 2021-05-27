@@ -14,7 +14,8 @@ export class CollaborateurComponent implements OnInit {
 
   subscription!: Subscription;
   collaboratorInputLastName = new Collaborator();
-  public collaborators!:Collaborator;  
+
+  public collaborators!:Collaborator[];  
 
 
   /** test communication between componente */
