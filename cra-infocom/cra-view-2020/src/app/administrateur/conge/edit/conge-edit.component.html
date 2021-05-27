@@ -8,11 +8,11 @@
     
       <div class="container ">
           <img class ="profil-image" src="https://qualium-investissement.com/wp-content/uploads/2017/05/inconnu-small.jpg">
-          <p class="titre">Gestion du congé de  Mohammad-Reza SHAKIBAEI   </p>
+          <p class="titre">Gestion demande de congé : Mohammad-Reza SHAKIBAEI   </p>
     
       </div>
     </div>
-    <br><br><br><br>
+    <br><br><br><br><br><br>
     
     
     <div class="panel-body bio-graph-info">
@@ -20,7 +20,7 @@
        <div class="row">
     
         <div class="bio-row">
-          <div class="inputbox mt-1"><span>clientInformed :</span><br>
+          <div class="inputbox mt-1"><span>Client informé :</span><br>
             <select class="form-input" aria-label="Default select example"  required [(ngModel)]="updatedLeave.clientInformed" name="clientInformed">
             <option value="1">Oui</option>
             <option value="2">Non</option>
@@ -29,19 +29,19 @@
 
 
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">dateOfDemand :</span> <input type="Date" placeholder={{leave.dateOfDemand}} required [(ngModel)]="updatedLeave.dateOfDemand" name="dateOfDemand" > </div>
+              <div class="inputbox mt-1"><span class="input-title">Date de demande :</span> <input type="Date" placeholder={{leave.dateOfDemand}} required [(ngModel)]="updatedLeave.dateOfDemand" name="dateOfDemand" > </div>
           </div>
           
           <div class="bio-row">
-            <div class="inputbox mt-1"><span>LeaveType :</span><br>
+            <div class="inputbox mt-1"><span>Type de départ :</span><br>
               <select class="form-input" aria-label="Default select example" required [(ngModel)]="updatedLeave.LeaveType" name="LeaveType">
-              <option value="1">Oui</option>
-              <option value="2">Non</option>
+              <option value="1">Type 1</option>
+              <option value="2">Type 2</option>
             </select></div>
       </div>
 
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">dateOfStartLeave :</span> <input type="Date" placeholder={{leave.dateOfStartLeave}}   required [(ngModel)]="updatedLeave.dateOfStartLeave" name="dateOfStartLeave"> </div>
+              <div class="inputbox mt-1"><span class="input-title">Date de départ :</span> <input type="Date" placeholder={{leave.dateOfStartLeave}}   required [(ngModel)]="updatedLeave.dateOfStartLeave" name="dateOfStartLeave"> </div>
             </div>
 
             <div class="bio-row">
@@ -53,7 +53,7 @@
           </div>
 
           <div class="bio-row">
-            <div class="inputbox mt-1"><span class="input-title">dateOfEndLeave :</span> <input type="Date" placeholder={{leave.dateOfEndLeave}}   required [(ngModel)]="updatedLeave.dateOfEndLeave" name="dateOfEndLeave"> </div>
+            <div class="inputbox mt-1"><span class="input-title">Date de fin :</span> <input type="Date" placeholder={{leave.dateOfEndLeave}}   required [(ngModel)]="updatedLeave.dateOfEndLeave" name="dateOfEndLeave"> </div>
           </div>
 
         

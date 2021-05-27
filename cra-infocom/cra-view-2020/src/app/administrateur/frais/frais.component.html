@@ -40,8 +40,7 @@
         <table class="table ">
             <thead>
               <tr>
-                <th><p class="titreTable">Nom </p></th>
-                <th><p class="titreTable">Prénom</p></th>
+           
                 <th><p class="titreTable">Date demande</p></th>
                 <th><p class="titreTable">Date frais</p></th>
                 <th><p class="titreTable">Status</p></th>
@@ -53,8 +52,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let expense of expenses">
-                <td>{{expense.costTVA}}</td>
-                <td>{{expense.billable}}</td>
+    
                 <td>{{expense.dateRequest}}</td>
                 <td>{{expense.dateExpense}}</td>
                 <td>{{expense.status}}</td>
