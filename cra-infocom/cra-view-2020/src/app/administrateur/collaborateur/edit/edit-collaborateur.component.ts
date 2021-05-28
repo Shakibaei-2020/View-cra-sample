@@ -11,7 +11,7 @@ import { Leave } from 'src/app/z-model/leave';
   templateUrl: './edit-collaborateur.component.html',
   styleUrls: ['./edit-collaborateur.component.css']
 })
-export class EditCollaborateurComponent implements OnInit{
+export class EditCollaborateurComponent implements OnInit {
 
 
     collaborateur = new Collaborator();
@@ -26,24 +26,24 @@ export class EditCollaborateurComponent implements OnInit{
     leaves !: Leave[];
     updatedLeave = new Leave();
     leave = new Leave();
+
+    date1 = new Date();
+    date2 = new Date();
   
-
-
-  constructor(private _service:NgserviceService, private _route:Router) { 
-    
-
-  }
+    nullDate = new Date(0);
 
 
 
 
-  searchOneCollab(){
+  constructor(private _service:NgserviceService, private _route:Router) { }
 
-  
-    }
 
-    
+
+
+
   ngOnInit() {
+
+
 
     this._service.selectOneCollabById(2).subscribe(
       data=> this.collaborateur = data,
@@ -62,29 +62,32 @@ export class EditCollaborateurComponent implements OnInit{
 
   }
 
+  
+
   /** Collab commands */
   updateCollab(){
 
     this.updatedCollaborateur.id = this.collaborateur.id;
     this.updatedCollaborateur.passward = this.collaborateur.passward;
-    this.updatedCollaborateur.typeCollaborator = this.collaborateur.typeCollaborator;
+    this.updatedCollaborateur.typeCollaboratorId = this.collaborateur.typeCollaboratorId;
 
-    this._service.updateCollab(this.updatedCollaborateur).subscribe(
+
+
+    this._service.addCollab(this.updatedCollaborateur,this.date1,this.date2).subscribe(
       data =>{
         console.log("ajout effectué");
-        this._route.navigate(['listCollab']);
       },
       error =>{
         console.log("erreur ajout non-effectué")
       }
     )
-  }
+    }
+  
 
   deleteCollab(){
-    this._service.deleteCollab(this.collaborateur).subscribe(
+    this._service.deleteCollabById(this.collaborateur.id).subscribe(
       data =>{
         console.log("delete effectué");
-        this._route.navigate(['listCollab']);
       },
       error =>{
         console.log("erreur ajout non-effectué")
@@ -101,7 +104,6 @@ export class EditCollaborateurComponent implements OnInit{
       this._service.addOneExpense(this.updatedExpense).subscribe(
         data =>{
           console.log("update expense effectué");
-          this._route.navigate(['listCollab']);
         },
         error =>{
           console.log("erreur update expense non-effectué")
@@ -116,7 +118,6 @@ export class EditCollaborateurComponent implements OnInit{
       this._service.deleteOneExpense(this.expense).subscribe(
         data =>{
           console.log("delete expense effectué");
-          this._route.navigate(['listCollab']);
         },
         error =>{
           console.log("erreur delete expense non-effectué")
@@ -153,11 +154,4 @@ export class EditCollaborateurComponent implements OnInit{
       }
     )
     }
-
-  
-
-
-
-
-
 }

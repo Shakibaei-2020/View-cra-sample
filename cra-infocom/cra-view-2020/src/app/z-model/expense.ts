@@ -8,4 +8,5 @@ export class Expense {
 	public  costHT!:number;
 	public  costTVA!:number;
 	public  status!:String;
+	public type!: String;
 }

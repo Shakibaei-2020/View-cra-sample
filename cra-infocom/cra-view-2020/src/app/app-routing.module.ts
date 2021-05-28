@@ -31,7 +31,7 @@ import { EditClientComponent } from './administrateur/client/edit/edit-client.co
 
 import { ClientComponent } from './administrateur/client/client.component';
 import { EditMissionComponent } from './administrateur/mission/edit-mission/edit-mission.component';
-import { AddMissionComponent } from './administrateur/mission/add/add-mission.component';
+import { AddMissionComponent } from './administrateur/mission/add-mission/add-mission.component';
 import { MissionComponent } from './administrateur/mission/mission.component';
 import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
 

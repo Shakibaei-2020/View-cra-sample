@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Collaborator } from 'src/app/z-model/collaborator';
+import { EditCollaborateurComponent } from '../edit/edit-collaborateur.component';
 
 @Component({
   selector: 'app-add-collaborateur',
@@ -14,12 +16,16 @@ export class AddCollaborateurComponent implements OnInit {
   date1 = new Date;
   date2 = new Date;
 
-  toDate = new Date;
+
   
+
   constructor(private _route:Router,private _service:NgserviceService) { }
 
   ngOnInit(): void {
+
   }
+
+
 
   addCollabFormSubmit(){
 
@@ -34,6 +40,5 @@ export class AddCollaborateurComponent implements OnInit {
     )
     }
 
-    
 
 }

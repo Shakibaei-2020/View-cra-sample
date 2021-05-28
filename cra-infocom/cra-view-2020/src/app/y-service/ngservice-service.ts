@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import{HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Collaborator } from '../z-model/collaborator';
-import { TypeCollaborator } from '../z-model/type-collaborator';
 import { Expense } from '../z-model/expense';
 import { BehaviorSubject } from 'rxjs';
-import { Subject } from 'rxjs';
 import { Leave } from '../z-model/leave';
 import { Activity } from '../z-model/activity';
 import { TypeActivity } from '../z-model/type-activity';
@@ -51,9 +49,13 @@ export class NgserviceService {
      }
 
      deleteCollab(collaborator: Collaborator):Observable<Collaborator>{
-      return this._http.delete<Collaborator>("http://localhost:8900/collaborateurs/supprimer" + collaborator);
+      return this._http.delete<Collaborator>("http://localhost:8900/collaborateurs/supprimer" +collaborator);
     }
 
+    deleteCollabById(id: number):Observable<any>{
+      return this._http.delete<any>("http://localhost:8900/collaborateurs/supprimer/"+id);
+
+    }
     /** END Controller for Collaborateur interactions */
 
 
@@ -69,13 +71,17 @@ export class NgserviceService {
 
      }
 
+     
+    addAndUpdateExpense(expense: Expense, dateExpense :Date,dateRequest:Date):Observable<any>{
+      return  this._http.post<any>("http://localhost:7672/expenses/ajouter/" +dateExpense +"/"+ dateRequest , expense);
+     }
 
      addOneExpense(expense: Expense ):Observable<any>{
       return  this._http.post<any>("http://localhost:7672/expenses/ajouter",expense);
     }
 
-    deleteOneExpense(expense: Expense ):Observable<any>{
-      return  this._http.delete<any>("http://localhost:7672/expenses/supprimer"+ expense);
+    deleteOneExpense(expense: Expense ):Observable<Expense>{
+      return  this._http.delete<Expense>("http://localhost:7672/expenses/supprimer" + expense);
     }
     
 
@@ -94,7 +100,7 @@ export class NgserviceService {
     }
 
     deleteOneLeaveRequest(leave: Leave ):Observable<any>{
-      return  this._http.delete<any>("http://localhost:8950/conge/supprimer"+ leave);
+      return  this._http.delete<Leave>("http://localhost:8950/conge/supprimer"+ leave);
     }
     
 
@@ -129,5 +135,10 @@ export class NgserviceService {
     }
      
      /** END ACTIVITY */
+
+
+
+
+
   }
 

@@ -21,7 +21,7 @@
             <div class="inputbox mt-3"> <span for="dateOfEntry" >Date entrée :</span> <input  value="0000-00-00"  type="date" required [(ngModel)]="date1" name="date1" > </div>
             <div class="inputbox mt-3"> <span for="dateOfRelease">Date sortie :</span> <input value="0000-00-00"  type="date" required [(ngModel)]="date2" name="date2"> </div>
         <div class="inputbox mt-3"><span>Type :</span><br>
-            <select class="form-input" required [(ngModel)]="collaborator.typeCollaborator" name="typeCollaborator">
+            <select class="form-input" required [(ngModel)]="collaborator.typeCollaboratorId" name="typeCollaboratorId">
             <option value="1">Admin</option>
             <option value="2">Client</option>
           </select>

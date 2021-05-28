@@ -14,6 +14,9 @@ export class EditFraisComponent implements OnInit {
   expense = new Expense();
   updatedExpense = new Expense();
 
+  dateExpense = new Date();
+  dateRequest = new Date();
+
 
 
   constructor(private _service:NgserviceService, private _route:Router) { }
@@ -41,7 +44,7 @@ export class EditFraisComponent implements OnInit {
 
     this.updatedExpense.id = this.expense.id;
 
-    this._service.addOneExpense(this.updatedExpense).subscribe(
+    this._service.addAndUpdateExpense(this.updatedExpense,this.dateExpense,this.dateRequest).subscribe(
       data =>{
         console.log("ajout effectué");
       },

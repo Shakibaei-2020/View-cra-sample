@@ -32,7 +32,7 @@
                             
 
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Date entrée :</span> <input type="date" placeholder={{collaborateur.dateOfEntry}}  required [(ngModel)]="updatedCollaborateur.dateOfEntry" name="dateOfEntry"> </div>
+                    <div class="inputbox mt-1"><span class="input-title">Date entrée :</span> <input type="date" placeholder={{collaborateur.dateOfEntry}}  required [(ngModel)]="date1" name="date1"> </div>
                 </div>
                 
                   <div class="bio-row">
@@ -41,7 +41,7 @@
                 </div>
               
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Date sortie : </span> <input type="date" placeholder={{collaborateur.dateOfRelease}}  required [(ngModel)]="updatedCollaborateur.dateOfRelease" name="dateOfRelease"> </div>
+                    <div class="inputbox mt-1"><span class="input-title">Date sortie : </span> <input type="date" placeholder={{collaborateur.dateOfRelease}}  required [(ngModel)]="date2" name="date2"> </div>
                   </div> 
 
                   <div class="bio-row">
@@ -131,8 +131,8 @@
           <tr *ngFor="let expense of expenses">
 
        
-            <td>   <input type="text" value={{expense.dateRequest}} required [(ngModel)]="expense.dateRequest" name="dateRequest" > </td>
-            <td>   <input type="text" value={{expense.dateExpense}} required [(ngModel)]="expense.dateExpense" name="dateExpense"> </td>
+            <td>   <input type="date" value={{expense.dateRequest}} required [(ngModel)]="expense.dateRequest" name="dateRequest" > </td>
+            <td>   <input type="date" value={{expense.dateExpense}} required [(ngModel)]="expense.dateExpense" name="dateExpense"> </td>
             <td>  
             
               <select class="form-input" aria-label="Default select example"  value= required [(ngModel)]="expense.billable" name="billable"> 
@@ -177,15 +177,15 @@
 
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let leave of leaves">
-            
-            <td>   <input type="text" placeholder={{leave.dateOfDemand}} required [(ngModel)]="updatedLeave.dateOfDemand" name="dateOfDemand"> </td>
-            <td>   <input type="text" placeholder={{leave.dateOfStartLeave}} required [(ngModel)]="updatedLeave.dateOfStartLeave" name="dateOfStartLeave"> </td>
-            <td>   <input type="text" placeholder={{leave.dateOfEndLeave}} required [(ngModel)]="updatedLeave.dateOfEndLeave" name="dateOfEndLeave"> </td>
+        <tbody  > 
+
+          <tr  *ngFor="let leave of leaves; let i=index;">
+            <td >   <input  type="date" placeholder={{leave.dateOfDemand}} required [(ngModel)]="updatedLeave.dateOfDemand" name="{{leave.id}}"> </td>
+            <td>   <input type="date" placeholder={{leave.dateOfStartLeave}} required [(ngModel)]="updatedLeave.dateOfStartLeave" name="{{leave.id}}"> </td>
+            <td>   <input type="date" placeholder={{leave.dateOfEndLeave}} required [(ngModel)]="updatedLeave.dateOfEndLeave" name="{{leave.id}}"> </td>
             <td>   
             
-              <select class="form-input"  aria-label="Default select example"  required [(ngModel)]="updatedLeave.status" name="status">> 
+              <select class="form-input" value="{{leave.status}}"   required [(ngModel)]="updatedLeave.status" name="{{leave.id}}">> 
                 <option value="{{leave.status}} ">{{leave.status}} </option>
                 <option value="valider">valider</option>
                 <option value="valider">refuser</option>
@@ -193,7 +193,7 @@
               </select> 
             </td>
             <td>   
-              <select class="form-input" aria-label="Default select example"  required [(ngModel)]="updatedLeave.clientInformed" name="clientInformed"> 
+              <select class="form-input" aria-label="Default select example"  required [(ngModel)]="updatedLeave.clientInformed" name="{{leave.id}}"> 
                 <option value="{{leave.clientInformed}}">{{leave.clientInformed}}</option>
                 <option value="false">false</option>
               </select>
@@ -205,6 +205,7 @@
 
             </td>
         </tr>
+
 
         </tbody>
       </table>
