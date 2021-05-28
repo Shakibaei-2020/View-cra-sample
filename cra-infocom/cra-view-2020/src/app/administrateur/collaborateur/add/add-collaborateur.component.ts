@@ -20,6 +20,8 @@ export class AddCollaborateurComponent implements OnInit {
 
   addCollabFormSubmit(){
 
+   console.log (this.collaborator.dateOfEntry.setDate);
+
     this._service.addCollab(this.collaborator).subscribe(
       data =>{
         console.log("ajout effectué");
