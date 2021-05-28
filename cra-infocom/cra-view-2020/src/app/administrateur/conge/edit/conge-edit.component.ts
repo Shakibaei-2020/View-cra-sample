@@ -13,6 +13,11 @@ export class CongeEditComponent implements OnInit {
   leave = new Leave();
   updatedLeave = new Leave();
 
+  dateLeaveRequest = new Date();
+  dateStartLeave =  new Date();
+  dateEndLeave = new Date();
+
+
   constructor(private _service:NgserviceService, private _route:Router) { }
 
   ngOnInit(): void {
@@ -26,7 +31,7 @@ export class CongeEditComponent implements OnInit {
 
     this.updatedLeave.id = this.leave.id;
 
-    this._service.addOneLeaveRequest(this.updatedLeave).subscribe(
+    this._service.addOrUpdateLeaveRequest(this.updatedLeave).subscribe(
       data =>{
         console.log("ajout effectué");
       },

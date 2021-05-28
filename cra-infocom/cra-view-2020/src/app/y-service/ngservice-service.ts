@@ -63,15 +63,12 @@ export class NgserviceService {
 
     searchExpense(date1 : Date, date2 :Date ,status :String):Observable<Expense[]>{
       return  this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpense/"+ date1 +"/"+date2 +"/"+status);
-     }
+    }
      
-     listExpenseByCollabId(id:number):Observable<Expense[]>{
-
+    listExpenseByCollabId(id:number):Observable<Expense[]>{
             return  this._http.get<Expense[]>("http://localhost:7672/expenses/lister/expense/collab/"+id);
+    }
 
-     }
-
-     
     addAndUpdateExpense(expense: Expense, dateExpense :Date,dateRequest:Date):Observable<any>{
       return  this._http.post<any>("http://localhost:7672/expenses/ajouter/" +dateExpense +"/"+ dateRequest , expense);
      }
@@ -95,7 +92,7 @@ export class NgserviceService {
     /**START LEAVE  */
 
 
-    addOneLeaveRequest(leave: Leave ):Observable<any>{
+    addOrUpdateLeaveRequest(leave: Leave, date1 : Date,date2 : Date,date3 : Date  ):Observable<any>{
       return  this._http.post<any>("http://localhost:8950/conge/ajouter",leave);
     }
 
@@ -114,8 +111,8 @@ export class NgserviceService {
     }
 
 
-  searchLeave(date1 : Date, date2 :Date ,status :String):Observable<Leave[]>{
-  return  this._http.get<Leave[]>("http://localhost:8950/conge/searchLeave/" + date1+"/" +date2 +"/"+status);
+  searchLeave(dateDebut : Date, dateFin :Date ,status :String):Observable<Leave[]>{
+  return  this._http.get<Leave[]>("http://localhost:8950/conge/searchLeave/" + dateDebut+"/" +dateFin +"/"+status);
  }
 
   
