@@ -11,8 +11,11 @@ import { Collaborator } from 'src/app/z-model/collaborator';
 export class AddCollaborateurComponent implements OnInit {
 
   collaborator = new Collaborator();
+  date1 = new Date;
+  date2 = new Date;
 
-
+  toDate = new Date;
+  
   constructor(private _route:Router,private _service:NgserviceService) { }
 
   ngOnInit(): void {
@@ -20,12 +23,10 @@ export class AddCollaborateurComponent implements OnInit {
 
   addCollabFormSubmit(){
 
-   console.log (this.collaborator.dateOfEntry.setDate);
 
-    this._service.addCollab(this.collaborator).subscribe(
+   this._service.addCollab(this.collaborator,this.date1,this.date2).subscribe(
       data =>{
         console.log("ajout effectué");
-        this._route.navigate(['listCollab']);
       },
       error =>{
         console.log("erreur ajout non-effectué")

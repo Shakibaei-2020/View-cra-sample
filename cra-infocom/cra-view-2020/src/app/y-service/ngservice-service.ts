@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Subject } from 'rxjs';
 import { Leave } from '../z-model/leave';
 import { Activity } from '../z-model/activity';
+import { TypeActivity } from '../z-model/type-activity';
 
 
 @Injectable({
@@ -40,8 +41,8 @@ export class NgserviceService {
      return  this._http.get<Collaborator[]>("http://localhost:8900/collaborateurs/lister");
     }
  
-    addCollab(collaborator: Collaborator ):Observable<any>{
-      return  this._http.post<any>("http://localhost:8900/collaborateurs/ajouter",collaborator);
+    addCollab(collaborator: Collaborator, date1 :Date,date2:Date):Observable<any>{
+      return  this._http.post<any>("http://localhost:8900/collaborateurs/ajouter/" +date1 +"/"+ date2 , collaborator);
      }
 
 
@@ -121,6 +122,11 @@ export class NgserviceService {
     searchActivity(date1 : Date, date2 :Date ,lastName :String):Observable<Activity[]>{
       return  this._http.get<Activity[]>("http://localhost:8800/activity/searchActivity/"+ date1 +"/"+date2 +"/"+lastName);
      }
+
+
+     addNewTypeActivit(typeActivity: TypeActivity ):Observable<TypeActivity>{
+      return  this._http.post<TypeActivity>("http://localhost:8800/typesactivity/ajouter",typeActivity);
+    }
      
      /** END ACTIVITY */
   }

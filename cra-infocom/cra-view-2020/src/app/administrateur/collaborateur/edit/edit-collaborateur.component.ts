@@ -69,7 +69,7 @@ export class EditCollaborateurComponent implements OnInit{
     this.updatedCollaborateur.passward = this.collaborateur.passward;
     this.updatedCollaborateur.typeCollaborator = this.collaborateur.typeCollaborator;
 
-    this._service.addCollab(this.updatedCollaborateur).subscribe(
+    this._service.updateCollab(this.updatedCollaborateur).subscribe(
       data =>{
         console.log("ajout effectué");
         this._route.navigate(['listCollab']);

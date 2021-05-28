@@ -1,10 +1,10 @@
 <app-administrateur></app-administrateur>
 
-<form #addCollabForm="ngForm" (ngSubmit)="addCollabFormSubmit()">
+<form>
 
 <div class="div-add">
 <div class="container ">
-    <h2>Ajouter un collaborateur</h2>
+    <h3>Ajouter un collaborateur</h3>
     <hr>
 <div class="row">
     <div class="col-md-6">
@@ -18,10 +18,10 @@
     </div>
     <div class="col-md-6">
         <div class="form">
-            <div class="inputbox mt-3"> <span for="dateOfEntry" >Date entrée :</span> <input type="date" required [(ngModel)]="collaborator.dateOfEntry" name="dateOfEntry" > </div>
-            <div class="inputbox mt-3"> <span for="dateOfRelease">Date sortie :</span> <input type="date" required [(ngModel)]="collaborator.dateOfRelease" name="dateOfRelease"> </div>
+            <div class="inputbox mt-3"> <span for="dateOfEntry" >Date entrée :</span> <input  value="0000-00-00"  type="date" required [(ngModel)]="date1" name="date1" > </div>
+            <div class="inputbox mt-3"> <span for="dateOfRelease">Date sortie :</span> <input value="0000-00-00"  type="date" required [(ngModel)]="date2" name="date2"> </div>
         <div class="inputbox mt-3"><span>Type :</span><br>
-            <select class="form-input" aria-label="Default select example" required [(ngModel)]="collaborator.typeCollaborator" name="typeCollaborator">
+            <select class="form-input" required [(ngModel)]="collaborator.typeCollaborator" name="typeCollaborator">
             <option value="1">Admin</option>
             <option value="2">Client</option>
           </select>
@@ -30,7 +30,7 @@
     </div>
 
 
-    <button class="btnEditer"  data-target="#addModal">Ajouter</button>
+    <button class="btnEditer"   (click)="addCollabFormSubmit()">Ajouter</button>
 
     
 
