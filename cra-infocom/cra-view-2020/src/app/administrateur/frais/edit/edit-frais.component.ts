@@ -34,11 +34,6 @@ export class EditFraisComponent implements OnInit {
 
   }
 
-  deleteFrais(){
-    this._route.navigate(['/searchFrais']);
-
-  }
-
 
   updateExpense(){
 
@@ -55,10 +50,9 @@ export class EditFraisComponent implements OnInit {
   }
 
   deleteExpense(){
-    this._service.deleteOneExpense(this.expense).subscribe(
+    this._service.deleteOneExpense(this.expense.id).subscribe(
       data =>{
         console.log("delete effectué");
-        this._route.navigate(['listCollab']);
       },
       error =>{
         console.log("erreur delete non-effectué")

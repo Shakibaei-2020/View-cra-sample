@@ -115,7 +115,7 @@ export class EditCollaborateurComponent implements OnInit {
     deleteExpenseFromCollab(value :any) {
       console.log(value);
       this.expense.id = value;
-      this._service.deleteOneExpense(this.expense).subscribe(
+      this._service.deleteOneExpense(this.expense.id).subscribe(
         data =>{
           console.log("delete expense effectué");
         },

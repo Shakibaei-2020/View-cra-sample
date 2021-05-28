@@ -80,8 +80,8 @@ export class NgserviceService {
       return  this._http.post<any>("http://localhost:7672/expenses/ajouter",expense);
     }
 
-    deleteOneExpense(expense: Expense ):Observable<Expense>{
-      return  this._http.delete<Expense>("http://localhost:7672/expenses/supprimer" + expense);
+    deleteOneExpense(id: number ):Observable<Expense>{
+      return  this._http.delete<Expense>("http://localhost:7672/expenses/supprimer/" + id);
     }
     
 
