@@ -31,7 +31,7 @@ export class CongeEditComponent implements OnInit {
 
     this.updatedLeave.id = this.leave.id;
 
-    this._service.addOrUpdateLeaveRequest(this.updatedLeave).subscribe(
+    this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateLeaveRequest,this.dateStartLeave,this.dateEndLeave).subscribe(
       data =>{
         console.log("ajout effectué");
       },
@@ -42,10 +42,9 @@ export class CongeEditComponent implements OnInit {
   }
 
   deleteLeave(){
-    this._service.deleteOneLeaveRequest(this.leave).subscribe(
+    this._service.deleteOneLeaveRequest(this.leave.id).subscribe(
       data =>{
         console.log("delete effectué");
-        this._route.navigate(['listCollab']);
       },
       error =>{
         console.log("erreur delete non-effectué")

@@ -25,12 +25,15 @@ export class CongeDemandeComponent implements OnInit {
       )
   }
 
+  dateLeaveRequest = new Date();
+  dateStartLeave =  new Date();
+  dateEndLeave = new Date();
+
   addLeaveFormSubmit(){
 
-    this._service.addOneLeaveRequest(this.leave).subscribe(
+    this._service.addOrUpdateLeaveRequest(this.leave, this.dateLeaveRequest,this.dateStartLeave,this.dateEndLeave).subscribe(
       data =>{
         console.log("ajout effectué");
-        this._route.navigate(['listCollab']);
       },
       error =>{
         console.log("erreur ajout non-effectué")

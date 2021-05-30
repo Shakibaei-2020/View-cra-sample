@@ -128,15 +128,19 @@ export class EditCollaborateurComponent implements OnInit {
 
     /** Leaves commands */
 
+    dateLeaveRequest = new Date();
+    dateStartLeave = new Date();
+    dateEndLeave = new Date();
+
   updateLeaveFromCollab(value :number) {
     console.log(value);
     this.updatedLeave.id = value;
-    this._service.addOneLeaveRequest(this.updatedLeave).subscribe(
+    this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateLeaveRequest,this.dateStartLeave,this.dateEndLeave).subscribe(
       data =>{
-        console.log("update leave effectué");
+        console.log("ajout effectué");
       },
       error =>{
-        console.log("erreur update leave non-effectué")
+        console.log("erreur ajout non-effectué")
       }
     )
     }
@@ -145,7 +149,7 @@ export class EditCollaborateurComponent implements OnInit {
   deleteLeaveFromCollab(value :any) {
     console.log(value);
     this.leave.id = value;
-    this._service.deleteOneLeaveRequest(this.leave).subscribe(
+    this._service.deleteOneLeaveRequest(this.leave.id).subscribe(
       data =>{
         console.log("delete leave effectué");
       },

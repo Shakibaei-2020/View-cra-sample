@@ -92,12 +92,12 @@ export class NgserviceService {
     /**START LEAVE  */
 
 
-    addOrUpdateLeaveRequest(leave: Leave, date1 : Date,date2 : Date,date3 : Date  ):Observable<any>{
-      return  this._http.post<any>("http://localhost:8950/conge/ajouter",leave);
+    addOrUpdateLeaveRequest(leave: Leave, dateOfDemand : Date,dateOfStartLeave : Date,dateOfEndLeave : Date  ):Observable<any>{
+      return  this._http.post<any>("http://localhost:8950/conge/update/" + dateOfDemand + "/" + dateOfStartLeave + "/"+ dateOfEndLeave ,leave);
     }
 
-    deleteOneLeaveRequest(leave: Leave ):Observable<any>{
-      return  this._http.delete<Leave>("http://localhost:8950/conge/supprimer"+ leave);
+    deleteOneLeaveRequest(id: number ):Observable<Leave>{
+      return  this._http.delete<Leave>("http://localhost:8950/conge/supprimer/"+ id);
     }
     
 
