@@ -5,12 +5,13 @@
 <div class="contenue">
 <div class="Frais">
 <div class="activ">
+  <div class="">
     <h2> Notes de frais </h2>
-  <select class="form-input2" aria-label="Default select example">
+ </div>
+<select class="form-input2" aria-label="Default select example">
     <option value="1">Janvier</option>
     <option value="2">Fevrier</option>
-  </select>  
-
+  </select>
   <table class="table ">
     <thead>
       <tr>
@@ -18,37 +19,8 @@
         <th>REF.INTERNE	</th>
         <th>REF.CLIENT	</th>
         <th>R.AUTO	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
-        <th>Sa 1	</th>
+       
+        <th *ngFor="let element of tabJours;">{{element}}	</th>
         <th>total</th>
       </tr>
     </thead>
@@ -63,38 +35,10 @@
         <td><input  class=" choice"></td>
         <td><input class=" choice"></td>
         <td><button class="btnRemplir">1 -></button></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
+        
+        <td  *ngFor="let element of tabJours;"><input class=" inputDay" type="" name="" id=""></td>
+        <td ><input class=" inputDay" type="" name="" id=""></td>
+
       </tr>
       <tr>
         <td>
@@ -106,37 +50,7 @@
         <td><input  class=" choice"></td>
         <td><input class=" choice"></td>
         <td><button class="btnRemplir">1 -></button></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
+        <td  *ngFor="let element of tabJours;"><input class=" inputDay" type="" name="" id=""></td>
         <td><input class=" inputDay" type="" name="" id=""></td>
       </tr> <tr>
         <td>
@@ -148,37 +62,7 @@
         <td><input  class=" choice"></td>
         <td><input class=" choice"></td>
         <td><button class="btnRemplir">1 -></button></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
+        <td  *ngFor="let element of tabJours;"><input class=" inputDay" type="" name="" id=""></td>
         <td><input class=" inputDay" type="" name="" id=""></td>
       </tr> <tr>
         <td>
@@ -190,40 +74,9 @@
         <td><input  class=" choice"></td>
         <td><input class=" choice"></td>
         <td><button class="btnRemplir">1 -></button></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
-        <td><input class=" inputDay" type="" name="" id=""></td>
+        <td  *ngFor="let element of tabJours;"><input class=" inputDay" type="" name="" id=""></td>
         <td><input class=" inputDay" type="" name="" id=""></td>
       </tr>
-
     </tbody>
   </table>
 </div>
@@ -239,7 +92,10 @@
     <div class="">
       <h2> Astreinte </h2>
    </div>
-
+  <select class="form-input2" aria-label="Default select example">
+      <option value="1">Janvier</option>
+      <option value="2">Fevrier</option>
+    </select>
     <table class="table ">
       <thead>
         <tr>
@@ -247,41 +103,13 @@
           <th>TYPE	</th>
           <th>UNITE	</th>
           <th>R.AUTO	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
-          <th>Sa 1	</th>
+          <th *ngFor="let element of tabJours;">{{element}}	</th>
           <th>total</th>
         </tr>
       </thead>
       <tbody>
+
+        
         <tr>
           <td>
             <select class="form-input" aria-label="Default select example">
@@ -301,39 +129,12 @@
           <option value="2">Projet 2</option>
       </select>
     </td>          <td><button class="btnRemplir">1 -></button></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
+    <td  *ngFor="let element of tabJours;"><input class=" inputDay" type="" name="" id=""></td>
+
           <td><input class=" inputDay" type="" name="" id=""></td>
         </tr>
+
+
         <tr>
           <td>
             <select class="form-input" aria-label="Default select example">
@@ -353,39 +154,12 @@
           <option value="2">Projet 2</option>
       </select>
     </td>          <td><button class="btnRemplir">1 -></button></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
+    <td  *ngFor="let element of tabJours;"><input class=" inputDay" type="" name="" id=""></td>
+
           <td><input class=" inputDay" type="" name="" id=""></td>
         </tr>
+
+
         <tr>
           <td>
             <select class="form-input" aria-label="Default select example">
@@ -405,39 +179,14 @@
           <option value="2">Projet 2</option>
       </select>
     </td>          <td><button class="btnRemplir">1 -></button></td>
+    <td  *ngFor="let element of tabJours;"><input class=" inputDay" type="" name="" id=""></td>
+
           <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-        </tr>  <tr>
+        </tr> 
+        
+        
+        
+        <tr>
           <td>
             <select class="form-input" aria-label="Default select example">
               <option value="1">Projet 1</option>
@@ -456,37 +205,8 @@
           <option value="2">Projet 2</option>
       </select>
     </td>          <td><button class="btnRemplir">1 -></button></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
-          <td><input class=" inputDay" type="" name="" id=""></td>
+    <td  *ngFor="let element of tabJours;"><input class=" inputDay" type="" name="" id=""></td>
+
           <td><input class=" inputDay" type="" name="" id=""></td>
         </tr>
       </tbody>
@@ -500,4 +220,4 @@
   <button  class="send">Imprimer</button>
   <button  class="send">Aide</button>
 </div>
-<br><br><br><br>  <br><br><br><br>
+  <br><br><br><br>
