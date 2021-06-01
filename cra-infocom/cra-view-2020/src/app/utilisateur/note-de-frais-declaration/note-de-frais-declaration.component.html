@@ -1,0 +1,96 @@
+<app-utilisateur></app-utilisateur>
+
+<br><br><br><br>
+
+<div class="container">
+<div class="panel">
+
+    <br><br><br><br><br>
+    
+    
+    <div class="panel-body bio-graph-info">
+          <br>
+       <div class="row">
+    
+            <div class="bio-row">
+              <div class="inputbox mt-1"><span class="input-title">Cout HT :</span> <input type="text" placeholder="55€"> </div>
+    
+            </div>
+            <div class="bio-row">
+              <div class="inputbox mt-1"><span class="input-title">Date Frais :</span> <input type="Date" placeholder="13 juillet 1983" > </div>
+          </div>
+          
+            <div class="bio-row">
+              
+              <div class="inputbox mt-1"><span class="input-title">Cout TVA :</span><input type="text" placeholder="180€"   > </div>
+          </div>
+            <div class="bio-row">
+              <div class="inputbox mt-1"><span class="input-title">Date demande :</span> <input type="Date" placeholder="13 juillet 1983"   > </div>
+    
+            </div>
+            <div class="bio-row">
+              <div class="inputbox mt-1"><span>Facturable :</span><br>
+                <select class="form-input" aria-label="Default select example"  >
+                <option value="true">Oui</option>
+                <option value="false">Non</option>
+              </select></div>
+
+                       <div class="inputbox mt-1"><span>Type :</span><br>
+                <select class="form-input" aria-label="Default select example" >
+                <option value="type1">Type1</option>
+                <option value="type2">Type2</option>
+              </select></div>
+
+              
+    </div>
+          <div class="bio-row">
+       
+            <div class="inputbox mt-1"><span>Status :</span><br>
+                <select class="form-input" aria-label="Default select example" >
+                <option value="1">Traité</option>
+                <option value="2">En-cours</option>
+
+              </select>
+          </div>          
+        </div>
+
+
+        <div class="bio-row"></div>
+
+          <div class="bio-row">
+            <br>    <br>
+
+            <button class="button" data-toggle="modal" data-target="#updateModal" >Ajouter</button>
+
+       
+
+            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Êtes vous sur de vouloir mettre à jour ?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" >Ajouter</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+         
+
+             
+          </div>
+    
+        </div>
+    </div>
+    </div></div>

@@ -20,18 +20,14 @@
                 <th>Nom</th>
                 <th>Type</th>
                 <th>Action</th>
-
-
               </tr>
             </thead>
             <tbody>
                 <tr  *ngFor="let client of clients">
                   <td>{{client.name}}</td>
                   <td>{{client.typeClient}}</td>
-            
                 <td>
-
-                  <button type="button" class="btn btn-secondary" (click)="goToEditCollab()">Gerer</button>
+                  <button type="button" class="btnEditer" (click)="goToEditCollab()">Gerer</button>
                 </td>
             </tr>
             </tbody>
@@ -42,10 +38,3 @@
     </div>
     
 
-
-
-    
-<!--     <app-child [childMessage]="parentMessage"></app-child>
-        <button class="btnEditer" type="submit" (click)="goToEditCollab()">Editer</button>
-
- -->
