@@ -1,0 +1,222 @@
+<app-administrateur></app-administrateur>
+
+
+
+<div class="div-edit">
+
+<div class="container">
+   
+      <div class="panel">
+          <div class="bio-graph-heading-profil">
+
+            <div class="container ">
+                <img class ="profil-image" src="https://qualium-investissement.com/wp-content/uploads/2017/05/inconnu-small.jpg">
+                <p class="titre">Bonjour ! Mohammad-Reza SHAKIBAEI   </p>
+                
+
+            </div>
+          </div>
+          <br><br><br><br>
+   
+          
+          <div class="panel-body bio-graph-info">
+                <br>
+                <br>
+        
+             <div class="row">
+                  <div class="bio-row">
+                    <div class="inputbox mt-1"><span class="input-title">Prenom :</span> <input type="text" placeholder={{collaborateur.firstName}}  required [(ngModel)]="updatedCollaborateur.firstName" name="firstName"> </div>
+
+                  </div>
+
+                            
+
+                  <div class="bio-row">
+                    <div class="inputbox mt-1"><span class="input-title">Date entrée :</span> <input type="date" placeholder={{collaborateur.dateOfEntry}}  required [(ngModel)]="date1" name="date1"> </div>
+                </div>
+                
+                  <div class="bio-row">
+                    
+                    <div class="inputbox mt-1"><span class="input-title">Nom de famille :</span><input type="text" placeholder={{collaborateur.lastName}}  required [(ngModel)]="updatedCollaborateur.lastName" name="lastName"  > </div>
+                </div>
+              
+                  <div class="bio-row">
+                    <div class="inputbox mt-1"><span class="input-title">Date sortie : </span> <input type="date" placeholder={{collaborateur.dateOfRelease}}  required [(ngModel)]="date2" name="date2"> </div>
+                  </div> 
+
+                  <div class="bio-row">
+                    <div class="inputbox mt-1"><span class="input-title">Adresse mail : </span> <input type="text" placeholder={{collaborateur.email}}  required [(ngModel)]="updatedCollaborateur.email" name="email"  > </div>
+                </div>
+
+                <div class="bio-row">
+                </div>
+                <div class="bio-row">
+          
+                </div>
+                <div class="bio-row">
+
+                    <button class="button" data-toggle="modal" data-target="#updateModal"  >Mettre à jour</button>
+
+                
+
+                    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Êtes vous sur de vouloir mettre à jour ?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-primary" (click)="updateCollab()">Sauvgarder</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <button class="button" data-toggle="modal" data-target="#DeleteModal" >Supprimer</button>
+
+                    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Alert delete</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Êtes vous sur de vouloir supprimer?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-primary" (click)="deleteCollab()">Supprimer</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 
+                   
+                </div>
+              </div>
+            
+          </div>
+      </div>
+
+
+      <div class="bio-graph-heading">
+        <p class="titre"> Notes de frais </p>
+     </div>
+      <table class="table table-condensed">
+        <thead>
+          <tr >
+            <th>dateRequest</th>
+            <th>date de frais</th>
+            <th>Facturable</th>
+            <th>Cout HT</th>
+            <th>Cout TVA</th>
+            <th>Status</th>
+            <th>Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let expense of expenses">
+
+       
+            <td>   <input type="date" value={{expense.dateRequest}} required [(ngModel)]="expense.dateRequest" name="dateRequest" > </td>
+            <td>   <input type="date" value={{expense.dateExpense}} required [(ngModel)]="expense.dateExpense" name="dateExpense"> </td>
+            <td>  
+            
+              <select class="form-input" aria-label="Default select example"  value= required [(ngModel)]="expense.billable" name="billable"> 
+                <option value="{{expense.billable}}">{{expense.billable}}</option>
+                <option value="valider">true</option>
+              </select>
+            
+            </td>
+            <td>   <input type="text" value={{expense.costHT}} required [(ngModel)]="expense.costHT" name="costHT"> </td>
+            <td>   <input type="text" value={{expense.costTVA}} required [(ngModel)]="expense.costTVA" name="costTVA"> </td>
+            <td>  
+            
+              <select class="form-input" aria-label="Default select example"   required [(ngModel)]="expense.status" name="status"> 
+                <option value="{{expense.status}}">{{expense.status}}</option>
+                <option value="valider">valider</option>
+                <option value="valider">refuser</option>
+
+              </select> </td>
+       
+            <td>
+                <button class="btnTab" type="submit"  (click)="updateLeaveFromCollab(expense.id)">update</button><br><br>
+                <button class="btnTab" type="submit"  (click)="updateLeaveFromCollab(expense.id)">delete</button>
+
+            </td>
+        </tr>
+        </tbody>
+      </table>
+
+
+      <div class="bio-graph-heading">
+        <p class="titre"> Demande de congées  </p>
+     </div>
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Date de demande</th>
+            <th>Date de départ</th>
+            <th>Date de retour</th>
+            <th>Status</th>
+            <th>Client informé</th>
+            <th>Action</th>
+
+          </tr>
+        </thead>
+        <tbody  > 
+
+          <tr  *ngFor="let leave of leaves; let i=index;">
+            <td >   <input  type="date" placeholder={{leave.dateOfDemand}} required [(ngModel)]="updatedLeave.dateOfDemand" name="{{leave.id}}"> </td>
+            <td>   <input type="date" placeholder={{leave.dateOfStartLeave}} required [(ngModel)]="updatedLeave.dateOfStartLeave" name="{{leave.id}}"> </td>
+            <td>   <input type="date" placeholder={{leave.dateOfEndLeave}} required [(ngModel)]="updatedLeave.dateOfEndLeave" name="{{leave.id}}"> </td>
+            <td>   
+            
+              <select class="form-input" value="{{leave.status}}"   required [(ngModel)]="updatedLeave.status" name="{{leave.id}}">> 
+                <option value="{{leave.status}} ">{{leave.status}} </option>
+                <option value="valider">valider</option>
+                <option value="valider">refuser</option>
+
+              </select> 
+            </td>
+            <td>   
+              <select class="form-input" aria-label="Default select example"  required [(ngModel)]="updatedLeave.clientInformed" name="{{leave.id}}"> 
+                <option value="{{leave.clientInformed}}">{{leave.clientInformed}}</option>
+                <option value="false">false</option>
+              </select>
+            </td>
+       
+            <td>
+                <button class="btnTab" type="submit" (click)="updateLeaveFromCollab(leave.id)">update</button><br><br>
+                <button class="btnTab" type="submit" (click)="deleteLeaveFromCollab(leave.id)">delete</button>
+
+            </td>
+        </tr>
+
+
+        </tbody>
+      </table>
+
+
+
+
+<br>
+
+
+
+</div>
+</div>
+

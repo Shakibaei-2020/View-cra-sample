@@ -1,0 +1,64 @@
+<app-administrateur></app-administrateur>
+
+
+
+
+<div class="font-div1">
+          <div class="container">
+            <h2>Gestion des missions</h2>
+            <hr>
+  
+      
+
+
+
+  
+
+      <div class="container">
+        <div class="row">
+            <div class="col-sm-4"><span>Date 1 : </span><input type="date" required [(ngModel)]="date1" name="date1"></div>
+            <div class="col-sm-4"><span>Date 2 : </span><input type="date" required [(ngModel)]="date2" name="date2" ></div>
+            <div class="col-sm-4"><button class="btnSearch" type="submit" (click)="searchMission()">Chercher</button></div>
+            <div class="col-sm-8"><br><br>
+              <span>Nom client : </span>  <input type="text" required [(ngModel)]="clientName" name="clientName" >
+            </div>
+
+    </div>
+
+        <br><br><br><br>
+
+        <h2>Resultat</h2>
+        <hr>
+        <table class="table ">
+            <thead>
+              <tr>
+                <th><p class="titreTable">Mission title </p></th>
+                <th><p class="titreTable">Début mission</p></th>
+                <th><p class="titreTable">Fin mission</p></th>
+           
+
+
+                <th ><p class="commande titreTable">Action</p></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let mission of missions">
+                <td>{{mission.missionTitle}}</td>
+                <td>{{mission.startDate}}</td>
+                <td>{{mission.endDate}}</td>
+       
+
+                <td>
+                    <button class="btnEditer" type="submit" (click)="goGerer()" >Gerer</button>
+                </td>
+            </tr>
+            </tbody>
+          </table>
+
+
+
+       
+        </div>
+    </div>
+d<br><br><br><br><br><br>

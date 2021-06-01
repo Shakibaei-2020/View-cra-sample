@@ -1,0 +1,76 @@
+.photo{
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+    margin-left: 80%;
+}
+
+.BonjourX{
+    margin-left: 41%;
+    margin-bottom: 5%;
+}
+
+.Presentation{
+    margin-top: 10%;
+}
+
+.monProfil{
+    margin-left: 45%;
+}
+.bio-graph-heading {
+    background: #252525;
+    color: #fff;
+    text-align: center;
+    padding: 5px 110px;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    font-size: 8px;
+    height:30px;
+    border-radius: 15px;
+
+}
+
+
+
+.profil-image{
+    height: 140px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+}
+
+.lesButtons{
+margin-top: 2%;
+margin-left: 24%;
+}
+
+.titre{
+    margin-left: -12%;
+}
+
+
+
+.bouttonMenu:hover {background-color: bl}
+  
+.bouttonMenu:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+.bouttonMenu {
+    float: left;
+    height: 100px;
+    width: 100px;
+    margin-left: 50px;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #f5af18;
+    border: none;
+    border-radius: 100%;
+    box-shadow: 0 9px #999;
+    margin-bottom: 5%;
+  }

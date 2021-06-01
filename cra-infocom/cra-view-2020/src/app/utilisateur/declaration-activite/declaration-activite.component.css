@@ -1,0 +1,148 @@
+
+
+
+  
+.inputDay{
+  width: 30px;
+  height: 18px;
+  margin-left: 1px;
+}
+
+
+
+.contenue{
+  margin-left: 30px;
+}
+
+td{
+padding-left: 2px;
+}
+.Frais{
+  width: 800px;
+}
+.choice{
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid#464646;
+}
+.form-input{
+  height: 24.5px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #464646;
+}
+
+.form-input2{
+  width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid#464646;
+  }
+
+  .activ{
+    width: 1000px;
+  }
+
+
+
+
+.btnAct {
+    float: left;
+    padding: 10px 25px;
+    width: 100%;
+    font-size: 11px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    margin-bottom: 5%;
+  }
+  
+  .btnAct:hover {background-color: #464646}
+  
+  .btnAct:active {
+    background-color: #363636;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+
+
+  .btnEditer {
+    float: left;
+    padding: 10px 25px;
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    margin-bottom: 5%;
+  }
+
+  .btnRemplir{
+    float: left;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 5%;
+  }
+  
+  .btnEditer:hover {background-color: #464646}
+  
+  .btnEditer:active {
+    background-color: #363636;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+.register{
+  margin-left: 30px;
+}
+
+.send{
+  margin-top: 50px;
+  margin-left: 10px;
+  height: 30px;
+  width: 160px;
+
+  float: left;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #363636;
+  border: none;
+  border-radius: 15px;
+  margin-bottom: 5%;
+}
+
+
+
+

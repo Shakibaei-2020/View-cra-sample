@@ -1,23 +1,41 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ConnexionComponent } from './connexion/connexion.component';
-
-import { AddCollaborateurComponent } from './administrateur/add-collaborateur/add-collaborateur.component';
-import { EditCollaborateurComponent } from './administrateur/edit-collaborateur/edit-collaborateur.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-<<<<<<< HEAD
 import { SecurityComponent } from './security/security.component';
-=======
+import { ReactiveFormsModule } from '@angular/forms';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
-import { SearchCollaborateurComponent } from './administrateur/search-collaborateur/search-collaborateur.component';
-import { AddFraisComponent } from './administrateur/add-frais/add-frais.component';
-import { EditFraisComponent } from './administrateur/edit-frais/edit-frais.component';
 
->>>>>>> 385cfe9ff707cbec078e9fdd6ea244a4452da09a
+import { AddCollaborateurComponent } from './administrateur/collaborateur/add/add-collaborateur.component';
+import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
+
+import { EditFraisComponent } from './administrateur/frais/edit/edit-frais.component';
+
+import { ConnexionComponent } from './connexion/connexion.component';
+
+import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { DeclarationActiviteComponent } from './utilisateur/declaration-activite/declaration-activite.component';
+
+import { FraisComponent } from './administrateur/frais/frais.component';
+import { CongeComponent } from './administrateur/conge/conge.component';
+import { CongeEditComponent } from './administrateur/conge/edit/conge-edit.component';
+import{ CongeDemandeComponent} from './utilisateur/conge-demande/conge-demande.component';
+
+import { CollaborateurComponent } from './administrateur/collaborateur/collaborateur.component';
+import { ActiviteComponent } from './administrateur/activite/activite.component';
+import { AddComponent } from './administrateur/activite/add/add.component';
+import { EditComponent } from './administrateur/activite/edit/edit.component';
+import { ClientComponent } from './administrateur/client/client.component';
+import { AddClientComponent } from './administrateur/client/add/add-client.component';
+import { EditClientComponent } from './administrateur/client/edit-client/edit-client.component';
+import { MissionComponent } from './administrateur/mission/mission.component';
+import { AddMissionComponent } from './administrateur/mission/add-mission/add-mission.component';
+import { EditMissionComponent } from './administrateur/mission/edit-mission/edit-mission.component';
+import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
+import { AccueilUtilisateurComponent } from './utilisateur/accueil/accueil-utilisateur.component';
+import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-declaration/note-de-frais-declaration.component';
 
 
 
@@ -25,25 +43,39 @@ import { EditFraisComponent } from './administrateur/edit-frais/edit-frais.compo
   declarations: [
     AppComponent,
     ConnexionComponent,
+    AdministrateurComponent,
     AddCollaborateurComponent,
     EditCollaborateurComponent,
-    AdministrateurComponent,
-    SearchCollaborateurComponent,
-    AddFraisComponent,
     EditFraisComponent,
-<<<<<<< HEAD
-    ListFraisComponent,
     SecurityComponent,
-=======
->>>>>>> 385cfe9ff707cbec078e9fdd6ea244a4452da09a
+    CongeDemandeComponent,
+    CongeEditComponent,
+    UtilisateurComponent,
+    DeclarationActiviteComponent,
+    FraisComponent,
+    CongeComponent,
+    CollaborateurComponent,
+    ActiviteComponent,
+    AddComponent,
+    EditComponent,
+    ClientComponent,
+    AddClientComponent,
+    EditClientComponent,
+    MissionComponent,
+    AddMissionComponent,
+    EditMissionComponent,
+    MonProfileComponent,
+    AccueilUtilisateurComponent,
+    NoteDeFraisDeclarationComponent,
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
+  providers: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

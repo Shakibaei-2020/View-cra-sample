@@ -1,0 +1,40 @@
+<app-administrateur></app-administrateur>
+
+
+<div class="font-div1">
+  <div class="container">
+    <h2>Gestion des clients</h2>
+    <hr>
+<div>
+    <div class="container mt-3"><br>
+        <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchClientByName()">
+            <input type="text" placeholder="Nom du client"required [(ngModel)]="clientInput.name" name="name">
+            <button type="submit"><p>Chercher</p></button>
+          </form>
+
+        <br><br><br>
+        <h2>Resultat  </h2> 
+        <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor="let client of clients">
+                  <td>{{client.name}}</td>
+                  <td>{{client.typeClient}}</td>
+                <td>
+                  <button type="button" class="btnEditer" (click)="goToEditCollab()">Gerer</button>
+                </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    </div>
+    </div>
+    
+
