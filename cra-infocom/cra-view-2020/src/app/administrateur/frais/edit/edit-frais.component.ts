@@ -50,7 +50,9 @@ export class EditFraisComponent implements OnInit {
   }
 
   deleteExpense(){
-    this._service.deleteOneExpense(this.expense.id).subscribe(
+
+    this.expense.id;
+    this._service.deleteOneExpense(2).subscribe(
       data =>{
         console.log("delete effectué");
       },

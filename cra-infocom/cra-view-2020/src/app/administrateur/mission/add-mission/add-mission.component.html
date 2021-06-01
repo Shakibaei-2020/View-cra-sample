@@ -22,20 +22,17 @@
        <div class="row">
     
             <div class="bio-row">
-                <div class="inputbox mt-1"><span class="input-title">Nom mission:</span> <input type="text" name=""> </div>
+                <div class="inputbox mt-1"><span class="input-title">Nom mission:</span> <input type="text" required [(ngModel)]="newMission.missionTitle" name="newMission.missionTitle"> </div>
          
 
-                <div class="inputbox mt-1"><span class="input-title"class="input-title">Client :</span><br>
-                  <select class="form-input" aria-label="Default select example">
-                  <option value="1">Client 1</option>
-                  <option value="2">Client 2</option>
-                </select>  </div> 
+                <div class="inputbox mt-1"><span class="input-title">Nom mission:</span> <input type="text" required [(ngModel)]="newClient.name" name="newClient.name"> </div>
+
             </div>
 
             <div class="bio-row">
               
-              <div class="inputbox mt-1"><span class="input-title">Date début :</span> <input type="Date" placeholder="13 juillet 1983" name="" > </div>
-              <div class="inputbox mt-1"><span class="input-title">Date fin :</span> <input type="Date" placeholder="13 juillet 1983" name=""> </div>
+              <div class="inputbox mt-1"><span class="input-title">Date début :</span> <input type="Date"  required [(ngModel)]="startDate" name="startDate"> </div>
+              <div class="inputbox mt-1"><span class="input-title">Date fin :</span> <input type="Date"  required [(ngModel)]="endDate" name="endDate"> </div>
 
           </div>
      
@@ -63,8 +60,8 @@
                     Êtes vous sur de vouloir supprimer?
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"  >Ajouter</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Annuler</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="addMission()">Ajouter</button>
                   </div>
                 </div>
               </div>

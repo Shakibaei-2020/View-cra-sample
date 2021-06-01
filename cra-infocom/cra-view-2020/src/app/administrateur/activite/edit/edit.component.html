@@ -21,19 +21,18 @@
        <div class="row">
     
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Durée ::</span> <input type="text"  > </div>
+              <div class="inputbox mt-1"><span class="input-title">Durée :</span> <input type="text"  required [(ngModel)]="updatedActivity.duration" name="updatedActivity.duration" > </div>
     
             </div>
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Date début :</span> <input type="Date"  > </div>
+              <div class="inputbox mt-1"><span class="input-title">Date début :</span> <input type="Date"   required [(ngModel)]="dateOfStart" name="dateOfStart"> </div>
           </div>
-          
             <div class="bio-row">
               
               <div class="inputbox mt-1"> <div class="inputbox mt-1"><span class="input-title"class="input-title">Distentiel :</span><br>
-                <select class="form-input" aria-label="Default select example">
-                <option value="1">Oui</option>
-                <option value="2">Non</option>
+                <select class="form-input" aria-label="Default select example" required [(ngModel)]="updatedActivity.remote" name="updatedActivity.remote">
+                <option value="true">Oui</option>
+                <option value="false">Non</option>
               </select>  </div></div>
           </div>
             <div class="bio-row">
@@ -69,7 +68,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" >Sauvgarder</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateActivity()" >Sauvgarder</button>
                   </div>
                 </div>
               </div>
@@ -93,7 +92,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"  >Supprimer</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteActivity()"  >Supprimer</button>
                   </div>
                 </div>
               </div>

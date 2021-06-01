@@ -22,16 +22,16 @@
        <div class="row">
     
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Nom de la mission :</span> <input type="text"  > </div>
-    
+              <div class="inputbox mt-1"><span class="input-title">Nom de la mission :</span> <input type="text" required [(ngModel)]="updatedMission.missionTitle" name="updatedMission.missionTitle"  > </div>
+
             </div>
             <div class="bio-row">
 
-                <div class="inputbox mt-1"><span class="input-title">Date de début :</span> <input type="Date" placeholder="13 juillet 1983" name="" > </div>
+                <div class="inputbox mt-1"><span class="input-title">Date de début :</span> <input type="Date" required [(ngModel)]="newStartDate" name="newStartDate" > </div>
 
 <br>
                   
-                <div class="inputbox mt-1"><span class="input-title">Date de fin  :</span> <input type="Date" placeholder="13 juillet 1983" name="" > </div>
+                <div class="inputbox mt-1"><span class="input-title">Date de fin  :</span> <input type="Date" required [(ngModel)]="newEndDate" name="newEndDate" > </div>
 
          
            
@@ -60,7 +60,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" >Sauvgarder</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateMission()" >Sauvgarder</button>
                   </div>
                 </div>
               </div>
@@ -84,7 +84,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"  >Supprimer</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteMission()">Supprimer</button>
                   </div>
                 </div>
               </div>

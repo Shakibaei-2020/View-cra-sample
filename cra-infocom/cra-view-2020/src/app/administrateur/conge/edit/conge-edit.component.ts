@@ -13,7 +13,7 @@ export class CongeEditComponent implements OnInit {
   leave = new Leave();
   updatedLeave = new Leave();
 
-  dateLeaveRequest = new Date();
+  dateOfDemand = new Date();
   dateStartLeave =  new Date();
   dateEndLeave = new Date();
 
@@ -31,7 +31,7 @@ export class CongeEditComponent implements OnInit {
 
     this.updatedLeave.id = this.leave.id;
 
-    this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateLeaveRequest,this.dateStartLeave,this.dateEndLeave).subscribe(
+    this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemand,this.dateStartLeave,this.dateEndLeave).subscribe(
       data =>{
         console.log("ajout effectué");
       },

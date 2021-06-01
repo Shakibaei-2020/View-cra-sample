@@ -18,10 +18,10 @@
       <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchExpenses()">
       <div class="container">
         <div class="row">
-            <div class="col-sm-4"><input type="date" required [(ngModel)]="date1" name="date1"></div>
-            <div class="col-sm-4"><input type="date"  required [(ngModel)]="date2" name="date2"></div>
+            <div class="col-sm-4"><span>date 1 : </span><input type="date" required [(ngModel)]="date1" name="date1"></div>
+            <div class="col-sm-4"><span>date 2 : </span><input type="date"  required [(ngModel)]="date2" name="date2"></div>
             <div class="col-sm-4"><button class="btnSearch" type="submit">Chercher</button></div>
-            <div class="col-sm-8">
+            <div class="col-sm-8"><br><br><span>Status : </span>
               <select class="form-input" aria-label="Default select example"  required [(ngModel)]="status" name="status">
               <option value="1">En-cours</option>
               <option value="2">Refusé</option>

@@ -10,11 +10,12 @@
   
       <div class="container">
         <div class="row">
-            <div class="col-sm-4"><input type="date" required [(ngModel)]="date1" name="date1"></div>
-            <div class="col-sm-4"><input type="date" required [(ngModel)]="date2" name="date2"> </div>
+            <div class="col-sm-4"><span>Date 1:</span><input type="date" required [(ngModel)]="date1" name="date1"></div>
+            <div class="col-sm-4"><span>Date 2:</span><input type="date" required [(ngModel)]="date2" name="date2"> </div>
             <div class="col-sm-4"><button class="btnSearch" type="submit"  (click)="searchActivity()">Chercher</button></div>
             <div class="col-sm-8">
-            <input type="text" required [(ngModel)]="lastName" name="lastName">
+              <br><br>
+              <span>Nom du collaborateur : </span>  <input type="text" required [(ngModel)]="lastName" name="lastName">
             </div>
 
     </div>
@@ -26,9 +27,8 @@
         <table class="table ">
             <thead>
               <tr>
-                <th><p class="titreTable">Nom collaborateur </p></th>
-                <th><p class="titreTable">Durée</p></th>
                 <th><p class="titreTable">Date debut</p></th>
+                <th><p class="titreTable">Durée</p></th>
                 <th><p class="titreTable">Distentiel</p></th>
 
 
@@ -42,7 +42,7 @@
                 <td>{{activity.duration}}</td>
                 <td>{{activity.remote}}</td>
                 <td>
-                    <button class="btnEditer" type="submit" >Gerer</button>
+                    <button class="btnEditer" type="submit" (click)="goGerer()" >Gerer</button>
                 </td>
             </tr>
             </tbody>
@@ -53,4 +53,3 @@
        
         </div>
     </div>
-    <button  type="submit"  (click)="goGerer()">Gerer</button>

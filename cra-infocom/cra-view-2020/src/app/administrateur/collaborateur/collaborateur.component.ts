@@ -12,18 +12,10 @@ import { Collaborator } from 'src/app/z-model/collaborator';
 export class CollaborateurComponent implements OnInit {
 
 
-  subscription!: Subscription;
   collaboratorInputLastName = new Collaborator();
 
   public collaborators!:Collaborator[];  
 
-
-  /** test communication between componente */
-  
-  parentMessage = "message from parent dqsdqsd";
-
-
-    /** END test communication between componente */
 
 
 
@@ -40,7 +32,6 @@ export class CollaborateurComponent implements OnInit {
   }
   
 
-  /** fin test */
 
 
   goToEditCollab(){

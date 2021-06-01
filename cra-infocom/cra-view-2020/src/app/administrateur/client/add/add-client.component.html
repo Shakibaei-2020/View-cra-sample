@@ -16,7 +16,7 @@
         <hr>       <div class="row">
     
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Nom client:</span> <input type="text"  > </div>
+              <div class="inputbox mt-1"><span class="input-title">Nom client:</span> <input type="text"   required [(ngModel)]="newClient.name" name="newClient.name"> </div>
          
     
             </div>
@@ -25,9 +25,9 @@
             <div class="bio-row">
 
                 <div class="inputbox mt-1"><span class="input-title"class="input-title">Type :</span><br>
-                    <select class="form-input" aria-label="Default select example">
-                    <option value="1">Type 1</option>
-                    <option value="2">Type 2</option>
+                    <select class="form-input" aria-label="Default select example" required [(ngModel)]="newClient.typeClient" name="newClient.typeClient">
+                    <option value="new  ">Type 1</option>
+                    <option value="type2">Type 2</option>
                   </select>  </div> 
 
                    
@@ -57,7 +57,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"  >Supprimer</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addClient()" >Ajouter</button>
                   </div>
                 </div>
               </div>

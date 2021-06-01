@@ -6,5 +6,6 @@ export class Activity {
 	public  startDate!: Date;
 	public  duration!: number;
 	public  remote!: boolean;
+	public typeActivityId!: number;
 
 }

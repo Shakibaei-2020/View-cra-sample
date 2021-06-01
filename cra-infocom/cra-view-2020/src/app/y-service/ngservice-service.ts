@@ -7,6 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 import { Leave } from '../z-model/leave';
 import { Activity } from '../z-model/activity';
 import { TypeActivity } from '../z-model/type-activity';
+import { Client } from '../z-model/client';
+import { Mission } from '../z-model/mission';
 
 
 @Injectable({
@@ -32,7 +34,7 @@ export class NgserviceService {
    }
 
    selectCollabByMail(email :String):Observable<Collaborator>{
-    return  this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/email/{email}"+email);
+    return  this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/email/"+email);
    }
 
     selectAllCollab():Observable<Collaborator[]>{
@@ -92,8 +94,8 @@ export class NgserviceService {
     /**START LEAVE  */
 
 
-    addOrUpdateLeaveRequest(leave: Leave, dateOfDemand : Date,dateOfStartLeave : Date,dateOfEndLeave : Date  ):Observable<any>{
-      return  this._http.post<any>("http://localhost:8950/conge/update/" + dateOfDemand + "/" + dateOfStartLeave + "/"+ dateOfEndLeave ,leave);
+    addOrUpdateLeaveRequest(leave: Leave, dateOfDemand : Date,dateOfStartLeave : Date,dateOfEndLeave : Date  ):Observable<Leave>{
+      return  this._http.post<Leave>("http://localhost:8950/conge/update/" + dateOfDemand + "/" + dateOfStartLeave + "/"+ dateOfEndLeave ,leave);
     }
 
     deleteOneLeaveRequest(id: number ):Observable<Leave>{
@@ -131,10 +133,69 @@ export class NgserviceService {
       return  this._http.post<TypeActivity>("http://localhost:8800/typesactivity/ajouter",typeActivity);
     }
      
-     /** END ACTIVITY */
+
+    selectActivityById(id : number):Observable<Activity>{
+      return  this._http.get<Activity>("http://localhost:8800/activity/lister/"+id);
+     }
+    
+    
+    
+    addAndUpdateActivity(activity: Activity, startDate : Date):Observable<Activity>{
+      return  this._http.post<Activity>("http://localhost:8800/activity/update/" + startDate ,activity);
+    }
+
+    DeleteActivityById(id: number ):Observable<Activity>{
+      return  this._http.delete<Activity>("http://localhost:8800/activity/supprimer/"+ id);
+    }
+    
+    /** END ACTIVITY */
+
+
+    /**START CLIENT */
+
+
+    selectClientByName(name :String):Observable<Client[]>{
+      return  this._http.get<Client[]>("http://localhost:8801/client/lister/Nom/"+name);
+     }
+
+
+    addAndupdateClient(client: Client ):Observable<any>{
+      return  this._http.post<any>("http://localhost:8801/client/update",client);
+    }
+
+    deleteClient(id: number ):Observable<Client>{
+      return  this._http.delete<Client>("http://localhost:8801/client/supprimer/"+ id);
+    }
+
+    selectClientById(id: number):Observable<Client>{
+      return  this._http.get<Client>("http://localhost:8801/client/lister/"+id);
+     }
+    /**END CLIENT */
 
 
 
+    /**START MISSION */
+
+    selectMissionById(id: number):Observable<Mission>{
+      return  this._http.get<Mission>("http://localhost:8801/mission/lister/"+id);
+     }
+
+
+    searchMission(date1 : Date, date2 :Date ,nameClient :String):Observable<Mission[]>{
+      return  this._http.get<Mission[]>("http://localhost:8801/mission/searchMission/"+ date1 +"/"+date2 +"/"+nameClient);
+     }
+
+    
+     addAndUpdateMission  (mission: Mission, startDate : Date, endDate : Date):Observable<Mission>{
+      return  this._http.post<Mission>("http://localhost:8801/mission/update/" + startDate+ "/" +  endDate ,mission);
+    }
+
+
+    deleteMission(id: number ):Observable<Mission>{
+      return  this._http.delete<Mission>("http://localhost:8801/mission/supprimer/"+ id);
+    }
+
+    /**END MISSION */
 
 
   }
