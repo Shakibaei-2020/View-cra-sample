@@ -8,6 +8,7 @@ export class Collaborator {
     public dateOfEntry!:Date;
     public dateOfRelease!:Date;
     public typeCollaboratorId!:number;
+    public profileImagePath!: Blob;
 
 
 }

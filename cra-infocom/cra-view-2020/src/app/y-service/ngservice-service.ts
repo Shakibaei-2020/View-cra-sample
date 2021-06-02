@@ -15,6 +15,9 @@ import { Mission } from '../z-model/mission';
   providedIn: 'root'
 })
 export class NgserviceService {
+  get(arg0: string, arg1: { responseType: string; }) {
+    throw new Error('Method not implemented.');
+  }
 
  
 
@@ -46,8 +49,8 @@ export class NgserviceService {
      }
 
 
-     updateCollab(collaborator: Collaborator ):Observable<any>{
-      return  this._http.post<any>("http://localhost:8900/collaborateurs/update",collaborator);
+     updateCollab(collaborator: Collaborator ):Observable<Collaborator>{
+      return  this._http.post<Collaborator>("http://localhost:8900/collaborateurs/update",collaborator);
      }
 
      deleteCollab(collaborator: Collaborator):Observable<Collaborator>{
