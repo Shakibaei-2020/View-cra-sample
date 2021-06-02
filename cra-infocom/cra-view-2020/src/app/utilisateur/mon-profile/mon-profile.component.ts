@@ -14,8 +14,16 @@ export class MonProfileComponent implements OnInit {
 
   collaborateur = new Collaborator();
   newPassward!: string;
+  url!:File;
+
+  
 
   ngOnInit(): void {
+
+
+
+
+
 
     this._service.selectOneCollabById(2).subscribe(
       data=> this.collaborateur = data,
@@ -23,10 +31,14 @@ export class MonProfileComponent implements OnInit {
       )
   }
 
+  
 
   updateCollab(){
+    
+    
 
     this.collaborateur.passward = this.newPassward;
+    this.collaborateur.profileImagePath = this.url;
 
     this._service.updateCollab(this.collaborateur).subscribe(
       data =>{
@@ -36,6 +48,9 @@ export class MonProfileComponent implements OnInit {
         console.log("erreur ajout non-effectué")
       }
     )
+
+    console.log(this.collaborateur.profileImagePath)
+    
     }
 
 }
