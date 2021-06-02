@@ -40,7 +40,7 @@
         <td><input class=" choice"></td>
         <td>
           <button class="btnRemplir" (click)="remplirProjet1()">Remplir</button>
-          <button class="btnRemplir">TAD</button>
+          <button class="btnRemplir" (click)="remplirRemoteP1()">TAD</button>
 
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
@@ -50,7 +50,7 @@
 
 
 
-            <input class="inputRemote"   name="remote-{{indexOfelement}}" id="remote-{{indexOfelement}}" type="checkbox"  value="{{isRemote}}">{{isRemote}}
+            <input class="inputRemote"   name="remote-{{indexOfelement}}" id="remote-{{indexOfelement}}" type="checkbox" checked="{{isRemote}}" value="{{isRemote}}">
 
 
           </td>

@@ -87,6 +87,10 @@ nosDates!: number[];
     this.totalProjet1 = this.daysInMonth;
   }
 
+  remplirRemoteP1(){
+    this.isRemote = true;
+  }
+
 
   remplirProjet2(){
     this.dureeProjet2 = 1;
