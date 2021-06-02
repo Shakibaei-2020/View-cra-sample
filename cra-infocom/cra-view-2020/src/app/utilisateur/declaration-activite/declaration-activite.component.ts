@@ -85,7 +85,6 @@ nosDates!: number[];
   remplirProjet1(){
     this.dureeProjet1 = 1;
     this.totalProjet1 = this.daysInMonth;
-
   }
 
 
@@ -120,12 +119,12 @@ nosDates!: number[];
     this.activity1.projectId = 2;
     this.activity1.typeActivityId = 2;
     this.activity1.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
-    this.activity1.remote =  (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).translate;
+    this.activity1.remote =  (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked;
     
 
     console.log(this.activity1.remote);
      
-    /** 
+  
      this._service.addAndUpdateActivity(this.activity1,this.aujourdhui).subscribe(
       data =>{
         console.log("ajout effectué");
@@ -134,7 +133,7 @@ nosDates!: number[];
         console.log("erreur ajout non-effectué")
       }
     )
-*/
+
   }
   }
 }
