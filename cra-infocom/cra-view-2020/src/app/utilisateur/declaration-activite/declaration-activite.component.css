@@ -100,6 +100,11 @@ input[type=text] {
     margin-bottom: 5%;
   }
 
+  .inputRemote{
+    margin-top: 12px;
+    margin-left:25%;
+  }
+
   .btnRemplir{
     float: left;
     font-size: 15px;
@@ -111,6 +116,8 @@ input[type=text] {
     border: none;
     border-radius: 15px;
     margin-bottom: 5%;
+    height:23px;
+    width: 100%;
   }
   
   .btnEditer:hover {background-color: #464646}

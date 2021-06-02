@@ -1,5 +1,6 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { Router } from '@angular/router';
+import { cpuUsage } from 'node:process';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Activity } from 'src/app/z-model/activity';
 
@@ -18,22 +19,28 @@ day!: number;
 daysInMonth!: number;
 
 tabJours=new Array();
+
+
 activitiesPerDay = new Array();
 
-activity1 = new Activity();
-activity2 = new Activity();
-activity3 = new Activity();
-activity4 = new Activity();
 
+isRemote!: Boolean;
+remotePerDay = new Array();
+
+
+activity1 = new Activity();
 dureeProjet1!: number;
 totalProjet1!: number;
 
+activity2 = new Activity();
 dureeProjet2!: number;
 totalProjet2!: number;
 
+activity3 = new Activity();
 dureeProjet3!: number;
 totalProjet3!: number;
 
+activity4 = new Activity();
 dureeProjet4!: number;
 totalProjet4!: number;
 
@@ -57,16 +64,17 @@ nosDates!: number[];
     this.month = this.dt.getMonth()+1;
     this.year = this.dt.getFullYear();
 
-    console.log(this.day);
 
 
    this.daysInMonth = new Date(this.year, this.month, 0).getDate();
     var i;
     for (i = 0; i < this.daysInMonth; i++) {
-
-
       this.tabJours[i] = i + 1;
+
       this.activitiesPerDay.push("jour-"+i);
+
+      this.remotePerDay.push("remote-"+i);
+
     }
   }
 
@@ -77,7 +85,9 @@ nosDates!: number[];
   remplirProjet1(){
     this.dureeProjet1 = 1;
     this.totalProjet1 = this.daysInMonth;
+
   }
+
 
   remplirProjet2(){
     this.dureeProjet2 = 1;
@@ -99,6 +109,8 @@ nosDates!: number[];
   tabAllInputedValue=new Array();
   j!: number;
 
+
+  
   EnregisterEtEnvoyer(){
 
     var i;
@@ -106,20 +118,14 @@ nosDates!: number[];
           
     this.activity1.collaboratorId = 1;
     this.activity1.projectId = 2;
-    this.activity1.remote = true;
     this.activity1.typeActivityId = 2;
     this.activity1.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
-    console.log(this.activity1.duration);
+    this.activity1.remote =  (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).translate;
     
-    //this.tabAllInputedValue[i] = 1;
 
-
-
-    this.activity1.duration = this.tabAllInputedValue[i];
-
-
-
- 
+    console.log(this.activity1.remote);
+     
+    /** 
      this._service.addAndUpdateActivity(this.activity1,this.aujourdhui).subscribe(
       data =>{
         console.log("ajout effectué");
@@ -128,7 +134,7 @@ nosDates!: number[];
         console.log("erreur ajout non-effectué")
       }
     )
-
+*/
   }
   }
 }
