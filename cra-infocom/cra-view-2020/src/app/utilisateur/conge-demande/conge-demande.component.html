@@ -14,7 +14,7 @@
 
           
 
-                  <div class="inputbox mt-3"> <span  >Date début :</span> <input type="date" required [(ngModel)]="leave.dateOfStartLeave" name="dateOfStartLeave" > </div>
+                  <div class="inputbox mt-3"> <span  >Date début :</span> <input type="date" required [(ngModel)]="dateStartLeave" name="dateStartLeave" > </div>
 
 
                   <div class="inputbox mt-3"> <span>Type de congé :</span>
@@ -29,11 +29,11 @@
         
         <div class="col-md-6">
             <div class="form">
-                <div class="inputbox mt-3"> <span  >Date fin :</span> <input type="date" required [(ngModel)]="leave.dateOfStartLeave" name="dateOfStartLeave" > </div>
+                <div class="inputbox mt-3"> <span  >Date fin :</span> <input type="date" required [(ngModel)]="dateEndLeave" name="dateEndLeave" > </div>
                 <div class="inputbox mt-3"> <span>Client informé :</span>
-                    <select class="form-input" aria-label="Default select example"   required [(ngModel)]="leave.LeaveType" name="LeaveType">
-                    <option value="true">Type 1</option>
-                    <option value="false">Type 2</option>
+                    <select class="form-input" aria-label="Default select example"   required [(ngModel)]="leave.clientInformed" name="leave.clientInformed">
+                    <option value="true">Oui</option>
+                    <option value="false">Non</option>
                   </select> </div>            </div>
         </div>
     
@@ -52,16 +52,18 @@
                 <th>Date Fin</th>
                 <th>Status</th>
 
-                <th>Type</th>
+                <th></th>
 
 
               </tr>
             </thead>
             <tbody>
                 <tr  *ngFor="let leave of leaves">
+                    <td>{{leave.dateOfStartLeave}}</td>
                     <td>{{leave.dateOfEndLeave}}</td>
-                    <td>{{leave.dateOfEndLeave}}</td>
-                    <td>{{leaves}}</td>
+                    <td>{{leave.status}}</td>
+                    <td><button  class="btnEditer" (click)="deleteLeave()">Delete</button></td>
+
 
             </tr>
             </tbody>

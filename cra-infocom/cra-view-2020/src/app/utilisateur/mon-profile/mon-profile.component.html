@@ -41,7 +41,7 @@
                 </div>
               
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Mot de passe :</span> <input value="*************"  type="text"> </div>
+                    <div class="inputbox mt-1"><span class="input-title">Mot de passe :</span> <input value="*************"  type="text"  required [(ngModel)]="newPassward" name="newPassward"> </div>
                   </div> 
                   <div class="bio-row">
                     <div class="inputbox mt-1"><span class="input-title">Mission :</span> <input value="GroupaWeb"  disabled type="text"> </div>
@@ -73,7 +73,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary">Sauvgarder</button>
+                            <button type="button" class="btn btn-primary" (click)="updateCollab()"> Sauvgarder</button>
                           </div>
                         </div>
                       </div>
