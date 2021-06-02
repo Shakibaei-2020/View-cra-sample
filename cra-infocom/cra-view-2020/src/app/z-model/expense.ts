@@ -7,6 +7,8 @@ export class Expense {
 	public  billable!:boolean;
 	public  costHT!:number;
 	public  costTVA!:number;
+	public  costTTC!:number;
+
 	public  status!:String;
 	public type!: String;
 }

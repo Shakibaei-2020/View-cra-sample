@@ -3,39 +3,40 @@
 <br><br><br><br>
 
 <div class="container">
+  <h2>Ajouter une note de frais </h2>
+  <hr>
 <div class="panel">
 
-    <br><br><br><br><br>
-    
+  
     
     <div class="panel-body bio-graph-info">
           <br>
        <div class="row">
     
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Cout HT :</span> <input type="text" placeholder="55€"> </div>
+              <div class="inputbox mt-1"><span class="input-title">Cout HT :</span> <input type="text" placeholder="55€  " requireds [(ngModel)]="expense.costHT" name="expense.costHT"> </div>
     
             </div>
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Date Frais :</span> <input type="Date" placeholder="13 juillet 1983" > </div>
+              <div class="inputbox mt-1"><span class="input-title">Date Frais :</span> <input type="Date" placeholder="13 juillet 1983" required [(ngModel)]="dateExpense" name="dateExpense" > </div>
           </div>
           
             <div class="bio-row">
               
-              <div class="inputbox mt-1"><span class="input-title">Cout TVA :</span><input type="text" placeholder="180€"   > </div>
-              <div class="inputbox mt-1"><span class="input-title">Cout TTC :</span><input type="text" placeholder="180€"   > </div>
+              <div class="inputbox mt-1"><span class="input-title">Cout TVA :</span><input type="text" placeholder="180€"  required [(ngModel)]="expense.costTVA" name="expense.costTVA"  > </div>
+              <div class="inputbox mt-1"><span class="input-title">Cout TTC :</span><input type="text" placeholder="180€"   required [(ngModel)]="expense.costTTC" name="expense.costTTC" > </div>
 
             </div>
          
             <div class="bio-row">
               <div class="inputbox mt-1"><span>Facturable :</span><br>
-                <select class="form-input" aria-label="Default select example"  >
+                <select class="form-input" aria-label="Default select example"   required [(ngModel)]="expense.billable" name="expense.billable" >
                 <option value="true">Oui</option>
                 <option value="false">Non</option>
               </select></div>
 
                        <div class="inputbox mt-1"><span>Nature des frais :</span><br>
-                <select class="form-input" aria-label="Default select example" >
+                <select class="form-input" aria-label="Default select example"  required [(ngModel)]="expense.type" name="expense.type" >
                 <option value="type1">Type1</option>
                 <option value="type2">Type2</option>
               </select></div>
@@ -70,7 +71,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" >Ajouter</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addExpense()" >Ajouter</button>
                   </div>
                 </div>
               </div>

@@ -13,6 +13,8 @@ export class DeclarationActiviteComponent implements OnInit {
 dt = new Date();
 month!: number;
 year!: number;
+day!: number;
+
 daysInMonth!: number;
 
 tabJours=new Array();
@@ -41,15 +43,28 @@ aujourdhui = new Date();
 nosDates!: number[];
 
 
+
+
+
   constructor(private _route:Router,private _service:NgserviceService) {}
 
   ngOnInit(): void {
+
+    if(this.dt.getDay() == 6 || this.dt.getDay() == 0){
+
+    }
+
     this.month = this.dt.getMonth()+1;
     this.year = this.dt.getFullYear();
+
+    console.log(this.day);
+
 
    this.daysInMonth = new Date(this.year, this.month, 0).getDate();
     var i;
     for (i = 0; i < this.daysInMonth; i++) {
+
+
       this.tabJours[i] = i + 1;
       this.activitiesPerDay.push("jour-"+i);
     }
@@ -95,16 +110,14 @@ nosDates!: number[];
     this.activity1.typeActivityId = 2;
     this.activity1.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
     console.log(this.activity1.duration);
-
-/*     for (let index = 0; index < this.activitiesPerDay.length; index++) {
-      console.log((<HTMLInputElement>document.getElementById(this.activitiesPerDay[index])).value);
-    } */
     
     //this.tabAllInputedValue[i] = 1;
 
 
 
     this.activity1.duration = this.tabAllInputedValue[i];
+
+
 
  
      this._service.addAndUpdateActivity(this.activity1,this.aujourdhui).subscribe(

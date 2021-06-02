@@ -19,7 +19,7 @@ export class CongeDemandeComponent implements OnInit {
 
   
   ngOnInit() {
-    this._service.selectLeaveByCollabId(1).subscribe(
+    this._service.selectLeaveByCollabId(2).subscribe(
       data=> this.leaves = data,
       error=>console.log("exception" +error)
       )
@@ -28,9 +28,15 @@ export class CongeDemandeComponent implements OnInit {
   dateLeaveRequest = new Date();
   dateStartLeave =  new Date();
   dateEndLeave = new Date();
+  
 
   addLeaveFormSubmit(){
 
+    this.leave.status='en-cours';
+    this.leave.collaboratorId = 2;
+    this.leave.clientInformed
+
+    this.dateLeaveRequest = this.dateStartLeave
     this._service.addOrUpdateLeaveRequest(this.leave, this.dateLeaveRequest,this.dateStartLeave,this.dateEndLeave).subscribe(
       data =>{
         console.log("ajout effectué");
@@ -39,6 +45,17 @@ export class CongeDemandeComponent implements OnInit {
         console.log("erreur ajout non-effectué")
       }
     )
+    }
+
+    deleteLeave(){
+      this._service.deleteOneLeaveRequest(4).subscribe(
+        data =>{
+          console.log("ajout effectué");
+        },
+        error =>{
+          console.log("erreur ajout non-effectué")
+        }
+      )
     }
 
 }
