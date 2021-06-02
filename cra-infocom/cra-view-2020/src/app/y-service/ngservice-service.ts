@@ -15,6 +15,9 @@ import { Mission } from '../z-model/mission';
   providedIn: 'root'
 })
 export class NgserviceService {
+  get(arg0: string, arg1: { responseType: string; }) {
+    throw new Error('Method not implemented.');
+  }
 
  
 

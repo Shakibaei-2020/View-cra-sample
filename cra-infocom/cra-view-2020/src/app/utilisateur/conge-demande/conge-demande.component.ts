@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Leave } from 'src/app/z-model/leave';
+import { TypeLeave } from 'src/app/z-model/type-leave';
 
 @Component({
   selector: 'app-conge-demande',
@@ -28,15 +29,26 @@ export class CongeDemandeComponent implements OnInit {
   dateLeaveRequest = new Date();
   dateStartLeave =  new Date();
   dateEndLeave = new Date();
+
+
+  leaveType = new TypeLeave();
+
+
   
 
   addLeaveFormSubmit(){
 
-    this.leave.status='en-cours';
-    this.leave.collaboratorId = 2;
-    this.leave.clientInformed
+    this.leave.id = 1;
 
-    this.dateLeaveRequest = this.dateStartLeave
+      this.leave.status='en-cours';
+    this.leave.collaboratorId = 2;
+    this.leave.clientInformed = true;
+    this.leave.leaveType = this.leaveType;
+
+    
+
+    this.dateLeaveRequest = this.dateStartLeave;
+
     this._service.addOrUpdateLeaveRequest(this.leave, this.dateLeaveRequest,this.dateStartLeave,this.dateEndLeave).subscribe(
       data =>{
         console.log("ajout effectué");
