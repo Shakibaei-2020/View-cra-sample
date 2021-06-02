@@ -18,9 +18,7 @@ day!: number;
 daysInMonth!: number;
 
 tabJours=new Array();
-
-
-
+activitiesPerDay = new Array();
 
 activity1 = new Activity();
 activity2 = new Activity();
@@ -63,23 +61,14 @@ nosDates!: number[];
 
 
    this.daysInMonth = new Date(this.year, this.month, 0).getDate();
-    console.log(this.daysInMonth);
     var i;
     for (i = 0; i < this.daysInMonth; i++) {
 
 
       this.tabJours[i] = i + 1;
-
-    
-      if( this.day  == 6 ||  this.day  == 0){
-        this.tabJours[i] = 0;
-
-      }
-
-
+      this.activitiesPerDay.push("jour-"+i);
     }
   }
-
 
   passIndexValue(index: any){
     console.log(index);
@@ -119,8 +108,10 @@ nosDates!: number[];
     this.activity1.projectId = 2;
     this.activity1.remote = true;
     this.activity1.typeActivityId = 2;
-
-    this.tabAllInputedValue[i] = 1;
+    this.activity1.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
+    console.log(this.activity1.duration);
+    
+    //this.tabAllInputedValue[i] = 1;
 
 
 
@@ -129,7 +120,7 @@ nosDates!: number[];
 
 
  
-    this._service.addAndUpdateActivity(this.activity1,this.aujourdhui).subscribe(
+     this._service.addAndUpdateActivity(this.activity1,this.aujourdhui).subscribe(
       data =>{
         console.log("ajout effectué");
       },
