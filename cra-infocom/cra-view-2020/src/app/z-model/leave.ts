@@ -8,10 +8,12 @@ export class Leave {
 	public  dateOfDemand!:Date;
 	public  dateOfStartLeave!:Date;
 	public  dateOfEndLeave!:Date;
-
-	public leaveType = new TypeLeave;
 	public  status!:String;
 	public  clientInformed!:boolean;
+	
+
+	public leaveType = new TypeLeave;
+
 }
 
 

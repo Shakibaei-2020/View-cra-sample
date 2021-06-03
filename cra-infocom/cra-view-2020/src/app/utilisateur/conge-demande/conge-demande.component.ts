@@ -31,21 +31,30 @@ export class CongeDemandeComponent implements OnInit {
   dateEndLeave = new Date();
 
 
+  inputleaveType = new TypeLeave();
   leaveType = new TypeLeave();
-
 
   
 
   addLeaveFormSubmit(){
 
-    this.leave.id = 1;
+    console.log("inputed leave type" + this.inputleaveType.id);
 
-      this.leave.status='en-cours';
-    this.leave.collaboratorId = 2;
-    this.leave.clientInformed = true;
-    this.leave.leaveType = this.leaveType;
+    this._service.selectLeaveTypeById(this.inputleaveType.id).subscribe(
+      data=> this.leaveType = data,
+      error=>console.log("exception" +error)
+    )
 
+    console.log("leave recuperer" + this.leaveType.id + "et " + this.leaveType.type)
     
+
+    this.leave.status='en-cours';
+    this.leave.collaboratorId = 2;
+    console.log(" l'id du collaborateur" +this.leave.collaboratorId);
+
+
+    this.leave.clientInformed;
+    this.leave.leaveType = this.leaveType
 
     this.dateLeaveRequest = this.dateStartLeave;
 

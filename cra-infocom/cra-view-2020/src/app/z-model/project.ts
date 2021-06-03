@@ -4,6 +4,6 @@ export class Project {
 
     public  id!: number;
 	public  collaboratorId!: number;
-	public  mission!: Mission;
+	public  mission = new Mission();
 
 }

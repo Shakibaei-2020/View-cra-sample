@@ -1,3 +1,5 @@
+import { TypeActivity } from "./type-activity";
+
 export class Activity {
 
 	public  id!: number;
@@ -6,6 +8,6 @@ export class Activity {
 	public  startDate!: Date;
 	public  duration!: number;
 	public  remote!: boolean;
-	public typeActivityId!: number;
+	public TypeActivity!: TypeActivity;
 
 }

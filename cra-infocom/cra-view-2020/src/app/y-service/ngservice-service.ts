@@ -10,6 +10,8 @@ import { TypeActivity } from '../z-model/type-activity';
 import { Client } from '../z-model/client';
 import { Mission } from '../z-model/mission';
 import { Project } from '../z-model/project';
+import { TypeLeave } from '../z-model/type-leave';
+import { TypeExpense } from '../z-model/type-expense';
 
 
 @Injectable({
@@ -91,6 +93,10 @@ export class NgserviceService {
     selectOneExpenseById(id: number):Observable<Expense>{
       return  this._http.get<Expense>("http://localhost:7672/expenses/lister/"+id);
      }
+
+     selectTypeExpenseById(id: number):Observable<TypeExpense>{
+      return  this._http.get<TypeExpense>("http://localhost:7672/typesexpenses/lister/"+id);
+     }
     
     /**END EXPENSE  */
 
@@ -121,6 +127,11 @@ export class NgserviceService {
   return  this._http.get<Leave[]>("http://localhost:8950/conge/searchLeave/" + dateDebut+"/" +dateFin +"/"+status);
  }
 
+ selectLeaveTypeById(id: number):Observable<TypeLeave>{
+  return  this._http.get<TypeLeave>("http://localhost:8950/typesdeconge/lister/"+id);
+ }
+
+
   
    
     /**END LEAVE  */
@@ -144,13 +155,20 @@ export class NgserviceService {
     
     
     
-    addAndUpdateActivity(activity: Activity, startDate : Date):Observable<Activity>{
+    addAndUpdateActivity(activity: Activity, startDate : string):Observable<Activity>{
       return  this._http.post<Activity>("http://localhost:8800/activity/update/" + startDate ,activity);
     }
 
     DeleteActivityById(id: number ):Observable<Activity>{
       return  this._http.delete<Activity>("http://localhost:8800/activity/supprimer/"+ id);
     }
+    
+
+    selectTypeActivityById(id : number):Observable<TypeActivity>{
+      return  this._http.get<TypeActivity>("http://localhost:8800/typesactivity/lister/"+id);
+     }
+    
+    
     
     /** END ACTIVITY */
 
