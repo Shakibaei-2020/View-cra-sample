@@ -9,6 +9,7 @@ import { Activity } from '../z-model/activity';
 import { TypeActivity } from '../z-model/type-activity';
 import { Client } from '../z-model/client';
 import { Mission } from '../z-model/mission';
+import { Project } from '../z-model/project';
 
 
 @Injectable({
@@ -198,7 +199,21 @@ export class NgserviceService {
       return  this._http.delete<Mission>("http://localhost:8801/mission/supprimer/"+ id);
     }
 
+    selectAllMission():Observable<Mission[]>{
+      return  this._http.get<Mission[]>("http://localhost:8801/mission/lister/");
+
+    }
+
     /**END MISSION */
+
+
+    /** START PROJECT */
+
+    selectProjectByMissionId(id: number):Observable<Project>{
+      return  this._http.get<Project>("http://localhost:8801/project/foundProject/"+id);
+     }
+
+    /** END PROJECT */
 
 
   }

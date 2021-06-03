@@ -39,7 +39,7 @@ export class EditMissionComponent implements OnInit {
   updateMission(){
 
     this.updatedMission.id = this.mission.id;
-    this.updatedMission.clientId = this.client.id;
+    this.updatedMission.client.id = this.client.id;
     
         this._service.addAndUpdateMission(this.updatedMission,this.newStartDate,this.newEndDate).subscribe(
           data =>{

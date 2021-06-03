@@ -29,7 +29,7 @@ addMission(){
   this._service.addAndupdateClient(this.newClient).subscribe(
     data =>{
       console.log("ajout effectué");
-      this.newMission.clientId = this.newClient.id;
+      this.newMission.client.id = this.newClient.id;
       this._service.addAndUpdateMission(this.newMission,this.startDate,this.endDate).subscribe(
         data =>{
           console.log("ajout effectué");
