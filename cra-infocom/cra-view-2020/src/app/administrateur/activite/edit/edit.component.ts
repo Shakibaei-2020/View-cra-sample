@@ -24,12 +24,11 @@ export class EditComponent implements OnInit {
   }
 
 
-  dateOfStart = new Date();
+  dateOfStart = new Date().toLocaleDateString();
 
   updateActivity(){
 
     this.updatedActivity.id = this.activity.id;
-    this.updatedActivity.typeActivityId = this.activity.typeActivityId;
     this.updatedActivity.projectId = this.activity.projectId;
     this.updatedActivity.collaboratorId = this.activity.collaboratorId;
 

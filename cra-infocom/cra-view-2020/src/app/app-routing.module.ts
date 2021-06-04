@@ -26,7 +26,7 @@ import{ CongeDemandeComponent} from './utilisateur/conge-demande/conge-demande.c
 import {ActiviteComponent} from './administrateur/activite/activite.component';
 import {AddComponent } from './administrateur/activite/add/add.component';
 import {EditComponent} from './administrateur/activite//edit/edit.component';
-import { AddClientComponent } from './administrateur/client/add/add-client.component';
+import { AddClientComponent } from './administrateur/client/add-client/add-client.component';
 import { EditClientComponent } from './administrateur/client/edit-client/edit-client.component';
 
 import { ClientComponent } from './administrateur/client/client.component';
@@ -34,7 +34,7 @@ import { EditMissionComponent } from './administrateur/mission/edit-mission/edit
 import { AddMissionComponent } from './administrateur/mission/add-mission/add-mission.component';
 import { MissionComponent } from './administrateur/mission/mission.component';
 import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
-import { AccueilUtilisateurComponent } from './utilisateur/accueil/accueil-utilisateur.component';
+import { AccueilUtilisateurComponent } from './utilisateur/accueil-utilisateur/accueil-utilisateur.component';
 import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-declaration/note-de-frais-declaration.component';
 
 

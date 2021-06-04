@@ -1,3 +1,5 @@
+import { TypeExpense } from "./type-expense";
+
 export class Expense {
     
     public  id!:number;
@@ -8,7 +10,8 @@ export class Expense {
 	public  costHT!:number;
 	public  costTVA!:number;
 	public  costTTC!:number;
-
 	public  status!:String;
-	public type!: String;
+
+	public typeExpense!: TypeExpense;
+
 }

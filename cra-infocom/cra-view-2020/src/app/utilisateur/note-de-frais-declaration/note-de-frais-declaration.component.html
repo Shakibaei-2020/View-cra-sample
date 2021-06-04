@@ -35,10 +35,12 @@
                 <option value="false">Non</option>
               </select></div>
 
-                       <div class="inputbox mt-1"><span>Nature des frais :</span><br>
-                <select class="form-input" aria-label="Default select example"  required [(ngModel)]="expense.type" name="expense.type" >
-                <option value="type1">Type1</option>
-                <option value="type2">Type2</option>
+                <div class="inputbox mt-1"><span>Nature des frais :</span><br>
+                <select class="form-input" aria-label="Default select example"  required [(ngModel)]="inputedTypeExpense.id" name="id" >
+                <option value="1">Nature 1</option>
+                <option value="2">Nature 2</option>
+                <option value="3">Nature 3</option>
+
               </select></div>
 
 
@@ -52,6 +54,7 @@
 
           <div class="bio-row">
             <br>    <br>
+            <button class="button" (click)="retour()">Retour</button>
 
             <button class="button" data-toggle="modal" data-target="#updateModal" >Ajouter</button>
 
@@ -87,3 +90,5 @@
         </div>
     </div>
     </div></div>
+
+    <button (click)="test()">test</button>

@@ -12,10 +12,9 @@
             <div class="container ">
                 <img class ="profil-image" src="https://qualium-investissement.com/wp-content/uploads/2017/05/inconnu-small.jpg">
                 <p class="titre">Bonjour ! Mohammad-Reza SHAKIBAEI   </p>
-                <input type="file"  id="fileUpload" required [(ngModel)]="url" name="url">
             </div>
           </div>
-          <br><br><br><br>
+          <br><br><br><br><br>
    
           
           <div class="panel-body bio-graph-info">
@@ -54,9 +53,10 @@
                 </div>
                 <div class="bio-row">
 
+                    <button class="button" (click)="retour()" >Retour</button>
+
                     <button class="button" data-toggle="modal" data-target="#updateModal"  >Mettre à jour</button>
 
-                
 
                     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">

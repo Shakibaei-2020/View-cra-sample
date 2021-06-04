@@ -3,7 +3,7 @@
 
   
 .inputDay{
-  width: 30px;
+  width: 40px;
   height: 18px;
   margin-left: 1px;
 }
@@ -43,9 +43,9 @@ padding-left: 2px;
 }
 
 input[type=text] {
-    width: 100%;
+    width: 30%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin-left: 10px;
     box-sizing: border-box;
     border: none;
     border-bottom: 2px solid#464646;
@@ -100,6 +100,11 @@ input[type=text] {
     margin-bottom: 5%;
   }
 
+  .inputRemote{
+    margin-top: 12px;
+    margin-left:25%;
+  }
+
   .btnRemplir{
     float: left;
     font-size: 15px;
@@ -111,7 +116,26 @@ input[type=text] {
     border: none;
     border-radius: 15px;
     margin-bottom: 5%;
+    height:23px;
+    width: 100%;
   }
+
+
+  .btnGo{
+    float: left;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 5%;
+    height:23px;
+    width: 30%;
+  }
+  
   
   .btnEditer:hover {background-color: #464646}
   
@@ -144,5 +168,10 @@ input[type=text] {
 }
 
 
+
+th{
+  width: 10px;
+  font-size: 11px;
+}
 
 

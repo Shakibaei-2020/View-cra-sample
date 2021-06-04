@@ -6,8 +6,6 @@ export class Mission {
 	public  missionTitle!: string;
 	public  startDate!: Date;
 	public  endDate!: Date;
-	public  client!: Client;
-	public clientId!: number;
-	
+	public  client= new Client();
 	
 }
