@@ -58,4 +58,8 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   }
   
 
+  retour(){
+    this._route.navigate(['/utilisateur']);
+  }
+
 }

@@ -36,8 +36,17 @@
                     <option value="false">Non</option>
                   </select> </div>            </div>
         </div>
+        
+        <div class="col-md-6">
+     
+      </div>
+
+      <div class="col-md-6">
+        <button class="btnEditer" (click)="addLeaveFormSubmit()" >Ajouter demande de congé</button>
+
+      </div>
     
-        <button class="btnEditer" >Ajouter demande de congé</button>
+    
     </div>
     </div>
     </div>
@@ -63,11 +72,18 @@
                     <td>{{leave.dateOfEndLeave}}</td>
                     <td>{{leave.status}}</td>
                     <td><button  class="btnEditer" (click)="deleteLeave()">Delete</button></td>
+
             </tr>
             </tbody>
           </table>
         <hr>    
-
-
     </div>
+
+   
+    <div class="container">  
+
+
+      <button class="btnRetour" (click)="retour()" >Retour</button>
+
+  </div> 
 <br><br><br><br><br><br>

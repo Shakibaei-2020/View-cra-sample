@@ -30,7 +30,7 @@ import { ActiviteComponent } from './administrateur/activite/activite.component'
 import { AddComponent } from './administrateur/activite/add/add.component';
 import { EditComponent } from './administrateur/activite/edit/edit.component';
 import { ClientComponent } from './administrateur/client/client.component';
-import { AddClientComponent } from './administrateur/client/add/add-client.component';
+import { AddClientComponent } from './administrateur/client/add-client/add-client.component';
 import { EditClientComponent } from './administrateur/client/edit-client/edit-client.component';
 import { MissionComponent } from './administrateur/mission/mission.component';
 import { AddMissionComponent } from './administrateur/mission/add-mission/add-mission.component';

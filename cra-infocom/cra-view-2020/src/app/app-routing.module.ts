@@ -26,7 +26,7 @@ import{ CongeDemandeComponent} from './utilisateur/conge-demande/conge-demande.c
 import {ActiviteComponent} from './administrateur/activite/activite.component';
 import {AddComponent } from './administrateur/activite/add/add.component';
 import {EditComponent} from './administrateur/activite//edit/edit.component';
-import { AddClientComponent } from './administrateur/client/add/add-client.component';
+import { AddClientComponent } from './administrateur/client/add-client/add-client.component';
 import { EditClientComponent } from './administrateur/client/edit-client/edit-client.component';
 
 import { ClientComponent } from './administrateur/client/client.component';
