@@ -167,6 +167,11 @@ export class NgserviceService {
     selectTypeActivityById(id : number):Observable<TypeActivity>{
       return  this._http.get<TypeActivity>("http://localhost:8800/typesactivity/lister/"+id);
      }
+
+     selectAllTypeActivity():Observable<TypeActivity[]>{
+      return  this._http.get<TypeActivity[]>("http://localhost:8800/typesactivity/lister/");
+
+     }
     
     
     

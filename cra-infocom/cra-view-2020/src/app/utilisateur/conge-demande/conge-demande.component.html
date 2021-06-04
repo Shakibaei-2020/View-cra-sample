@@ -2,88 +2,91 @@
 
 
 
-<form  #addLeaveForm="ngForm" (ngSubmit)="addLeaveFormSubmit()" >
+<form #addLeaveForm="ngForm" (ngSubmit)="addLeaveFormSubmit()">
 
-    <div class="div-add">
+  <div class="div-add">
     <div class="container ">
-        <h2>Demande de congé </h2>
-        <hr>
-    <div class="row">
+      <h2>Demande de congé </h2>
+      <hr>
+      <div class="row">
         <div class="col-md-6">
-            <div class="form">
+          <div class="form">
+            <div class="inputbox mt-3"> <span>Date début :</span> <input type="date" required
+                [(ngModel)]="dateStartLeave" name="dateStartLeave"> </div>
 
-          
-
-                  <div class="inputbox mt-3"> <span  >Date début :</span> <input type="date" required [(ngModel)]="dateStartLeave" name="dateStartLeave" > </div>
-
-
-                  <div class="inputbox mt-3"> <span>Type de congé :</span>
-                    <select class="form-input" aria-label="Default select example"   required [(ngModel)]="inputleaveType.id" name="type">
-                    <option value="1">CDI</option>
-                    <option value="2">CDD</option>
-                  </select> </div>
- 
+            <div class="inputbox mt-3"> <span>Type de congé :</span>
+              <select class="form-input" aria-label="Default select example" required [(ngModel)]="inputleaveType.id"
+                name="type">
+                <option value="1">CDI</option>
+                <option value="2">CDD</option>
+              </select>
             </div>
+          </div>
         </div>
 
-        
+
         <div class="col-md-6">
-            <div class="form">
-                <div class="inputbox mt-3"> <span  >Date fin :</span> <input type="date" required [(ngModel)]="dateEndLeave" name="dateEndLeave" > </div>
-                <div class="inputbox mt-3"> <span>Client informé :</span>
-                    <select class="form-input" aria-label="Default select example"   required [(ngModel)]="leave.clientInformed" name="leave.clientInformed">
-                    <option value="true">Oui</option>
-                    <option value="false">Non</option>
-                  </select> </div>            </div>
+          <div class="form">
+            <div class="inputbox mt-3"> <span>Date fin :</span> <input type="date" required [(ngModel)]="dateEndLeave"
+                name="dateEndLeave"> </div>
+            <div class="inputbox mt-3"> <span>Client informé :</span>
+              <select class="form-input" aria-label="Default select example" required [(ngModel)]="leave.clientInformed" name="leave.clientInformed">
+                <option value="true">Oui</option>
+                <option value="false">Non</option>
+              </select>
+            </div>
+          </div>
         </div>
-        
+
         <div class="col-md-6">
-     
+
+        </div>
+
+        <div class="col-md-6">
+          <button class="btnEditer" (click)="addLeaveFormSubmit()">Ajouter demande de congé</button>
+        </div>
+
+
       </div>
-
-      <div class="col-md-6">
-        <button class="btnEditer" (click)="addLeaveFormSubmit()" >Ajouter demande de congé</button>
-
-      </div>
-    
-    
     </div>
-    </div>
-    </div>
-    </form>
+  </div>
+</form>
 
-    <div class="container">
-        <p>Liste des demandes de congé</p>
-        <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th>Date début</th>
-                <th>Date Fin</th>
-                <th>Status</th>
+<div class="container">
+  <p>Liste des demandes de congé</p>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Date début</th>
+        <th>Date Fin</th>
+        <th>Type</th>
+        <th>Status</th>
 
-                <th></th>
-
-
-              </tr>
-            </thead>
-            <tbody>
-                <tr  *ngFor="let leave of leaves">
-                    <td>{{leave.dateOfStartLeave}}</td>
-                    <td>{{leave.dateOfEndLeave}}</td>
-                    <td>{{leave.status}}</td>
-                    <td><button  class="btnEditer" (click)="deleteLeave()">Delete</button></td>
-
-            </tr>
-            </tbody>
-          </table>
-        <hr>    
-    </div>
-
-   
-    <div class="container">  
+        <th></th>
 
 
-      <button class="btnRetour" (click)="retour()" >Retour</button>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leave of leaves">
+        <td>{{leave.dateOfStartLeave}}</td>
+        <td>{{leave.dateOfEndLeave}}</td>
+        <td>{{leave.leaveType.type}}</td>
 
-  </div> 
+        <td>{{leave.status}}</td>
+        <td><button class="btnEditer" (click)="deleteLeave()">Delete</button></td>
+
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+</div>
+
+
+<div class="container">
+
+
+  <button class="btnRetour" (click)="retour()">Retour</button>
+
+</div>
 <br><br><br><br><br><br>
