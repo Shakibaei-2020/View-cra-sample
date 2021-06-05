@@ -36,8 +36,9 @@ import { MissionComponent } from './administrateur/mission/mission.component';
 import { AddMissionComponent } from './administrateur/mission/add-mission/add-mission.component';
 import { EditMissionComponent } from './administrateur/mission/edit-mission/edit-mission.component';
 import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
-import { AccueilUtilisateurComponent } from './utilisateur/accueil-utilisateur/accueil-utilisateur.component';
+import { AccueilUtilisateurComponent } from './utilisateur/Accueil/accueil-utilisateur.component';
 import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-declaration/note-de-frais-declaration.component';
+import { AccueilAdministrateurComponent } from './administrateur/accueil-administrateur/accueil-administrateur.component';
 
 
 
@@ -68,6 +69,7 @@ import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-dec
     MonProfileComponent,
     AccueilUtilisateurComponent,
     NoteDeFraisDeclarationComponent,
+    AccueilAdministrateurComponent,
 
   ],
   imports: [

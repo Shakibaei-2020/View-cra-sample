@@ -128,7 +128,7 @@ export class EditCollaborateurComponent implements OnInit {
 
     /** Leaves commands */
 
-    dateLeaveRequest = new Date();
+    dateLeaveRequest!: string;
     dateStartLeave = new Date();
     dateEndLeave = new Date();
 

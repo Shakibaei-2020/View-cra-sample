@@ -13,7 +13,7 @@ export class CongeEditComponent implements OnInit {
   leave = new Leave();
   updatedLeave = new Leave();
 
-  dateOfDemand = new Date();
+  dateOfDemand !: string;
   dateStartLeave =  new Date();
   dateEndLeave = new Date();
 

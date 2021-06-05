@@ -17,8 +17,22 @@ export class CongeDemandeComponent implements OnInit {
 
 
   constructor(private _route: Router, private _service: NgserviceService) { }
-
-
+ 
+  formatageDate() {
+    var jour = new Date().getDay() ;
+    var jour_toString = jour.toString();
+    if (jour < 10) {
+      jour_toString = "0" + jour_toString;
+    }
+    var mois = new Date().getMonth() + 1;
+    var mois_toString = mois.toString();
+    if (mois < 10) {
+      mois_toString = "0" + mois_toString;
+    }
+    var annee = new Date().getFullYear();
+    return annee + '-' + mois_toString + '-' + jour_toString;
+  }
+  
   ngOnInit() {
     this._service.selectLeaveByCollabId(2).subscribe(
       data => this.leaves = data,
@@ -26,7 +40,8 @@ export class CongeDemandeComponent implements OnInit {
     )
   }
 
-  dateLeaveRequest = new Date();
+  dateLeaveRequest!: string 
+  ;
   dateStartLeave = new Date();
   dateEndLeave = new Date();
 
@@ -37,25 +52,18 @@ export class CongeDemandeComponent implements OnInit {
 
   addLeaveFormSubmit() {
 
-    console.log("inputed leave type" + this.inputleaveType.id);
 
     this._service.selectLeaveTypeById(this.inputleaveType.id).subscribe(
       data => this.leaveType = data,
       error => console.log("exception" + error)
     )
 
-    console.log("leave recuperer" + this.leaveType.id + "et " + this.leaveType.type)
-
-
     this.leave.status = 'en-cours';
     this.leave.collaboratorId = 2;
-    console.log(" l'id du collaborateur" + this.leave.collaboratorId);
-
-
     this.leave.clientInformed;
     this.leave.leaveType = this.leaveType
 
-    this.dateLeaveRequest = this.dateStartLeave;
+    this.dateLeaveRequest =  this.formatageDate();
 
     this._service.addOrUpdateLeaveRequest(this.leave, this.dateLeaveRequest, this.dateStartLeave, this.dateEndLeave).subscribe(
       data => {

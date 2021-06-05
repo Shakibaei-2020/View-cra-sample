@@ -32,7 +32,7 @@
     <option value="2024">2024</option>
   </select>
 
-    <table (change)="total()">
+    <table>
       <thead>
         <tr>
           <th>CLIENT </th>
@@ -44,10 +44,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of dynamicRowsActivity; let i = index">
+        <tr *ngFor="let row of dynamicRowsActivity; let iActivity = index">
           <td>
-            <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedOption"
-              (change)="updatedAfterSelect()">
+            <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedOption" (change)="updatedAfterSelect()">
               <option *ngFor="let mission of missions" value="{{mission.id}}">{{mission.missionTitle}}</option>
             </select>
           </td>
@@ -58,27 +57,25 @@
             <button class="btnRemplir" (click)="remplirRemoteP1()">TAD</button>
           </td>
           <td *ngFor="let element of tabJours;let indexOfelement=index;">
-            <input class=" inputDay" step="0.25" min="0" max="1" name="jour-{{indexOfelement}}" id="jour-{{indexOfelement}}" type="number" value="{{dureeProjet1}}">
+            <input class=" inputDay" step="0.25" min="0" max="1" name="jour-{{indexOfelement}}" id="jour-{{indexOfelement}}" type="number" value="{{dureeProjet1}}"  [disabled]="" (change)="total()" value="0">
             <input class="inputRemote" name="remote-{{indexOfelement}}" id="remote-{{indexOfelement}}" type="checkbox"[checked]="isRemote" value="{{isRemote}}">
           </td>
           <td>
             <input class="inputDay twolast"  type="" value={{totalProjet1}} id="" required [(ngModel)]="totalProjet1"name="totalProjet1">
            </td>
           <td>
-            <button class="btnAjouterRow twolast" *ngIf="i === dynamicRowsActivity.length - 1" (click)="addNewActivity()">+</button>
+            <button class="btnAjouterRow twolast" *ngIf="iActivity === dynamicRowsActivity.length - 1" (click)="addNewActivity()">+</button>
           </td>
         </tr>
         <tr *ngIf="dynamicRowsActivity.length === 0">
           <td>
             <button class="btnAjouterRow twolast" (click)="addNewActivity()">+</button>
           </td>
-          <td></td>
         </tr>
-        <tr></tr>
       </tbody>
     </table>
     <br><br>
-    <span>Totaux jours travaillés : </span><input class=" inputDay">
+    <span>Totaux jours travaillés : </span><input class=" inputDay" value={{toalDuTotalAcitivty}}>
   </div>
   <hr>
 
@@ -102,13 +99,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of dynamicRowsAstreinte; let i = index">
+        <tr *ngFor="let row of dynamicRowsAstreinte; let iAstreinte = index">
           <td>
             <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedOption5" (change)="updatedAfterSelect5()">
               <option *ngFor="let mission of missions" value="{{mission.id}}">{{mission.missionTitle}}</option>
             </select>
           </td>
-
           <td>
             <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedTypeUpdateValue" (change)="selectedTypeUpdate()">
               <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
@@ -122,15 +118,14 @@
             </select>
           </td>
           <td>
-            <button class="btnRemplir" (click)="remplirAstreinte1()">Remplir</button>
+            <button class="btnRemplir" (click)="remplirAstreinte()">Remplir</button>
           </td>
           <td *ngFor="let element of tabJours;let indexOfelement=index;">
-            <input class=" inputDay" name="jourAstreinte1-{{indexOfelement}}" id="jourAstreinte1-{{indexOfelement}}" type="number" value="{{dureeAstreinte1}}">
+            <input class=" inputDay" name="jourAstreinte-{{indexOfelement}}" id="jourAstreinte-{{indexOfelement}}" type="number" value="{{dureeAstreinte}}">
           </td>
-          <td><input class=" inputDay" type="" value={{totalAstreinte1}} id="" required [(ngModel)]="totalAstreinte1"
-              name="totalAstreinte1"></td>
+          <td><input class=" inputDay" type="" value={{totalAstreinte}} id="" required [(ngModel)]="totalAstreinte"  name="totalAstreinte"></td>
           <td>
-            <button class="btnAjouterRow" *ngIf="i === dynamicRowsAstreinte.length - 1" (click)="addNewAstreinte()">+</button>
+            <button class="btnAjouterRow" *ngIf="iAstreinte === dynamicRowsAstreinte.length - 1"  (click)="addNewAstreinte()">+</button>
           </td>
         </tr>
         <tr *ngIf="dynamicRowsAstreinte.length === 0">
@@ -155,6 +150,21 @@
 <br><br><br><br>
 <p>
 </p>
-<br><br><br><br>
+<button (click)="test()">test</button>
 
-<br><br><br><br>
+
+
+ 
+<div style="text-align:center">
+  <h2>
+      Country list from local json file...
+  </h2>
+  <ul *ngFor="let item of joursFerieesList">
+     <li>
+        <h3>Country Name :{{item.date}}, Code: {{item.nom_jour_ferie}}</h3>
+     </li>
+  </ul>
+</div>
+
+
+<button (click)="test">test</button>
