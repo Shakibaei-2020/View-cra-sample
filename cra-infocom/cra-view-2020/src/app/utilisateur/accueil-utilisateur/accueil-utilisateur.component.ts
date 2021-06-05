@@ -13,26 +13,26 @@ export class AccueilUtilisateurComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
 
-  goToProfil(){
+
+  goToProfil() {
 
     this._route.navigate(['/monProfil']);
   }
 
-  goToDeclarationActivite(){
+  goToDeclarationActivite() {
 
     this._route.navigate(['/declarationActivite']);
   }
 
 
-  goToDemandeConge(){
+  goToDemandeConge() {
 
     this._route.navigate(['/demandeConge']);
   }
 
-  
-  goToAddNoteDeFrais(){
+
+  goToAddNoteDeFrais() {
 
     this._route.navigate(['/ajouterNoteDeFraisUser']);
   }

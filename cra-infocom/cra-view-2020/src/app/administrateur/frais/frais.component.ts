@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Expense } from 'src/app/z-model/expense';
+import { Expense } from 'src/app/z-model/Expense/expense';
 
 @Component({
   selector: 'app-frais',

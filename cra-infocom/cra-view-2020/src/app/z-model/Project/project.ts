@@ -1,4 +1,4 @@
-import { Mission } from "./mission";
+import { Mission } from "../Mission/mission";
 
 export class Project {
 

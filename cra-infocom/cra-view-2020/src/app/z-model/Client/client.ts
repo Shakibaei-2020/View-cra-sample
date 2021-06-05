@@ -4,8 +4,7 @@ export class Client {
 
 	public  id!: number;
 	public name!: string;
-
-	public typeClient!: TypeClient;
+	public typeClient = new TypeClient();
 }
 
 

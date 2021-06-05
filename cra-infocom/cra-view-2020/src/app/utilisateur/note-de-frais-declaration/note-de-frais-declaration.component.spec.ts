@@ -8,9 +8,9 @@ describe('NoteDeFraisDeclarationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NoteDeFraisDeclarationComponent ]
+      declarations: [NoteDeFraisDeclarationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Activity } from 'src/app/z-model/activity';
-import { TypeActivity } from 'src/app/z-model/type-activity';
+import { Activity } from 'src/app/z-model/Activity/activity';
+import { TypeActivity } from 'src/app/z-model/Activity/type-activity';
 
 @Component({
   selector: 'app-add',

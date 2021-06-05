@@ -1,10 +1,10 @@
 import { Component, OnInit ,Input, OnDestroy} from '@angular/core';
-import { Collaborator } from 'src/app/z-model/collaborator';
+import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 import { Subscription } from 'rxjs';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Router } from '@angular/router';
-import { Expense } from 'src/app/z-model/expense';
-import { Leave } from 'src/app/z-model/leave';
+import { Expense } from 'src/app/z-model/Expense/expense';
+import { Leave } from 'src/app/z-model/Leave/leave';
 
 @Component({
   selector: 'app-edit-collaborateur',
@@ -69,7 +69,7 @@ export class EditCollaborateurComponent implements OnInit {
 
     this.updatedCollaborateur.id = this.collaborateur.id;
     this.updatedCollaborateur.passward = this.collaborateur.passward;
-    this.updatedCollaborateur.typeCollaboratorId = this.collaborateur.typeCollaboratorId;
+    this.updatedCollaborateur.typeCollaborator = this.collaborateur.typeCollaborator;
 
 
 

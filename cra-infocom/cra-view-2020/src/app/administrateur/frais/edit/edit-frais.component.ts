@@ -1,8 +1,8 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Collaborator } from 'src/app/z-model/collaborator';
-import { Expense } from 'src/app/z-model/expense';
+import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
+import { Expense } from 'src/app/z-model/Expense/expense';
 
 @Component({
   selector: 'app-edit-frais',

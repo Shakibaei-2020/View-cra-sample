@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Collaborator } from 'src/app/z-model/collaborator';
+import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 
 @Component({
   selector: 'app-mon-profile',
@@ -10,51 +10,42 @@ import { Collaborator } from 'src/app/z-model/collaborator';
 })
 export class MonProfileComponent implements OnInit {
 
-  constructor(private _service:NgserviceService, private _route:Router) { }
+  constructor(private _service: NgserviceService, private _route: Router) { }
 
   collaborateur = new Collaborator();
   newPassward!: string;
-  url!:File;
+  confirmationPassward!: string;
+  url!: File;
 
-  
+
 
   ngOnInit(): void {
-
-
-
-
-
-
     this._service.selectOneCollabById(2).subscribe(
-      data=> this.collaborateur = data,
-      error=>console.log("exception" +error)
-      )
+      data => this.collaborateur = data,
+      error => console.log("exception" + error)
+    )
   }
-  
-  retour(){
+
+  retour() {
     this._route.navigate(['/utilisateur']);
   }
 
-  
 
-  updateCollab(){
-    
-    
+  updateCollab() {
 
-    this.collaborateur.passward = this.newPassward;
-    this.collaborateur.profileImagePath = this.url;
+    if (this.newPassward == this.confirmationPassward) {
+      this.collaborateur.passward = this.newPassward;
+      this.collaborateur.profileImagePath = this.url;
 
-    this._service.updateCollab(this.collaborateur).subscribe(
-      data =>{
-        console.log("ajout effectué");
-      },
-      error =>{
-        console.log("erreur ajout non-effectué")
-      }
-    )
-
-    console.log(this.collaborateur.profileImagePath)
-    
+      this._service.updateCollab(this.collaborateur).subscribe(
+        data => {
+          console.log("ajout effectué");
+        },
+        error => {
+          console.log("erreur ajout non-effectué")
+        }
+      )
     }
+  }
 
 }
