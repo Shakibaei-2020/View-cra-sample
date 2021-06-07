@@ -6,8 +6,6 @@ import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 import { Mission } from 'src/app/z-model/Mission/mission';
 import { Project } from 'src/app/z-model/Project/project';
 import { TypeActivity } from 'src/app/z-model/Activity/type-activity';
-import { FormGroup, FormBuilder, Validators, FormControl, FormArray, NgForm } from '@angular/forms'
-import { HttpClient } from '@angular/common/http';
 import joursFeriees  from '../../z-sources/data/joursFeriées.json'
 
 @Component({
@@ -33,7 +31,7 @@ export class DeclarationActiviteComponent implements OnInit {
   remotePerDay = new Array();
 
 
-  activitiesPerDay5 = new Array();
+  astreintePerDay = new Array();
   projectAstreinte= new Array();
   typeAstreinte= new Array();
   uniteAstreinte= new Array();
@@ -45,6 +43,9 @@ export class DeclarationActiviteComponent implements OnInit {
   constructor(private _route: Router, private _service: NgserviceService) { 
  
   }
+
+
+
 
   public missions!: Mission[];
   public collaborateur!: Collaborator;
@@ -90,39 +91,64 @@ export class DeclarationActiviteComponent implements OnInit {
       this.remotePerDay.push("remote-" + i);
 
       /**Astreinte */
-      for (var j = 0;j< 2  ; j++){
-        this.activitiesPerDay5.push("jourAstreinte-" + i + "-" + j);
+      for (var j = 0;j< 1  ; j++){
+        this.astreintePerDay.push("jourAstreinte-" + i + "-" + j);
+
       }
     }
 
 
-    for (var j = 0; j < 10; j++){      
+    for (var j = 0; j < 1; j++){      
       this.projectAstreinte.push("selectedOption5-" + j)
-      console.log( this.projectAstreinte)
       this.typeAstreinte.push("selectedTypeUpdateValue-" + j)
-      console.log( this.typeAstreinte)
       this.uniteAstreinte.push("uniteAstreinte-" + j)
-      console.log( this.uniteAstreinte)
 
-    }    
+    }  
+  
+    console.log("activité par jour :" +this.astreintePerDay)
+    console.log( "project astreinte :" +this.projectAstreinte)
+    console.log( "type :"+ this.typeAstreinte)
+    console.log( "unite :" +this.uniteAstreinte)
+
+
   }
 
   dynamicRowsAstreinte: number[] = [];
 
   /** Ajouter une nouvelle*/
   addNewAstreinte() {
+
+
     this.dynamicRowsAstreinte.push(this.dynamicRowsAstreinte.length);
 
-    for (var j = 0; j < 10; j++){      
-      this.projectAstreinte.push("selectedOption5-" + j)
-      console.log( this.projectAstreinte)
-      this.typeAstreinte.push("selectedTypeUpdateValue-" + j)
-      console.log( this.typeAstreinte)
-      this.uniteAstreinte.push("uniteAstreinte-" + j)
-      console.log( this.uniteAstreinte)
 
+    this.astreintePerDay = [null];
+    this.typeAstreinte = [null];
+    this.projectAstreinte = [null]
+    this.uniteAstreinte = [null];
+
+    for (var i = 0; i < this.daysInMonth; i++) {
+      this.tabJours[i] = i + 1;
+      /**Astreinte */
+      for (var j = 1;j< this.dynamicRowsAstreinte.length  ; j++){
+        this.astreintePerDay.push("jourAstreinte-" + i + "-" + j);
+
+      }
+    }
+
+    for (var j = 0; j <this.dynamicRowsAstreinte.length ; j++){  
+
+      this.projectAstreinte.push("selectedOption5-" + j)
+      this.typeAstreinte.push("selectedTypeUpdateValue-" + j)
+      this.uniteAstreinte.push("uniteAstreinte-" + j)
     }  
-    
+  
+    console.log("activité par jour :" +this.astreintePerDay)
+    console.log( "project astreinte :" +this.projectAstreinte)
+    console.log( "type :"+ this.typeAstreinte)
+    console.log( "unite :" +this.uniteAstreinte)
+
+
   }
 
   dynamicRowsActivity: number[] = [];
@@ -189,13 +215,12 @@ export class DeclarationActiviteComponent implements OnInit {
       }
   }
 }
-
   /** total temps d'astreinte */
   total2() {
     var i;
     for (i = 0; i <  this.daysInMonth; i++) {
-      if((<HTMLInputElement>document.getElementById(this.activitiesPerDay5[i])).valueAsNumber != undefined){
-     this.totalAstreinte =   this.totalProjet1  +(<HTMLInputElement>document.getElementById(this.activitiesPerDay5[i])).valueAsNumber;
+      if((<HTMLInputElement>document.getElementById(this.astreintePerDay[i])).valueAsNumber != undefined){
+     this.totalAstreinte =   this.totalProjet1  +(<HTMLInputElement>document.getElementById(this.astreintePerDay[i])).valueAsNumber;
       }
   }
   this.totalAstreinte = 0;
@@ -312,9 +337,12 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
 
-    for (var j = 0 ; j < 10; j++){
+    for (var j = 0 ; j < this.dynamicRowsAstreinte.length ; j++){
 
-  
+   console.log("oui")
+
+   console.log(j)
+    console.log("type astreinte" + +(<HTMLInputElement>document.getElementById(this.typeAstreinte[j])).value)
     /** Select type activity By Id  */
     this._service.selectTypeActivityById(+(<HTMLInputElement>document.getElementById(this.typeAstreinte[j])).value).subscribe(
       data => this.typeActivity = data,
@@ -371,12 +399,12 @@ export class DeclarationActiviteComponent implements OnInit {
       if (this.ProjectAstreinte != null) {
         this.astreinte.collaboratorId = 1;
         this.astreinte.projectId = this.ProjectAstreinte.id;
-        this.astreinte.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay5[i])).valueAsNumber;
+        this.astreinte.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay[i])).valueAsNumber;
       }
 
+      console.log((<HTMLInputElement>document.getElementById(this.astreintePerDay[i])).valueAsNumber)
 
-
-       
+      /**  
       this._service.addAndUpdateActivity(this.astreinte, this.aujourdhui).subscribe(
         data => {
           console.log("astreinte "+ j +" ajouté");
@@ -385,7 +413,7 @@ export class DeclarationActiviteComponent implements OnInit {
           console.log("erreur ajout non-effectué")
         }
       )
-    
+    */
     }
 
     }
@@ -400,18 +428,16 @@ export class DeclarationActiviteComponent implements OnInit {
 
   test(){
 
-    (<HTMLInputElement>document.getElementById(this.activitiesPerDay[1])).disabled = true;
-    (<HTMLInputElement>document.getElementById(this.activitiesPerDay[1])).valueAsNumber = 1;
-    
-    console.log((<HTMLInputElement>document.getElementById(this.activitiesPerDay5[0])).valueAsNumber)
-    console.log((<HTMLInputElement>document.getElementById(this.projectAstreinte[0])).value)
-    console.log((<HTMLInputElement>document.getElementById(this.typeAstreinte[0])).value)
-    console.log((<HTMLInputElement>document.getElementById(this.uniteAstreinte[0])).value)
 
-    console.log((<HTMLInputElement>document.getElementById(this.activitiesPerDay5[1])).valueAsNumber)
+    
+    console.log("activité par jour :" +this.astreintePerDay)
+    console.log( "project astreinte :" +this.projectAstreinte)
+    console.log( "type :"+ this.typeAstreinte)
+
+
     console.log((<HTMLInputElement>document.getElementById(this.projectAstreinte[1])).value)
     console.log((<HTMLInputElement>document.getElementById(this.typeAstreinte[1])).value)
-    console.log((<HTMLInputElement>document.getElementById(this.uniteAstreinte[1])).value)
+
 }
 }
 
