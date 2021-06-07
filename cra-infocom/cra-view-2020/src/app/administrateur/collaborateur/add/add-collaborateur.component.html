@@ -12,7 +12,6 @@
             <div class="inputbox mt-3"> <span for="lastName" >Nom :</span> <input type="text" placeholder="Nom de famille" required [(ngModel)]="collaborator.lastName" name="lastName" > </div>
             <div class="inputbox mt-3"> <span for="firstName" >Prenom :</span> <input type="text" placeholder="Prenom"  required [(ngModel)]="collaborator.firstName" name="firstName" > </div>
             <div class="inputbox mt-3"> <span for="email" >Adresse mail:</span> <input type="text" placeholder="Adresse mail"  required [(ngModel)]="collaborator.email" name="email" > </div>
-            <div class="inputbox mt-3"> <span for="passward" >Mot de passe :</span> <input type="text" placeholder="Mot de passe" required [(ngModel)]="collaborator.passward" name="passward"  > </div>
 
         </div>
     </div>
@@ -28,9 +27,13 @@
         </div>
         </div>
     </div>
+    <div class="col-md-6">
+</div>
 
-
+<div class="col-md-6">
     <button class="btnEditer"   (click)="addCollabFormSubmit()">Ajouter</button>
+
+</div>
 
     
 

@@ -1,0 +1,71 @@
+.photo{
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+}
+
+.BonjourX{
+    margin-left: 41%;
+    margin-bottom: 5%;
+}
+
+.leMenu{
+    margin-left: 10%;
+}
+
+.leProfil{
+    margin-left: 47%;
+}
+.monProfil{
+    margin-left: 45%;
+}
+
+.test{
+    height: 1000px;
+}
+
+
+
+.profil-image{
+    height: 140px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+}
+
+
+
+.titre{
+    margin-left: 35%;
+}
+
+.Presentation{
+    margin-top: 110px;
+}
+
+
+
+.bouttonMenu:hover {background-color: bl}
+  
+.bouttonMenu:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+.bouttonMenu {
+    float: left;
+    height: 100px;
+    width: 100px;
+    margin-left: 50px;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #f5af18;
+    border: none;
+    border-radius: 100%;
+    box-shadow: 0 9px #999;
+    margin-bottom: 5%;
+  }

@@ -2,19 +2,11 @@
     margin-top: 4%;
 }
 
-.btnEditer{
-    width: 100%;
-    padding: 13px;
-    background: #FF5733;
-    color: white;
-    font-size: 15px;
-    border: 1px solid grey;
-    border-radius: 20px;
-    margin-top: 6.5%;
-}
-   
+
 
 .btnEditer {
+  margin-top: 6%;
+
     float: left;
     padding: 10px 25px;
     width: 100%;

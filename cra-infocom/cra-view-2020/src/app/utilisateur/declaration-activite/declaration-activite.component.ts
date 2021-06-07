@@ -31,7 +31,14 @@ export class DeclarationActiviteComponent implements OnInit {
   tabJours = new Array();
   activitiesPerDay = new Array();
   remotePerDay = new Array();
+
+
   activitiesPerDay5 = new Array();
+  projectAstreinte= new Array();
+  typeAstreinte= new Array();
+  uniteAstreinte= new Array();
+
+
 
   toalDuTotalAcitivty = 0 ;
 
@@ -46,9 +53,6 @@ export class DeclarationActiviteComponent implements OnInit {
   public collaborateur!: Collaborator;
 
   ngOnInit(): void {
-
-
-
 
     this.dynamicRowsAstreinte.push(this.dynamicRowsAstreinte.length);
     this.dynamicRowsActivity.push(this.dynamicRowsActivity.length);
@@ -72,9 +76,11 @@ export class DeclarationActiviteComponent implements OnInit {
     this.year = this.dt.getFullYear();
 
     this.daysInMonth = new Date(this.year, this.month, 0).getDate();
-    var i;
 
-    for (i = 0; i < this.daysInMonth; i++) {
+
+
+
+    for (var i = 0; i < this.daysInMonth; i++) {
       this.tabJours[i] = i + 1;
 
       /** Activité */
@@ -82,11 +88,21 @@ export class DeclarationActiviteComponent implements OnInit {
       this.remotePerDay.push("remote-" + i);
 
       /**Astreinte */
-      this.activitiesPerDay5.push("jourAstreinte-" + i);
+      for (var j = 0;j< 1  ; j++){
+        this.activitiesPerDay5.push("jourAstreinte-" + i + "-" + j);
+      }
     }
 
 
-    
+    for (var j = 0; j < 1; j++){      
+      this.projectAstreinte.push("selectedOption5-" + j)
+      console.log( this.projectAstreinte)
+      this.typeAstreinte.push("selectedTypeUpdateValue-" + j)
+      console.log( this.typeAstreinte)
+      this.uniteAstreinte.push("uniteAstreinte-" + j)
+      console.log( this.uniteAstreinte)
+
+    }    
   }
 
   dynamicRowsAstreinte: number[] = [];
@@ -250,6 +266,8 @@ export class DeclarationActiviteComponent implements OnInit {
 
   
   updatedAfterSelect5() {
+
+    this.selectedOption5 = (<HTMLInputElement>document.getElementById(this.projectAstreinte[1])).valueAsNumber;
     this._service.selectMissionById(this.selectedOption5).subscribe(
       data => this.laMission5 = data,
       error => console.log("exception" + error)
@@ -371,6 +389,12 @@ export class DeclarationActiviteComponent implements OnInit {
 
     (<HTMLInputElement>document.getElementById(this.activitiesPerDay[1])).disabled = true;
     (<HTMLInputElement>document.getElementById(this.activitiesPerDay[1])).valueAsNumber = 1;
+
+    
+    console.log((<HTMLInputElement>document.getElementById(this.activitiesPerDay5[0])).valueAsNumber)
+    console.log((<HTMLInputElement>document.getElementById(this.projectAstreinte[0])).valueAsNumber)
+    console.log((<HTMLInputElement>document.getElementById(this.typeAstreinte[0])).valueAsNumber)
+    console.log((<HTMLInputElement>document.getElementById(this.uniteAstreinte[0])).valueAsNumber)
 
 }
 }

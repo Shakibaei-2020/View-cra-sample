@@ -90,7 +90,7 @@
     <table>
       <thead>
         <tr>
-          <th>CLIENT </th>
+          <th>PROJECT </th>
           <th>TYPE </th>
           <th>UNITE </th>
           <th>R.AUTO </th>
@@ -101,18 +101,18 @@
       <tbody>
         <tr *ngFor="let row of dynamicRowsAstreinte; let iAstreinte = index">
           <td>
-            <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedOption5" (change)="updatedAfterSelect5()">
+            <select   type="number" class="form-input" aria-label="Default select example" name="selectedOption5-{{iAstreinte}}" id="selectedOption5-{{iAstreinte}}"   (change)="updatedAfterSelect5()">
               <option *ngFor="let mission of missions" value="{{mission.id}}">{{mission.missionTitle}}</option>
             </select>
           </td>
           <td>
-            <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedTypeUpdateValue" (change)="selectedTypeUpdate()">
+            <select  type="number" class="form-input" aria-label="Default select example"  name="selectedTypeUpdateValue-{{iAstreinte}}" id="selectedTypeUpdateValue-{{iAstreinte}}"   (change)="selectedTypeUpdate()">
               <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
               </option>
             </select>
           </td>
           <td>
-            <select class="form-input" aria-label="Default select example">
+            <select  type="number"  class="form-input" aria-label="Default select example"  name="uniteAstreinte-{{iAstreinte}}" id="uniteAstreinte-{{iAstreinte}}" >
               <option value="1">Heure</option>
               <option value="2">Jour</option>
             </select>
@@ -121,9 +121,9 @@
             <button class="btnRemplir" (click)="remplirAstreinte()">Remplir</button>
           </td>
           <td *ngFor="let element of tabJours;let indexOfelement=index;">
-            <input class=" inputDay" name="jourAstreinte-{{indexOfelement}}" id="jourAstreinte-{{indexOfelement}}" type="number" value="{{dureeAstreinte}}">
+            <input class=" inputDay" name="jourAstreinte-{{indexOfelement}}-{{iAstreinte}}" id="jourAstreinte-{{indexOfelement}}-{{iAstreinte}}" type="number" value="{{dureeAstreinte}}">
           </td>
-          <td><input class=" inputDay" type="" value={{totalAstreinte}} id="" required [(ngModel)]="totalAstreinte"  name="totalAstreinte"></td>
+          <td><input class=" inputDay" type="" value={{totalAstreinte}}></td>
           <td>
             <button class="btnAjouterRow" *ngIf="iAstreinte === dynamicRowsAstreinte.length - 1"  (click)="addNewAstreinte()">+</button>
           </td>
@@ -154,17 +154,14 @@
 
 
 
- 
+ <!-- json working
 <div style="text-align:center">
   <h2>
-      Country list from local json file...
-  </h2>
+List jours feriées  </h2>
   <ul *ngFor="let item of joursFerieesList">
      <li>
-        <h3>Country Name :{{item.date}}, Code: {{item.nom_jour_ferie}}</h3>
+        <h3>date :{{item.date}}, nom: {{item.nom_jour_ferie}}</h3>
      </li>
   </ul>
 </div>
-
-
-<button (click)="test">test</button>
+-->
