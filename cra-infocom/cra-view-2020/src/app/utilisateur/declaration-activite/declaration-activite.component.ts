@@ -267,7 +267,9 @@ export class DeclarationActiviteComponent implements OnInit {
   
   updatedAfterSelect5() {
 
-    this.selectedOption5 = (<HTMLInputElement>document.getElementById(this.projectAstreinte[1])).valueAsNumber;
+    this.selectedOption5 = +(<HTMLInputElement>document.getElementById(this.projectAstreinte[0])).value;
+    this
+
     this._service.selectMissionById(this.selectedOption5).subscribe(
       data => this.laMission5 = data,
       error => console.log("exception" + error)
@@ -279,7 +281,8 @@ export class DeclarationActiviteComponent implements OnInit {
 
   /** Select Type activité via l'id */
   selectedTypeUpdate() {
-    console.log(this.selectedTypeUpdateValue);
+
+    this.selectedTypeUpdateValue  = +(<HTMLInputElement>document.getElementById(this.typeAstreinte[0])).value;
     this._service.selectTypeActivityById(this.selectedTypeUpdateValue).subscribe(
       data => this.theTypeActivity = data,
       error => console.log("exception" + error)
@@ -289,9 +292,6 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
   /** COMMUN ACTIVITY + ASTREINTE*/
-
-
-
   activity = new Activity();
   astreinte = new Activity();
   typeActivity = new TypeActivity();
@@ -392,9 +392,9 @@ export class DeclarationActiviteComponent implements OnInit {
 
     
     console.log((<HTMLInputElement>document.getElementById(this.activitiesPerDay5[0])).valueAsNumber)
-    console.log((<HTMLInputElement>document.getElementById(this.projectAstreinte[0])).valueAsNumber)
-    console.log((<HTMLInputElement>document.getElementById(this.typeAstreinte[0])).valueAsNumber)
-    console.log((<HTMLInputElement>document.getElementById(this.uniteAstreinte[0])).valueAsNumber)
+    console.log((<HTMLInputElement>document.getElementById(this.projectAstreinte[0])).value)
+    console.log((<HTMLInputElement>document.getElementById(this.typeAstreinte[0])).value)
+    console.log((<HTMLInputElement>document.getElementById(this.uniteAstreinte[0])).value)
 
 }
 }
