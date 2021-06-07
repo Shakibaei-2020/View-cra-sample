@@ -99,7 +99,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
     for (var j = 0; j < 1; j++){      
-      this.projectAstreinte.push("selectedOption5-" + j)
+      this.projectAstreinte.push("selectedProjectAstreint-" + j)
       this.typeAstreinte.push("selectedTypeUpdateValue-" + j)
       this.uniteAstreinte.push("uniteAstreinte-" + j)
 
@@ -138,7 +138,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
     for (var j = 0; j <this.dynamicRowsAstreinte.length ; j++){  
 
-      this.projectAstreinte.push("selectedOption5-" + j)
+      this.projectAstreinte.push("selectedProjectAstreint-" + j)
       this.typeAstreinte.push("selectedTypeUpdateValue-" + j)
       this.uniteAstreinte.push("uniteAstreinte-" + j)
     }  
@@ -301,13 +301,13 @@ export class DeclarationActiviteComponent implements OnInit {
     this.totalAstreinte = this.daysInMonth;
   }
 
-  selectedOption5!: number;
+  selectedProjectAstreint!: number;
 
   
-  updatedAfterSelect5() {
+  updateAfterSelectAstreinte() {
 
-    this.selectedOption5 = +(<HTMLInputElement>document.getElementById(this.projectAstreinte[0])).value;
-    this._service.selectMissionById(this.selectedOption5).subscribe(
+    this.selectedProjectAstreint = +(<HTMLInputElement>document.getElementById(this.projectAstreinte[0])).value;
+    this._service.selectMissionById(this.selectedProjectAstreint).subscribe(
       data => this.laMission5 = data,
       error => console.log("exception" + error)
     )
@@ -389,7 +389,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
       /** astreinte  */
 
-      if (this.selectedOption5 != null) {
+      if (this.selectedProjectAstreint != null) {
         this._service.selectProjectByMissionId(+(<HTMLInputElement>document.getElementById(this.projectAstreinte[j])).value).subscribe(
           data => this.ProjectAstreinte = data,
           error => console.log("exception" + error)

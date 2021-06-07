@@ -101,7 +101,7 @@
       <tbody>
         <tr *ngFor="let row of dynamicRowsAstreinte; let iAstreinte = index">
           <td>
-            <select   type="number" class="form-input" aria-label="Default select example" name="selectedOption5-{{iAstreinte}}" id="selectedOption5-{{iAstreinte}}"   (change)="updatedAfterSelect5()">
+            <select   type="number" class="form-input" aria-label="Default select example" name="selectedProjectAstreint-{{iAstreinte}}" id="selectedProjectAstreint-{{iAstreinte}}"   (change)="updateAfterSelectAstreinte()">
               <option *ngFor="let mission of missions" value="{{mission.id}}">{{mission.missionTitle}}</option>
             </select>
           </td>
@@ -147,8 +147,9 @@
 
 <br><br><br><br>
 
+<!-- test button
 <button (click)="test()">test</button>
-
+-->
 
 
  <!-- json working
