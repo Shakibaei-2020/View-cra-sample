@@ -52,7 +52,6 @@ export class CongeDemandeComponent implements OnInit {
 
   addLeaveFormSubmit() {
 
-
     this._service.selectLeaveTypeById(this.inputleaveType.id).subscribe(
       data => this.leaveType = data,
       error => console.log("exception" + error)
@@ -63,7 +62,6 @@ export class CongeDemandeComponent implements OnInit {
     this.leave.clientInformed;
     this.leave.leaveType = this.leaveType
 
-    this.dateLeaveRequest =  this.formatageDate();
 
     this._service.addOrUpdateLeaveRequest(this.leave, this.dateLeaveRequest, this.dateStartLeave, this.dateEndLeave).subscribe(
       data => {

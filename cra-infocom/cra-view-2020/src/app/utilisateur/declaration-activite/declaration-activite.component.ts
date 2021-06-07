@@ -115,6 +115,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
   dynamicRowsAstreinte: number[] = [];
 
+
   /** Ajouter une nouvelle*/
   addNewAstreinte() {
 
@@ -122,10 +123,10 @@ export class DeclarationActiviteComponent implements OnInit {
     this.dynamicRowsAstreinte.push(this.dynamicRowsAstreinte.length);
 
 
-    this.astreintePerDay = [null];
-    this.typeAstreinte = [null];
-    this.projectAstreinte = [null]
-    this.uniteAstreinte = [null];
+    this.astreintePerDay = [];
+    this.typeAstreinte = [];
+    this.projectAstreinte = []
+    this.uniteAstreinte = [];
 
     for (var i = 0; i < this.daysInMonth; i++) {
       this.tabJours[i] = i + 1;
@@ -142,11 +143,10 @@ export class DeclarationActiviteComponent implements OnInit {
       this.typeAstreinte.push("selectedTypeUpdateValue-" + j)
       this.uniteAstreinte.push("uniteAstreinte-" + j)
     }  
-  
-    console.log("activité par jour :" +this.astreintePerDay)
-    console.log( "project astreinte :" +this.projectAstreinte)
-    console.log( "type :"+ this.typeAstreinte)
-    console.log( "unite :" +this.uniteAstreinte)
+
+    /** PROBLEME ! */
+    console.log("activité par jour :" +this.astreintePerDay[0])
+    console.log("activité par jour :" +this.astreintePerDay[1])
 
 
   }
@@ -339,10 +339,8 @@ export class DeclarationActiviteComponent implements OnInit {
 
     for (var j = 0 ; j < this.dynamicRowsAstreinte.length ; j++){
 
-   console.log("oui")
 
-   console.log(j)
-    console.log("type astreinte" + +(<HTMLInputElement>document.getElementById(this.typeAstreinte[j])).value)
+
     /** Select type activity By Id  */
     this._service.selectTypeActivityById(+(<HTMLInputElement>document.getElementById(this.typeAstreinte[j])).value).subscribe(
       data => this.typeActivity = data,
@@ -401,11 +399,11 @@ export class DeclarationActiviteComponent implements OnInit {
         this.astreinte.projectId = this.ProjectAstreinte.id;
         this.astreinte.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay[i])).valueAsNumber;
       }
-
+      console.log(this.astreintePerDay[i]);
       console.log((<HTMLInputElement>document.getElementById(this.astreintePerDay[i])).valueAsNumber)
 
       /**  
-      this._service.addAndUpdateActivity(this.astreinte, this.aujourdhui).subscribe(
+      this._service.addAndUpdateActivity(this.astreinte, this.aujourdhui).subscx²ribe(
         data => {
           console.log("astreinte "+ j +" ajouté");
         },
@@ -430,13 +428,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
     
-    console.log("activité par jour :" +this.astreintePerDay)
-    console.log( "project astreinte :" +this.projectAstreinte)
     console.log( "type :"+ this.typeAstreinte)
-
-
-    console.log((<HTMLInputElement>document.getElementById(this.projectAstreinte[1])).value)
-    console.log((<HTMLInputElement>document.getElementById(this.typeAstreinte[1])).value)
 
 }
 }
