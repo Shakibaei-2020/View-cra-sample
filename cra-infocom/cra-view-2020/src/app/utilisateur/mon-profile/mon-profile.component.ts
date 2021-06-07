@@ -31,21 +31,32 @@ export class MonProfileComponent implements OnInit {
   }
 
 
+  alert!: string;
+
   updateCollab() {
 
-    if (this.newPassward == this.confirmationPassward) {
-      this.collaborateur.passward = this.newPassward;
-      this.collaborateur.profileImagePath = this.url;
 
-      this._service.updateCollab(this.collaborateur).subscribe(
-        data => {
-          console.log("ajout effectué");
-        },
-        error => {
-          console.log("erreur ajout non-effectué")
-        }
-      )
-    }
+     if (this.newPassward == this.confirmationPassward) {
+
+      if(this.newPassward != "" && this.confirmationPassward != ""){
+
+        console.log(this.newPassward)
+
+        this.collaborateur.passward = this.newPassward;
+
+        this._service.updateCollab(this.collaborateur).subscribe(
+          data => {
+            console.log("update effectué");
+            this.alert = "Modification réussie"
+          },
+          error => {
+            console.log("Update non-effectuer")
+            this.alert = "Aucune modification à été effectuées"
+            
+          }
+        )  
+      } else this.alert = "Merci de remplir tous les champs"
+    } else this.alert = "les mots de passe ne sont pas identique"
   }
 
 }

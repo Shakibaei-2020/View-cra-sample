@@ -45,7 +45,7 @@
           <div class="bio-row">
             <div class="inputbox mt-1">
               <span class="input-title">Mot de passe :</span>
-               <input value="*************" type="text" required [(ngModel)]="newPassward" name="newPassward"> </div>
+               <input value="*************" type="password" required [(ngModel)]="newPassward" name="newPassward"> </div>
           </div>
           <div class="bio-row">
             <div class="inputbox mt-1">
@@ -57,8 +57,10 @@
           <div class="bio-row">
             <div class="inputbox mt-1">
               <span class="input-title">Confirmation mot de passe :</span> 
-              <input value="*************" type="text" required [(ngModel)]="confirmationPassward"name="confirmationPassward"> 
+              <input value="*************" type="password" required [(ngModel)]="confirmationPassward"name="confirmationPassward"> 
             </div>
+            <p>{{alert}} </p>
+
           </div>
           <div class="bio-row">
           </div>
