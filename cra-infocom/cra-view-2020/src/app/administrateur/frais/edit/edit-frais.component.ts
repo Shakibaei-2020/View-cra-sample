@@ -15,7 +15,7 @@ export class EditFraisComponent implements OnInit {
   updatedExpense = new Expense();
 
   dateExpense = new Date();
-  dateRequest = new Date();
+  dateRequest !: string;
 
 
 

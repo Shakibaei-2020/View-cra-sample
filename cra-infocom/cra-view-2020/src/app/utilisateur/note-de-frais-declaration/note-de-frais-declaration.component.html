@@ -33,10 +33,9 @@
           </div>
 
           <div class="inputbox mt-1"><span>Nature des frais :</span><br>
-            <select class="form-input" aria-label="Default select example" required [(ngModel)]="inputedTypeExpense.id" name="id">
-              <option value="1">Nature 1</option>
-              <option value="2">Nature 2</option>
-              <option value="3">Nature 3</option>
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfExpenseType"  name="idOfExpenseType" (change)="getExpenseType()">
+              <option *ngFor="let typeExpense of allTypeExpense"  value="{{typeExpense.id}}">{{typeExpense.type}}</option> 
+
             </select>
           </div>
           <div class="inputbox mt-1"></div>

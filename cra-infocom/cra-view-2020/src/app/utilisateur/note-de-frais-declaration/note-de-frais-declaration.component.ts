@@ -11,47 +11,49 @@ import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
 })
 export class NoteDeFraisDeclarationComponent implements OnInit {
 
+  expense = new Expense();
+  dateExpense = new Date();
+  dateRequest !: string;
+  inputedTypeExpense = new TypeExpense();
+  typeExpense = new TypeExpense();
+  allTypeExpense!: TypeExpense[];
+  idOfExpenseType!: number;
+
   constructor(private _route: Router, private _service: NgserviceService) { }
 
   ngOnInit(): void {
 
-    this._service.selectTypeExpenseById(1).subscribe(
-      data => this.typeExpense = data,
+    /** on recupere tous les types d'expense pour le <select> */
+    this._service.selectAllTypeExpense().subscribe(
+      data => this.allTypeExpense = data,
       error => console.log("exception" + error)
     )
 
+    /** date request mis à la date d'aujourd'hui */
+    this.dateRequest = this.formatageDate()
   }
 
-  expense = new Expense();
 
-  dateExpense = new Date();
-  dateRequest = new Date();
+  /** On recupere l'expense selectioné a chaque <select> */
+  getExpenseType(){
+    console.log(this.idOfExpenseType)
+    this._service.selectTypeExpenseById(this.idOfExpenseType).subscribe(
+      data9 => { this.typeExpense = data9; },
+      error => console.log("exception" + error),
+    )
+    setTimeout(() => {
+      console.log(this.typeExpense)
+    }, 50);
+  }
 
-
-  
-
-  inputedTypeExpense = new TypeExpense();
-  typeExpense = new TypeExpense();
-
-
-
-
-
+  /** Ajout de la note de frais */
   addExpense() {
 
-
-    this._service.selectTypeExpenseById(this.inputedTypeExpense.id).subscribe(
-      data => this.typeExpense = data,
-      error => console.log("exception" + error)
-    )
-
+    /** id du collaborateur connecté suite à la connexion */
     this.expense.collaboratorId = 2;
+
     this.expense.status = 'en-cours';
     this.expense.typeExpense = this.typeExpense;
-
-    /** a modifier a la date de la demande rentrée */
-    this.dateRequest = this.dateExpense;
-
     this._service.addAndUpdateExpense(this.expense, this.dateExpense, this.dateRequest).subscribe(
       data => {
         console.log("ajout effectué");
@@ -62,9 +64,26 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
     )
   }
 
-
+  /** retour vers l'accueil utilisateur */
   retour() {
     this._route.navigate(['/utilisateur']);
   }
+
+  /** formatage de la date YYYY-MM-DD */
+  formatageDate() {
+    var jour = new Date().getDay() + 6;
+    var jour_toString = jour.toString();
+    if (jour < 10) {
+      jour_toString = "0" + jour_toString;
+    }
+    var mois = new Date().getMonth() + 1;
+    var mois_toString = mois.toString();
+    if (mois < 10) {
+      mois_toString = "0" + mois_toString;
+    }
+    var annee = new Date().getFullYear();
+    return annee + '-' + mois_toString + '-' + jour_toString;
+  }
+
 
 }

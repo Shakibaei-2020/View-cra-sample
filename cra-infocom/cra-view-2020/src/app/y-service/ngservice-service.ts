@@ -70,7 +70,7 @@ export class NgserviceService {
     return this._http.get<Expense[]>("http://localhost:7672/expenses/lister/expense/collab/" + id);
   }
 
-  addAndUpdateExpense(expense: Expense, dateExpense: Date, dateRequest: Date): Observable<any> {
+  addAndUpdateExpense(expense: Expense, dateExpense: Date, dateRequest: string): Observable<any> {
     return this._http.post<any>("http://localhost:7672/expenses/ajouter/" + dateExpense + "/" + dateRequest, expense);
   }
 
@@ -90,6 +90,10 @@ export class NgserviceService {
 
   selectTypeExpenseById(id: number): Observable<TypeExpense> {
     return this._http.get<TypeExpense>("http://localhost:7672/typesexpenses/lister/" + id);
+  }
+
+  selectAllTypeExpense(): Observable<TypeExpense[]> {
+    return this._http.get<TypeExpense[]>("http://localhost:7672/typesexpenses/lister/");
   }
 
   /****************************************************************************************** CONGE SERVICES *******************************************************************************/

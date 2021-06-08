@@ -11,74 +11,56 @@ import { TypeLeave } from 'src/app/z-model/Leave/type-leave';
 })
 export class CongeDemandeComponent implements OnInit {
 
-  public leave = new Leave();
-  public leaves!: Leave[];
-
-  constructor(private _route: Router, private _service: NgserviceService) { }
- 
+  leave = new Leave();
+  leaves!: Leave[];
+  leaveType = new TypeLeave();
   aujourdhui !: string;
-
   dateStartLeave = new Date();
   dateEndLeave = new Date();
+  allLeaveType!: TypeLeave[];
+  idOfLeaveType!: number;
 
-  public allLeaveType!: TypeLeave[];
-
-  leaveType = new TypeLeave();
-
-
-
-
+  constructor(private _route: Router, private _service: NgserviceService) { }
 
 
 
   ngOnInit(): void {
 
+    /** on recupere la date d'aujourd'hui au bon format*/
     this.aujourdhui = this.formatageDate()
+
+
+    /** on recupere tous les types */
     this._service.selectAllLeaveType().subscribe(
       data1 => this.allLeaveType = data1,
       error => console.log("exception" + error)
     )
-
+    
+    /** id du collaborateur recuperé a la connexion */
     this._service.selectLeaveByCollabId(2).subscribe(
       data2 => this.leaves = data2,
       error => console.log("exception" + error)
     )
-
-    console.log(this.leaveType)
-
-
-    
-
   }
 
 
 
-
-  idOfLeaveType!: number;
-  getTypeLeave(){
-
+  /** On recupere le congé selectionné a chaque <select> */
+  getTypeLeave() {
     console.log(this.idOfLeaveType)
- 
-      this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
-      data9 => { this.leaveType = data9;} ,
+    this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
+      data9 => { this.leaveType = data9; },
       error => console.log("exception" + error),
     )
-    setTimeout(() =>{
+    setTimeout(() => {
       console.log(this.leaveType)
-  
-    },50);
-  
+    }, 50);
+  }
 
-}
-
-  
+  /** Ajout de la demande de congé */
   addLeaveFormSubmit() {
-
-    
     this.leave.status = 'en-cours';
     this.leave.leaveType = this.leaveType
-    this.dateStartLeave;
-    this.dateEndLeave;
 
     this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
       data => {
@@ -88,18 +70,18 @@ export class CongeDemandeComponent implements OnInit {
         console.log("erreur ajout non-effectué")
       }
     )
-    console.log(this.leave.collaboratorId)
   }
 
 
+  /** Navigation vers l'accueil*/
   retour() {
     this._route.navigate(['/utilisateur']);
   }
 
 
-  deleteLeaveById(value :any) {
-    console.log(value); 
-
+  /** delete de la note de frais via l'id*/
+  deleteLeaveById(value: any) {
+    console.log(value);
     this._service.deleteOneLeaveRequest(value).subscribe(
       data => {
         console.log("delete effectué");
@@ -108,10 +90,12 @@ export class CongeDemandeComponent implements OnInit {
         console.log("delete ajout non-effectué")
       }
     )
-    }
+  }
 
+
+  /** formatage de la date YYYY-MM-DD */
   formatageDate() {
-    var jour = new Date().getDay() +6;
+    var jour = new Date().getDay() + 6;
     var jour_toString = jour.toString();
     if (jour < 10) {
       jour_toString = "0" + jour_toString;
@@ -124,20 +108,6 @@ export class CongeDemandeComponent implements OnInit {
     var annee = new Date().getFullYear();
     return annee + '-' + mois_toString + '-' + jour_toString;
   }
-
-
-  
-  test(){
-    this._service.selectLeaveTypeById(3).subscribe(
-    data9 => { this.leaveType = data9;} ,
-    error => console.log("exception" + error),
-  )
-  setTimeout(() =>{
-    console.log(this.leaveType)
-
-  },50);
-  }
-  
 
 
 }
