@@ -26,39 +26,42 @@ export class CongeDemandeComponent implements OnInit {
 
   ngOnInit(): void {
 
+    /** id du collaborateur connecté suite à la connexion */
+    this.leave.collaboratorId = 3;
+
     /** on recupere la date d'aujourd'hui au bon format*/
     this.aujourdhui = this.formatageDate()
 
 
     /** on recupere tous les types */
     this._service.selectAllLeaveType().subscribe(
-      data1 => this.allLeaveType = data1,
+      data => this.allLeaveType = data,
       error => console.log("exception" + error)
     )
     
     /** id du collaborateur recuperé a la connexion */
     this._service.selectLeaveByCollabId(2).subscribe(
-      data2 => this.leaves = data2,
+      data => this.leaves = data,
       error => console.log("exception" + error)
     )
+
   }
 
 
 
   /** On recupere le congé selectionné a chaque <select> */
   getTypeLeave() {
-    console.log(this.idOfLeaveType)
     this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
-      data9 => { this.leaveType = data9; },
+      data => { this.leaveType = data; },
       error => console.log("exception" + error),
     )
     setTimeout(() => {
-      console.log(this.leaveType)
     }, 50);
   }
 
   /** Ajout de la demande de congé */
   addLeaveFormSubmit() {
+
     this.leave.status = 'en-cours';
     this.leave.leaveType = this.leaveType
 
@@ -70,6 +73,7 @@ export class CongeDemandeComponent implements OnInit {
         console.log("erreur ajout non-effectué")
       }
     )
+    
   }
 
 
@@ -80,8 +84,7 @@ export class CongeDemandeComponent implements OnInit {
 
 
   /** delete de la note de frais via l'id*/
-  deleteLeaveById(value: any) {
-    console.log(value);
+  deleteLeaveById(value: number) {
     this._service.deleteOneLeaveRequest(value).subscribe(
       data => {
         console.log("delete effectué");

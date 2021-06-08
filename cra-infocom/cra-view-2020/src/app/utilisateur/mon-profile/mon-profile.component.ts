@@ -49,16 +49,16 @@ export class MonProfileComponent implements OnInit {
         this._service.updateCollab(this.collaborateur).subscribe(
           data => {
             console.log("update effectué");
-            this.alert = "Modification réussie"
+            this.alert = "Modification réussie !"
           },
           error => {
             console.log("Update non-effectuer")
-            this.alert = "Aucune modification à été effectuées"
+            this.alert = "Aucune modification à été effectuées !"
             
           }
         )  
-      } else this.alert = "Merci de remplir tous les champs"
-    } else this.alert = "les mots de passe ne sont pas identique"
+      } else this.alert = "Merci de remplir tous les champs !"
+    } else this.alert = "Les mots de passe ne sont pas identique !"
   }
 
 }

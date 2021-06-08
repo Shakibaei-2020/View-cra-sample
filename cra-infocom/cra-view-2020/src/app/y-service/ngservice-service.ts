@@ -99,8 +99,8 @@ export class NgserviceService {
   /****************************************************************************************** CONGE SERVICES *******************************************************************************/
 
 
-  addOrUpdateLeaveRequest(leave: Leave, dateOfDemand: string, dateOfStartLeave: Date, dateOfEndLeave: Date): Observable<Leave> {
-    return this._http.post<Leave>("http://localhost:8950/conge/update/" + dateOfDemand + "/" + dateOfStartLeave + "/" + dateOfEndLeave, leave);
+  addOrUpdateLeaveRequest(leave: Leave, dateOfDemand: string, dateOfStartLeave: Date, dateOfEndLeave: Date): Observable<any> {
+    return this._http.post<any>("http://localhost:8950/conge/update/" + dateOfDemand + "/" + dateOfStartLeave + "/" + dateOfEndLeave, leave);
   }
 
   deleteOneLeaveRequest(id: number): Observable<Leave> {

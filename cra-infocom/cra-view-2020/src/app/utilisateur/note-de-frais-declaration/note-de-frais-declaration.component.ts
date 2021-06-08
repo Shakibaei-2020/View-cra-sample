@@ -23,6 +23,11 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    /** id du collaborateur connecté suite à la connexion */
+    this.expense.collaboratorId = 2;
+
+
     /** on recupere tous les types d'expense pour le <select> */
     this._service.selectAllTypeExpense().subscribe(
       data => this.allTypeExpense = data,
@@ -38,7 +43,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   getExpenseType(){
     console.log(this.idOfExpenseType)
     this._service.selectTypeExpenseById(this.idOfExpenseType).subscribe(
-      data9 => { this.typeExpense = data9; },
+      data => { this.typeExpense = data; },
       error => console.log("exception" + error),
     )
     setTimeout(() => {
@@ -48,10 +53,6 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
 
   /** Ajout de la note de frais */
   addExpense() {
-
-    /** id du collaborateur connecté suite à la connexion */
-    this.expense.collaboratorId = 2;
-
     this.expense.status = 'en-cours';
     this.expense.typeExpense = this.typeExpense;
     this._service.addAndUpdateExpense(this.expense, this.dateExpense, this.dateRequest).subscribe(
