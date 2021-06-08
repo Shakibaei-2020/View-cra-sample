@@ -14,6 +14,12 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   constructor(private _route: Router, private _service: NgserviceService) { }
 
   ngOnInit(): void {
+
+    this._service.selectTypeExpenseById(1).subscribe(
+      data => this.typeExpense = data,
+      error => console.log("exception" + error)
+    )
+
   }
 
   expense = new Expense();
@@ -22,14 +28,13 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   dateRequest = new Date();
 
 
+  
+
   inputedTypeExpense = new TypeExpense();
   typeExpense = new TypeExpense();
 
 
-  test() {
-    console.log(this.inputedTypeExpense.id);
 
-  }
 
 
   addExpense() {

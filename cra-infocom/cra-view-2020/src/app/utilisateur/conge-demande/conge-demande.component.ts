@@ -11,17 +11,101 @@ import { TypeLeave } from 'src/app/z-model/Leave/type-leave';
 })
 export class CongeDemandeComponent implements OnInit {
 
-  leave = new Leave();
-
+  public leave = new Leave();
   public leaves!: Leave[];
-
 
   constructor(private _route: Router, private _service: NgserviceService) { }
  
   aujourdhui !: string;
 
+  dateStartLeave = new Date();
+  dateEndLeave = new Date();
+  inputleaveType = new TypeLeave();
+
+  public allLeaveType!: TypeLeave[];
+
+  leaveType = new TypeLeave();
+
+
+
+
+
+
+  ngOnInit(): void {
+
+
+    this.aujourdhui = this.formatageDate()
+
+
+    this._service.selectAllLeaveType().subscribe(
+      data => this.allLeaveType = data,
+      error => console.log("exception" + error)
+    )
+
+    this._service.selectLeaveByCollabId(2).subscribe(
+      data => this.leaves = data,
+      error => console.log("exception" + error)
+    )
+
+    
+  }
+
+
+  idOfLeaveType!: number;
+  getTypeLeave(){
+
+    
+
+
+    this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
+    data => this.leaveType = data,
+    error => console.log("exception" + error)
+  )
+  console.log(this.leaveType.type)
+
+}
+
+  
+  addLeaveFormSubmit() {
+
+    
+    this.leave.status = 'en-cours';
+    this.leave.leaveType = this.leaveType
+    this.dateStartLeave;
+    this.dateEndLeave;
+
+    this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
+      data => {
+        console.log("ajout effectué");
+      },
+      error => {
+        console.log("erreur ajout non-effectué")
+      }
+    )
+    console.log(this.leave.collaboratorId)
+  }
+
+
+  retour() {
+    this._route.navigate(['/utilisateur']);
+  }
+
+
+  deleteLeaveById(value :any) {
+    console.log(value); 
+
+    this._service.deleteOneLeaveRequest(value).subscribe(
+      data => {
+        console.log("delete effectué");
+      },
+      error => {
+        console.log("delete ajout non-effectué")
+      }
+    )
+    }
+
   formatageDate() {
-    var jour = new Date().getDay() ;
+    var jour = new Date().getDay() +6;
     var jour_toString = jour.toString();
     if (jour < 10) {
       jour_toString = "0" + jour_toString;
@@ -35,57 +119,4 @@ export class CongeDemandeComponent implements OnInit {
     return annee + '-' + mois_toString + '-' + jour_toString;
   }
   
-  ngOnInit() {
-    this._service.selectLeaveByCollabId(2).subscribe(
-      data => this.leaves = data,
-      error => console.log("exception" + error)
-
-    )
-
-    this.aujourdhui = this.formatageDate();
-    this.test();
-  }
-
-  dateStartLeave = new Date();
-  dateEndLeave = new Date();
-  inputleaveType = new TypeLeave();
-  leaveType = new TypeLeave();
-
-  addLeaveFormSubmit() {
-
-    this._service.selectLeaveTypeById(this.inputleaveType.id).subscribe(
-      data => this.leaveType = data,
-      error => console.log("exception" + error)
-    )
-
-    this.leave.status = 'en-cours';
-    this.leave.collaboratorId = 2;
-    this.leave.clientInformed;
-    this.leave.leaveType = this.leaveType
-  
-    console.log(this.leave)
-
-
-    this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
-      data => {
-        console.log("ajout effectué");
-      },
-      error => {
-        console.log("erreur ajout non-effectué")
-      }
-    )
-  }
-
-
-  retour() {
-    this._route.navigate(['/utilisateur']);
-  }
-
-  test(){
-    for (var i = 0 ; i < this.leaves.length; i++){
-      console.log(this.leaves[i].dateOfStartLeave.toLocaleDateString)
-    }
-
-  }
-
 }

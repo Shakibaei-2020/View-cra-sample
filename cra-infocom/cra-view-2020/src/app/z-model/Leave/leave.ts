@@ -14,6 +14,8 @@ export class Leave {
 
 	public leaveType = new TypeLeave;
 
+
+	
 }
 
 

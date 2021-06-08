@@ -1,6 +1,7 @@
 export class TypeLeave {
 
-    public id!:number;
-	public type!:string;
+    public id = new Number();
+	public type = new String();
 	
+
 }

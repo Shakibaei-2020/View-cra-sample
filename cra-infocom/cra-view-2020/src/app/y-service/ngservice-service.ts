@@ -121,7 +121,9 @@ export class NgserviceService {
     return this._http.get<TypeLeave>("http://localhost:8950/typesdeconge/lister/" + id);
   }
 
-
+  selectAllLeaveType(): Observable<TypeLeave[]> {
+    return this._http.get<TypeLeave[]>("http://localhost:8950/typesdeconge/lister/");
+  }
   /*************************************************************************************** ACTIVITY SERVICES *******************************************************************************/
 
   searchActivity(date1: Date, date2: Date, lastName: String): Observable<Activity[]> {
