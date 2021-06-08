@@ -40,8 +40,7 @@ export class CongeDemandeComponent implements OnInit {
     )
   }
 
-  dateLeaveRequest!: string 
-  ;
+  dateLeaveRequest!: string;
   dateStartLeave = new Date();
   dateEndLeave = new Date();
 

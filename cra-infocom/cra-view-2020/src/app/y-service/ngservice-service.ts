@@ -202,5 +202,12 @@ export class NgserviceService {
   selectProjectByMissionId(id: number): Observable<Project> {
     return this._http.get<Project>("http://localhost:8801/project/foundProject/" + id);
   }
+
+
+
+  SelectAllProjectForOneCollab(id: number): Observable<Project[]> {
+    return this._http.get<Project[]>("http://localhost:8801/project/projectByCollab/" + id);
+  }
+
 }
 

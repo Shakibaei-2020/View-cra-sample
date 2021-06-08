@@ -41,7 +41,16 @@ export class DeclarationActiviteComponent implements OnInit {
   remotePerDay4 = new Array()
 
 
+  /**  astreinte dynamique
   astreintePerDay = new Array();
+ */
+
+  astreintePerDay1 = new Array();
+  astreintePerDay2 = new Array();
+  astreintePerDay3 = new Array();
+  astreintePerDay4 = new Array();
+
+
   projectAstreinte= new Array();
   typeAstreinte= new Array();
   uniteAstreinte= new Array();
@@ -56,6 +65,9 @@ export class DeclarationActiviteComponent implements OnInit {
 
   public missions!: Mission[];
   public collaborateur!: Collaborator;
+
+
+  public projects!: Project[];
 
   ngOnInit(): void {
 
@@ -76,6 +88,12 @@ export class DeclarationActiviteComponent implements OnInit {
 
     this._service.selectAllMission().subscribe(
       data => this.missions = data,
+      error => console.log("exception" + error)
+    )
+
+
+    this._service.SelectAllProjectForOneCollab(2).subscribe(
+      data => this.projects = data,
       error => console.log("exception" + error)
     )
 
@@ -108,6 +126,14 @@ export class DeclarationActiviteComponent implements OnInit {
       this.activitiesPerDay4.push("jour4-" + i );
       this.remotePerDay4.push("remote4-" + i);
       
+
+
+
+      this.astreintePerDay1.push("jourAstreinte1-" + i );
+      this.astreintePerDay2.push("jourAstreinte2-" + i );
+      this.astreintePerDay3.push("jourAstreinte3-" + i );
+      this.astreintePerDay4.push("jourAstreinte4-" + i );
+
 
       /**Astreinte  dynamique
       for (var j = 0;j< 1  ; j++){
@@ -230,11 +256,13 @@ export class DeclarationActiviteComponent implements OnInit {
   updatedAfterSelect() {
     this.refinterne = this.collaborateur.id;
 
+  
     this._service.selectMissionById(this.selectedOption).subscribe(
       data => this.laMission = data,
       error => console.log("exception" + error)
     )
     this.refClient = this.laMission.client.id;
+
   }
 
   remoteRemplis = false;
@@ -460,6 +488,163 @@ export class DeclarationActiviteComponent implements OnInit {
   
 
 
+  /** ASTREINTE 1 */
+
+  /**  */
+  dureeAstreinte1 = 0 ;
+  totalAstreinte1 = 0;
+  projectAstreinte1 = new Project();
+  laMissionAstreinte1 = new Mission();
+  astreinte1remplis = false;
+
+  selectedProjectAstreint1!: number;
+  selectedTypeUpdateValue1!: number;
+  selectedUniteAstreint1!: number;
+
+
+  /** Remplissage automatique de l'estreinte*/
+  remplirAstreinte1() {
+    if (this.astreinte1remplis == true) {
+      this.dureeAstreinte1 = 0;
+      this.astreinte1remplis = false;
+      this.totalAstreinte1 = 0;
+    } else {
+      this.dureeAstreinte1 = 1;
+      this.astreinte1remplis = true;
+      this.totalAstreinte1 = this.daysInMonth;
+
+    }
+  }
+
+  updateAfterSelectAstreinte1() {
+
+    this._service.selectMissionById(this.selectedProjectAstreint1).subscribe(
+      data => this.laMissionAstreinte1 = data,
+      error => console.log("exception" + error)
+    )
+  }
+
+  totalAstreinteT1() {
+    var i;
+    for (i = 0; i <  this.daysInMonth; i++) {
+      if((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber != undefined){
+     this.totalAstreinte1=   this.totalAstreinte1  +(<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
+      }
+    }
+  }
+
+  theTypeActivity1 = new TypeActivity();
+
+  /** Select Type activité via l'id */
+  selectedTypeUpdate1() {
+
+    this._service.selectTypeActivityById(this.selectedTypeUpdateValue1).subscribe(
+      data => this.theTypeActivity1 = data,
+      error => console.log("exception" + error)
+    )
+  }
+
+
+
+ /** ASTREINTE 2 */
+ dureeAstreinte2 = 0 ;
+ totalAstreinte2 = 0;
+ projectAstreinte2 = new Project();
+ laMissionAstreinte2 = new Mission();
+ astreinte2remplis= false;
+
+
+ selectedProjectAstreint2!: number;
+ selectedTypeUpdateValue2!: number;
+ selectedUniteAstreint2!: number;
+
+
+ /** Remplissage automatique de l'estreinte*/
+ remplirAstreinte2() {
+   if (this.astreinte2remplis == true) {
+     this.dureeAstreinte2 = 0;
+     this.astreinte2remplis = false;
+     this.totalAstreinte2 = 0;
+   } else {
+     this.dureeAstreinte2 = 1;
+     this.astreinte2remplis = true;
+     this.totalAstreinte2 = this.daysInMonth;
+
+   }
+ }
+
+
+ updateAfterSelectAstreinte2() {
+
+   this._service.selectMissionById(this.selectedProjectAstreint2).subscribe(
+     data => this.laMissionAstreinte2 = data,
+     error => console.log("exception" + error)
+   )
+ }
+
+ theTypeActivity2 = new TypeActivity();
+
+ /** Select Type activité via l'id */
+ selectedTypeUpdate2() {
+
+   this._service.selectTypeActivityById(this.selectedTypeUpdateValue2).subscribe(
+     data => this.theTypeActivity2 = data,
+     error => console.log("exception" + error)
+   )
+   this.astreinte2.TypeActivity = this.theTypeActivity2;
+ }
+
+
+
+
+ /** ASTREINTE 3 */
+ dureeAstreinte3 = 0 ;
+ totalAstreinte3 = 0;
+ projectAstreinte3 = new Project();
+ laMissionAstreinte3 = new Mission();
+ astreinte3remplis= false;
+
+ selectedProjectAstreint3!: number;
+ selectedTypeUpdateValue3!: number;
+ selectedUniteAstreint3!: number;
+
+
+ /** Remplissage automatique de l'estreinte*/
+ remplirAstreinte3() {
+   if (this.astreinte3remplis == true) {
+     this.dureeAstreinte3 = 0;
+     this.astreinte3remplis = false;
+     this.totalAstreinte3 = 0;
+   } else {
+     this.dureeAstreinte3 = 1;
+     this.astreinte3remplis = true;
+     this.totalAstreinte3 = this.daysInMonth;
+
+   }
+ }
+
+
+ 
+ updateAfterSelectAstreinte3() {
+
+   this._service.selectMissionById(this.selectedProjectAstreint3).subscribe(
+     data => this.laMissionAstreinte3 = data,
+     error => console.log("exception" + error)
+   )
+ }
+
+ theTypeActivity3 = new TypeActivity();
+
+ /** Select Type activité via l'id */
+
+ selectedTypeUpdate3() {
+
+   this._service.selectTypeActivityById(this.selectedTypeUpdateValue3).subscribe(
+     data => this.theTypeActivity3= data,
+     error => console.log("exception" + error)
+   )
+   this.astreinte3.TypeActivity = this.theTypeActivity3;
+ }
 
 
 
@@ -477,17 +662,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-  /** ASTREINTE  */
+  /** ASTREINTE DYNAMIQUE 
   dureeAstreinte = 0 ;
   totalAstreinte = 0;
   ProjectAstreinte = new Project();
@@ -496,7 +671,6 @@ export class DeclarationActiviteComponent implements OnInit {
 
   remplis5 = false;
 
-  /** Remplissage automatique de l'estreinte*/
   remplirAstreinte() {
     if (this.remplis5 == true) {
       this.dureeAstreinte = 0;
@@ -523,7 +697,6 @@ export class DeclarationActiviteComponent implements OnInit {
   selectedTypeUpdateValue!: number;
   theTypeActivity = new TypeActivity();
 
-  /** Select Type activité via l'id */
   selectedTypeUpdate() {
 
     this.selectedTypeUpdateValue  = +(<HTMLInputElement>document.getElementById(this.typeAstreinte[0])).value;
@@ -533,11 +706,15 @@ export class DeclarationActiviteComponent implements OnInit {
     )
     this.astreinte.TypeActivity = this.theTypeActivity;
   }
-
+*/
 
   /** COMMUN ACTIVITY + ASTREINTE*/
 
   astreinte = new Activity();
+  astreinte1 = new Activity();
+  astreinte2 = new Activity();
+  astreinte3 = new Activity();
+  astreinte4 = new Activity();
 
 
 
@@ -559,64 +736,59 @@ export class DeclarationActiviteComponent implements OnInit {
     */
 
 
-    /** Select type activity By Id  FOR ACTIVITY 1*/
+    /** FOR ACTIVITY  */
+
     this._service.selectTypeActivityById(2).subscribe(
       data => this.typeActivity = data,
       error => console.log("exception" + error)
     )
 
-      /** Select type activity By Id  FOR ACTIVITY 1*/
       this._service.selectTypeActivityById(2).subscribe(
         data => this.typeActivity2 = data,
         error => console.log("exception" + error)
       )
 
       
-        /** Select type activity By Id  FOR ACTIVITY  3*/
     this._service.selectTypeActivityById(2).subscribe(
       data => this.typeActivity3 = data,
       error => console.log("exception" + error)
     )
 
 
-      /** Select type activity By Id  FOR ACTIVITY 4*/
       this._service.selectTypeActivityById(2).subscribe(
         data => this.typeActivity4 = data,
         error => console.log("exception" + error)
       )
   
 
- 
+        this._service.selectProjectByMissionId(this.selectedOption).subscribe(
+          data => this.ProjectActivity = data,
+          error => console.log("exception" + error)
+        )
+   
+      if (this.selectedOption2 != null) {
+        this._service.selectProjectByMissionId(this.selectedOption2).subscribe(
+          data => this.ProjectActivity2 = data,
+          error => console.log("exception" + error)
+        )
+      }
+  
+      if (this.selectedOption3 != null) {
+        this._service.selectProjectByMissionId(this.selectedOption3).subscribe(
+          data => this.ProjectActivity3 = data,
+          error => console.log("exception" + error)
+        )
+      }
+  
+      if (this.selectedOption4 != null) {
+        this._service.selectProjectByMissionId(this.selectedOption4).subscribe(
+          data => this.ProjectActivity4 = data,
+          error => console.log("exception" + error)
+        )
+      }
 
-    if (this.selectedOption != null) {
-      this._service.selectProjectByMissionId(this.selectedOption).subscribe(
-        data => this.ProjectActivity = data,
-        error => console.log("exception" + error)
-      )
-    }
+      /** FOR ASTREINTE */
 
-    if (this.selectedOption2 != null) {
-      this._service.selectProjectByMissionId(this.selectedOption2).subscribe(
-        data => this.ProjectActivity2 = data,
-        error => console.log("exception" + error)
-      )
-    }
-
-
-    if (this.selectedOption3 != null) {
-      this._service.selectProjectByMissionId(this.selectedOption3).subscribe(
-        data => this.ProjectActivity3 = data,
-        error => console.log("exception" + error)
-      )
-    }
-
-
-    if (this.selectedOption4 != null) {
-      this._service.selectProjectByMissionId(this.selectedOption4).subscribe(
-        data => this.ProjectActivity4 = data,
-        error => console.log("exception" + error)
-      )
-    }
 
 
 
@@ -626,15 +798,26 @@ export class DeclarationActiviteComponent implements OnInit {
       /** ACTIVITY 1 */
 
  
-        this.activity.collaboratorId = 1;
+      if( this.totalProjet1 != 0){
+        
+
+        this._service.selectProjectByMissionId(this.selectedOption).subscribe(
+          data => this.ProjectActivity = data,
+          error => console.log("exception" + error)
+        )
+
+        console.log(this.ProjectActivity)
+
+        this.activity.collaboratorId = 2;
         this.activity.projectId = this.ProjectActivity.id;
         this.activity.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
         this.activity.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked;
         this.activity.TypeActivity = this.typeActivity;
 
+        console.log( this.ProjectActivity.id)
 
-      if( this.totalProjet1 != 0){
 
+        /**  
       this._service.addAndUpdateActivity(this.activity, this.aujourdhui).subscribe(
         data => {
           console.log("activity 1 ajouté");
@@ -642,20 +825,22 @@ export class DeclarationActiviteComponent implements OnInit {
         error => {
           console.log("erreur ajout non-effectué")
         }
-      )
+      )*/
       }
      
 
 
        /** ACTIVITY 2 */
+
+       if( this.totalProjet2 != 0){
+
         this.activity2.collaboratorId = 1;
-        this.activity2.projectId = this.ProjectActivity.id;
+        this.activity2.projectId = this.ProjectActivity2.id;
         this.activity2.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
         this.activity2.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked;
         this.activity2.TypeActivity = this.typeActivity2;
     
  
-        if( this.totalProjet2 != 0){
  
       this._service.addAndUpdateActivity(this.activity2, this.aujourdhui).subscribe(
         data => {
@@ -667,17 +852,21 @@ export class DeclarationActiviteComponent implements OnInit {
       )
       }
 
+              /** ACTIVITY 3 */
 
-        /** ACTIVITY 3 */
+
+      if( this.totalProjet3 != 0){
+
           this.activity3.collaboratorId = 1;
-          this.activity3.projectId = this.ProjectActivity.id;
+          this.activity3.projectId = this.ProjectActivity3.id;
           this.activity3.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
           this.activity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
           this.activity3.TypeActivity = this.typeActivity3;
-     
-  
-          if( this.totalProjet3 != 0){
 
+
+
+       
+     
         this._service.addAndUpdateActivity(this.activity3, this.aujourdhui).subscribe(
           data => {
             console.log("activity  3 ajouté");
@@ -686,19 +875,25 @@ export class DeclarationActiviteComponent implements OnInit {
             console.log("erreur ajout non-effectué")
           }
         )
+    
         }
 
-          /** ACTIVITY 4 */
-        this.activity4.collaboratorId = 1;
-        this.activity4.projectId = this.ProjectActivity.id;
-        this.activity4.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
-        this.activity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
-        this.activity4.TypeActivity = this.typeActivity4;
-     
+        
+        /** ACTIVITY 4 */
 
         if( this.totalProjet4 != 0){
 
-      this._service.addAndUpdateActivity(this.activity, this.aujourdhui).subscribe(
+  
+
+
+        this.activity4.collaboratorId = 1;
+        this.activity4.projectId = this.ProjectActivity4.id;
+        this.activity4.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
+        this.activity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
+        this.activity4.TypeActivity = this.typeActivity4;
+    
+
+         this._service.addAndUpdateActivity(this.activity, this.aujourdhui).subscribe(
         data => {
           console.log("activity 4 ajouté");
         },
@@ -711,20 +906,45 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
 
+        /** ASTREINTE 1  */
 
 
+        if( this.totalAstreinte1 != 0){
+
+        this._service.selectProjectByMissionId(2).subscribe(
+            data => this.projectAstreinte1 = data,
+            error => console.log("exception" + error)
+        )
+  
+        this.astreinte1.collaboratorId = 1;
+        this.astreinte1.projectId = this.selectedProjectAstreint1;
+        this.astreinte1.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
+        this.astreinte1.TypeActivity = this.theTypeActivity1;
+
+        console.log( this.astreinte1.collaboratorId)
+        console.log( "id du cadsqdq :" + this.astreinte1.projectId)
+        console.log( this.astreinte1.duration)
+        console.log(  this.astreinte1.TypeActivity)
+
+        /** 
+        this._service.addAndUpdateActivity(this.astreinte1, this.aujourdhui).subscribe(
+          data => {
+            console.log("astreinte  ajouté");
+          },
+          error => {
+            console.log("erreur ajout non-effectué")
+          }
+        )*/
+
+        }
 
 
+       
 
 
+          
 
-
-
-
-
-
-
-
+  
       /** astreinte  Dynamique 
 
       if (this.selectedProjectAstreint != null) {
@@ -770,6 +990,15 @@ export class DeclarationActiviteComponent implements OnInit {
   test(){
     console.log( "type :"+ this.typeAstreinte)
 }
+
+totalActivity!: number;
+
+totalAllActivity(){
+
+
+}
+
+
 }
 
 

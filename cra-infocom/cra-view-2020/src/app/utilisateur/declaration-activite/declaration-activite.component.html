@@ -38,11 +38,11 @@
         <th class="enTete">REF.INTERNE </th>
         <th class="enTete">REF.CLIENT </th>
         <th class="enTete" >R.AUTO </th>
-        <th class="enTete" *ngFor="let element of tabJours;">{{element}} </th>
+        <th class="enTeteDates" *ngFor="let element of tabJours;">{{element}} </th>
         <th class="enTete"  >total</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody  (change)="totalAllActivity()">
       <tr>
         <td>
           <select class="form-input choice" aria-label="Default select example" [(ngModel)]="selectedOption"
@@ -129,8 +129,7 @@
 
       <tr>
         <td>
-          <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedOption4"
-            (change)="updatedAfterSelect4()">
+          <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedOption4" (change)="updatedAfterSelect4()">
             <option *ngFor="let mission of missions" value="{{mission.id}}">{{mission.missionTitle}}</option>
           </select>
         </td>
@@ -157,11 +156,12 @@
     </tbody>
   </table>
   <br>
-  <!-- ACTIVITE 2-->
 
+  <span>Total de jours travaillés :</span> <input class="inputDay2" type="" value={{totalActivity}} required [(ngModel)]="totalActivity" name="totalActivity">
 
-
-
+  <br>  <br>  <br>
+  <!-- ASTREINTE -->
+  
 
       <h2> Astreinte </h2>
       <table>
@@ -176,113 +176,93 @@
           </tr>
         </thead>
         <tbody>
+            <!-- ASTREINTE 1-->
+
           <tr>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example"
-                name="selectedProjectAstreint" id="selectedProjectAstreint" (change)="updateAfterSelectAstreinte()">
-                <option *ngFor="let mission of missions" value="{{mission.id}}">{{mission.missionTitle}}</option>
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedProjectAstreint1" (change)="updateAfterSelectAstreinte1()">
+                <option *ngFor="let project of projects" value="{{project.id}}">{{project.projectTitle}}</option> 
               </select>
             </td>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example"
-                name="selectedTypeUpdateValue" id="selectedTypeUpdateValue-" (change)="selectedTypeUpdate()">
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedTypeUpdateValue1"  (change)="selectedTypeUpdate1()">
                 <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
                 </option>
               </select>
             </td>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example" name="uniteAstreinte"
-                id="uniteAstreinte">
+              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedUniteAstreint1">
                 <option value="1">Heure</option>
                 <option value="2">Jour</option>
               </select>
             </td>
             <td>
-              <button class="btnRemplir" (click)="remplirAstreinte()">Remplir</button>
+              <button class="btnRemplir" (click)="remplirAstreinte1()">Remplir</button>
             </td>
             <td *ngFor="let element of tabJours;let indexOfelement=index;">
-              <input class=" inputDay2" name="jourAstreinte-{{indexOfelement}}" id="jourAstreinte-{{indexOfelement}}"
-                type="number" value="{{dureeAstreinte}}">
+              <input class=" inputDay2" name="jourAstreinte1-{{indexOfelement}}" id="jourAstreinte1-{{indexOfelement}}" type="number" value="{{dureeAstreinte1}}">
             </td>
-            <td><input class=" inputDay2" type="" value={{totalAstreinte}}></td>
-          </tr>
-
-
+            <td><input class=" inputDay2" type="" value={{totalAstreinte1}}></td>
+          </tr> 
+            <!-- ASTREINTE 2 -->
           <tr>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example"
-                name="selectedProjectAstreint" id="selectedProjectAstreint" (change)="updateAfterSelectAstreinte()">
-                <option *ngFor="let mission of missions" value="{{mission.id}}">{{mission.missionTitle}}</option>
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]= "selectedProjectAstreint2" (change)="updateAfterSelectAstreinte2()">
+                <option *ngFor="let project of projects" value="{{project.id}}">{{project.projectTitle}}</option> 
               </select>
             </td>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example"
-                name="selectedTypeUpdateValue" id="selectedTypeUpdateValue-" (change)="selectedTypeUpdate()">
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]= "selectedTypeUpdateValue2"  (change)="selectedTypeUpdate2()">
                 <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
                 </option>
               </select>
             </td>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example" name="uniteAstreinte"
-                id="uniteAstreinte">
+              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedUniteAstreint2">
                 <option value="1">Heure</option>
                 <option value="2">Jour</option>
               </select>
             </td>
             <td>
-              <button class="btnRemplir" (click)="remplirAstreinte()">Remplir</button>
+              <button class="btnRemplir" (click)="remplirAstreinte2()">Remplir</button>
             </td>
             <td *ngFor="let element of tabJours;let indexOfelement=index;">
-              <input class=" inputDay2" name="jourAstreinte-{{indexOfelement}}" id="jourAstreinte-{{indexOfelement}}"
-                type="number" value="{{dureeAstreinte}}">
+              <input class=" inputDay2" name="jourAstreinte2-{{indexOfelement}}" id="jourAstreinte2-{{indexOfelement}}" type="number" value="{{dureeAstreinte2}}">
             </td>
-            <td><input class=" inputDay2" type="" value={{totalAstreinte}}></td>
+            <td><input class=" inputDay2" type="" value={{totalAstreinte2}}></td>
           </tr>
+            <!-- ASTREINTE 3 -->
 
           <tr>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example"
-                name="selectedProjectAstreint" id="selectedProjectAstreint" (change)="updateAfterSelectAstreinte()">
-                <option *ngFor="let mission of missions" value="{{mission.id}}">{{mission.missionTitle}}</option>
+              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedProjectAstreint3" (change)="updateAfterSelectAstreinte3()">
+                <option *ngFor="let project of projects" value="{{project.id}}">{{project.projectTitle}}</option> 
               </select>
             </td>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example"
-                name="selectedTypeUpdateValue" id="selectedTypeUpdateValue-" (change)="selectedTypeUpdate()">
+              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedTypeUpdateValue3" (change)="selectedTypeUpdate3()">
                 <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
                 </option>
               </select>
             </td>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example" name="uniteAstreinte"
-                id="uniteAstreinte">
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedUniteAstreint3">
                 <option value="1">Heure</option>
                 <option value="2">Jour</option>
               </select>
             </td>
             <td>
-              <button class="btnRemplir" (click)="remplirAstreinte()">Remplir</button>
+              <button class="btnRemplir" (click)="remplirAstreinte3()">Remplir</button>
             </td>
             <td *ngFor="let element of tabJours;let indexOfelement=index;">
-              <input class="inputDay2" name="jourAstreinte-{{indexOfelement}}" id="jourAstreinte-{{indexOfelement}}"
-                type="number" value="{{dureeAstreinte}}">
+              <input class="inputDay2" name="jourAstreinte3-{{indexOfelement}}" id="jourAstreinte3-{{indexOfelement}}"
+                type="number" value="{{dureeAstreinte3}}">
             </td>
-            <td><input class="inputDay2" type="" value={{totalAstreinte}}></td>
+            <td><input class="inputDay2" type="" value={{totalAstreinte3}}></td>
           </tr>
-
-
         </tbody>
       </table>
   </div>
-
-
-
-
-
-
-
-
-
 
 
 
