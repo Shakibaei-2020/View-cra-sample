@@ -86,7 +86,7 @@
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class=" inputDay" step="0.25" min="0" max="1" name="jour2-{{indexOfelement}}"
-            id="jour2-{{indexOfelement}}" type="number" value="{{dureeProjet2}}" [disabled]="" (change)="total()"
+            id="jour2-{{indexOfelement}}" type="number" value="{{dureeProjet2}}" [disabled]="" (change)="total2()"
             value="0">
           <input class="inputRemote" name="remote2-{{indexOfelement}}" id="remote2-{{indexOfelement}}" type="checkbox"
             [checked]="isRemote2" value="{{isRemote2}}">
@@ -114,7 +114,7 @@
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class=" inputDay" step="0.25" min="0" max="1" name="jour3-{{indexOfelement}}"
-            id="jour3-{{indexOfelement}}" type="number" value="{{dureeProjet3}}" [disabled]="" (change)="total()"
+            id="jour3-{{indexOfelement}}" type="number" value="{{dureeProjet3}}" [disabled]="" (change)="total3()"
             value="0">
           <input class="inputRemote" name="remote3-{{indexOfelement}}" id="remote3-{{indexOfelement}}" type="checkbox"
             [checked]="isRemote3" value="{{isRemote3}}">
@@ -141,7 +141,7 @@
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class=" inputDay" step="0.25" min="0" max="1" name="jour4-{{indexOfelement}}"
-            id="jour4-{{indexOfelement}}" type="number" value="{{dureeProjet4}}" [disabled]="" (change)="total()"
+            id="jour4-{{indexOfelement}}" type="number" value="{{dureeProjet4}}" [disabled]="" (change)="total4()"
             value="0">
           <input class="inputRemote" name="remote4-{{indexOfelement}}" id="remote4-{{indexOfelement}}" type="checkbox"
             [checked]="isRemote4" value="{{isRemote4}}">
@@ -200,7 +200,7 @@
               <button class="btnRemplir" (click)="remplirAstreinte1()">Remplir</button>
             </td>
             <td *ngFor="let element of tabJours;let indexOfelement=index;">
-              <input class=" inputDay2" name="jourAstreinte1-{{indexOfelement}}" id="jourAstreinte1-{{indexOfelement}}" type="number" value="{{dureeAstreinte1}}">
+              <input class=" inputDay2" name="jourAstreinte1-{{indexOfelement}}" id="jourAstreinte1-{{indexOfelement}}" type="number" value="{{dureeAstreinte1}}" (change)="total5()">
             </td>
             <td><input class=" inputDay2" type="" value={{totalAstreinte1}}></td>
           </tr> 
@@ -227,7 +227,7 @@
               <button class="btnRemplir" (click)="remplirAstreinte2()">Remplir</button>
             </td>
             <td *ngFor="let element of tabJours;let indexOfelement=index;">
-              <input class=" inputDay2" name="jourAstreinte2-{{indexOfelement}}" id="jourAstreinte2-{{indexOfelement}}" type="number" value="{{dureeAstreinte2}}">
+              <input class=" inputDay2" name="jourAstreinte2-{{indexOfelement}}" id="jourAstreinte2-{{indexOfelement}}" type="number" value="{{dureeAstreinte2}}" (change)="total6()">
             </td>
             <td><input class=" inputDay2" type="" value={{totalAstreinte2}}></td>
           </tr>
@@ -256,7 +256,7 @@
             </td>
             <td *ngFor="let element of tabJours;let indexOfelement=index;">
               <input class="inputDay2" name="jourAstreinte3-{{indexOfelement}}" id="jourAstreinte3-{{indexOfelement}}"
-                type="number" value="{{dureeAstreinte3}}">
+                type="number" value="{{dureeAstreinte3}}" (change)="total7()">
             </td>
             <td><input class="inputDay2" type="" value={{totalAstreinte3}}></td>
           </tr>
