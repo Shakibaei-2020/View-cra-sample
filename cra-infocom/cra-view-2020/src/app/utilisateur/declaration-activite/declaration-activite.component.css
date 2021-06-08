@@ -30,15 +30,18 @@
 }
 
 .form-input2{
-  width: 10%;
     box-sizing: border-box;
     border: none;
     border-bottom: 2px solid #464646;
+    margin-left: 5px;
 }
 
+
+
 .form-input3{
-  width: 10%;
+  width: 80px;
     margin-bottom: 50px;
+    margin-left: 8px;
     box-sizing: border-box;
     border: none;
     border-bottom: 2px solid #464646;

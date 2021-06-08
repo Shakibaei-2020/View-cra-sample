@@ -18,6 +18,8 @@ export class CongeDemandeComponent implements OnInit {
 
   constructor(private _route: Router, private _service: NgserviceService) { }
  
+  aujourdhui !: string;
+
   formatageDate() {
     var jour = new Date().getDay() ;
     var jour_toString = jour.toString();
@@ -37,17 +39,17 @@ export class CongeDemandeComponent implements OnInit {
     this._service.selectLeaveByCollabId(2).subscribe(
       data => this.leaves = data,
       error => console.log("exception" + error)
+
     )
+
+    this.aujourdhui = this.formatageDate();
+    this.test();
   }
 
-  dateLeaveRequest!: string;
   dateStartLeave = new Date();
   dateEndLeave = new Date();
-
   inputleaveType = new TypeLeave();
   leaveType = new TypeLeave();
-
-
 
   addLeaveFormSubmit() {
 
@@ -60,9 +62,11 @@ export class CongeDemandeComponent implements OnInit {
     this.leave.collaboratorId = 2;
     this.leave.clientInformed;
     this.leave.leaveType = this.leaveType
+  
+    console.log(this.leave)
 
 
-    this._service.addOrUpdateLeaveRequest(this.leave, this.dateLeaveRequest, this.dateStartLeave, this.dateEndLeave).subscribe(
+    this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
       data => {
         console.log("ajout effectué");
       },
@@ -72,20 +76,16 @@ export class CongeDemandeComponent implements OnInit {
     )
   }
 
-  deleteLeave() {
-    this._service.deleteOneLeaveRequest(4).subscribe(
-      data => {
-        console.log("ajout effectué");
-      },
-      error => {
-        console.log("erreur ajout non-effectué")
-      }
-    )
-  }
 
   retour() {
     this._route.navigate(['/utilisateur']);
   }
 
+  test(){
+    for (var i = 0 ; i < this.leaves.length; i++){
+      console.log(this.leaves[i].dateOfStartLeave.toLocaleDateString)
+    }
+
+  }
 
 }

@@ -20,10 +20,12 @@ export class MonProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this._service.selectOneCollabById(2).subscribe(
+    this._service.selectOneCollabById(3).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)
     )
+
+    console.log(this.collaborateur.profileImagePath)
   }
 
   retour() {

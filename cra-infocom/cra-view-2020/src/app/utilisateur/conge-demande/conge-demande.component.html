@@ -2,7 +2,7 @@
 
 
 
-<form #addLeaveForm="ngForm" (ngSubmit)="addLeaveFormSubmit()">
+<form>
 
   <div class="div-add">
     <div class="container ">
@@ -61,7 +61,7 @@
         <td>{{leave.dateOfEndLeave}}</td>
         <td>{{leave.leaveType.type}}</td>
         <td>{{leave.status}}</td>
-        <td><button class="btnEditer" (click)="deleteLeave()">Delete</button></td>
+        <td><button class="btnEditer" >Delete</button></td>
       </tr>
     </tbody>
   </table>
@@ -71,5 +71,6 @@
 <div class="container">
   <button class="btnRetour" (click)="retour()">Retour</button>
 </div>
+<button (click)="test()">test</button>
 
 <br><br><br><br><br><br>
