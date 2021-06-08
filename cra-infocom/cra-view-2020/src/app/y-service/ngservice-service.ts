@@ -118,7 +118,7 @@ export class NgserviceService {
 
   /** TYPE **/
   selectLeaveTypeById(id: number): Observable<TypeLeave> {
-    return this._http.get<TypeLeave>("http://localhost:8950/typesdeconge/lister/" + id);
+    return this._http.get<TypeLeave>("http://localhost:8950/typesdeconge/lister/one/" + id);
   }
 
   selectAllLeaveType(): Observable<TypeLeave[]> {

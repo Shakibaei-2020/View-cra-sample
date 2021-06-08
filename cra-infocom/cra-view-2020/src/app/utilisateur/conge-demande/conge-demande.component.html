@@ -13,7 +13,7 @@
           <div class="form">
             <div class="inputbox mt-3"> <span>Date début :</span> <input type="date" required [(ngModel)]="dateStartLeave" name="dateStartLeave"> </div>
             <div class="inputbox mt-3"> <span>Type de congé :</span>
-              <select class="form-input" required [(ngModel)]="idOfLeaveType"  name="type" (change)="getTypeLeave()"  >
+              <select class="form-input" required [(ngModel)]="idOfLeaveType"  name="getTypeLeave" (change)="getTypeLeave()"  >
                 <option *ngFor="let typeConge of allLeaveType"  value="{{typeConge.id}}">{{typeConge.type}}</option> 
               </select>
             </div>
@@ -70,5 +70,8 @@
 <div class="container">
   <button class="btnRetour" (click)="retour()">Retour</button>
 </div>
+
+
+<button (click)="test()">test</button>
 
 <br><br><br><br><br><br>

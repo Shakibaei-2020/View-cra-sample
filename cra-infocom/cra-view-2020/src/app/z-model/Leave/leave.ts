@@ -12,7 +12,7 @@ export class Leave {
 	public  clientInformed!:boolean;
 	
 
-	public leaveType = new TypeLeave;
+	public leaveType = new TypeLeave();
 
 
 	

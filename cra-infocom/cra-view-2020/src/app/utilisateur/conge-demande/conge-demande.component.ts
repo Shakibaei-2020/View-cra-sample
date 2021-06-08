@@ -20,7 +20,6 @@ export class CongeDemandeComponent implements OnInit {
 
   dateStartLeave = new Date();
   dateEndLeave = new Date();
-  inputleaveType = new TypeLeave();
 
   public allLeaveType!: TypeLeave[];
 
@@ -31,37 +30,44 @@ export class CongeDemandeComponent implements OnInit {
 
 
 
+
   ngOnInit(): void {
 
-
     this.aujourdhui = this.formatageDate()
-
-
     this._service.selectAllLeaveType().subscribe(
-      data => this.allLeaveType = data,
+      data1 => this.allLeaveType = data1,
       error => console.log("exception" + error)
     )
 
     this._service.selectLeaveByCollabId(2).subscribe(
-      data => this.leaves = data,
+      data2 => this.leaves = data2,
       error => console.log("exception" + error)
     )
 
+    console.log(this.leaveType)
+
+
     
+
   }
+
+
 
 
   idOfLeaveType!: number;
   getTypeLeave(){
 
-    
-
-
-    this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
-    data => this.leaveType = data,
-    error => console.log("exception" + error)
-  )
-  console.log(this.leaveType.type)
+    console.log(this.idOfLeaveType)
+ 
+      this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
+      data9 => { this.leaveType = data9;} ,
+      error => console.log("exception" + error),
+    )
+    setTimeout(() =>{
+      console.log(this.leaveType)
+  
+    },50);
+  
 
 }
 
@@ -118,5 +124,20 @@ export class CongeDemandeComponent implements OnInit {
     var annee = new Date().getFullYear();
     return annee + '-' + mois_toString + '-' + jour_toString;
   }
+
+
   
+  test(){
+    this._service.selectLeaveTypeById(3).subscribe(
+    data9 => { this.leaveType = data9;} ,
+    error => console.log("exception" + error),
+  )
+  setTimeout(() =>{
+    console.log(this.leaveType)
+
+  },50);
+  }
+  
+
+
 }
