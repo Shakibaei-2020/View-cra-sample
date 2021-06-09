@@ -77,7 +77,7 @@ export class EditFraisComponent implements OnInit {
       }
     )
 
-   // window.location.reload();
+  window.location.reload();
 
   }
 

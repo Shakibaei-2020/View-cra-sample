@@ -610,44 +610,8 @@ export class DeclarationActiviteComponent implements OnInit {
         },
         error => console.log("exception" + error)
       )
-<<<<<<< HEAD
-  
-
-      if (this.selectedOption != null) {
-        console.log(this.selectedOption);
-        (await this._service.selectProjectByMissionId(this.selectedOption)).subscribe(
-          data => {this.ProjectActivity = data; console.log(this.ProjectActivity.id)},
-          error => console.log("exception" + error)
-        )
-      }
-   
-      if (this.selectedOption2 != null) {
-        (await this._service.selectProjectByMissionId(this.selectedOption2)).subscribe(
-          data => this.ProjectActivity2 = data,
-          error => console.log("exception" + error)
-        )
-      }
-  
-      if (this.selectedOption3 != null) {
-        (await this._service.selectProjectByMissionId(this.selectedOption3)).subscribe(
-          data => this.ProjectActivity3 = data,
-          error => console.log("exception" + error)
-        )
-      }
-  
-      if (this.selectedOption4 != null) {
-        (await this._service.selectProjectByMissionId(this.selectedOption4)).subscribe(
-          data => this.ProjectActivity4 = data,
-          error => console.log("exception" + error)
-        )
-      }
-
-
-
-=======
       console.log("Subscribe " + this.ProjectActivity);
     }
->>>>>>> 2bbcba49a0dbb1f336d092af35fd9908f54775ed
 
     if (this.selectedOption2 != null) {
       this._service.selectProjectByMissionId(this.selectedOption2).subscribe(
@@ -755,15 +719,9 @@ export class DeclarationActiviteComponent implements OnInit {
 
       if (this.totalAstreinte1 != 0) {
 
-<<<<<<< HEAD
-        (await this._service.selectProjectByMissionId(2)).subscribe(
-            data => this.projectAstreinte1 = data,
-            error => console.log("exception" + error)
-=======
         this._service.selectProjectByMissionId(2).subscribe(
           data => this.projectAstreinte1 = data,
           error => console.log("exception" + error)
->>>>>>> 2bbcba49a0dbb1f336d092af35fd9908f54775ed
         )
 
         this.astreinte1.collaboratorId = 1;
@@ -785,70 +743,11 @@ export class DeclarationActiviteComponent implements OnInit {
             console.log("erreur ajout non-effectué")
           }
         )
-<<<<<<< HEAD
-        }
-
-
-        
-        /** ASTREINTE 2  */
-
-
-        if( this.totalAstreinte2 != 0){
-
-          (await this._service.selectProjectByMissionId(2)).subscribe(
-              data => this.projectAstreinte2 = data,
-              error => console.log("exception" + error)
-          )
-    
-          this.astreinte2.collaboratorId = 1;
-          this.astreinte2.projectId = this.selectedProjectAstreint1;
-          this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
-          this.astreinte2.TypeActivity = this.theTypeActivity2;
-  
-          this._service.addAndUpdateActivity(this.astreinte2, this.aujourdhui).subscribe(
-            data => {
-              console.log("astreinte  ajouté");
-            },
-            error => {
-              console.log("erreur ajout non-effectué")
-            }
-          )
-          }
-=======
       }
->>>>>>> 2bbcba49a0dbb1f336d092af35fd9908f54775ed
 
       /** ASTREINTE 2  */
 
-<<<<<<< HEAD
-        /** ASTREINTE 3 */
-
-
-        if( this.totalAstreinte3 != 0){
-
-          (await this._service.selectProjectByMissionId(2)).subscribe(
-              data => this.projectAstreinte3 = data,
-              error => console.log("exception" + error)
-          )
-    
-          this.astreinte3.collaboratorId = 1;
-          this.astreinte3.projectId = this.selectedProjectAstreint3;
-          this.astreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
-          this.astreinte3.TypeActivity = this.theTypeActivity3;
-  
-          this._service.addAndUpdateActivity(this.astreinte3, this.aujourdhui).subscribe(
-            data => {
-              console.log("astreinte  ajouté");
-            },
-            error => {
-              console.log("erreur ajout non-effectué")
-            }
-          )
-          }
-  
-=======
       if (this.totalAstreinte2 != 0) {
->>>>>>> 2bbcba49a0dbb1f336d092af35fd9908f54775ed
 
         this._service.selectProjectByMissionId(2).subscribe(
           data => this.projectAstreinte2 = data,
