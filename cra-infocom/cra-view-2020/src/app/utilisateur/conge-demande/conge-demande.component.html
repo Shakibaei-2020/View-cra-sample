@@ -2,7 +2,7 @@
 
 
 
-<form>
+<form #addLeaveForm="ngForm" (ngSubmit)="addLeaveFormSubmit()">
 
   <div class="div-add">
     <div class="container ">
@@ -13,9 +13,8 @@
           <div class="form">
             <div class="inputbox mt-3"> <span>Date début :</span> <input type="date" required [(ngModel)]="dateStartLeave" name="dateStartLeave"> </div>
             <div class="inputbox mt-3"> <span>Type de congé :</span>
-              <select class="form-input" aria-label="Default select example" required [(ngModel)]="inputleaveType.id"name="type">
-                <option value="1">Type1</option>
-                <option value="2">Type2</option>
+              <select class="form-input" required [(ngModel)]="idOfLeaveType"  name="getTypeLeave" (change)="getTypeLeave()"  >
+                <option *ngFor="let typeConge of allLeaveType"  value="{{typeConge.id}}">{{typeConge.type}}</option> 
               </select>
             </div>
           </div>
@@ -27,7 +26,7 @@
             <div class="inputbox mt-3"> <span>Date fin :</span> <input type="date" required [(ngModel)]="dateEndLeave"
                 name="dateEndLeave"> </div>
             <div class="inputbox mt-3"> <span>Client informé :</span>
-              <select class="form-input" aria-label="Default select example" required [(ngModel)]="leave.clientInformed" name="leave.clientInformed">
+              <select class="form-input"  required [(ngModel)]="leave.clientInformed" name="leave.clientInformed">
                 <option value="true">Oui</option>
                 <option value="false">Non</option>
               </select>
@@ -36,7 +35,7 @@
         </div>
         <div class="col-md-6"></div>
         <div class="col-md-6">
-          <button class="btnEditer" (click)="addLeaveFormSubmit()">Ajouter demande de congé</button>
+          <button class="btnEditer" type="submit">Ajouter demande de congé</button>
         </div>
       </div>
     </div>
@@ -44,7 +43,7 @@
 </form>
 
 <div class="container">
-  <p>Liste des demandes de congé</p>
+  <h2>Vos demandes :</h2>
   <table class="table table-condensed">
     <thead>
       <tr>
@@ -57,11 +56,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let leave of leaves">
-        <td>{{leave.dateOfStartLeave}}</td>
-        <td>{{leave.dateOfEndLeave}}</td>
+        <td>{{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</td>
+        <td>{{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</td>
         <td>{{leave.leaveType.type}}</td>
         <td>{{leave.status}}</td>
-        <td><button class="btnEditer" >Delete</button></td>
+        <td><button class="btnEditer" (click)="deleteLeaveById(leave.id)">Delete</button></td>
       </tr>
     </tbody>
   </table>
@@ -71,6 +70,7 @@
 <div class="container">
   <button class="btnRetour" (click)="retour()">Retour</button>
 </div>
-<button (click)="test()">test</button>
+
+
 
 <br><br><br><br><br><br>

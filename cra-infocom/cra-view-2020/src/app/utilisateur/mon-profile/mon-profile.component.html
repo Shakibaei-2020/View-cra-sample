@@ -12,7 +12,7 @@
         <div class="container ">
           <img class="profil-image"
             src="https://qualium-investissement.com/wp-content/uploads/2017/05/inconnu-small.jpg">
-          <p class="titre">Bonjour ! Mohammad-Reza SHAKIBAEI </p>
+          <p class="titre">Bonjour ! {{collaborateur.firstName}} {{collaborateur.lastName}} </p>
         </div>
       </div>
       <br><br><br><br>
@@ -24,7 +24,7 @@
           <div class="bio-row">
             <div class="inputbox mt-1">
               <span class="input-title">Prénom :</span>
-               <input value={{collaborateur.firstName}} disabled type="text"> 
+               <input autocomplete="off"  value={{collaborateur.firstName}} disabled type="text"> 
               </div>
           </div>
 
@@ -32,20 +32,20 @@
           <div class="bio-row">
             <div class="inputbox mt-1">
               <span class="input-title">E-mail :</span>
-               <input value={{collaborateur.email}} disabled type="text"> </div>
+               <input  autocomplete="off" value={{collaborateur.email}} disabled type="text"> </div>
           </div>
 
           <div class="bio-row">
 
             <div class="inputbox mt-1">
               <span class="input-title">Nom :</span> 
-              <input value={{collaborateur.lastName}} disabled type="text"> </div>
+              <input autocomplete="off" value={{collaborateur.lastName}} disabled type="text"> </div>
           </div>
 
           <div class="bio-row">
             <div class="inputbox mt-1">
               <span class="input-title">Mot de passe :</span>
-               <input value="*************" type="password" required [(ngModel)]="newPassward" name="newPassward"> </div>
+               <input autocomplete="off"  value="*************" type="password" required [(ngModel)]="newPassward" name="newPassward"> </div>
           </div>
           <div class="bio-row">
             <div class="inputbox mt-1">
@@ -56,7 +56,7 @@
           <div class="bio-row">
             <div class="inputbox mt-1">
               <span class="input-title">Confirmation mot de passe :</span> 
-              <input value="*************" type="password" required [(ngModel)]="confirmationPassward"name="confirmationPassward"> 
+              <input autocomplete="off"value="*************" type="password" required [(ngModel)]="confirmationPassward"name="confirmationPassward"> 
             </div>
             <p>{{alert}} </p>
 

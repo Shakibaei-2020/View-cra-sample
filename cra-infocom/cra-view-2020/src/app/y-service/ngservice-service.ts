@@ -70,7 +70,7 @@ export class NgserviceService {
     return this._http.get<Expense[]>("http://localhost:7672/expenses/lister/expense/collab/" + id);
   }
 
-  addAndUpdateExpense(expense: Expense, dateExpense: Date, dateRequest: Date): Observable<any> {
+  addAndUpdateExpense(expense: Expense, dateExpense: Date, dateRequest: string): Observable<any> {
     return this._http.post<any>("http://localhost:7672/expenses/ajouter/" + dateExpense + "/" + dateRequest, expense);
   }
 
@@ -92,11 +92,15 @@ export class NgserviceService {
     return this._http.get<TypeExpense>("http://localhost:7672/typesexpenses/lister/" + id);
   }
 
+  selectAllTypeExpense(): Observable<TypeExpense[]> {
+    return this._http.get<TypeExpense[]>("http://localhost:7672/typesexpenses/lister/");
+  }
+
   /****************************************************************************************** CONGE SERVICES *******************************************************************************/
 
 
-  addOrUpdateLeaveRequest(leave: Leave, dateOfDemand: string, dateOfStartLeave: Date, dateOfEndLeave: Date): Observable<Leave> {
-    return this._http.post<Leave>("http://localhost:8950/conge/update/" + dateOfDemand + "/" + dateOfStartLeave + "/" + dateOfEndLeave, leave);
+  addOrUpdateLeaveRequest(leave: Leave, dateOfDemand: string, dateOfStartLeave: Date, dateOfEndLeave: Date): Observable<any> {
+    return this._http.post<any>("http://localhost:8950/conge/update/" + dateOfDemand + "/" + dateOfStartLeave + "/" + dateOfEndLeave, leave);
   }
 
   deleteOneLeaveRequest(id: number): Observable<Leave> {
@@ -118,10 +122,12 @@ export class NgserviceService {
 
   /** TYPE **/
   selectLeaveTypeById(id: number): Observable<TypeLeave> {
-    return this._http.get<TypeLeave>("http://localhost:8950/typesdeconge/lister/" + id);
+    return this._http.get<TypeLeave>("http://localhost:8950/typesdeconge/lister/one/" + id);
   }
 
-
+  selectAllLeaveType(): Observable<TypeLeave[]> {
+    return this._http.get<TypeLeave[]>("http://localhost:8950/typesdeconge/lister/");
+  }
   /*************************************************************************************** ACTIVITY SERVICES *******************************************************************************/
 
   searchActivity(date1: Date, date2: Date, lastName: String): Observable<Activity[]> {
