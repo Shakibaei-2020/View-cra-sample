@@ -57,8 +57,12 @@ export class NgserviceService {
 
   deleteCollabById(id: number): Observable<any> {
     return this._http.delete<any>("http://localhost:8900/collaborateurs/supprimer/" + id);
-
   }
+
+  selectCollabByLeaveId(id: number): Observable<Collaborator> {
+    return this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/collab/leave/" + id);
+  }
+
 
   /****************************************************************************************** NOTE DE FRAIS SERVICES*************************************************************************/
 
@@ -205,8 +209,9 @@ export class NgserviceService {
 
   /*************************************************************************************** PROJECT SERVICES *******************************************************************************/
 
-  selectProjectByMissionId(id: number): Observable<Project> {
-    return this._http.get<Project>("http://localhost:8801/project/foundProject/" + id);
+   async selectProjectByMissionId(id: number): Promise<Observable<Project>> {
+    console.log("Dans le service : "+ id)
+     return this._http.get<Project>("http://localhost:8801/project/foundProject/" + id);
   }
 
 

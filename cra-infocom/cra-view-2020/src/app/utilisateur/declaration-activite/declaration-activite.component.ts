@@ -750,7 +750,7 @@ export class DeclarationActiviteComponent implements OnInit {
   typeActivity3 = new TypeActivity();
   typeActivity4 = new TypeActivity();
 
-  EnregisterEtEnvoyer() {
+  async EnregisterEtEnvoyer() {
 
     /** Dynamique astreinte 
     for (var j = 0 ; j < this.dynamicRowsAstreinte.length ; j++){
@@ -783,28 +783,29 @@ export class DeclarationActiviteComponent implements OnInit {
   
 
       if (this.selectedOption != null) {
-        this._service.selectProjectByMissionId(this.selectedOption).subscribe(
-          data => this.ProjectActivity = data,
+        console.log(this.selectedOption);
+        (await this._service.selectProjectByMissionId(this.selectedOption)).subscribe(
+          data => {this.ProjectActivity = data; console.log(this.ProjectActivity.id)},
           error => console.log("exception" + error)
         )
       }
    
       if (this.selectedOption2 != null) {
-        this._service.selectProjectByMissionId(this.selectedOption2).subscribe(
+        (await this._service.selectProjectByMissionId(this.selectedOption2)).subscribe(
           data => this.ProjectActivity2 = data,
           error => console.log("exception" + error)
         )
       }
   
       if (this.selectedOption3 != null) {
-        this._service.selectProjectByMissionId(this.selectedOption3).subscribe(
+        (await this._service.selectProjectByMissionId(this.selectedOption3)).subscribe(
           data => this.ProjectActivity3 = data,
           error => console.log("exception" + error)
         )
       }
   
       if (this.selectedOption4 != null) {
-        this._service.selectProjectByMissionId(this.selectedOption4).subscribe(
+        (await this._service.selectProjectByMissionId(this.selectedOption4)).subscribe(
           data => this.ProjectActivity4 = data,
           error => console.log("exception" + error)
         )
@@ -924,7 +925,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
         if( this.totalAstreinte1 != 0){
 
-        this._service.selectProjectByMissionId(2).subscribe(
+        (await this._service.selectProjectByMissionId(2)).subscribe(
             data => this.projectAstreinte1 = data,
             error => console.log("exception" + error)
         )
@@ -957,7 +958,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
         if( this.totalAstreinte2 != 0){
 
-          this._service.selectProjectByMissionId(2).subscribe(
+          (await this._service.selectProjectByMissionId(2)).subscribe(
               data => this.projectAstreinte2 = data,
               error => console.log("exception" + error)
           )
@@ -983,7 +984,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
         if( this.totalAstreinte3 != 0){
 
-          this._service.selectProjectByMissionId(2).subscribe(
+          (await this._service.selectProjectByMissionId(2)).subscribe(
               data => this.projectAstreinte3 = data,
               error => console.log("exception" + error)
           )

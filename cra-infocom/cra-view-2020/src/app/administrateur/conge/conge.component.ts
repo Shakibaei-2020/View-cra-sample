@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
+import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 import { Leave } from 'src/app/z-model/Leave/leave';
 
 @Component({
@@ -15,6 +16,7 @@ export class CongeComponent implements OnInit {
   status!:String;
   public leaves!:Leave[];  
 
+  collaborator = new Collaborator();
   
   constructor(private _service:NgserviceService, private _route:Router) { }
 
@@ -26,11 +28,24 @@ export class CongeComponent implements OnInit {
       data=> this.leaves = data,
       error=>console.log("exception" +error)
       )
-      console.log(this.leaves)
+      setTimeout(() => {
+      }, 50);
   }
   
+  getCollabByLeaveId(){
+    this._service.selectCollabByLeaveId(1).subscribe(
+      data=> this.collaborator = data,
+      error=>console.log("exception" +error)
+      )
+  }
+
+
+  goToAddConge(){
+    this._route.navigate(['/addConge']);
+
+  }
   goGerer(){
-    this._route.navigate(['/editConge']);
+    this._route.navigate(['/editLeave']);
 
   }
 

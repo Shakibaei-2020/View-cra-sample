@@ -13,6 +13,21 @@ export class EditClientComponent implements OnInit {
   constructor(private _service:NgserviceService, private _route:Router) { }
 
   ngOnInit(): void {
+    this._service.selectClientById(1).subscribe(
+      data =>{
+        console.log("ajout effectué");
+      },
+      error =>{
+        console.log("erreur ajout non-effectué")
+      }
+    )      
+    /** on recupere tous les types
+    this._service.selectAllTypeClient().subscribe(
+      data => this.allLeaveType = data,
+      error => console.log("exception" + error)
+    )
+
+     */
   }
 
 

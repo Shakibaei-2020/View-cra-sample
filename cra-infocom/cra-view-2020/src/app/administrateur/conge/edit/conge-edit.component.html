@@ -3,117 +3,128 @@
 <br><br><br><br>
 
 <div class="container">
-<div class="panel">
-    <div class="bio-graph-heading-profil">
-    
-      <div class="container ">
-          <img class ="profil-image" src="https://qualium-investissement.com/wp-content/uploads/2017/05/inconnu-small.jpg">
-          <p class="titre">Gestion demande de congé : Mohammad-Reza SHAKIBAEI   </p>
-    
-      </div>
-    </div>
-    <br><br><br><br><br><br>
-    
-    
+  <div class="panel">
+    <span>
+      <button class="img-fluid bouttonMenu ">
+        <img class="img1" src="https://image.flaticon.com/icons/png/512/1719/1719522.png">
+      </button>
+      <h2 class="page">Gestion de la demande de congés de : </h2>
+    </span>
+    <hr>
+
+
     <div class="panel-body bio-graph-info">
-          <br>
-       <div class="row">
-    
+      <br>
+      <div class="row">
+
         <div class="bio-row">
-          <div class="inputbox mt-1"><span>Type de congé :</span><br>
-            <select class="form-input" aria-label="Default select example"  required [(ngModel)]="updatedLeave.clientInformed" name="clientInformed">
-            <option value="true">Oui</option>
-            <option value="false">Non</option>
-          </select></div>
+          <div class="inputbox mt-1"><span>Type de congé : {{leave.leaveType.type}}</span><br>
+            <select class="form-input" required [(ngModel)]="idOfLeaveType" placeholder="{{leave.leaveType.type}"
+              name="getTypeLeave" (change)="getTypeLeave()">
+              <option *ngFor="let typeConge of allLeaveType" value="{{typeConge.id}}">{{typeConge.type}}</option>
+            </select>
+          </div>
+
+
         </div>
 
 
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Date de demande :</span> <input type="Date"  required [(ngModel)]="dateOfDemand" name="dateOfDemand" > </div>
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span class="input-title">Date de demande : {{leave.dateOfDemand | date:
+              'dd/MM/yyyy'}}</span> <input type="Date" required [(ngModel)]="dateOfDemand" name="dateOfDemand"> </div>
+        </div>
+
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span>État : {{leave.status}}</span><br>
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="inputedStatus"
+              name="inputedStatus" (change)="getNewStatusLeave()">
+              <option *ngFor="let statu of status" value={{statu}}>{{statu}}</option>
+            </select>
           </div>
-          
-          <div class="bio-row">
-            <div class="inputbox mt-1"><span>Status :</span><br>
-              <select class="form-input" aria-label="Default select example" required [(ngModel)]="updatedLeave.leaveType" name="leaveType">
-              <option value="1">Type 1</option>
-              <option value="2">Type 2</option>
-            </select></div>
-      </div>
+        </div>
 
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Date de départ :</span> <input type="Date"  required [(ngModel)]="dateStartLeave" name="dateStartLeave"> </div>
-            </div>
-
-            <div class="bio-row">
-                <div class="inputbox mt-1"><span>Client informé :</span><br>
-                  <select class="form-input" aria-label="Default select example" required [(ngModel)]="updatedLeave.status" name="status">
-                  <option value="true">Oui</option>
-                  <option value="false">Non</option>
-                </select></div>
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span class="input-title">Date de départ : {{leave.dateOfStartLeave | date:
+              'dd/MM/yyyy'}}</span> <input type="Date" required [(ngModel)]="dateStartLeave" name="dateStartLeave">
           </div>
+        </div>
 
-          <div class="bio-row">
-            <div class="inputbox mt-1"><span class="input-title">Date de fin :</span> <input type="Date"  required [(ngModel)]="dateEndLeave" name="dateEndLeave"> </div>
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span>Client informé : {{leave.clientInformed}}</span><br>
+            <select class="form-input" aria-label="Default select example" required
+              [(ngModel)]="updatedLeave.clientInformed" name="clientInformed">
+              <option value="true">Oui</option>
+              <option value="false">Non</option>
+            </select>
           </div>
+        </div>
 
-        
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span class="input-title">Date de fin : {{leave.dateOfEndLeave | date:
+              'dd/MM/yyyy'}} </span> <input type="Date" required [(ngModel)]="dateEndLeave" name="dateEndLeave"> </div>
+        </div>
+
+
 
 
         <div class="bio-row"></div>
 
-          <div class="bio-row">
-            <br>    <br>
+        <div class="bio-row">
+          <br> <br>
 
-            <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+          <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
 
-            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Êtes vous sur de vouloir mettre à jour ?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="updateLeave()" >Sauvgarder</button>
-                  </div>
+          <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Êtes vous sur de vouloir mettre à jour ?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="updateLeave()">Sauvgarder</button>
                 </div>
               </div>
             </div>
-
-
-
-            <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
-
-            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Alert delete</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Êtes vous sur de vouloir supprimer?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteLeave()" >Supprimer</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-           
-    
-             
           </div>
-    
+
+
+
+          <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
+
+          <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Alert delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Êtes vous sur de vouloir supprimer?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="deleteLeave()">Supprimer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
+      </div>
     </div>
-    </div></div>
+  </div>
+</div>

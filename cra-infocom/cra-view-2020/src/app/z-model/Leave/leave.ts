@@ -10,6 +10,8 @@ export class Leave {
 	public  dateOfEndLeave!:Date;
 	public  status!:string;
 	public  clientInformed!:boolean;
+	public name!: string;
+	
 	
 
 	public leaveType = new TypeLeave();

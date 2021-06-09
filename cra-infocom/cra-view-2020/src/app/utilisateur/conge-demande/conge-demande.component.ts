@@ -47,21 +47,23 @@ export class CongeDemandeComponent implements OnInit {
 
   }
 
-
-
   /** On recupere le congé selectionné a chaque <select> */
   getTypeLeave() {
     this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
       data => { this.leaveType = data; },
       error => console.log("exception" + error),
+      
     )
     setTimeout(() => {
-    }, 50);
+    }, 10);
+
   }
 
   /** Ajout de la demande de congé */
   addLeaveFormSubmit() {
 
+
+    this.leave.collaboratorId = 2;
     this.leave.status = 'en-cours';
     this.leave.leaveType = this.leaveType
 

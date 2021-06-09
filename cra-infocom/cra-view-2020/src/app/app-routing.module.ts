@@ -57,12 +57,12 @@ const routes: Routes = [
 {path:'administrateur',component:AccueilAdministrateurComponent },
 
 
-  {path:'editConge',component:CongeEditComponent },
-  {path:'searchconge',component:CongeComponent},
+  {path:'editLeave',component:CongeEditComponent },
+  {path:'searchLeave',component:CongeComponent},
 
   {path:'editActivite',component:EditComponent },
   {path:'addActivite',component:AddComponent },
-  {path:'activite',component: ActiviteComponent},
+  {path:'searchActivity',component: ActiviteComponent},
 
 
   {path:'editCollaborateur',component:EditCollaborateurComponent },
@@ -74,12 +74,12 @@ const routes: Routes = [
 
   {path:'editClient',component: EditClientComponent },
   {path:'addClient',component:AddClientComponent },
-  {path:'client',component:ClientComponent },
+  {path:'searchClient',component:ClientComponent },
 
 
   {path:'editMission',component: EditMissionComponent },
   {path:'addMission',component:AddMissionComponent },
-  {path:'mission',component:MissionComponent },
+  {path:'searchMission',component:MissionComponent },
 
   {path:'monProfil',component:MonProfileComponent },
   

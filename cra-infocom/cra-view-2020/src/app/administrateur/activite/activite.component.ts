@@ -29,8 +29,13 @@ export class ActiviteComponent implements OnInit {
   }
   
 
+  
+  goToAddActivity(){
+    this._route.navigate(['/addActivite']);
 
+  }
 
+  
   goGerer(){
     this._route.navigate(['/editActivite']);
 

@@ -15,23 +15,10 @@ export class AdministrateurComponent implements OnInit {
   }
 
 
-  goToAddCollab(){
-    this._route.navigate(['/administrateur/collaborateur/ajout']);
-  }
 
+  retour(){
+    this._route.navigate(['/administrateur']);
 
-
-  goToUpdateCollab(){
-    this._route.navigate(['/editCollab']);
-  }
-
-  goToListCollab(){
-    this._route.navigate(['/listCollaborateur']);
-  }
-
-
-  goToDeleteCollab(){
-    this._route.navigate(['/deleteCollab']);
   }
 
 

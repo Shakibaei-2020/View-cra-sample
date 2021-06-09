@@ -39,6 +39,7 @@ import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.compo
 import { AccueilUtilisateurComponent } from './utilisateur/Accueil/accueil-utilisateur.component';
 import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-declaration/note-de-frais-declaration.component';
 import { AccueilAdministrateurComponent } from './administrateur/accueil-administrateur/accueil-administrateur.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -80,6 +81,6 @@ import { AccueilAdministrateurComponent } from './administrateur/accueil-adminis
     FormsModule,
   ],
   providers: [AppComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
