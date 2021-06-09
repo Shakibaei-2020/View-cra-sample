@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Leave } from 'src/app/z-model/leave';
-import { Mission } from 'src/app/z-model/mission';
+import { Leave } from 'src/app/z-model/Leave/leave';
+import { Mission } from 'src/app/z-model/Mission/mission';
 
 @Component({
   selector: 'app-mission',

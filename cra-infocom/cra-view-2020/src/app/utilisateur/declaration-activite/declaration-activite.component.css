@@ -5,26 +5,22 @@
 .inputDay{
   width: 40px;
   height: 18px;
-  margin-left: 1px;
 }
 
-
+.inputDay2{
+  width: 40px;
+  height: 18px;
+  margin-left: 5px;
+}
 
 .contenue{
   margin-left: 30px;
 }
 
-td{
-padding-left: 2px;
-}
-.Frais{
-  width: 800px;
-}
+
 .choice{
-  width: 100%;
-  box-sizing: border-box;
-  border: none;
-  border-bottom: 2px solid#464646;
+  width: 100px;
+
 }
 .form-input{
   height: 24.5px;
@@ -34,18 +30,26 @@ padding-left: 2px;
 }
 
 .form-input2{
-  width: 30%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+    margin-left: 5px;
+}
+
+
+
+.form-input3{
+  width: 80px;
+    margin-bottom: 50px;
+    margin-left: 8px;
     box-sizing: border-box;
     border: none;
     border-bottom: 2px solid #464646;
 }
 
+
 input[type=text] {
     width: 30%;
-    padding: 12px 20px;
-    margin-left: 10px;
     box-sizing: border-box;
     border: none;
     border-bottom: 2px solid#464646;
@@ -58,21 +62,6 @@ input[type=text] {
 
 
 
-.btnAct {
-    float: left;
-    padding: 10px 25px;
-    width: 100%;
-    font-size: 11px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #363636;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    margin-bottom: 5%;
-  }
   
   .btnAct:hover {background-color: #464646}
   
@@ -86,7 +75,6 @@ input[type=text] {
 
   .btnEditer {
     float: left;
-    padding: 10px 25px;
     width: 100%;
     font-size: 15px;
     text-align: center;
@@ -101,8 +89,9 @@ input[type=text] {
   }
 
   .inputRemote{
-    margin-top: 12px;
-    margin-left:25%;
+    margin-top: 3px;
+    margin-left:30%;
+    width: 10px;
   }
 
   .btnRemplir{
@@ -120,7 +109,41 @@ input[type=text] {
     width: 100%;
   }
 
+  .btnRemplirActivity{
+    float: left;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 4px;
+    height:17px;
+    width: 100%;
+  }
 
+
+
+  .btnAjouterRow{
+    float: left;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    height:23px;
+    width: 25px;
+  }
+
+  .twolast{
+    margin-bottom: 26px;
+  }
+  
   .btnGo{
     float: left;
     font-size: 15px;
@@ -170,7 +193,7 @@ input[type=text] {
 
 
 th{
-  width: 10px;
+  background-color: grey;
   font-size: 11px;
 }
 

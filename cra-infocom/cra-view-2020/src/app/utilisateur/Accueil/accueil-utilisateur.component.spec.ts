@@ -8,9 +8,9 @@ describe('AccueilUtilisateurComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccueilUtilisateurComponent ]
+      declarations: [AccueilUtilisateurComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

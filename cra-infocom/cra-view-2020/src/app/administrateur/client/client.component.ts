@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Activity } from 'src/app/z-model/activity';
-import { Client } from 'src/app/z-model/client';
-import { Collaborator } from 'src/app/z-model/collaborator';
+import { Activity } from 'src/app/z-model/Activity/activity';
+import { Client } from 'src/app/z-model/Client/client';
+import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 
 @Component({
   selector: 'app-client',

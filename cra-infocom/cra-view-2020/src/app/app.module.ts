@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,11 +34,14 @@ import { MissionComponent } from './administrateur/mission/mission.component';
 import { AddMissionComponent } from './administrateur/mission/add-mission/add-mission.component';
 import { EditMissionComponent } from './administrateur/mission/edit-mission/edit-mission.component';
 import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
-import { AccueilUtilisateurComponent } from './utilisateur/accueil-utilisateur/accueil-utilisateur.component';
+import { AccueilUtilisateurComponent } from './utilisateur/Accueil/accueil-utilisateur.component';
 import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-declaration/note-de-frais-declaration.component';
+import { AccueilAdministrateurComponent } from './administrateur/accueil-administrateur/accueil-administrateur.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 
-
+registerLocaleData(localeFr, 'fr');
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +70,8 @@ import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-dec
     MonProfileComponent,
     AccueilUtilisateurComponent,
     NoteDeFraisDeclarationComponent,
+    AccueilAdministrateurComponent,
+
   ],
   imports: [
     BrowserModule,

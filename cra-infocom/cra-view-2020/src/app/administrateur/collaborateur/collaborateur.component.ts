@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Collaborator } from 'src/app/z-model/collaborator';
+import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 
 @Component({
   selector: 'app-collaborateur',

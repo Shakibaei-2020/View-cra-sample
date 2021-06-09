@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Client } from 'src/app/z-model/client';
-import { Mission } from 'src/app/z-model/mission';
+import { Client } from 'src/app/z-model/Client/client';
+import { Mission } from 'src/app/z-model/Mission/mission';
 
 @Component({
   selector: 'app-edit-mission',

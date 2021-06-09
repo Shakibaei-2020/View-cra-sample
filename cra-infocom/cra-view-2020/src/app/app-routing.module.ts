@@ -34,8 +34,9 @@ import { EditMissionComponent } from './administrateur/mission/edit-mission/edit
 import { AddMissionComponent } from './administrateur/mission/add-mission/add-mission.component';
 import { MissionComponent } from './administrateur/mission/mission.component';
 import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
-import { AccueilUtilisateurComponent } from './utilisateur/accueil-utilisateur/accueil-utilisateur.component';
+import { AccueilUtilisateurComponent } from './utilisateur/Accueil/accueil-utilisateur.component';
 import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-declaration/note-de-frais-declaration.component';
+import { AccueilAdministrateurComponent } from './administrateur/accueil-administrateur/accueil-administrateur.component';
 
 
 
@@ -53,7 +54,8 @@ const routes: Routes = [
 
   {path:'utilisateur',component: AccueilUtilisateurComponent},
 
-{path:'administrateur',component:AdministrateurComponent },
+{path:'administrateur',component:AccueilAdministrateurComponent },
+
 
   {path:'editConge',component:CongeEditComponent },
   {path:'searchconge',component:CongeComponent},

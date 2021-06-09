@@ -1,3 +1,5 @@
+import { TypeCollaborator } from "./type-collaborator";
+
 export class Collaborator {
 
     public id!:number;
@@ -7,8 +9,8 @@ export class Collaborator {
     public passward!:string;
     public dateOfEntry!:Date;
     public dateOfRelease!:Date;
-    public typeCollaboratorId!:number;
     public profileImagePath!: Blob;
 
+    public typeCollaborator = new TypeCollaborator();
 
 }

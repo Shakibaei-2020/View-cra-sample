@@ -1,4 +1,4 @@
-import { Client } from "./client";
+import { Client } from "../Client/client";
 
 export class Mission {
 

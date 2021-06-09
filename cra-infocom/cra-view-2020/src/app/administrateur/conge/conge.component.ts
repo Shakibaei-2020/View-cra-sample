@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Leave } from 'src/app/z-model/leave';
+import { Leave } from 'src/app/z-model/Leave/leave';
 
 @Component({
   selector: 'app-conge',

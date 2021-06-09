@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from '../y-service/ngservice-service';
-import { Collaborator } from '../z-model/collaborator';
+import { Collaborator } from '../z-model/Collaborator/collaborator';
 
 @Component({
   selector: 'app-connexion',

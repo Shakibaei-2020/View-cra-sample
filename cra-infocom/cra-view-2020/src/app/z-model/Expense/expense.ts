@@ -10,8 +10,8 @@ export class Expense {
 	public  costHT!:number;
 	public  costTVA!:number;
 	public  costTTC!:number;
-	public  status!:String;
+	public  status!:string;
 
-	public typeExpense!: TypeExpense;
+	public typeExpense = new TypeExpense();
 
 }

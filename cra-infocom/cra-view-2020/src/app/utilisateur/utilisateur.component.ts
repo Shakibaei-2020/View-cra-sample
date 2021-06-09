@@ -8,12 +8,12 @@ import { Router } from '@angular/router';
 })
 export class UtilisateurComponent implements OnInit {
 
-  constructor(private _route : Router) { }
+  constructor(private _route: Router) { }
 
   ngOnInit(): void {
   }
 
-  retour(){
+  retour() {
     this._route.navigate(['/utilisateur']);
   }
 

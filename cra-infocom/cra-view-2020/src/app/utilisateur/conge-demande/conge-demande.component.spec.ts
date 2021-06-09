@@ -8,9 +8,9 @@ describe('CongeDemandeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CongeDemandeComponent ]
+      declarations: [CongeDemandeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
-import { Leave } from 'src/app/z-model/leave';
-import { TypeLeave } from 'src/app/z-model/type-leave';
+import { Leave } from 'src/app/z-model/Leave/leave';
+import { TypeLeave } from 'src/app/z-model/Leave/type-leave';
 
 @Component({
   selector: 'app-conge-demande',
@@ -12,76 +12,105 @@ import { TypeLeave } from 'src/app/z-model/type-leave';
 export class CongeDemandeComponent implements OnInit {
 
   leave = new Leave();
-
-  public leaves!:Leave[];  
-
-
-  constructor(private _route:Router,private _service:NgserviceService) { }
-
-  
-  ngOnInit() {
-    this._service.selectLeaveByCollabId(2).subscribe(
-      data=> this.leaves = data,
-      error=>console.log("exception" +error)
-      )
-  }
-
-  dateLeaveRequest = new Date();
-  dateStartLeave =  new Date();
-  dateEndLeave = new Date();
-
-
-  inputleaveType = new TypeLeave();
+  leaves!: Leave[];
   leaveType = new TypeLeave();
+  aujourdhui !: string;
+  dateStartLeave = new Date();
+  dateEndLeave = new Date();
+  allLeaveType!: TypeLeave[];
+  idOfLeaveType!: number;
 
-  
+  constructor(private _route: Router, private _service: NgserviceService) { }
 
-  addLeaveFormSubmit(){
 
-    console.log("inputed leave type" + this.inputleaveType.id);
 
-    this._service.selectLeaveTypeById(this.inputleaveType.id).subscribe(
-      data=> this.leaveType = data,
-      error=>console.log("exception" +error)
+  ngOnInit(): void {
+
+    /** id du collaborateur connecté suite à la connexion */
+    this.leave.collaboratorId = 3;
+
+    /** on recupere la date d'aujourd'hui au bon format*/
+    this.aujourdhui = this.formatageDate()
+
+
+    /** on recupere tous les types */
+    this._service.selectAllLeaveType().subscribe(
+      data => this.allLeaveType = data,
+      error => console.log("exception" + error)
+    )
+    
+    /** id du collaborateur recuperé a la connexion */
+    this._service.selectLeaveByCollabId(2).subscribe(
+      data => this.leaves = data,
+      error => console.log("exception" + error)
     )
 
-    console.log("leave recuperer" + this.leaveType.id + "et " + this.leaveType.type)
-    
-
-    this.leave.status='en-cours';
-    this.leave.collaboratorId = 2;
-    console.log(" l'id du collaborateur" +this.leave.collaboratorId);
+  }
 
 
-    this.leave.clientInformed;
+
+  /** On recupere le congé selectionné a chaque <select> */
+  getTypeLeave() {
+    this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
+      data => { this.leaveType = data; },
+      error => console.log("exception" + error),
+    )
+    setTimeout(() => {
+    }, 50);
+  }
+
+  /** Ajout de la demande de congé */
+  addLeaveFormSubmit() {
+
+    this.leave.status = 'en-cours';
     this.leave.leaveType = this.leaveType
 
-    this.dateLeaveRequest = this.dateStartLeave;
-
-    this._service.addOrUpdateLeaveRequest(this.leave, this.dateLeaveRequest,this.dateStartLeave,this.dateEndLeave).subscribe(
-      data =>{
+    this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
+      data => {
         console.log("ajout effectué");
       },
-      error =>{
+      error => {
         console.log("erreur ajout non-effectué")
       }
     )
-    }
+    
+  }
 
-    deleteLeave(){
-      this._service.deleteOneLeaveRequest(4).subscribe(
-        data =>{
-          console.log("ajout effectué");
-        },
-        error =>{
-          console.log("erreur ajout non-effectué")
-        }
-      )
-    }
 
-    retour(){
-      this._route.navigate(['/utilisateur']);
+  /** Navigation vers l'accueil*/
+  retour() {
+    this._route.navigate(['/utilisateur']);
+  }
+
+
+  /** delete de la note de frais via l'id*/
+  deleteLeaveById(value: number) {
+    this._service.deleteOneLeaveRequest(value).subscribe(
+      data => {
+        console.log("delete effectué");
+      },
+      error => {
+        console.log("delete ajout non-effectué")
+      }
+    )
+  }
+
+
+  /** formatage de la date YYYY-MM-DD */
+  formatageDate() {
+    var jour = new Date().getDay() + 6;
+    var jour_toString = jour.toString();
+    if (jour < 10) {
+      jour_toString = "0" + jour_toString;
     }
-  
+    var mois = new Date().getMonth() + 1;
+    var mois_toString = mois.toString();
+    if (mois < 10) {
+      mois_toString = "0" + mois_toString;
+    }
+    var annee = new Date().getFullYear();
+    return annee + '-' + mois_toString + '-' + jour_toString;
+  }
+
 
 }

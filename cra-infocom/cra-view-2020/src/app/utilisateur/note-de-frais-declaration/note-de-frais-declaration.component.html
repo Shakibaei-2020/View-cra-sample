@@ -5,90 +5,73 @@
 <div class="container">
   <h2>Ajouter une note de frais </h2>
   <hr>
-<div class="panel">
-
-  
-    
+  <div class="panel">
     <div class="panel-body bio-graph-info">
-          <br>
-       <div class="row">
-    
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Cout HT :</span> <input type="text" placeholder="55€  " requireds [(ngModel)]="expense.costHT" name="expense.costHT"> </div>
-    
-            </div>
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Date Frais :</span> <input type="Date" placeholder="13 juillet 1983" required [(ngModel)]="dateExpense" name="dateExpense" > </div>
-          </div>
-          
-            <div class="bio-row">
-              
-              <div class="inputbox mt-1"><span class="input-title">Cout TVA :</span><input type="text" placeholder="180€"  required [(ngModel)]="expense.costTVA" name="expense.costTVA"  > </div>
-              <div class="inputbox mt-1"><span class="input-title">Cout TTC :</span><input type="text" placeholder="180€"   required [(ngModel)]="expense.costTTC" name="expense.costTTC" > </div>
+      <br>
+      <div class="row">
 
-            </div>
-         
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span>Facturable :</span><br>
-                <select class="form-input" aria-label="Default select example"   required [(ngModel)]="expense.billable" name="expense.billable" >
-                <option value="true">Oui</option>
-                <option value="false">Non</option>
-              </select></div>
+        <div class="bio-row">
+          <div   class="inputbox mt-1"><span class="input-title">Coût HT :</span> <input autocomplete="off"  type="text" requireds [(ngModel)]="expense.costHT" name="expense.costHT"> </div>
 
-                <div class="inputbox mt-1"><span>Nature des frais :</span><br>
-                <select class="form-input" aria-label="Default select example"  required [(ngModel)]="inputedTypeExpense.id" name="id" >
-                <option value="1">Nature 1</option>
-                <option value="2">Nature 2</option>
-                <option value="3">Nature 3</option>
-
-              </select></div>
-
-
-       
-            <div class="inputbox mt-1">
-          </div>          
+        </div>
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span class="input-title">Date frais :</span> <input type="Date" placeholder="13 juillet 1983" required [(ngModel)]="dateExpense" name="dateExpense"> </div>
         </div>
 
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span class="input-title">Coût TVA :</span><input autocomplete="off"  type="text" required [(ngModel)]="expense.costTVA" name="expense.costTVA"> </div>
+          <div class="inputbox mt-1"><span class="input-title">Coût TTC :</span><input  autocomplete="off" type="text"  required [(ngModel)]="expense.costTTC" name="expense.costTTC"> </div>
+        </div>
+
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span>Facturable :</span><br>
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="expense.billable"
+              name="expense.billable">
+              <option value="true">Oui</option>
+              <option value="false">Non</option>
+            </select>
+          </div>
+
+          <div class="inputbox mt-1"><span>Nature des frais :</span><br>
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfExpenseType"  name="idOfExpenseType" (change)="getExpenseType()">
+              <option *ngFor="let typeExpense of allTypeExpense"  value="{{typeExpense.id}}">{{typeExpense.type}}</option> 
+
+            </select>
+          </div>
+          <div class="inputbox mt-1"></div>
+
+        </div>
 
         <div class="bio-row"></div>
 
-          <div class="bio-row">
-            <br>    <br>
-            <button class="button" (click)="retour()">Retour</button>
-
-            <button class="button" data-toggle="modal" data-target="#updateModal" >Ajouter</button>
-
-       
-
-            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Êtes vous sur de vouloir mettre à jour ?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addExpense()" >Ajouter</button>
-                  </div>
+        <div class="bio-row">
+          <br><br>
+          <button class="button" (click)="retour()">Retour</button>
+          <button class="button" data-toggle="modal" data-target="#updateModal">Ajouter</button>
+          <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Êtes vous sur de vouloir mettre à jour ?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="addExpense()">Ajouter</button>
                 </div>
               </div>
             </div>
-
-
-
-         
-
-             
           </div>
-    
         </div>
+      </div>
     </div>
-    </div></div>
+  </div>
+</div>
 
-    <button (click)="test()">test</button>
