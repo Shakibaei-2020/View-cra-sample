@@ -209,9 +209,12 @@ export class NgserviceService {
 
   /*************************************************************************************** PROJECT SERVICES *******************************************************************************/
 
-   async selectProjectByMissionId(id: number): Promise<Observable<Project>> {
-    console.log("Dans le service : "+ id)
-     return this._http.get<Project>("http://localhost:8801/project/foundProject/" + id);
+
+  selectProjectByMissionId(id: number): Observable<any> {
+    var projet: Observable<any>;
+    projet = this._http.get<any>("http://localhost:8801/project/foundProject/" + id)
+    console.log("Projet est il recupéré ? : " + projet);
+    return projet;
   }
 
 
