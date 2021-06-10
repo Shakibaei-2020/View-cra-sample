@@ -88,11 +88,13 @@ export class DeclarationActiviteComponent implements OnInit {
     )
 
     // TODO : attention c'es en dur
+
+    /**  
     this._service.selectOneCollabById(2).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)
     )
-
+*/
     this.month = this.dt.getMonth() + 1;
     this.year = this.dt.getFullYear();
     this.daysInMonth = new Date(this.year, this.month, 0).getDate();

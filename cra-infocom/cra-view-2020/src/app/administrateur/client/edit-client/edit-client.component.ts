@@ -19,6 +19,9 @@ export class EditClientComponent implements OnInit {
   client = new Client();
   updatedClient = new Client();
 
+  
+
+
   ngOnInit(): void {
     this._service.selectClientById(1).subscribe(
       data=> this.client = data,

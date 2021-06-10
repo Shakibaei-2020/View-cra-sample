@@ -1,6 +1,7 @@
 import { TypeCollaborator } from "./type-collaborator";
 
 export class Collaborator {
+    [x: string]: any;
 
     public id!:number;
     public lastName!:string;

@@ -20,15 +20,15 @@
       <div class="row">
 
         <div class="bio-row">
-          <div class="inputbox mt-1"><span class="input-title">Nom client :</span> <input type="text" required
+          <div class="inputbox mt-1"><span class="input-title">Nom du client :</span> <input type="text" required
               [(ngModel)]="newClient.name" name="newClient.name"> </div>
         </div>
 
 
         <div class="bio-row">
-          <div class="inputbox mt-1"><span class="input-title">Réf client :</span> <input type="text" required [(ngModel)]="newClient.ref" name="newClient.ref"> </div>
+          <div class="inputbox mt-1"><span class="input-title">Référence du client :</span> <input type="text" required [(ngModel)]="newClient.ref" name="newClient.ref"> </div>
 
-          <div class="inputbox mt-1"><span class="input-title" class="input-title">Type :</span><br>
+          <div class="inputbox mt-1"><span class="input-title" class="input-title">Type de client :</span><br>
             <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfClientType" name="idOfClientType" (change)="getClientType()">
               <option *ngFor="let allClientTypes of allClientType" value="{{allClientTypes.id}}">{{allClientTypes.type}}
             </select>

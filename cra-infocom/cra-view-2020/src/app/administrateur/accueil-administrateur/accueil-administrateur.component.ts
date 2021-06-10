@@ -16,6 +16,7 @@ export class AccueilAdministrateurComponent implements OnInit {
 
   ngOnInit(): void {
 
+    /**  */
     this._service.selectOneCollabById(3).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)

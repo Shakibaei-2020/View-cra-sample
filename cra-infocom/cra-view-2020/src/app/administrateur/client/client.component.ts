@@ -20,20 +20,15 @@ export class ClientComponent implements OnInit {
   constructor(private _service:NgserviceService, private _route:Router) { }
 
 
-  ngOnInit() {
-
-  }
-  
-
-
+  ngOnInit() {}
 
   goToEditCollab(){
-
     this._route.navigate(['/editClient']);
   }
 
-
-
+  goToAddClient(){
+    this._route.navigate(['/addClient']);
+  }
 
   searchClientByName(){
 

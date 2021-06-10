@@ -21,6 +21,7 @@ export class MonProfileComponent implements OnInit {
   ngOnInit(): void {
 
     /** données du collaborateur recuperer via l'id de connexion */
+    /** */
     this._service.selectOneCollabById(3).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)

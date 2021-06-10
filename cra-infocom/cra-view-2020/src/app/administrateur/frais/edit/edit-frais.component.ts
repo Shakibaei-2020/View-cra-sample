@@ -64,8 +64,7 @@ export class EditFraisComponent implements OnInit {
     this.updatedExpense.id = this.expense.id;
     this.updatedExpense.collaboratorId = this.expense.collaboratorId;
     this.updatedExpense.typeExpense = this.expenseType;
-
-
+    
     this._service.addAndUpdateExpense(this.updatedExpense,this.dateExpense,this.dateRequest).subscribe(
       data =>{
         console.log("ajout effectué");
@@ -74,9 +73,7 @@ export class EditFraisComponent implements OnInit {
         console.log("erreur ajout non-effectué")
       }
     )
-
   window.location.reload();
-
   }
 
   deleteExpense(){

@@ -36,4 +36,9 @@ export class MissionComponent implements OnInit {
 
   }
 
+  goToAddMission(){
+    this._route.navigate(['/addMission']);
+
+  }
+
 }

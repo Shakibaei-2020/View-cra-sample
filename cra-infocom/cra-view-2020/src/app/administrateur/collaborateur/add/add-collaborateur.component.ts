@@ -18,6 +18,7 @@ export class AddCollaborateurComponent implements OnInit {
   date1 = new Date;
   date2 = new Date;
 
+  mdp!: string;
 
   
 
@@ -32,11 +33,14 @@ export class AddCollaborateurComponent implements OnInit {
       error => console.log("exception" + error)
     )
 
+
   }
 
   addCollabFormSubmit(){
 
-    this.collaborator.passward = "mot_de_passe_auto";
+    this.mdp = this.randomMDP();
+
+    this.collaborator.passward =   this.mdp;
     this.collaborator.typeCollaborator = this.collaboratorType;
 
    this._service.addCollab(this.collaborator,this.date1,this.date2).subscribe(
@@ -47,6 +51,8 @@ export class AddCollaborateurComponent implements OnInit {
         console.log("erreur ajout non-effectué")
       }
     )
+
+    console.log
     }
 
     idOfCollType!: number;
@@ -60,4 +66,21 @@ export class AddCollaborateurComponent implements OnInit {
       setTimeout(() => {
       }, 50);
     }
+
+
+    randomMDP() {
+      length = 10
+      var result           = '';
+      var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * 
+   charactersLength));
+     }
+     console.log(result)
+     return result;
+  }
+  
+
+ 
 }

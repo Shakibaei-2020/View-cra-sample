@@ -70,11 +70,11 @@
       <tbody>
         <tr *ngFor="let expense of expenses">
 
-          <td>{{expense.dateRequest}}</td>
-          <td>{{expense.dateExpense}}</td>
+          <td>{{expense.dateRequest | date: 'dd/MM/yyyy' }}</td>
+          <td>{{expense.dateExpense | date: 'dd/MM/yyyy' }}</td>
           <td>{{expense.status}}</td>
           <td>
-            <button class="btnEditer" type="submit" (click)="goToEditFrais()">Gerer</button>
+            <button class="btnEditer" type="submit" (click)="goToEditFrais()">Gérer</button>
           </td>
         </tr>
       </tbody>

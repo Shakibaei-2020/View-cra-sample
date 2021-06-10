@@ -12,7 +12,7 @@
         <img class="img1"
             src="https://img-premium.flaticon.com/png/512/1534/1534938.png?token=exp=1623225915~hmac=32088da7943da48bf7dadfe6039678cc">
     </button>
-    <h2 class="page">Modification du collaborateur :</h2>
+    <h2 class="page">Modification du collaborateur : {{collaborateur.firstName}}  {{collaborateur.lastName}} </h2>
 </div>
 <hr>
    
@@ -21,29 +21,25 @@
            
              <div class="row">
                   <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Prénom :</span> <input type="text" value={{collaborateur.firstName}}  required [(ngModel)]="updatedCollaborateur.firstName" name="firstName"> </div>
+                    <div class="inputbox mt-1"><span class="input-title">Prénom : {{collaborateur.firstName}}  </span> <input type="text"   required [(ngModel)]="updatedCollaborator.firstName" name="firstName"> </div>
+                    <div class="inputbox mt-1"><span class="input-title">Date d'entrée : {{collaborateur.dateOfEntry | date: 'dd/MM/yyyy'}} </span> <input type="date"   required [(ngModel)]="date1" name="date1"> </div>
+                    <div class="inputbox mt-1"><span class="input-title">Date de sortie :{{collaborateur.dateOfRelease | date: 'dd/MM/yyyy'}} </span> <input type="date"   required [(ngModel)]="date2" name="date2"> </div>
 
                   </div>
 
-                  <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Date d'entrée :</span> <input type="date" placeholder={{collaborateur.dateOfEntry}}  required [(ngModel)]="date1" name="date1"> </div>
-                </div>
                 
                   <div class="bio-row">
-                    
-                    <div class="inputbox mt-1"><span class="input-title">Nom de famille :</span><input type="text" value={{collaborateur.lastName}}  required [(ngModel)]="updatedCollaborateur.lastName" name="lastName"  > </div>
-                </div>
+                    <div class="inputbox mt-1"><span class="input-title">Nom de famille : {{collaborateur.lastName}}</span><input type="text"   required [(ngModel)]="updatedCollaborator.lastName" name="lastName"  > </div>
+                    <div class="inputbox mt-1"><span class="input-title">Adresse mail : {{collaborateur.email}} </span> <input type="text"   required [(ngModel)]="updatedCollaborator.email" name="email"  > </div>
+                  
+                    <div class="inputbox mt-3"><span>Type : {{typeCollaborator.type}}</span><br>
+                      <select class="typeCollab" aria-label="Default select example" required [(ngModel)]="idOfCollType" name="idOfCollType" (change)="getCollType()">
+                          <option *ngFor="let allTypeCollaborators of allTypeCollaborator" value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}
+                      </select>
+                  </div>
+                  </div>
               
-                  <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Date de sortie : </span> <input type="date" placeholder={{collaborateur.dateOfRelease}}  required [(ngModel)]="date2" name="date2"> </div>
-                  </div> 
-
-                  <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Adresse mail : </span> <input type="text" value={{collaborateur.email}}  required [(ngModel)]="updatedCollaborateur.email" name="email"  > </div>
-                </div>
-
-                <div class="bio-row">
-                </div>
+                 
                 <div class="bio-row">
           
                 </div>
@@ -108,93 +104,115 @@
       <div class="bio-graph-heading">
         <p class="titre"> Notes de frais </p>
      </div>
+<br>
       <table class="table table-condensed">
         <thead>
           <tr >
-            <th>dateRequest</th>
-            <th>date de frais</th>
-            <th>Facturable</th>
-            <th>Cout HT</th>
-            <th>Cout TVA</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
 
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let expense of expenses">
+          <tr *ngFor="let expense of expenses; let indexOfelement =index;">
 
-       
-            <td>   <input type="date" value={{expense.dateRequest}} required [(ngModel)]="expense.dateRequest" name="dateRequest" > </td>
-            <td>   <input type="date" value={{expense.dateExpense}} required [(ngModel)]="expense.dateExpense" name="dateExpense"> </td>
             <td>  
-            
-              <select class="form-input" aria-label="Default select example"  value= required [(ngModel)]="expense.billable" name="billable"> 
+              <span class="input-title">Date de demande : {{expense.dateRequest | date:   'dd/MM/yyyy'}} </span> 
+              <input type="date" name="dateExpenseRequest-{{indexOfelement}}" id="dateExpenseRequest-{{indexOfelement}}" > </td>
+            <td>  
+              <span class="input-title">Date de frais : {{expense.dateExpense | date:   'dd/MM/yyyy'}} </span> 
+              <input type="date" name="dateExpense-{{indexOfelement}}" id="dateExpense-{{indexOfelement}}" > </td>
+            <td>  
+              <span class="input-title">Facturable: {{expense.billable}}</span> 
+              <select class="expenseInput" aria-label="Default select example"   name="expenseBillable-{{indexOfelement}}" id="expenseBillable-{{indexOfelement}}"  > 
                 <option value="{{expense.billable}}">{{expense.billable}}</option>
                 <option value="valider">true</option>
               </select>
-            
+        
             </td>
-            <td>   <input type="text" value={{expense.costHT}} required [(ngModel)]="expense.costHT" name="costHT"> </td>
-            <td>   <input type="text" value={{expense.costTVA}} required [(ngModel)]="expense.costTVA" name="costTVA"> </td>
             <td>  
-            
-              <select class="form-input" aria-label="Default select example"   required [(ngModel)]="expense.status" name="status"> 
-                <option value="{{expense.status}}">{{expense.status}}</option>
-                <option value="valider">valider</option>
-                <option value="valider">refuser</option>
+              <span class="input-title">Coût HT : {{expense.costHT }}</span> 
+              <input class="costInput"  name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}"> </td>
 
+            <td>   
+              <span class="input-title">Coût TVA: {{expense.costTVA }}</span> 
+              <input class="costInput"  name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}"> </td>
+            <td>  
+              <span class="input-title">État : {{expense.status}}</span> 
+              <select class="expenseInput" aria-label="Default select example"   name="expenseStatus-{{indexOfelement}}" id="expenseStatus-{{indexOfelement}}"  > 
+                <option value="{{expense.status}}">{{expense.status}}</option>
+                <option value="validé">valider</option>
+                <option value="refusé">refuser</option>
               </select> </td>
+
+              
        
             <td>
-                <button class="btnTab" type="submit"  (click)="updateLeaveFromCollab(expense.id)">Maj</button><br><br>
-                <button class="btnTab" type="submit"  (click)="updateLeaveFromCollab(expense.id)">Supprimer</button>
-
+                <button class="btnTab" type="submit"  (click)="updateExpenseFromCollab()">Maj</button><br><br>
+                <button class="btnTab" type="submit"  (click)="deleteExpenseFromCollab(expense.id)">Supprimer</button>
             </td>
         </tr>
         </tbody>
       </table>
 
-
+     
       <div class="bio-graph-heading">
         <p class="titre"> Demande de congées  </p>
      </div>
+     <br>
+
       <table class="table table-condensed">
         <thead>
           <tr>
-            <th>Date de demande</th>
-            <th>Date de départ</th>
-            <th>Date de retour</th>
-            <th>Status</th>
-            <th>Client informé</th>
-            <th>Action</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
 
           </tr>
         </thead>
         <tbody  > 
 
-          <tr  *ngFor="let leave of leaves; let i=index;">
-            <td >   <input  type="date" placeholder={{leave.dateOfDemand}} required [(ngModel)]="updatedLeave.dateOfDemand" name="{{leave.id}}"> </td>
-            <td>   <input type="date" placeholder={{leave.dateOfStartLeave}} required [(ngModel)]="updatedLeave.dateOfStartLeave" name="{{leave.id}}"> </td>
-            <td>   <input type="date" placeholder={{leave.dateOfEndLeave}} required [(ngModel)]="updatedLeave.dateOfEndLeave" name="{{leave.id}}"> </td>
+          <tr  *ngFor="let leave of leaves; let indexOfelement =index;">
             <td>   
+              <span class="input-title">Date de la demande : {{leave.dateOfDemand | date:   'dd/MM/yyyy'}}</span> 
+              <input  type="date" name="leaveDateOfDemand-{{indexOfelement}}" id="leaveDateOfDemand-{{indexOfelement}}" > 
+            </td>
+            <td>  
+              <span class="input-title">Date de début : {{leave.dateOfStartLeave | date:   'dd/MM/yyyy'}}</span> 
+               <input type="date"  name="leaveDateOfStart-{{indexOfelement}}" id="leaveDateOfStart-{{indexOfelement}}" > 
+              </td>
+            <td>  
+              <span class="input-title">Date de fin : {{leave.dateOfEndLeave | date:   'dd/MM/yyyy'}}</span> 
+              <input type="date"  name="leaveDateOfEnd-{{indexOfelement}}" id="leaveDateOfEnd-{{indexOfelement}}">
             
-              <select class="form-input" value="{{leave.status}}"   required [(ngModel)]="updatedLeave.status" name="{{leave.id}}">> 
-                <option value="{{leave.status}} ">{{leave.status}} </option>
-                <option value="valider">valider</option>
-                <option value="valider">refuser</option>
+            </td>
+            <td>   
+              <span class="input-title">État : {{leave.status}}</span> 
+              <select class="expenseInput"  name="leaveStatus-{{indexOfelement}}" id="leaveStatus-{{indexOfelement}}"> 
+                <option value="validé">valider</option>
+                <option value="refusé">refuser</option>
+                <option value="en-cours">en-cours</option>
 
               </select> 
             </td>
             <td>   
-              <select class="form-input" aria-label="Default select example"  required [(ngModel)]="updatedLeave.clientInformed" name="{{leave.id}}"> 
+              <span class="input-title">Client informé : {{leave.clientInformed}}</span> 
+              <select class="expenseInput" aria-label="Default select example" name="leaveInformed-{{indexOfelement}}" id="leaveInformed-{{indexOfelement}}">  
                 <option value="{{leave.clientInformed}}">{{leave.clientInformed}}</option>
                 <option value="false">false</option>
               </select>
             </td>
        
             <td>
-                <button class="btnTab" type="submit" (click)="updateLeaveFromCollab(leave.id)">Maj</button><br><br>
+                <button class="btnTab" type="submit" (click)="updateLeaveFromCollab()">Maj</button><br><br>
                 <button class="btnTab" type="submit" (click)="deleteLeaveFromCollab(leave.id)">Supprimer</button>
 
             </td>
@@ -213,4 +231,7 @@
 
 
 </div>
+<br>
+<br>
+<br>
 

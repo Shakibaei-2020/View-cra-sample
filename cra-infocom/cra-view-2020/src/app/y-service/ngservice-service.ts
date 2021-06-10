@@ -197,6 +197,11 @@ export class NgserviceService {
     return this._http.get<Client>("http://localhost:8801/client/lister/" + id);
   }
 
+  selectAllClient(): Observable<Client[]> {
+    return this._http.get<Client[]>("http://localhost:8801/client/lister/");
+
+  } 
+  
   /** TYPE */
 
   selectAllTypeClient(): Observable<TypeClient[]> {
@@ -233,6 +238,7 @@ export class NgserviceService {
     return this._http.get<Mission[]>("http://localhost:8801/mission/lister/");
   }
 
+  
   /*************************************************************************************** PROJECT SERVICES *******************************************************************************/
 
 

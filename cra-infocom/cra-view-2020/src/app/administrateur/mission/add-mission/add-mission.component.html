@@ -23,28 +23,29 @@
       <div class="row">
 
         <div class="bio-row">
-          <div class="inputbox mt-1"><span class="input-title">Nom de la mission:</span> <input type="text" required
-              [(ngModel)]="newMission.missionTitle" name="newMission.missionTitle"> </div>
+    
           <div class="inputbox mt-1">
-            <span class="input-title" class="input-title">Nom du client :</span><br>
-            <select class="form-input" aria-label="Default select example">
-              <option>1</option>
-            </select><br>
+            <span class="input-title">Nom du client  : </span><br>
+            <select class="form-input" aria-label="Default select example"  required [(ngModel)]="idClientByName" name="idClientByName" (change)="updateClientRef()">
+              <option *ngFor="let client of clients" value="{{client.id}}">{{client.name}}</option>
+
+              </select>
           </div>
           <div class="inputbox mt-1">
-            <span class="input-title" class="input-title">Ref client :</span><br>
-            <select class="form-input" aria-label="Default select example">
-              <option>1</option>
+            <span class="input-title" >Ref client :</span><br>
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idClientByRef" name="idClientByRef" (change)="updateClientName()">
+              <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
             </select>
           </div>
+
+          <div class="inputbox mt-1"><span class="input-title">Nom de la mission :</span> <input type="text" required
+            [(ngModel)]="newMission.missionTitle" name="newMission.missionTitle"> </div>
         </div>
 
         <div class="bio-row">
 
-          <div class="inputbox mt-1"><span class="input-title">Date de début :</span> <input type="Date" required
-              [(ngModel)]="startDate" name="startDate"> </div>
-          <div class="inputbox mt-1"><span class="input-title">Date de fin :</span> <input type="Date" required
-              [(ngModel)]="endDate" name="endDate"> </div>
+          <div class="inputbox mt-1"><span class="input-title">Date de début :</span> <input type="Date" required [(ngModel)]="startDate" name="startDate"> </div>
+          <div class="inputbox mt-1"><span class="input-title">Date de fin :</span> <input type="Date" required [(ngModel)]="endDate" name="endDate"> </div>
         </div>
 
 

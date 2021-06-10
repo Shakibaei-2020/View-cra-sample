@@ -12,7 +12,7 @@
       </button>
 
       <button class="img-fluid buttonAdd ">
-        <img class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
+        <img (click)="goToAddClient()" class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
       </button>
       <h2 class="page">Gestion des clients</h2>
     </div>
@@ -34,6 +34,7 @@
           <thead>
             <tr>
               <th><p class="titreTable">id</p></th>
+              <th><p class="titreTable">ref</p></th>
               <th><p class="titreTable">Nom</p></th>
               <th><p class="titreTable">Type</p></th>
               <th><p class="commande titreTable">Gestion</p></th>
@@ -42,10 +43,11 @@
           <tbody>
             <tr *ngFor="let client of clients">
               <td>{{client.id}}</td>
+              <td>{{client.ref}}</td>
               <td>{{client.name}}</td>
               <td>{{client.typeClient.type}}</td>
               <td>
-                <button type="button" class="btnEditer" (click)="goToEditCollab()">Gerer</button>
+                <button type="button" class="btnEditer" (click)="goToEditCollab()">Gérer</button>
               </td>
             </tr>
           </tbody>

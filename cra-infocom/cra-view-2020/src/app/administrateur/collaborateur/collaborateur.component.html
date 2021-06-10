@@ -9,7 +9,7 @@
           src="https://img-premium.flaticon.com/png/512/1534/1534938.png?token=exp=1623225915~hmac=32088da7943da48bf7dadfe6039678cc">
       </button>
 
-      <button class="img-fluid buttonAdd ">
+      <button (click)="goToAddCollab()" class="img-fluid buttonAdd ">
         <img class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
       </button>
       <h2 class="page">Gestion des collaborateurs</h2>
@@ -19,7 +19,7 @@
 <div>
     <div class="container mt-3"><br>
         <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchOneCollab()">
-            <input type="text" placeholder="Nom du collaborateur"  required [(ngModel)]="collaboratorInputLastName.lastName" name="lastName">
+            <input type="text" autocomplete="off" placeholder="Nom du collaborateur"  required [(ngModel)]="collaboratorInputLastName.lastName" name="lastName">
             <button type="submit"><p>Chercher</p></button>
           </form>
 
@@ -46,7 +46,7 @@
                     <td>{{collaborator.email}}</td>
         
                 <td>
-                    <button class="btnEditer" type="submit" (click)="goToEditCollab()">Editer </button>
+                    <button class="btnEditer" type="submit" (click)="goToEditCollab()">Gérer </button>
                 </td>
             </tr>
             </tbody>

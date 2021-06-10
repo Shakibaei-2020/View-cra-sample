@@ -11,24 +11,30 @@ import { Mission } from 'src/app/z-model/Mission/mission';
 })
 export class EditMissionComponent implements OnInit {
 
-  constructor(private _service:NgserviceService, private _route:Router) { }
+  constructor(private _service: NgserviceService, private _route: Router) { }
 
   mission = new Mission();
-  client = new Client();
+  clientSeleted = new Client();
+  clients!: Client[];
 
 
   ngOnInit(): void {
 
-    this._service.selectMissionById(2).subscribe(
-      data=> this.mission = data,
-      error=>console.log("exception" +error)
-      )
+    this._service.selectMissionById(4).subscribe(
+      data => {
+      this.mission = data
 
-      this._service.selectClientById(2).subscribe(
-        data=> this.client = data,
-        error=>console.log("exception" +error)
-        )
+      this._service.selectClientById( this.mission.client.id).subscribe(
+        data => this.clientSeleted = data,
+        error => console.log("exception" + error)
+      ) },
+      error => console.log("exception" + error)
+    )
 
+    this._service.selectAllClient().subscribe(
+      data => this.clients = data,
+      error => console.log("exception" + error)
+    ) 
   }
 
   newEndDate = new Date();
@@ -36,31 +42,44 @@ export class EditMissionComponent implements OnInit {
   updatedMission = new Mission();
 
 
-  updateMission(){
+  updateMission() {
 
     this.updatedMission.id = this.mission.id;
-    this.updatedMission.client.id = this.client.id;
-    
-        this._service.addAndUpdateMission(this.updatedMission,this.newStartDate,this.newEndDate).subscribe(
-          data =>{
-            console.log("maj effectué");
-          },
-          error =>{
-            console.log("erreur maj non-effectué")
-          }
-        )
-      }
+    this.updatedMission.client.id = this.idClientByRef;
 
-  deleteMission(){
+    this._service.addAndUpdateMission(this.updatedMission, this.newStartDate, this.newEndDate).subscribe(
+      data => {
+        console.log("maj effectué");
+      },
+      error => {
+        console.log("erreur maj non-effectué")
+      }
+    )
+
+    window.location.reload();
+
+  }
+
+  deleteMission() {
 
     this._service.deleteMission(2).subscribe(
-      data =>{
+      data => {
         console.log("delete effectué");
       },
-      error =>{
+      error => {
         console.log("erreur delete non-effectué")
       }
     )
+  }
+
+  idClientByName!: number;
+  updateClientRef() {
+    this.idClientByRef = this.idClientByName;
+  }
+
+  idClientByRef!: number;
+  updateClientName() {
+    this.idClientByName = this.idClientByRef;
   }
 
 }

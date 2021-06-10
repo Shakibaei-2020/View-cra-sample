@@ -24,7 +24,8 @@
         </div>
         <div class="bio-row">
           <div class="inputbox mt-1"><span class="input-title">Date frais : {{expense.dateExpense | date:
-              'dd/MM/yyyy'}}</span> <input type="Date" required [(ngModel)]="dateExpense" name="dateExpense"> </div>
+              'dd/MM/yyyy'}}</span> <input type="Date" value=" {{expense.dateExpense | date:
+                'dd/MM/yyyy'}}" required [(ngModel)]="dateExpense" name="dateExpense"> </div>
         </div>
 
         <div class="bio-row">

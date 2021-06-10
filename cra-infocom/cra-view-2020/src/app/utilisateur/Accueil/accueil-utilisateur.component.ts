@@ -15,6 +15,7 @@ export class AccueilUtilisateurComponent implements OnInit {
   constructor(private _route: Router, private _service: NgserviceService) { }
 
   ngOnInit(): void {
+    /** */
     this._service.selectOneCollabById(3).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)
