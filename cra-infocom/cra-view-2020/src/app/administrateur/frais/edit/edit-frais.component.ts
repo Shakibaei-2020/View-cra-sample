@@ -34,6 +34,7 @@ export class EditFraisComponent implements OnInit {
       data=> this.expense = data,
       error=>console.log("exception" +error)
       )
+      
       this._service.selectAllTypeExpense().subscribe(
         data=> this.allTypeExpense = data,
         error=>console.log("exception" +error)
@@ -56,13 +57,10 @@ export class EditFraisComponent implements OnInit {
 
   MajFrais(){
     this._route.navigate(['/searchFrais']);
-
   }
 
 
   updateExpense(){
-
-
     this.updatedExpense.id = this.expense.id;
     this.updatedExpense.collaboratorId = this.expense.collaboratorId;
     this.updatedExpense.typeExpense = this.expenseType;

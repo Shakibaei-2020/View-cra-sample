@@ -1,44 +1,42 @@
 <app-administrateur></app-administrateur>
 
 <form>
-
-<div class="div-add">
-<div class="container ">
-    <h3>Ajouter un collaborateur</h3>
-    <hr>
-<div class="row">
-    <div class="col-md-6">
-        <div class="form">
-            <div class="inputbox mt-3"> <span for="lastName" >Nom :</span> <input type="text" placeholder="Nom de famille" required [(ngModel)]="collaborator.lastName" name="lastName" > </div>
-            <div class="inputbox mt-3"> <span for="firstName" >Prenom :</span> <input type="text" placeholder="Prenom"  required [(ngModel)]="collaborator.firstName" name="firstName" > </div>
-            <div class="inputbox mt-3"> <span for="email" >Adresse mail:</span> <input type="text" placeholder="Adresse mail"  required [(ngModel)]="collaborator.email" name="email" > </div>
-
+    <div class="div-add">
+        <div class="container ">
+            <div>
+                <button class="img-fluid bouttonSousMenu">
+                    <img class="img1"
+                        src="https://img-premium.flaticon.com/png/512/1534/1534938.png?token=exp=1623225915~hmac=32088da7943da48bf7dadfe6039678cc">
+                </button>
+                <h2 class="page">Ajouter un collaborateur</h2>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form">
+                        <div class="inputbox mt-3"> <span for="lastName">Nom :</span> <input autocomplete="off" type="text" placeholder="Nom de famille" required [(ngModel)]="collaborator.lastName" name="lastName"> </div>
+                        <div class="inputbox mt-3"> <span for="firstName">Prenom :</span> <input autocomplete="off"  type="text" placeholder="Prenom" required [(ngModel)]="collaborator.firstName"  name="firstName"> </div>
+                        <div class="inputbox mt-3"> <span for="email">Adresse mail:</span> <input autocomplete="off" type="text" placeholder="Adresse mail" required [(ngModel)]="collaborator.email" name="email"> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form">
+                        <div class="inputbox mt-3"> <span for="dateOfEntry">Date entrée :</span> <input  type="date" required [(ngModel)]="date1" name="date1"> </div>
+                        <div class="inputbox mt-3"> <span for="dateOfRelease">Date sortie :</span> <input  type="date" required [(ngModel)]="date2" name="date2"> </div>
+                        <div class="inputbox mt-3"><span>Type :</span><br>
+                            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfCollType" name="idOfCollType" (change)="getCollType()">
+                                <option *ngFor="let allTypeCollaborators of allTypeCollaborator" value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                    <button class="btnEditer" (click)="addCollabFormSubmit()">Ajouter</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="form">
-            <div class="inputbox mt-3"> <span for="dateOfEntry" >Date entrée :</span> <input  value="0000-00-00"  type="date" required [(ngModel)]="date1" name="date1" > </div>
-            <div class="inputbox mt-3"> <span for="dateOfRelease">Date sortie :</span> <input value="0000-00-00"  type="date" required [(ngModel)]="date2" name="date2"> </div>
-        <div class="inputbox mt-3"><span>Type :</span><br>
-            <select class="form-input" required [(ngModel)]="collaborator.typeCollaborator" name="typeCollaborator">
-            <option value="1">Admin</option>
-            <option value="2">Client</option>
-          </select>
-        </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-</div>
-
-<div class="col-md-6">
-    <button class="btnEditer"   (click)="addCollabFormSubmit()">Ajouter</button>
-
-</div>
-
-    
-
-
-</div>
-</div>
-</div>
 </form>
