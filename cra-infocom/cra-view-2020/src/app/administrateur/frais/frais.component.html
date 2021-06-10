@@ -38,10 +38,9 @@
           <div class="col-sm-4"><button class="btnSearch" type="submit">Chercher</button></div>
           <div class="col-sm-8"><br><br><span>État : </span>
             <select class="form-input" aria-label="Default select example" required [(ngModel)]="status" name="status">
-              <option value="1">En-cours</option>
-              <option value="2">Refusé</option>
-              <option value="valider">Validé</option>
-              <option value="2">Toutes</option>
+              <option value="en-cours">En-cours</option>
+              <option value="refusé">Refusé</option>
+              <option value="validé">Validé</option>
             </select>
           </div>
         </div>
@@ -57,18 +56,20 @@
         <tr>
 
 
-          <th><p class="titreTable">id</p></th>
           <th><p class="titreTable">Nom</p></th>
           <th><p class="titreTable">Prénom</p></th>
           <th><p class="titreTable">Date  de la demande</p></th>
           <th><p class="titreTable">Type</p></th>
 
-          <th><p class="commande titreTable">Gestion</p></th>
+          <th><p class="commande titreTable">Action</p></th>
     
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let expense of expenses">
+
+          <td>{{expense.nomCollab}}</td>
+          <td>{{expense.prenomCollab}}</td>
 
           <td>{{expense.dateRequest | date: 'dd/MM/yyyy' }}</td>
           <td>{{expense.dateExpense | date: 'dd/MM/yyyy' }}</td>

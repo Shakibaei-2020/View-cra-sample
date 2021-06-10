@@ -33,16 +33,14 @@
         <table class="table table-condensed">
           <thead>
             <tr>
-              <th><p class="titreTable">id</p></th>
               <th><p class="titreTable">ref</p></th>
               <th><p class="titreTable">Nom</p></th>
               <th><p class="titreTable">Type</p></th>
-              <th><p class="commande titreTable">Gestion</p></th>
+              <th><p class="commande titreTable">Action</p></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let client of clients">
-              <td>{{client.id}}</td>
               <td>{{client.ref}}</td>
               <td>{{client.name}}</td>
               <td>{{client.typeClient.type}}</td>

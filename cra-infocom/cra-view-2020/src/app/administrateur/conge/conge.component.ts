@@ -36,7 +36,6 @@ export class CongeComponent implements OnInit {
 
   searchConge(){
 
-    this.collaborators = [];
 
     this._service.searchLeave(this.date1, this.date2, this.status).subscribe(
       data=> {  this.leaves = data;
@@ -60,17 +59,6 @@ export class CongeComponent implements OnInit {
       )
       setTimeout(() => {
       }, 50);
-
-
-
-/**
- * for = traitement synchrone 
- * 
- * asychrone = plusieurs execution en mm temps
- * 
- * forEach = traitement asynchrone
- * 
- */
       
   }
 

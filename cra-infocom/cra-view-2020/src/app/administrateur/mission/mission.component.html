@@ -54,15 +54,15 @@
            
 
 
-                <th ><p class="commande titreTable">Gestion</p></th>
+                <th ><p class="commande titreTable">Action</p></th>
 
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let mission of missions">
                 <td>{{mission.missionTitle}}</td>
-                <td>{{mission.startDate}}</td>
-                <td>{{mission.endDate}}</td>
+                <td>{{mission.startDate | date: 'dd/MM/yyyy' }}</td>
+                <td>{{mission.endDate | date: 'dd/MM/yyyy' }}</td>
        
 
                 <td>

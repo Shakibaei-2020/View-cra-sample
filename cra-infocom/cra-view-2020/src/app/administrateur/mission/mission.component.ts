@@ -29,6 +29,7 @@ export class MissionComponent implements OnInit {
       error=>console.log("exception" +error)
       )
       console.log(this.missions)
+      
   }
   
   goGerer(){
