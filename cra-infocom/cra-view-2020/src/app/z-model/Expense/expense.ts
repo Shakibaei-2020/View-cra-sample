@@ -12,6 +12,10 @@ export class Expense {
 	public  costTTC!:number;
 	public  status!:string;
 
+
+	public nomCollab!: string;
+	public prenomCollab!: string;
+	
 	public typeExpense = new TypeExpense();
 
 }

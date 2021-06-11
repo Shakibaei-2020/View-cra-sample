@@ -4,52 +4,85 @@
 
 
 <div class="font-div1">
-          <div class="container">
-            <h2>Gestion des activités</h2>
-            <hr>
-  
-      <div class="container">
-        <div class="row">
-            <div class="col-sm-4"><span>Date 1:</span><input type="date" required [(ngModel)]="date1" name="date1"></div>
-            <div class="col-sm-4"><span>Date 2:</span><input type="date" required [(ngModel)]="date2" name="date2"> </div>
-            <div class="col-sm-4"><button class="btnSearch" type="submit"  (click)="searchActivity()">Chercher</button></div>
-            <div class="col-sm-8">
-              <br><br>
-              <span>Nom du collaborateur : </span>  <input type="text" required [(ngModel)]="lastName" name="lastName">
-            </div>
+  <div class="container">
 
-    </div>
+    <span>
+      <button class="img-fluid bouttonMenu ">
+        <img class="img1" src="https://image.flaticon.com/icons/png/512/2590/2590848.png">
+      </button>
 
-        <br><br><br><br>
+      <button (click)="goToAddActivity()" class="img-fluid buttonAdd ">
+        <img class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
+      </button>
+      <h2 class="page">Gestion des activités</h2>
+    </span>
 
-        <h2>Resultat</h2>
-        <hr>
-        <table class="table ">
-            <thead>
-              <tr>
-                <th><p class="titreTable">Date debut</p></th>
-                <th><p class="titreTable">Durée</p></th>
-                <th><p class="titreTable">Distentiel</p></th>
+    <hr>
 
+    <div class="container">
 
-                <th ><p class="commande titreTable">Actions</p></th>
-
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let activity of activitys">
-                <td>{{activity.startDate}}</td>
-                <td>{{activity.duration}}</td>
-                <td>{{activity.remote}}</td>
-                <td>
-                    <button class="btnEditer" type="submit" (click)="goGerer()" >Gerer</button>
-                </td>
-            </tr>
-            </tbody>
-          </table>
-
-
-          
-       
+      <div class="row">
+        <div class="col-sm-4">
+          <span>Date de  déclaration d'activité entre :</span>
         </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-4"><input type="date" required [(ngModel)]="date1" name="date1"></div>
+        <div class="col-sm-4"><span></span><input type="date" required [(ngModel)]="date2" name="date2"> </div>
+        <div class="col-sm-4"><button class="btnSearch" type="submit" (click)="searchActivity()">Chercher</button></div>
+        <div class="col-sm-8">
+          <br><br>
+          <span>Nom du collaborateur : </span> <input autocomplete="off" type="text" required [(ngModel)]="lastName"
+            name="lastName">
+        </div>
+
+      </div>
+
+      <br><br>
+
+      <h2>Résultat :</h2>
+      <hr>
+      <table class="table ">
+        <thead>
+          <tr>
+            <th>
+              <p class="titreTable">id</p>
+            </th>
+            <th>
+              <p class="titreTable">Nom</p>
+            </th>
+            <th>
+              <p class="titreTable">Prénom</p>
+            </th>
+            <th>
+              <p class="titreTable">Date demande</p>
+            </th>
+            <th>
+              <p class="titreTable">Type</p>
+            </th>
+            <th>
+              <p class="commande titreTable">Action</p>
+            </th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let activity of activitys">
+            <td>{{activity.startDate}}</td>
+            <td>{{activity.startDate}}</td>
+            <td>{{activity.startDate}}</td>
+            <td>{{activity.remote}}</td>
+            <td>
+              <button class="btnEditer" type="submit" (click)="goGerer()">Gérer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
     </div>
+  </div>

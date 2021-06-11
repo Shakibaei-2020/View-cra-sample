@@ -96,6 +96,8 @@ export class DeclarationActiviteComponent implements OnInit {
 
     // Pour récupérer toutes les informations sur un collaborateur : opérationnelle mais faut l'automatiser
     // TODO : attention c'es en dur
+
+    /**  
     this._service.selectOneCollabById(2).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)
@@ -590,7 +592,7 @@ export class DeclarationActiviteComponent implements OnInit {
   typeActivity3 = new TypeActivity();
   typeActivity4 = new TypeActivity();
 
-  EnregisterEtEnvoyer() {
+  async EnregisterEtEnvoyer() {
 
     /** FOR ACTIVITY  */
     // Faudra récupérer le type de l'activité dans le formulaire

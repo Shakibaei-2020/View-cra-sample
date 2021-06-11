@@ -31,10 +31,29 @@ export class FraisComponent implements OnInit {
 
   searchExpenses(){
 
-    this._service.searchExpense(this.date1, this.date2, this.status).subscribe(
-      data=> this.expenses = data,
-      error=>console.log("exception" +error)
-      )
+      this._service.searchExpense(this.date1, this.date2, this.status).subscribe(
+        data=> {  this.expenses = data;
+  
+          this.expenses.forEach(
+            (item) =>{
+              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+                data=> {
+                  if(item != null){
+                    item.nomCollab = data.lastName;
+                    item.prenomCollab = data.firstName;
+                  }
+                  console.log(this.expenses)
+                  },
+                error=>console.log("exception" +error)
+                ) 
+            }
+          )
+        },
+        error=>console.log("exception" +error)
+        )
+        setTimeout(() => {
+        }, 50);
+        
     }
 
 

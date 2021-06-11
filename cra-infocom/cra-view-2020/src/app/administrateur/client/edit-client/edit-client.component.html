@@ -5,15 +5,14 @@
 
 <div class="container">
 <div class="panel">
-    <div class="bio-graph-heading-profil">
-    
-      <div class="container ">
-          <img class ="profil-image" src="https://qualium-investissement.com/wp-content/uploads/2017/05/inconnu-small.jpg">
-          <p class="titre">Gestion Client:   Mohammad-Reza SHAKIBAEI   </p>
-    
-      </div>
-    </div>
-    <br><br><br><br><br><br><br>
+  <div>
+    <button class="img-fluid bouttonSousMenu">
+      <img class="img1"
+        src="https://img-premium.flaticon.com/png/512/1605/1605350.png?token=exp=1623225972~hmac=281810e2540b4ab7634a155fd570eaa2">
+    </button>
+    <h2 class="page">Modification du client :</h2>
+  </div>
+<hr>
     
     
     <div class="panel-body bio-graph-info">
@@ -21,16 +20,16 @@
        <div class="row">
     
             <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Nom client:</span> <input type="text" required [(ngModel)]="updatedClient.name" name="updatedClient.name"  > </div>
+              <div class="inputbox mt-1"><span class="input-title">Nom du client : {{client.name}}</span> <input type="text" required [(ngModel)]="updatedClient.name" name="updatedClient.name"  > </div>
     
             </div>
             <div class="bio-row">
 
-        
-                <div class="inputbox mt-1"> <div class="inputbox mt-1"><span class="input-title"class="input-title" required [(ngModel)]="updatedClient.typeClient" name="updatedClient.typeClient">Type :</span><br>
-                    <select class="form-input" aria-label="Default select example">
-                    <option value="1">Type 1</option>
-                    <option value="2">Type 2</option>
+              <div class="inputbox mt-1"><span class="input-title">Référence du client : {{client.ref}}</span> <input type="text" required [(ngModel)]="updatedClient.ref" name="updatedClient.ref"> </div>
+
+                <div class="inputbox mt-1"> <div class="inputbox mt-1"><span class="input-title" >Type de client : {{client.typeClient.type}}</span><br>
+                  <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfClientType" name="idOfClientType" (change)="getClientType()">
+                    <option *ngFor="let allClientTypes of allClientType" value="{{allClientTypes.id}}">{{allClientTypes.type}}</option>
                   </select>  </div> </div>
          
            

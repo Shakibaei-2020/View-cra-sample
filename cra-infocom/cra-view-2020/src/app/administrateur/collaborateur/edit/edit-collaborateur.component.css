@@ -130,7 +130,7 @@
 }
 
 .form-input{
-    width: 130px;
+    width: 100%;
     padding: 14px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -138,6 +138,17 @@
     border-bottom: 2px solid #464646;
 
   }
+
+  .typeCollab{
+    width: 100%;
+    padding: 14px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+
+  }
+  
 
 
 .bio-graph-heading {
@@ -160,8 +171,20 @@ input[type=text] {
   box-sizing: border-box;
   border: none;
   border-bottom: 2px solid #464646;
-
 }
+
+
+
+.expenseInput{
+  width: 120px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #464646;
+}
+
+
 
 input[type=date] {
     width: 100%;
@@ -173,6 +196,17 @@ input[type=date] {
 
   }
 
+  .costInput{
+      width: 120px;
+      padding: 12px 20px;
+      margin: 8px 0;
+
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid #464646;
+  
+
+  }
 
 .bio-graph-heading-profil{
     text-align: center;
@@ -209,3 +243,66 @@ input[type=date] {
     border-radius: 60px;
     margin-bottom: 8px;
 }
+
+
+
+.img1{
+    height: 30px;
+  }
+  
+  .bouttonMenu:hover {background-color: bl}
+    
+  .bouttonMenu:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  
+  .bouttonSousMenu {
+      float: left;
+      height: 40px;
+      width: 40px;
+      font-size: 13px;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      color: #fff;
+      background-color: #ffbf35;
+      border: none;
+      border-radius: 100%;
+      margin-bottom: 5%;
+      margin-right: 10px;
+    }
+
+    .form-input{
+      width: 120px;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid #464646;
+  
+    }
+  
+  
+    .buttonAdd{
+      float: right;
+      height: 40px;
+      width: 40px;
+      font-size: 13px;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      color: #fff;
+      background-color: #ffbf35;
+      border: none;
+      border-radius: 100%;
+      margin-right: 10px;
+    }
+  
+  
+  .buttonAdd:hover {background-color: bl}
+    
+  .buttonAdd:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }

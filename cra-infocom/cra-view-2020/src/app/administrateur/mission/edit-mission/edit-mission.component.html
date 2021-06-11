@@ -4,96 +4,105 @@
 
 
 <div class="container">
-<div class="panel">
-    <div class="bio-graph-heading-profil">
-    
-      <div class="container ">
-   
-    
-      </div>
+  <div class="panel">
+    <div>
+      <button class="img-fluid bouttonMenu">
+        <img class="img1"
+          src="https://img-premium.flaticon.com/png/512/3233/3233497.png?token=exp=1623226098~hmac=3a138cb47c1e50795a2a9ef7a0d9e2e6">
+      </button>
+      <h2>Éditer la mission : {{mission.missionTitle}} </h2>
     </div>
-
-    
-    
+    <hr>
     <div class="panel-body bio-graph-info">
-        <h2>Mise à jour mission :</h2>
-        <hr>
+      <div class="row">
+        <div class="bio-row">
+       
+          <div class="inputbox mt-1">
+            <span class="input-title">Nom du client : {{clientSeleted.name}}</span><br>
+            <select class="form-input" aria-label="Default select example"  required [(ngModel)]="idClientByName" name="idClientByName" (change)="updateClientRef()">
+              <option *ngFor="let client of clients" value="{{client.id}}">{{client.name}}</option>
+
+              </select>
+          </div>
+          <div class="inputbox mt-1">
+            <span class="input-title" >Ref client : {{clientSeleted.ref}}</span><br>
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idClientByRef" name="idClientByRef" (change)="updateClientName()">
+              <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
+            </select>
+          </div>
+
+          <div class="inputbox mt-1"><span class="input-title">Nom de la mission :  {{mission.missionTitle}}</span> <input type="text" required [(ngModel)]="updatedMission.missionTitle" name="updatedMission.missionTitle"> </div>
+
+        </div>
+        <div class="bio-row">
+
+
+
+
+          <div class="inputbox mt-1"><span class="input-title">Date de début :  {{mission.startDate | date: 'dd/MM/yyyy' }}</span> <input type="Date" required [(ngModel)]="newStartDate" name="newStartDate"> </div>
           <br>
-       <div class="row">
-    
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Nom de la mission :</span> <input type="text" required [(ngModel)]="updatedMission.missionTitle" name="updatedMission.missionTitle"  > </div>
-
-            </div>
-            <div class="bio-row">
-
-                <div class="inputbox mt-1"><span class="input-title">Date de début :</span> <input type="Date" required [(ngModel)]="newStartDate" name="newStartDate" > </div>
-
-<br>
-                  
-                <div class="inputbox mt-1"><span class="input-title">Date de fin  :</span> <input type="Date" required [(ngModel)]="newEndDate" name="newEndDate" > </div>
-
-         
-           
-    </div>
-    
+          <div class="inputbox mt-1"><span class="input-title">Date de fin :  {{mission.endDate | date: 'dd/MM/yyyy' }}</span> <input type="Date" required [(ngModel)]="newEndDate" name="newEndDate"> </div>
+        </div>
 
 
         <div class="bio-row"></div>
+        <div class="bio-row">
+          <br> <br>
+          <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
 
-          <div class="bio-row">
-            <br>    <br>
-
-            <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
-
-            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Êtes vous sur de vouloir mettre à jour ?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateMission()" >Sauvgarder</button>
-                  </div>
+          <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Êtes vous sur de vouloir mettre à jour ?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="updateMission()">Sauvgarder</button>
                 </div>
               </div>
             </div>
-
-
-
-            <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
-
-            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Alert delete</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Êtes vous sur de vouloir supprimer?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteMission()">Supprimer</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-           
-    
-             
           </div>
-    
+
+
+
+          <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
+
+          <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Alert delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Êtes vous sur de vouloir supprimer?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="deleteMission()">Supprimer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
         </div>
+
+      </div>
     </div>
-    </div></div>
+  </div>
+</div>

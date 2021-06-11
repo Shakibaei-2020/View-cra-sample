@@ -3,38 +3,54 @@
 
 <div class="font-div1">
   <div class="container">
-    <h2>Gestion des clients</h2>
+
+
+    <div>
+      <button class="img-fluid bouttonSousMenu">
+        <img class="img1"
+          src="https://img-premium.flaticon.com/png/512/1605/1605350.png?token=exp=1623225972~hmac=281810e2540b4ab7634a155fd570eaa2">
+      </button>
+
+      <button class="img-fluid buttonAdd ">
+        <img (click)="goToAddClient()" class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
+      </button>
+      <h2 class="page">Gestion des clients</h2>
+    </div>
+
+
     <hr>
-<div>
-    <div class="container mt-3"><br>
+    <div>
+      <div class="container mt-3"><br>
         <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchClientByName()">
-            <input type="text" placeholder="Nom du client"required [(ngModel)]="clientInput.name" name="name">
-            <button type="submit"><p>Chercher</p></button>
-          </form>
+          <input type="text" placeholder="Nom du client" required [(ngModel)]="clientInput.name" name="name">
+          <button type="submit">
+            <p>Chercher</p>
+          </button>
+        </form>
 
-        <br><br><br>
-        <h2>Resultat  </h2> 
+        <br><br>
+        <h2>Résultat : </h2>
         <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Type</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr  *ngFor="let client of clients">
-                  <td>{{client.name}}</td>
-                  <td>{{client.typeClient}}</td>
-                <td>
-                  <button type="button" class="btnEditer" (click)="goToEditCollab()">Gerer</button>
-                </td>
+          <thead>
+            <tr>
+              <th><p class="titreTable">ref</p></th>
+              <th><p class="titreTable">Nom</p></th>
+              <th><p class="titreTable">Type</p></th>
+              <th><p class="commande titreTable">Action</p></th>
             </tr>
-            </tbody>
-          </table>
-        </div>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of clients">
+              <td>{{client.ref}}</td>
+              <td>{{client.name}}</td>
+              <td>{{client.typeClient.type}}</td>
+              <td>
+                <button type="button" class="btnEditer" (click)="goToEditCollab()">Gérer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    </div>
-    </div>
-    
-
+  </div>
+</div>

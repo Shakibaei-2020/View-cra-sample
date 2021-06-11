@@ -12,38 +12,46 @@ import { Mission } from 'src/app/z-model/Mission/mission';
 })
 export class AddMissionComponent implements OnInit {
 
-  constructor(private _route:Router,private _service:NgserviceService) { }
+  constructor(private _route: Router, private _service: NgserviceService) { }
+
+  clients!: Client[];
 
   ngOnInit(): void {
+
+    this._service.selectAllClient().subscribe(
+      data => this.clients = data,
+      error => console.log("exception" + error)
+    )
+
   }
 
-newMission = new Mission();
-startDate = new Date();
-endDate = new Date();
-
-newClient = new Client();
+  newMission = new Mission();
+  startDate = new Date();
+  endDate = new Date();
 
 
-addMission(){
-  
-  this._service.addAndupdateClient(this.newClient).subscribe(
-    data =>{
-      console.log("ajout effectué");
-      this.newMission.client.id = this.newClient.id;
-      this._service.addAndUpdateMission(this.newMission,this.startDate,this.endDate).subscribe(
-        data =>{
-          console.log("ajout effectué");
-        },
-        error =>{
-          console.log("erreur ajout non-effectué")
-        }
-      )
-    },
-    error =>{
-      console.log("erreur ajout non-effectué")
-    }
-  )
-    }
+  addMission() {
 
+    this.newMission.client.id =  this.idClientByRef;
+
+    this._service.addAndUpdateMission(this.newMission, this.startDate, this.endDate).subscribe(
+      data => {
+        console.log("ajout effectué");
+      },
+      error => {
+        console.log("erreur ajout non-effectué")
+      }
+    )
+  }
+
+  idClientByName!: number;
+  updateClientRef(){
+    this.idClientByRef = this.idClientByName;
+  }
+
+  idClientByRef!: number;
+  updateClientName(){
+    this.idClientByName = this.idClientByRef;
+  }
 
 }

@@ -15,19 +15,20 @@ export class MonProfileComponent implements OnInit {
   collaborateur = new Collaborator();
   newPassward!: string;
   confirmationPassward!: string;
-  url!: File;
 
 
 
   ngOnInit(): void {
+
+    /** données du collaborateur recuperer via l'id de connexion */
+    /** */
     this._service.selectOneCollabById(3).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)
     )
-
-    console.log(this.collaborateur.profileImagePath)
   }
 
+  /** retour au menu */
   retour() {
     this._route.navigate(['/utilisateur']);
   }
@@ -37,9 +38,8 @@ export class MonProfileComponent implements OnInit {
 
   updateCollab() {
 
-
      if (this.newPassward == this.confirmationPassward) {
-
+ 
       if(this.newPassward != "" && this.confirmationPassward != ""){
 
         console.log(this.newPassward)

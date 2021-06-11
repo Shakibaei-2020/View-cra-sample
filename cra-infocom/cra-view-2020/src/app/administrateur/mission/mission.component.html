@@ -5,8 +5,18 @@
 
 <div class="font-div1">
           <div class="container">
-            <h2>Gestion des missions</h2>
-            <hr>
+            <div>
+              <button class="img-fluid bouttonMenu">
+                <img class="img1"
+                  src="https://img-premium.flaticon.com/png/512/3233/3233497.png?token=exp=1623226098~hmac=3a138cb47c1e50795a2a9ef7a0d9e2e6">
+              </button>
+        
+              <button (click)="goToAddMission()" class="img-fluid buttonAdd ">
+                <img class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
+              </button>
+              <h2 class="page">Gestion des missions</h2>
+            </div>    
+        <hr>
   
       
 
@@ -15,26 +25,32 @@
   
 
       <div class="container">
+
         <div class="row">
-            <div class="col-sm-4"><span>Date 1 : </span><input type="date" required [(ngModel)]="date1" name="date1"></div>
-            <div class="col-sm-4"><span>Date 2 : </span><input type="date" required [(ngModel)]="date2" name="date2" ></div>
+          <div class="col-sm-4">
+            <span>Mission débutant entre :</span>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4"><input type="date" required [(ngModel)]="date1" name="date1"></div>
+            <div class="col-sm-4"><input type="date" required [(ngModel)]="date2" name="date2" ></div>
             <div class="col-sm-4"><button class="btnSearch" type="submit" (click)="searchMission()">Chercher</button></div>
             <div class="col-sm-8"><br><br>
-              <span>Nom client : </span>  <input type="text" required [(ngModel)]="clientName" name="clientName" >
+              <span>Nom du client : </span>  <input type="text" required [(ngModel)]="clientName" name="clientName" >
             </div>
 
     </div>
 
         <br><br><br><br>
 
-        <h2>Resultat</h2>
+        <h2>Résultat :</h2>
         <hr>
         <table class="table ">
             <thead>
               <tr>
-                <th><p class="titreTable">Mission title </p></th>
-                <th><p class="titreTable">Début mission</p></th>
-                <th><p class="titreTable">Fin mission</p></th>
+                <th><p class="titreTable">Nom de la mission </p></th>
+                <th><p class="titreTable">Date de début</p></th>
+                <th><p class="titreTable">Date de fin</p></th>
            
 
 
@@ -45,12 +61,12 @@
             <tbody>
               <tr *ngFor="let mission of missions">
                 <td>{{mission.missionTitle}}</td>
-                <td>{{mission.startDate}}</td>
-                <td>{{mission.endDate}}</td>
+                <td>{{mission.startDate | date: 'dd/MM/yyyy' }}</td>
+                <td>{{mission.endDate | date: 'dd/MM/yyyy' }}</td>
        
 
                 <td>
-                    <button class="btnEditer" type="submit" (click)="goGerer()" >Gerer</button>
+                    <button class="btnEditer" type="submit" (click)="goGerer()" >Gérer</button>
                 </td>
             </tr>
             </tbody>

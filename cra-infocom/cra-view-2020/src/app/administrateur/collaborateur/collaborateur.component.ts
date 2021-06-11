@@ -19,36 +19,27 @@ export class CollaborateurComponent implements OnInit {
 
 
 
-  constructor(private _service:NgserviceService, private _route:Router) { 
+  constructor(private _service:NgserviceService, private _route:Router) { }
 
-
-  }
-
-
-
-
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
   
-
-
-
-  goToEditCollab(){
-
-    this._route.navigate(['/editCollaborateur']);
-  }
-
-
-
-
-
   searchOneCollab(){
 
   this._service.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
     data=> this.collaborators = data,
     error=>console.log("exception" +error)
     )
+  }
+
+  
+  goToEditCollab(){
+
+    this._route.navigate(['/editCollaborateur']);
+  }
+
+  goToAddCollab(){
+
+    this._route.navigate(['/addCollaborateur']);
   }
 
 }

@@ -12,6 +12,8 @@ import { Mission } from '../z-model/Mission/mission';
 import { Project } from '../z-model/Project/project';
 import { TypeLeave } from '../z-model/Leave/type-leave';
 import { TypeExpense } from '../z-model/Expense/type-expense';
+import { TypeClient } from '../z-model/Client/type-client';
+import { TypeCollaborator } from '../z-model/Collaborator/type-collaborator';
 
 
 @Injectable({
@@ -57,8 +59,24 @@ export class NgserviceService {
 
   deleteCollabById(id: number): Observable<any> {
     return this._http.delete<any>("http://localhost:8900/collaborateurs/supprimer/" + id);
-
   }
+
+  selectCollabByLeaveId(id: number): Observable<Collaborator> {
+    return this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/collab/leave/" + id);
+  }
+
+   /** TYPE */
+
+   selectAllTypeCollaborator(): Observable<TypeCollaborator[]> {
+    return this._http.get<TypeCollaborator[]>("http://localhost:8900/typescollaborateurs/lister/");
+
+  } 
+  
+  selectTypeCollaboratorById(id: number): Observable<TypeCollaborator> {
+    return this._http.get<TypeCollaborator>("http://localhost:8900/typescollaborateurs/lister/" + id);
+  }
+  
+
 
   /****************************************************************************************** NOTE DE FRAIS SERVICES*************************************************************************/
 
@@ -178,6 +196,23 @@ export class NgserviceService {
   selectClientById(id: number): Observable<Client> {
     return this._http.get<Client>("http://localhost:8801/client/lister/" + id);
   }
+
+  selectAllClient(): Observable<Client[]> {
+    return this._http.get<Client[]>("http://localhost:8801/client/lister/");
+
+  } 
+  
+  /** TYPE */
+
+  selectAllTypeClient(): Observable<TypeClient[]> {
+    return this._http.get<TypeClient[]>("http://localhost:8801/typeClient/lister/");
+
+  } 
+  
+  selectTypeClientById(id: number): Observable<TypeClient> {
+    return this._http.get<TypeClient>("http://localhost:8801/typeClient/lister/" + id);
+  }
+  
   /*************************************************************************************** MISSIONS SERVICES *******************************************************************************/
 
   selectMissionById(id: number): Observable<Mission> {
@@ -203,6 +238,7 @@ export class NgserviceService {
     return this._http.get<Mission[]>("http://localhost:8801/mission/lister/");
   }
 
+  
   /*************************************************************************************** PROJECT SERVICES *******************************************************************************/
 
   selectProjectByMissionId(id: number): Observable<Project> {
@@ -212,6 +248,4 @@ export class NgserviceService {
   SelectAllProjectForOneCollab(id: number): Observable<Project[]> {
     return this._http.get<Project[]>("http://localhost:8801/project/projectByCollab/" + id);
   }
-
 }
-

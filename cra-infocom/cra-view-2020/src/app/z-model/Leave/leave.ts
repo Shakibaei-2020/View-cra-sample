@@ -1,3 +1,4 @@
+import { Collaborator } from "../Collaborator/collaborator";
 import { TypeLeave } from "./type-leave";
 
 export class Leave {
@@ -10,10 +11,18 @@ export class Leave {
 	public  dateOfEndLeave!:Date;
 	public  status!:string;
 	public  clientInformed!:boolean;
+	public name!: string;
+	public  statusDebut!: string;
+	public  statusFin!: string;
+
+	public nomCollab!: string;
+	public prenomCollab!: string;
+
 	
 
 	public leaveType = new TypeLeave();
 
+	
 
 	
 }

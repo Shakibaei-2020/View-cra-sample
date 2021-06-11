@@ -4,46 +4,51 @@
 
 
 <div class="container">
-<div class="panel">
-    <div class="bio-graph-heading-profil">
-
+  <div class="panel">
+    <div>
+      <button class="img-fluid bouttonSousMenu">
+        <img class="img1"
+          src="https://img-premium.flaticon.com/png/512/1605/1605350.png?token=exp=1623225972~hmac=281810e2540b4ab7634a155fd570eaa2">
+      </button>
+      <h2 class="page">Ajouter un client</h2>
     </div>
 
-    
+
     <div class="panel-body bio-graph-info">
-        <h2>Ajouter un  client</h2>
 
-        <hr>       <div class="row">
-    
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Nom client:</span> <input type="text"   required [(ngModel)]="newClient.name" name="newClient.name"> </div>
-         
-    
-            </div>
-      
-         
-            <div class="bio-row">
+      <hr>
+      <div class="row">
 
-                <div class="inputbox mt-1"><span class="input-title"class="input-title">Type :</span><br>
-                    <select class="form-input" aria-label="Default select example" required [(ngModel)]="newClient.typeClient" name="newClient.typeClient">
-                    <option value="new  ">Type 1</option>
-                    <option value="type2">Type 2</option>
-                  </select>  </div> 
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span class="input-title">Nom du client :</span> <input type="text" required
+              [(ngModel)]="newClient.name" name="newClient.name"> </div>
+        </div>
 
-                   
-    </div>
-    
+
+        <div class="bio-row">
+          <div class="inputbox mt-1"><span class="input-title">Référence du client :</span> <input type="text" required [(ngModel)]="newClient.ref" name="newClient.ref"> </div>
+
+          <div class="inputbox mt-1"><span class="input-title" class="input-title">Type de client :</span><br>
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfClientType" name="idOfClientType" (change)="getClientType()">
+              <option *ngFor="let allClientTypes of allClientType" value="{{allClientTypes.id}}">{{allClientTypes.type}}
+            </select>
+          </div>
+
+
+        </div>
+
 
 
         <div class="bio-row"></div>
 
-          <div class="bio-row">
-              
-           <br>
-           <div class="inputbox mt-1">
+        <div class="bio-row">
+
+      
+          <div class="inputbox mt-1">
             <button class="button" data-toggle="modal" data-target="#DeleteModal">Ajouter</button>
 
-            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -57,15 +62,17 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addClient()" >Ajouter</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                      (click)="addClient()">Ajouter</button>
                   </div>
                 </div>
               </div>
             </div>
-           
-    
+
+
           </div>
-    
+
         </div>
+      </div>
     </div>
-    </div></div>
+  </div>
