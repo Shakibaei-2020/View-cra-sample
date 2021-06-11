@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
+import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 import { Leave } from 'src/app/z-model/Leave/leave';
 import { TypeLeave } from 'src/app/z-model/Leave/type-leave';
 
@@ -14,17 +16,25 @@ export class CongeEditComponent implements OnInit {
   leave = new Leave();
   updatedLeave = new Leave();
 
-  dateOfDemand !: string;
+  dateOfDemand= "";
   dateStartLeave =  new Date();
   dateEndLeave = new Date();
   allLeaveType!: TypeLeave[];
 
   status =  ["en-cours", "validé", "refusé"]
   inputedStatus!:string;
+  collaborator = new Collaborator();
 
   constructor(private _service:NgserviceService, private _route:Router) { }
 
   ngOnInit(): void {
+
+
+    this._service.selectOneCollabById(2).subscribe(
+      data=> this.collaborator = data,
+      error=>console.log("exception" +error)
+    )
+
     this._service.selectOneLeaveRequestById(191).subscribe(
       data=> this.leave = data,
       error=>console.log("exception" +error)
@@ -61,11 +71,18 @@ export class CongeEditComponent implements OnInit {
   }
 
 
-    /** Lancement de la mise à jour*/
+
+  pipeDate = new DatePipe('fr-FR');
+
+  /** Lancement de la mise à jour*/
   updateLeave(){
+
     this.updatedLeave.id = this.leave.id;
     this.updatedLeave.leaveType = this.leaveType
 
+    this.dateOfDemand = this.pipeDate.transform(this.leave.dateOfDemand, 'yyyy-MM-dd') || this.dateOfDemand;
+    console.log(this.dateOfDemand)
+    
     this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemand,this.dateStartLeave,this.dateEndLeave).subscribe(
       data =>{
         console.log("mise à joru effectué");
@@ -74,9 +91,12 @@ export class CongeEditComponent implements OnInit {
         console.log("erreur ajout non-effectué")
       }
     )
+
     /** Rafraichissement de la page*/
-    window.location.reload();
+    //window.location.reload();
   }
+
+ 
 
   /** On supprime le leave en cours d'edition*/
   deleteLeave(){
@@ -89,4 +109,27 @@ export class CongeEditComponent implements OnInit {
       }
     )
   }
+
+  formatageDate(date:Date) {
+    var jour = date.getDay() + 6;
+    var jour_toString = jour.toString();
+    if (jour < 10) {
+      jour_toString = "0" + jour_toString;
+    }
+    var mois = date.getMonth() + 1;
+    var mois_toString = mois.toString();
+    if (mois < 10) {
+      mois_toString = "0" + mois_toString;
+    }
+    var annee = date.getFullYear();
+    return annee + '-' + mois_toString + '-' + jour_toString;
+  }
+
+   WithoutTime(dateTime:Date) {
+    var date = new Date(dateTime.getTime());
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
+
+
 }

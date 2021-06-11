@@ -53,6 +53,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
 
   /** Ajout de la note de frais */
   addExpense() {
+    /** 
     this.expense.status = 'en-cours';
     this.expense.typeExpense = this.typeExpense;
     this._service.addAndUpdateExpense(this.expense, this.dateExpense, this.dateRequest).subscribe(
@@ -62,7 +63,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
       error => {
         console.log("erreur ajout non-effectué")
       }
-    )
+    ) */
   }
 
   /** retour vers l'accueil utilisateur */

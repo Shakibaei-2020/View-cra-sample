@@ -46,19 +46,19 @@ export class EditCollaborateurComponent implements OnInit {
 
 
   /** Expense-[i] data */
-  dateExpenseRequest = new Array();
   dateExpense = new Array();
-  expenseBillable= new Array();
-  expenseCostHT= new Array();
-  expenseCostTVA= new Array();
-  expenseStatus= new Array();
+  expenseBillable = new Array();
+  expenseCostHT = new Array();
+  expenseCostTVA = new Array();
+  expenseStatus = new Array();
+  expenseRequestId = new Array();
 
   /** leave-[i] data */
-  leaveDateOfDemand = new Array();
-  leaveDateOfStart= new Array();
-  leaveDateOfEnd= new Array();
-  leaveStatus= new Array();
-  leaveInformed= new Array();
+  leaveRequestId = new Array();
+  leaveDateOfStart = new Array();
+  leaveDateOfEnd = new Array();
+  leaveStatus = new Array();
+  leaveInformed = new Array();
 
   ngOnInit() {
 
@@ -67,7 +67,6 @@ export class EditCollaborateurComponent implements OnInit {
     this._service.selectOneCollabById(2).subscribe(
       data => {
         this.collaborateur = data;
-        console.log(this.collaborateur.passward);
 
         this._service.selectTypeCollaboratorById(this.collaborateur.typeCollaborator.id).subscribe(
           data => this.typeCollaborator = data,
@@ -84,36 +83,38 @@ export class EditCollaborateurComponent implements OnInit {
     )
 
     this._service.listExpenseByCollabId(2).subscribe(
-      data => this.expenses = data,
+      data => {
+        this.expenses = data;
+
+        for (var i = 0; i < this.expenses.length; i++) {
+
+          this.expenseRequestId.push("expenseRequestId-" + i);
+          this.dateExpense.push("dateExpense-" + i);
+          this.expenseBillable.push("expenseBillable-" + i);
+          this.expenseCostHT.push("expenseCostHT-" + i);
+          this.expenseCostTVA.push("expenseCostTVA-" + i);
+          this.expenseStatus.push("expenseStatus-" + i);
+        }
+
+      },
       error => console.log("exception" + error)
     )
 
     this._service.selectLeaveByCollabId(2).subscribe(
-      data => this.leaves = data,
+      data => {
+        this.leaves = data;
+
+        for (var i = 0; i < this.leaves.length; i++) {
+          
+          this.leaveRequestId.push("leaveRequestId-" + i);
+          this.leaveDateOfStart.push("leaveDateOfStart-" + i);
+          this.leaveDateOfEnd.push("leaveDateOfEnd-" + i);
+          this.leaveStatus.push("leaveStatus-" + i);
+          this.leaveInformed.push("leaveInformed-" + i);
+        }
+      },
       error => console.log("exception" + error)
     )
-
-
-    /** au lieu de 30 avoir la taille du tableau Expense*/
-    for (var i = 0; i < 30; i++) {
-    this.dateExpenseRequest.push("dateExpenseRequest-" + i);
-    this.dateExpense.push("dateExpense-" + i);
-    this.expenseBillable.push("expenseBillable-" + i);
-    this.expenseCostHT.push("expenseCostHT-" + i);
-    this.expenseCostTVA.push("expenseCostTVA-" + i);
-    this.expenseStatus.push("expenseStatus-" + i);
-    }
-
-  /** au lieu de 30 avoir la taille du tableau Leave*/
-  for (var i = 0; i < 30; i++) {
-
-    this.leaveDateOfDemand.push("leaveDateOfDemand-" + i); 
-    this.leaveDateOfStart.push("leaveDateOfStart-" + i);
-    this.leaveDateOfEnd.push("leaveDateOfEnd-" + i);
-    this.leaveStatus.push("leaveStatus-" + i);
-    this.leaveInformed.push("leaveInformed-" + i);
-  }
-
 
   }
 
@@ -159,37 +160,51 @@ export class EditCollaborateurComponent implements OnInit {
   }
 
   /** Expense commands */
+  pipeDate = new DatePipe('fr-FR');
 
 
 
   selectedExpense = new Expense();
-  updatedExpense= new Expense();
-  newDateRequest!: Date;
-  newDateExpense!: Date;
+  updatedExpense = new Expense();
+  newDateRequest!: string;
+  newDateExpense!: string;
 
-  updateExpenseFromCollab() {
+  index!: number;
 
-    /**  
-      this.updatedExpense.id = 192;
-      this.newDateRequest = (<HTMLInputElement>document.getElementById(this.dateExpenseRequest[0])).valueAsDate;
-      this.newDateExpense =  (<HTMLInputElement>document.getElementById(this.dateExpense[0])).valueAsDate;
-      this.updatedExpense.billable =  (<HTMLInputElement>document.getElementById(this.expenseBillable[0])).defaultValue;
-      this.updatedExpense.costHT =  (<HTMLInputElement>document.getElementById(this.expenseCostHT[0])).valueAsNumber;
-      this.updatedExpense.costTVA =  (<HTMLInputElement>document.getElementById(this.expenseCostTVA[0])).valueAsNumber;
-      this.updatedExpense.status =  (<HTMLInputElement>document.getElementById(this.expenseStatus[0])).value;
+  date = new Date();
 
-      this._service.addAndUpdateExpense(this.updatedExpense,this.newDateExpense,this.newDateRequest).subscribe(
-        data =>{
-          console.log("ajout effectué");
-        },
-        error =>{
-          console.log("erreur ajout non-effectué")
-        }
-      )
-    window.location.reload();
- */
-}
-    
+  expenseToUpdate = new Expense();
+
+
+  updateExpenseFromCollab(indexOfElement: number) {
+
+    this._service.selectOneExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
+      data => {
+        this.expenseToUpdate = data;
+
+        this.updatedExpense.id = this.expenseToUpdate.id;
+        this.updatedExpense.collaboratorId = this.expenseToUpdate.collaboratorId;
+        this.newDateRequest = this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+        this.newDateExpense = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateExpense[indexOfElement])).valueAsDate, 'yyyy-MM-dd')|| this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+        this.updatedExpense.billable = !(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])) || this.expenseToUpdate.billable;
+        this.updatedExpense.costHT = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[indexOfElement])).value|| this.expenseToUpdate.costHT;
+        this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[indexOfElement])).value || this.expenseToUpdate.costTVA;
+        this.updatedExpense.status = (<HTMLInputElement>document.getElementById(this.expenseStatus[indexOfElement])).value  || this.expenseToUpdate.status;;
+
+        this._service.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
+          data => {
+            console.log("mise à jour effectué");
+          },
+          error => {
+            console.log("erreur maj non-effectué")
+          }
+        )
+        window.location.reload();
+      },
+      error => console.log("exception" + error),
+    )
+  }
+
 
 
   deleteExpenseFromCollab(value: number) {
@@ -207,35 +222,47 @@ export class EditCollaborateurComponent implements OnInit {
   /** Leaves commands */
 
 
-  
-  updatedLeave= new Leave();
+
 
   dateLeaveRequest!: string;
   dateStartLeave!: Date;
   dateEndLeave!: Date;
 
-  updateLeaveFromCollab() {
+  leaveRequestToUpdated = new Leave();
+  updatedLeave = new Leave();
 
-    /**  
-      this.updatedLeave.id = 192;
-      this.dateLeaveRequest = (<HTMLInputElement>document.getElementById(this.leaveDateOfDemand[0])).valueAsDate;
-      this.dateStartLeave =  (<HTMLInputElement>document.getElementById(this.leaveDateOfStart[0])).valueAsDate;
-      this.dateEndLeave = (<HTMLInputElement>document.getElementById(this.leaveDateOfEnd[])).valueAsDate;
+  updateLeaveFromCollab(indexOfElement:number) {
 
-      this.updatedLeave.clientInformed =  (<HTMLInputElement>document.getElementById(this.leaveInformed[0])).defaultValue;
-      this.updatedLeave.status =  (<HTMLInputElement>document.getElementById(this.leaveStatus[0])).valueAsNumber;
 
-       this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateLeaveRequest, this.dateStartLeave, this.dateEndLeave).subscribe(
+    
+    this._service.selectOneLeaveRequestById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
       data => {
-        console.log("ajout effectué");
+        this.leaveRequestToUpdated = data;
+
+        this.updatedLeave.id = this.leaveRequestToUpdated.id;
+        this.updatedLeave.dateOfStartLeave
+        this.updatedLeave.dateOfEndLeave
+        this.updatedLeave.dateOfDemand
+        this.updatedLeave.collaboratorId
+        this.updatedLeave.clientInformed
+        this.updatedLeave.dateOfStartLeave
+        this.updatedLeave.statusDebut
+        this.updatedLeave.statusFin
+        this.updatedLeave.status
+
+        this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateLeaveRequest, this.dateStartLeave, this.dateEndLeave).subscribe(
+          data => {
+            console.log("ajout effectué");
+          },
+          error => {
+            console.log("erreur ajout non-effectué")
+          }
+        )
+        window.location.reload();
       },
-      error => {
-        console.log("erreur ajout non-effectué")
-      }
+      error => console.log("exception" + error),
     )
-    window.location.reload();
-*/
-}
+  }
 
 
   deleteLeaveFromCollab(value: any) {
@@ -248,4 +275,11 @@ export class EditCollaborateurComponent implements OnInit {
       }
     )
   }
+
+
+   WithoutTime(dateTime:Date) {
+    var date = new Date(dateTime.getTime());
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
 }

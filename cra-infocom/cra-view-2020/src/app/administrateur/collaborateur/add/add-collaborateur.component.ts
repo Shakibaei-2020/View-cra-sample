@@ -40,7 +40,7 @@ export class AddCollaborateurComponent implements OnInit {
 
     this.mdp = this.randomMDP();
 
-    this.collaborator.passward =   this.mdp;
+    this.collaborator.password =  this.mdp;
     this.collaborator.typeCollaborator = this.collaboratorType;
 
    this._service.addCollab(this.collaborator,this.date1,this.date2).subscribe(
@@ -52,7 +52,6 @@ export class AddCollaborateurComponent implements OnInit {
       }
     )
 
-    console.log
     }
 
     idOfCollType!: number;

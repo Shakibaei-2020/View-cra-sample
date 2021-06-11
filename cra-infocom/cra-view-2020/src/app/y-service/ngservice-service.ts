@@ -88,7 +88,7 @@ export class NgserviceService {
     return this._http.get<Expense[]>("http://localhost:7672/expenses/lister/expense/collab/" + id);
   }
 
-  addAndUpdateExpense(expense: Expense, dateExpense: Date, dateRequest: string): Observable<any> {
+  addAndUpdateExpense(expense: Expense, dateExpense: string, dateRequest: string): Observable<any> {
     return this._http.post<any>("http://localhost:7672/expenses/ajouter/" + dateExpense + "/" + dateRequest, expense);
   }
 

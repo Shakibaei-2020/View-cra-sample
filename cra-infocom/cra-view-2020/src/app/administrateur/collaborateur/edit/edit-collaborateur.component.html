@@ -4,234 +4,295 @@
 
 <div class="div-edit">
 
-<div class="container">
-  <div class="panel">
+  <div class="container">
+    <div class="panel">
 
-  <div>
-    <button class="img-fluid bouttonSousMenu">
-        <img class="img1"
+      <div>
+        <button class="img-fluid bouttonSousMenu">
+          <img class="img1"
             src="https://img-premium.flaticon.com/png/512/1534/1534938.png?token=exp=1623225915~hmac=32088da7943da48bf7dadfe6039678cc">
-    </button>
-    <h2 class="page">Modification du collaborateur : {{collaborateur.firstName}}  {{collaborateur.lastName}} </h2>
-</div>
-<hr>
-   
-          
-          <div class="panel-body bio-graph-info">
-           
-             <div class="row">
-                  <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Prénom : {{collaborateur.firstName}}  </span> <input type="text"   required [(ngModel)]="updatedCollaborator.firstName" name="firstName"> </div>
-                    <div class="inputbox mt-1"><span class="input-title">Date d'entrée : {{collaborateur.dateOfEntry | date: 'dd/MM/yyyy'}} </span> <input type="date"   required [(ngModel)]="date1" name="date1"> </div>
-                    <div class="inputbox mt-1"><span class="input-title">Date de sortie :{{collaborateur.dateOfRelease | date: 'dd/MM/yyyy'}} </span> <input type="date"   required [(ngModel)]="date2" name="date2"> </div>
+        </button>
+        <h2 class="page">Modification du collaborateur : {{collaborateur.firstName}} {{collaborateur.lastName}} </h2>
+      </div>
+      <hr>
 
+
+      <div class="panel-body bio-graph-info">
+
+        <div class="row">
+          <div class="bio-row">
+            <div class="inputbox mt-1"><span class="input-title">Prénom : {{collaborateur.firstName}} </span> <input
+                type="text" value="{{collaborateur.firstName}}" required [(ngModel)]="updatedCollaborator.firstName"
+                name="firstName"> </div>
+            <div class="inputbox mt-1"><span class="input-title">Date d'entrée : {{collaborateur.dateOfEntry | date:
+                'dd/MM/yyyy'}} </span> <input type="date" required [(ngModel)]="date1" name="date1"> </div>
+            <div class="inputbox mt-1"><span class="input-title">Date de sortie :{{collaborateur.dateOfRelease | date:
+                'dd/MM/yyyy'}} </span> <input type="date" required [(ngModel)]="date2" name="date2"> </div>
+
+          </div>
+
+
+          <div class="bio-row">
+            <div class="inputbox mt-1"><span class="input-title">Nom de famille :
+                {{collaborateur.lastName}}</span><input type="text" value="{{collaborateur.lastName}}" required
+                [(ngModel)]="updatedCollaborator.lastName" name="lastName"> </div>
+            <div class="inputbox mt-1"><span class="input-title">Adresse mail : {{collaborateur.email}} </span> <input
+                type="text" value="{{collaborateur.email}}" required [(ngModel)]="updatedCollaborator.email"
+                name="email"> </div>
+
+            <div class="inputbox mt-3"><span>Type : {{typeCollaborator.type}}</span><br>
+              <select class="typeCollab" aria-label="Default select example" value="" required
+                [(ngModel)]="idOfCollType" name="idOfCollType" (change)="getCollType()">
+                <option *ngFor="let allTypeCollaborators of allTypeCollaborator" value
+                  value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}
+              </select>
+            </div>
+          </div>
+
+
+          <div class="bio-row">
+
+          </div>
+          <div class="bio-row">
+
+            <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+
+
+
+            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
-
-                
-                  <div class="bio-row">
-                    <div class="inputbox mt-1"><span class="input-title">Nom de famille : {{collaborateur.lastName}}</span><input type="text"   required [(ngModel)]="updatedCollaborator.lastName" name="lastName"  > </div>
-                    <div class="inputbox mt-1"><span class="input-title">Adresse mail : {{collaborateur.email}} </span> <input type="text"   required [(ngModel)]="updatedCollaborator.email" name="email"  > </div>
-                  
-                    <div class="inputbox mt-3"><span>Type : {{typeCollaborator.type}}</span><br>
-                      <select class="typeCollab" aria-label="Default select example" required [(ngModel)]="idOfCollType" name="idOfCollType" (change)="getCollType()">
-                          <option *ngFor="let allTypeCollaborators of allTypeCollaborator" value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}
-                      </select>
+                  <div class="modal-body">
+                    Êtes vous sur de vouloir mettre à jour ?
                   </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" (click)="updateCollab()">Sauvgarder</button>
                   </div>
-              
-                 
-                <div class="bio-row">
-          
-                </div>
-                <div class="bio-row">
-
-                    <button class="button" data-toggle="modal" data-target="#updateModal"  >Mettre à jour</button>
-
-                
-
-                    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            Êtes vous sur de vouloir mettre à jour ?
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary" (click)="updateCollab()">Sauvgarder</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-                    <button class="button" data-toggle="modal" data-target="#DeleteModal" >Supprimer</button>
-
-                    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Alert delete</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            Êtes vous sur de vouloir supprimer?
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary" (click)="deleteCollab()">Supprimer</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                 
-                   
                 </div>
               </div>
-            
+            </div>
+
+
+
+            <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
+
+            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alert delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Êtes vous sur de vouloir supprimer?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" (click)="deleteCollab()">Supprimer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
           </div>
+        </div>
+
       </div>
+    </div>
 
 
-      <div class="bio-graph-heading">
-        <p class="titre"> Notes de frais </p>
-     </div>
-<br>
-      <table class="table table-condensed">
-        <thead>
-          <tr >
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+    <div class="bio-graph-heading">
+      <p class="titre"> Notes de frais </p>
+    </div>
+    <br>
+    <table class="table table-condensed ">
+      <thead>
+        <tr>
+          <th class="expenseId"></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let expense of expenses; let indexOfelement =index;">
-
-            <td>  
-              <span class="input-title">Date de demande : {{expense.dateRequest | date:   'dd/MM/yyyy'}} </span> 
-              <input type="date" name="dateExpenseRequest-{{indexOfelement}}" id="dateExpenseRequest-{{indexOfelement}}" > </td>
-            <td>  
-              <span class="input-title">Date de frais : {{expense.dateExpense | date:   'dd/MM/yyyy'}} </span> 
-              <input type="date" name="dateExpense-{{indexOfelement}}" id="dateExpense-{{indexOfelement}}" > </td>
-            <td>  
-              <span class="input-title">Facturable: {{expense.billable}}</span> 
-              <select class="expenseInput" aria-label="Default select example"   name="expenseBillable-{{indexOfelement}}" id="expenseBillable-{{indexOfelement}}"  > 
-                <option value="{{expense.billable}}">{{expense.billable}}</option>
-                <option value="valider">true</option>
-              </select>
-        
-            </td>
-            <td>  
-              <span class="input-title">Coût HT : {{expense.costHT }}</span> 
-              <input class="costInput"  name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}"> </td>
-
-            <td>   
-              <span class="input-title">Coût TVA: {{expense.costTVA }}</span> 
-              <input class="costInput"  name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}"> </td>
-            <td>  
-              <span class="input-title">État : {{expense.status}}</span> 
-              <select class="expenseInput" aria-label="Default select example"   name="expenseStatus-{{indexOfelement}}" id="expenseStatus-{{indexOfelement}}"  > 
-                <option value="{{expense.status}}">{{expense.status}}</option>
-                <option value="validé">valider</option>
-                <option value="refusé">refuser</option>
-              </select> </td>
-
-              
-       
-            <td>
-                <button class="btnTab" type="submit"  (click)="updateExpenseFromCollab()">Maj</button><br><br>
-                <button class="btnTab" type="submit"  (click)="deleteExpenseFromCollab(expense.id)">Supprimer</button>
-            </td>
         </tr>
-        </tbody>
-      </table>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of expenses; let indexOfelement = index;">
 
-     
-      <div class="bio-graph-heading">
-        <p class="titre"> Demande de congées  </p>
-     </div>
-     <br>
+          <td class="expenseRequestId">
+            <input type="text" value="{{expense.id}}" name="expenseRequestId-{{indexOfelement}}"
+              id="expenseRequestId-{{indexOfelement}}" disabled>
+          </td>
+          <td>
 
-      <table class="table table-condensed">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
 
-          </tr>
-        </thead>
-        <tbody  > 
+          <td>
+            <span class="input-title">Demande du: </span>
+            <input type="text" value=" {{expense.dateRequest | date:   'dd/MM/yyyy'}}" disabled>
+          </td>
+          <td>
 
-          <tr  *ngFor="let leave of leaves; let indexOfelement =index;">
-            <td>   
-              <span class="input-title">Date de la demande : {{leave.dateOfDemand | date:   'dd/MM/yyyy'}}</span> 
-              <input  type="date" name="leaveDateOfDemand-{{indexOfelement}}" id="leaveDateOfDemand-{{indexOfelement}}" > 
-            </td>
-            <td>  
-              <span class="input-title">Date de début : {{leave.dateOfStartLeave | date:   'dd/MM/yyyy'}}</span> 
-               <input type="date"  name="leaveDateOfStart-{{indexOfelement}}" id="leaveDateOfStart-{{indexOfelement}}" > 
-              </td>
-            <td>  
-              <span class="input-title">Date de fin : {{leave.dateOfEndLeave | date:   'dd/MM/yyyy'}}</span> 
-              <input type="date"  name="leaveDateOfEnd-{{indexOfelement}}" id="leaveDateOfEnd-{{indexOfelement}}">
-            
-            </td>
-            <td>   
-              <span class="input-title">État : {{leave.status}}</span> 
-              <select class="expenseInput"  name="leaveStatus-{{indexOfelement}}" id="leaveStatus-{{indexOfelement}}"> 
-                <option value="validé">valider</option>
-                <option value="refusé">refuser</option>
-                <option value="en-cours">en-cours</option>
+            <span class="input-title">Frais du: {{expense.dateExpense | date: 'dd/MM/yyyy'}} </span>
+            <input type="date" name="dateExpense-{{indexOfelement}}" id="dateExpense-{{indexOfelement}}">
+          </td>
+          <td>
+            <span class="input-title">Facturable: {{expense.billable}}</span>
+            <select class="expenseInput" aria-label="Default select example" name="expenseBillable-{{indexOfelement}}"
+              id="expenseBillable-{{indexOfelement}}">
+              <option value="true">Oui</option>
+              <option value="false">Non</option>
 
-              </select> 
-            </td>
-            <td>   
-              <span class="input-title">Client informé : {{leave.clientInformed}}</span> 
-              <select class="expenseInput" aria-label="Default select example" name="leaveInformed-{{indexOfelement}}" id="leaveInformed-{{indexOfelement}}">  
-                <option value="{{leave.clientInformed}}">{{leave.clientInformed}}</option>
-                <option value="false">false</option>
-              </select>
-            </td>
-       
-            <td>
-                <button class="btnTab" type="submit" (click)="updateLeaveFromCollab()">Maj</button><br><br>
-                <button class="btnTab" type="submit" (click)="deleteLeaveFromCollab(leave.id)">Supprimer</button>
+            </select>
 
-            </td>
+          </td>
+          <td>
+            <span class="input-title">Coût HT : {{expense.costHT }}</span>
+            <input type="text" name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}">
+          </td>
+
+          <td>
+            <span class="input-title">Coût TVA: {{expense.costTVA }}</span>
+            <input class="costInput" name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}">
+          </td>
+          <td>
+            <span class="input-title">État : {{expense.status}}</span>
+            <select class="expenseInput" aria-label="Default select example" name="expenseStatus-{{indexOfelement}}"
+              id="expenseStatus-{{indexOfelement}}">
+              <option value="{{expense.status}}">{{expense.status}}</option>
+
+              <option value="validé">valider</option>
+              <option value="refusé">refuser</option>
+            </select>
+          </td>
+
+
+          <td>
+            <button class="btnTab" type="submit" (click)="updateExpenseFromCollab(indexOfelement)">Maj</button><br><br>
+            <button class="btnTab" type="submit" (click)="deleteExpenseFromCollab(expense.id)">Supprimer</button>
+          </td>
         </tr>
+      </tbody>
+    </table>
+
+<!-- old version 
+
+    <div class="bio-graph-heading">
+      <p class="titre"> Demande de congées </p>
+    </div>
+    <br>
+    <table class="table table-condensed ">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of leaves; let indexOfelement =index;">
+          <td class="expenseRequestId">
+            <input type="text" value="{{leave.id}}" name="leaveRequestId-{{indexOfelement}}"
+              id="leaveRequestId-{{indexOfelement}}" disabled>
+          </td>
+          <td>
+          <td>
+            <span class="input-title"> Demande du :</span>
+            <input type="text" value="  {{leave.dateOfDemand | date:   'dd/MM/yyyy'}}" disabled>
+          </td>
+          <td>
+            <span class="input-title"> Début le: {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span>
+            <input type="date" name="leaveDateOfStart-{{indexOfelement}}" id="leaveDateOfStart-{{indexOfelement}}">
+          </td>
+          <td>
+            <span class="input-title">Termine le : {{leave.dateOfEndLeave | date: 'dd/MM/yyyy'}}</span>
+            <input type="date" name="leaveDateOfEnd-{{indexOfelement}}" id="leaveDateOfEnd-{{indexOfelement}}">
+          </td>
+          <td>
+            <span class="input-title">État : {{leave.status}}</span>
+            <select class="expenseInput" name="leaveStatus-{{indexOfelement}}" id="leaveStatus-{{indexOfelement}}">
+              <option value="validé">valider</option>
+              <option value="refusé">refuser</option>
+
+            </select>
+          </td>
+          <td>
+            <span class="input-title">Client informé : {{leave.clientInformed}}</span>
+            <select class="expenseInput" aria-label="Default select example" name="leaveInformed-{{indexOfelement}}"
+              id="leaveInformed-{{indexOfelement}}">
+              <option value="true">oui</option>
+              <option value="false">Non</option>
+            </select>
+          </td>
+          <td>
+            <button class="btnTab" type="submit" (click)="updateLeaveFromCollab(indexOfelement)">Maj</button><br><br>
+            <button class="btnTab" type="submit" (click)="deleteLeaveFromCollab(leave.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+     -->
+    <br>
+
+    <div class="bio-graph-heading">
+      <p class="titre"> Demande de congées </p>
+    </div>
+    <br>
+    <table class="table table-condensed ">
+      <thead>
+        <tr>
+          <th>Date demande</th>
+          <th>Date  de début</th>
+          <th>Date de fin</th>
+          <th>État de la demande</th>
+          <th>Client informé :</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of leaves; let indexOfelement =index;">
+      
+          <td>
+            <span class="">{{leave.dateOfDemand | date:   'dd/MM/yyyy'}}</span>
+          </td>
+          <td>
+            <span class="">{{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span>
+          </td>
+          <td>
+            <span class="">{{leave.dateOfEndLeave | date: 'dd/MM/yyyy'}}</span>
+          </td>
+          <td>
+            <span class="" > {{leave.status}}</span>
+          </td>
+          <td>
+            <span class=""> {{leave.clientInformed}}</span>
+          </td>
+          <td>
+            <button class="btnTab" type="submit">+</button><br><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
 
-        </tbody>
-      </table>
-
-
-
-
-<br>
-
+  </div>
 </div>
-
-
-</div>
 <br>
 <br>
 <br>
-

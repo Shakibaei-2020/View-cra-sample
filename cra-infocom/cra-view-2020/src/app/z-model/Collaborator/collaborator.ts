@@ -7,7 +7,7 @@ export class Collaborator {
     public lastName!:string;
     public firstName!:string;
     public email!:string;
-    public passward!:string;
+    public password!:string;
     public dateOfEntry!:Date;
     public dateOfRelease!:Date;
     public profileImagePath!: Blob;

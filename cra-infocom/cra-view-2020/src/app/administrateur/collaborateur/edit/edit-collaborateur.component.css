@@ -126,7 +126,10 @@
     font-size: 22px;
     font-weight: 300;
     margin-bottom: 5px;
+}
 
+.expenseId{
+  display: none;
 }
 
 .form-input{
@@ -164,6 +167,9 @@
 
 }
 
+.noteDeFraisTable{
+  margin-left: -110px;
+}
 input[type=text] {
   width: 100%;
   padding: 12px 20px;
@@ -173,10 +179,17 @@ input[type=text] {
   border-bottom: 2px solid #464646;
 }
 
+.leaveTable{
+  width: 1200px;
+}
+
+.dayInput{
+  width: 200px;
+}
 
 
 .expenseInput{
-  width: 120px;
+  width: 100px;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
@@ -193,11 +206,20 @@ input[type=date] {
     box-sizing: border-box;
     border: none;
     border-bottom: 2px solid #464646;
+  }
+
+  input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
 
   }
 
   .costInput{
-      width: 120px;
+      width: 100px;
       padding: 12px 20px;
       margin: 8px 0;
 
@@ -305,4 +327,8 @@ input[type=date] {
   .buttonAdd:active {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+  }
+
+  .expenseRequestId{
+    display: none;
   }

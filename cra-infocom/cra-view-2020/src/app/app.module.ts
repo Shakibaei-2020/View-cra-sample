@@ -39,12 +39,11 @@ import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.compo
 import { AccueilUtilisateurComponent } from './utilisateur/Accueil/accueil-utilisateur.component';
 import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-declaration/note-de-frais-declaration.component';
 import { AccueilAdministrateurComponent } from './administrateur/accueil-administrateur/accueil-administrateur.component';
-import { DatePipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 
-
 registerLocaleData(localeFr, 'fr');
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +80,7 @@ registerLocaleData(localeFr, 'fr');
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent],
