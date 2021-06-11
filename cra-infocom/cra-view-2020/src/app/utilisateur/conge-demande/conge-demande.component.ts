@@ -22,8 +22,6 @@ export class CongeDemandeComponent implements OnInit {
 
   constructor(private _route: Router, private _service: NgserviceService) { }
 
-
-
   ngOnInit(): void {
 
     /** id du collaborateur connecté suite à la connexion */
@@ -38,7 +36,7 @@ export class CongeDemandeComponent implements OnInit {
       data => this.allLeaveType = data,
       error => console.log("exception" + error)
     )
-    
+
     /** id du collaborateur recuperé a la connexion */
     this._service.selectLeaveByCollabId(2).subscribe(
       data => this.leaves = data,
@@ -75,7 +73,7 @@ export class CongeDemandeComponent implements OnInit {
         console.log("erreur ajout non-effectué")
       }
     )
-    
+
   }
 
 
