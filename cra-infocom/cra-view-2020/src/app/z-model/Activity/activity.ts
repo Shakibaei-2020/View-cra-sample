@@ -8,6 +8,6 @@ export class Activity {
 	public  startDate!: Date;
 	public  duration!: number;
 	public  remote!: boolean;
-	public TypeActivity = new TypeActivity();
+	public typeActivity = new TypeActivity();
 
 }

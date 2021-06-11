@@ -122,7 +122,7 @@ export class NgserviceService {
 
   /** TYPE **/
   selectLeaveTypeById(id: number): Observable<TypeLeave> {
-    return this._http.get<TypeLeave>("http://localhost:8950/typesdeconge/lister/one/" + id);
+    return this._http.get<TypeLeave>("http://localhost:8950/typesdeconge/lister/" + id);
   }
 
   selectAllLeaveType(): Observable<TypeLeave[]> {
@@ -205,14 +205,9 @@ export class NgserviceService {
 
   /*************************************************************************************** PROJECT SERVICES *******************************************************************************/
 
-  selectProjectByMissionId(id: number): Observable<any> {
-    var projet: Observable<any>;
-    projet = this._http.get<any>("http://localhost:8801/project/foundProject/" + id)
-    console.log("Projet est il recupéré ? : " + projet);
-    return projet;
+  selectProjectByMissionId(id: number): Observable<Project> {
+    return this._http.get<Project>("http://localhost:8801/project/foundProject/" + id);
   }
-
-
 
   SelectAllProjectForOneCollab(id: number): Observable<Project[]> {
     return this._http.get<Project[]>("http://localhost:8801/project/projectByCollab/" + id);

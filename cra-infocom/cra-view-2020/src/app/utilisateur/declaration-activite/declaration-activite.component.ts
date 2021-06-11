@@ -23,6 +23,9 @@ export class DeclarationActiviteComponent implements OnInit {
   year!: number;
   day!: number;
   daysInMonth!: number;
+  
+  monthSelected = this.dt.getMonth()+1;
+  yearInput = this.dt.getFullYear();
 
   tabJours = new Array();
 
@@ -41,7 +44,7 @@ export class DeclarationActiviteComponent implements OnInit {
   /**  astreinte dynamique
    astreintePerDay = new Array();
    */
-
+   isLoading: boolean = true;
   astreintePerDay1 = new Array();
   astreintePerDay2 = new Array();
   astreintePerDay3 = new Array();
@@ -60,47 +63,53 @@ export class DeclarationActiviteComponent implements OnInit {
   public collaborateur!: Collaborator;
 
   public projects!: Project[];
+  public projectsByCollab!: Project[];
   lesTypeActivity: TypeActivity[] = [];
 
   // Pour formater des dates faut faire appel à ce pipe comme l'exemple ci-dessous
   aujourdhuiTestFormat = new Date();
   pipeDate = new DatePipe('fr-FR');
-  aujourdhuiTestFormatFormatee = this.pipeDate.transform(this.aujourdhuiTestFormat, 'yyyy-mm-dd');
-
+  aujourdhuiTestFormatFormatee = this.pipeDate.transform(this.aujourdhuiTestFormat, 'yyyy-MM-dd');
 
   ngOnInit(): void {
     this.aujourdhui = this.formatageDate();
 
+    // Pour récupérer la liste des types d'activité : opérationnelle
     this._service.selectAllTypeActivity().subscribe(
       data => this.lesTypeActivity = data,
-      error => console.log("exception" + error)
+      error => console.log("exception" + error),
+      () => this.isLoading = false
     )
 
+    // Pour récupérer la liste des missions : opérationnelle mais avoir si on en a vraiment besoin
     this._service.selectAllMission().subscribe(
       data => this.missions = data,
       error => console.log("exception" + error)
     )
 
+    // Pour récupérer la liste des projects affectés à un collaborateur : opérationnelle mais faut l'automatiser
     // TODO : attention c'es en dur
     this._service.SelectAllProjectForOneCollab(2).subscribe(
-      data => this.projects = data,
+      data => {this.projects = data;},
       error => console.log("exception" + error)
     )
 
+    // Pour récupérer toutes les informations sur un collaborateur : opérationnelle mais faut l'automatiser
     // TODO : attention c'es en dur
     this._service.selectOneCollabById(2).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)
     )
 
-    this.month = this.dt.getMonth() + 1;
-    this.year = this.dt.getFullYear();
-    this.daysInMonth = new Date(this.year, this.month, 0).getDate();
+    // Afin de récupérer le nombre de jour dans un mois : opérationnelle mais on peut faire mieux or at least extract this methode outside ngOnInit()
+    // En plus de calcul se refait dans la méthode updateMonth(), il sera mieux de le faire à un seul endroit et mettre la valeur de ce mois par défaut.
+    /* this.month = this.dt.getMonth() + 1;
+    this.year = this.dt.getFullYear();*/
+    this.daysInMonth = new Date(this.yearInput, this.monthSelected, 0).getDate();
 
+    // Cette bocle sert à affecter un nom à chaque case du calendrier en HTML pour les activités et les astreintes
     for (var i = 0; i < this.daysInMonth; i++) {
       this.tabJours[i] = i + 1;
-
-      /** Activité */
       this.activitiesPerDay.push("jour-" + i);
       this.remotePerDay.push("remote-" + i);
 
@@ -121,11 +130,11 @@ export class DeclarationActiviteComponent implements OnInit {
   }
 
   /** total temps d'activité */
-  monthSelected!: number;
-  yearInput!: number;
   updateMonth() {
 
     this.tabJours = [];
+    this.activitiesPerDay = [];
+    this.remotePerDay = [];
     this.dt.setMonth(this.monthSelected - 1);
     this.dt.setFullYear(this.yearInput)
 
@@ -135,15 +144,17 @@ export class DeclarationActiviteComponent implements OnInit {
 
     this.daysInMonth = new Date(this.year, this.month, 0).getDate();
     for (var i = 0; i < this.daysInMonth; i++) {
-      this.tabJours[i] = i + 1;
+      this.tabJours[i] = i + 1;      
+      this.activitiesPerDay.push("jour-" + i);
+      this.remotePerDay.push("remote-" + i);
     }
   }
 
+  // Je sais que ça fonctionne mais l'idée et de partir sur l'autre formatage avec le pipe
   /** Formatage de la date */
   aujourdhui !: string;
   formatageDate() {
     var jour = new Date().getDay() + 6;
-    console.log(jour);
     var jour_toString = jour.toString();
     if (jour < 10) {
       jour_toString = "0" + jour_toString;
@@ -158,29 +169,30 @@ export class DeclarationActiviteComponent implements OnInit {
   }
 
   /** ACTIVITE1  */
-
+  /*  refinterne = new Number();
+  refClient !: string; */
+  // laMission = new Mission();
   dureeProjet1 = 0;
-  refinterne = new Number();
-  refClient !: string;
-  laMission = new Mission();
   tabAllInputedValue = new Array();
-  j!: number;
   selectedOption!: number;
-  ProjectActivity = new Project;
+  projectActivity = new Project;
   isRemote = false;
+  activityNormal = new Activity;
 
+  // Cette méthode permetait de mettre à jour les informations pour la mission, je ne pesne pas qu'elle est utile maintenant
   updatedAfterSelect() {
-    this.refinterne = this.collaborateur.id;
+    // Une fois le projet selectioné, on affecte un type d'activité "normale".
+    // this.refinterne = this.collaborateur.id;
 
-    this._service.selectMissionById(this.selectedOption).subscribe(
+    /* this._service.selectMissionById(this.selectedOption).subscribe(
       data => this.laMission = data,
       error => console.log("exception" + error)
-    )
-    console.log(this.refClient);
-    this.refClient = this.laMission.client.ref;
+    ) */
+    //console.log(this.refClient);
+    //this.refClient = this.laMission.client.ref;
   }
 
-  /** Remplissage automatique des remotes de  l'Activité*/
+  /** Remplissage automatique des remotes de l'Activité avec 0 et 1 */
   remoteRemplis = false;
 
   remplirRemoteP1() {
@@ -212,11 +224,13 @@ export class DeclarationActiviteComponent implements OnInit {
 
   total() {
     this.totalProjet1 = 0;
+    this.totalActivity = 0;
     for (var i = 0; i < this.daysInMonth; i++) {
       if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber != undefined) {
         this.totalProjet1 = this.totalProjet1 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
       }
     }
+    this.totalActivity = this.totalProjet1 + this.totalProjet2 + this.totalProjet3 + this.totalProjet4;
   }
 
   /** ACTIVITE2  */
@@ -277,6 +291,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.totalProjet2 = this.totalProjet2 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
       }
     }
+    this.totalActivity = this.totalProjet1 + this.totalProjet2 + this.totalProjet3 + this.totalProjet4;
   }
 
   /** ACTIVITE 3  */
@@ -389,9 +404,8 @@ export class DeclarationActiviteComponent implements OnInit {
   /** total de l'activité */
 
   total4() {
-    var i;
     this.totalProjet4 = 0;
-    for (i = 0; i < this.daysInMonth; i++) {
+    for (var i = 0; i < this.daysInMonth; i++) {
       if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber != undefined) {
         this.totalProjet4 = this.totalProjet4 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
       }
@@ -490,7 +504,7 @@ export class DeclarationActiviteComponent implements OnInit {
       data => this.theTypeActivity2 = data,
       error => console.log("exception" + error)
     )
-    this.astreinte2.TypeActivity = this.theTypeActivity2;
+    this.astreinte2.typeActivity = this.theTypeActivity2;
   }
 
   total6() {
@@ -509,6 +523,7 @@ export class DeclarationActiviteComponent implements OnInit {
   projectAstreinte3 = new Project();
   laMissionAstreinte3 = new Mission();
   astreinte3remplis = false;
+  typeActivityNormal = new TypeActivity;      
 
   selectedProjectAstreint3!: number;
   selectedTypeUpdateValue3!: number;
@@ -543,7 +558,7 @@ export class DeclarationActiviteComponent implements OnInit {
       data => this.theTypeActivity3 = data,
       error => console.log("exception" + error)
     )
-    this.astreinte3.TypeActivity = this.theTypeActivity3;
+    this.astreinte3.typeActivity = this.theTypeActivity3;
   }
 
   total7() {
@@ -579,10 +594,10 @@ export class DeclarationActiviteComponent implements OnInit {
 
     /** FOR ACTIVITY  */
     // Faudra récupérer le type de l'activité dans le formulaire
-    this._service.selectTypeActivityById(2).subscribe(
+    /* this._service.selectTypeActivityById(2).subscribe(
       data => this.typeActivity = data,
       error => console.log("exception" + error)
-    )
+    ) */
 
     this._service.selectTypeActivityById(2).subscribe(
       data => this.typeActivity2 = data,
@@ -598,19 +613,13 @@ export class DeclarationActiviteComponent implements OnInit {
       data => this.typeActivity4 = data,
       error => console.log("exception" + error)
     )
+    
 
     if (this.selectedOption != null) {
-      console.log("Dans le if : " + this.selectedOption);
-      ////// ###########################################################
-      ////// ########################################################### Le projet n'est pas récupérer
-      this._service.selectProjectByMissionId(this.selectedOption).subscribe(
-        data => {
-          this.ProjectActivity = data
-          console.log("Premier");
-        },
-        error => console.log("exception" + error)
-      )
-      console.log("Subscribe " + this.ProjectActivity);
+      // Si un projet est selectioné, on atribue à l'activité un type et l'id du projet.
+      this.activityNormal.typeActivity=this.lesTypeActivity[0];
+      this.activityNormal.projectId = this.projects[this.selectedOption - 1].id;
+      this.activityNormal.collaboratorId = this.collaborateur.id;
     }
 
     if (this.selectedOption2 != null) {
@@ -635,17 +644,16 @@ export class DeclarationActiviteComponent implements OnInit {
     }
 
     for (var i = 0; i < this.daysInMonth; i++) {
-      /** ACTIVITY 1 */
+      /** ACTIVITY 1 activityNormal */
       if (this.totalProjet1 != 0) {
-        this.activity.collaboratorId = 2;
-        console.log("ProjectId : " + this.ProjectActivity);
-        this.activity.projectId = this.ProjectActivity.id;
-        this.activity.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
-        this.activity.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked;
-        this.activity.TypeActivity = this.typeActivity;
+        this.activityNormal.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
+        this.activityNormal.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked;
+        // on ajoute la date ici pourquoi la mettre en arguments
+        this.activityNormal.startDate = new Date(this.yearInput, this.monthSelected-1 , i+1);
+        this.aujourdhui = this.pipeDate.transform(this.activityNormal.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
 
-        console.log(this.ProjectActivity.id)
-        this._service.addAndUpdateActivity(this.activity, this.aujourdhui).subscribe(
+        this._service.addAndUpdateActivity(this.activityNormal, this.aujourdhui).subscribe(
           data => {
             console.log("activity 1 ajouté");
           },
@@ -653,7 +661,6 @@ export class DeclarationActiviteComponent implements OnInit {
             console.log("erreur ajout non-effectué")
           }
         )
-
       }
 
       /** ACTIVITY 2 */
@@ -662,7 +669,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.activity2.projectId = this.ProjectActivity2.id;
         this.activity2.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
         this.activity2.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked;
-        this.activity2.TypeActivity = this.typeActivity2;
+        this.activity2.typeActivity = this.typeActivity2;
 
         this._service.addAndUpdateActivity(this.activity2, this.aujourdhui).subscribe(
           data => {
@@ -682,7 +689,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.activity3.projectId = this.ProjectActivity3.id;
         this.activity3.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
         this.activity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
-        this.activity3.TypeActivity = this.typeActivity3;
+        this.activity3.typeActivity = this.typeActivity3;
 
         this._service.addAndUpdateActivity(this.activity3, this.aujourdhui).subscribe(
           data => {
@@ -703,7 +710,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.activity4.projectId = this.ProjectActivity4.id;
         this.activity4.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
         this.activity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
-        this.activity4.TypeActivity = this.typeActivity4;
+        this.activity4.typeActivity = this.typeActivity4;
 
         this._service.addAndUpdateActivity(this.activity, this.aujourdhui).subscribe(
           data => {
@@ -727,12 +734,12 @@ export class DeclarationActiviteComponent implements OnInit {
         this.astreinte1.collaboratorId = 1;
         this.astreinte1.projectId = this.selectedProjectAstreint1;
         this.astreinte1.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
-        this.astreinte1.TypeActivity = this.theTypeActivity1;
+        this.astreinte1.typeActivity = this.theTypeActivity1;
 
         console.log(this.astreinte1.collaboratorId)
         console.log("id du cadsqdq :" + this.astreinte1.projectId)
         console.log(this.astreinte1.duration)
-        console.log(this.astreinte1.TypeActivity)
+        console.log(this.astreinte1.typeActivity)
 
 
         this._service.addAndUpdateActivity(this.astreinte1, this.aujourdhui).subscribe(
@@ -757,7 +764,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.astreinte2.collaboratorId = 1;
         this.astreinte2.projectId = this.selectedProjectAstreint1;
         this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
-        this.astreinte2.TypeActivity = this.theTypeActivity2;
+        this.astreinte2.typeActivity = this.theTypeActivity2;
 
         this._service.addAndUpdateActivity(this.astreinte2, this.aujourdhui).subscribe(
           data => {
@@ -775,7 +782,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.astreinte3.collaboratorId = 1;
         this.astreinte3.projectId = this.selectedProjectAstreint3;
         this.astreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
-        this.astreinte3.TypeActivity = this.theTypeActivity3;
+        this.astreinte3.typeActivity = this.theTypeActivity3;
 
         this._service.addAndUpdateActivity(this.astreinte3, this.aujourdhui).subscribe(
           data => {
