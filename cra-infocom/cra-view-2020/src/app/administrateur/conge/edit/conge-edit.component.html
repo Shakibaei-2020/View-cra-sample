@@ -19,8 +19,7 @@
 
         <div class="bio-row">
           <div class="inputbox mt-1"><span>Type de congé : {{leave.leaveType.type}}</span><br>
-            <select class="form-input" required [(ngModel)]="idOfLeaveType" placeholder="{{leave.leaveType.type}"
-              name="getTypeLeave" (change)="getTypeLeave()">
+            <select class="form-input" required [(ngModel)]="idOfLeaveType" placeholder="{{leave.leaveType.type}" name="getTypeLeave" (change)="getTypeLeave()">
               <option *ngFor="let typeConge of allLeaveType" value="{{typeConge.id}}">{{typeConge.type}}</option>
             </select>
           </div>
@@ -62,7 +61,6 @@
               <div class="inputbox mt-1"><span class="input-title">Date de départ : {{leave.dateOfStartLeave | date:
                 'dd/MM/yyyy'}}</span> <input type="Date" required [(ngModel)]="dateStartLeave" name="dateStartLeave">
             </div>
-  
             <div class="inputbox mt-1"><span class="input-title">Date de fin : {{leave.dateOfEndLeave | date:
               'dd/MM/yyyy'}} </span> <input type="Date" required [(ngModel)]="dateEndLeave" name="dateEndLeave"> </div>
 
@@ -73,15 +71,7 @@
                   <option value="après-midi">Apres-midi</option> 
                 </select>
               </div>
-
-
-
         </div>
-
-     
- 
-
-
 
         <div class="bio-row"></div>
 
@@ -137,9 +127,7 @@
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   </div>

@@ -74,8 +74,8 @@ export class CongeEditComponent implements OnInit {
 
   pipeDate = new DatePipe('fr-FR');
 
-  /** Lancement de la mise à jour*/
   updateLeave(){
+  /** Lancement de la mise à jour
 
     this.updatedLeave.id = this.leave.id;
     this.updatedLeave.leaveType = this.leaveType
@@ -92,8 +92,7 @@ export class CongeEditComponent implements OnInit {
       }
     )
 
-    /** Rafraichissement de la page*/
-    //window.location.reload();
+    window.location.reload();*/
   }
 
  

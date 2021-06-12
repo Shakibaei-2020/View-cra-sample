@@ -7,6 +7,7 @@ import { Expense } from 'src/app/z-model/Expense/expense';
 import { Leave } from 'src/app/z-model/Leave/leave';
 import { TypeCollaborator } from 'src/app/z-model/Collaborator/type-collaborator';
 import { DatePipe } from '@angular/common';
+import { TypeLeave } from 'src/app/z-model/Leave/type-leave';
 
 @Component({
   selector: 'app-edit-collaborateur',
@@ -55,10 +56,18 @@ export class EditCollaborateurComponent implements OnInit {
 
   /** leave-[i] data */
   leaveRequestId = new Array();
-  leaveDateOfStart = new Array();
-  leaveDateOfEnd = new Array();
+  leaveType = new Array();
   leaveStatus = new Array();
-  leaveInformed = new Array();
+  leaveClientInformed = new Array();
+  leaveStatusDebut = new Array();
+  dateLeaveRequest = new Array();
+  dateStartLeave = new Array();
+  dateEndLeave = new Array();
+  leaveStatusFin = new Array();
+
+  allLeaveType!: TypeLeave[];
+  status = ["en-cours", "validé", "refusé"]
+
 
   ngOnInit() {
 
@@ -82,6 +91,7 @@ export class EditCollaborateurComponent implements OnInit {
       error => console.log("exception" + error)
     )
 
+    /** Expense request */
     this._service.listExpenseByCollabId(2).subscribe(
       data => {
         this.expenses = data;
@@ -95,26 +105,39 @@ export class EditCollaborateurComponent implements OnInit {
           this.expenseCostTVA.push("expenseCostTVA-" + i);
           this.expenseStatus.push("expenseStatus-" + i);
         }
-
       },
       error => console.log("exception" + error)
     )
 
+    /** Leave request */
     this._service.selectLeaveByCollabId(2).subscribe(
       data => {
         this.leaves = data;
 
         for (var i = 0; i < this.leaves.length; i++) {
-          
+
           this.leaveRequestId.push("leaveRequestId-" + i);
-          this.leaveDateOfStart.push("leaveDateOfStart-" + i);
-          this.leaveDateOfEnd.push("leaveDateOfEnd-" + i);
+          this.leaveType.push("leaveType-" + i);
           this.leaveStatus.push("leaveStatus-" + i);
-          this.leaveInformed.push("leaveInformed-" + i);
+          this.leaveClientInformed.push("leaveClientInformed-" + i);
+          this.leaveStatusDebut.push("leaveStatusDebut-" + i);
+          this.dateLeaveRequest.push("dateLeaveRequest-" + i);
+          this.dateStartLeave.push("dateStartLeave-" + i);
+          this.dateEndLeave.push("dateEndLeave-" + i);
+          this.leaveStatusFin.push("leaveStatusFin-" + i);
+
         }
       },
       error => console.log("exception" + error)
     )
+
+
+    /** on recupere tous les types */
+    this._service.selectAllLeaveType().subscribe(
+      data => this.allLeaveType = data,
+      error => console.log("exception" + error)
+    )
+
 
   }
 
@@ -185,11 +208,11 @@ export class EditCollaborateurComponent implements OnInit {
         this.updatedExpense.id = this.expenseToUpdate.id;
         this.updatedExpense.collaboratorId = this.expenseToUpdate.collaboratorId;
         this.newDateRequest = this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
-        this.newDateExpense = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateExpense[indexOfElement])).valueAsDate, 'yyyy-MM-dd')|| this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+        this.newDateExpense = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateExpense[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
         this.updatedExpense.billable = !(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])) || this.expenseToUpdate.billable;
-        this.updatedExpense.costHT = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[indexOfElement])).value|| this.expenseToUpdate.costHT;
+        this.updatedExpense.costHT = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[indexOfElement])).value || this.expenseToUpdate.costHT;
         this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[indexOfElement])).value || this.expenseToUpdate.costTVA;
-        this.updatedExpense.status = (<HTMLInputElement>document.getElementById(this.expenseStatus[indexOfElement])).value  || this.expenseToUpdate.status;;
+        this.updatedExpense.status = (<HTMLInputElement>document.getElementById(this.expenseStatus[indexOfElement])).value || this.expenseToUpdate.status;;
 
         this._service.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
           data => {
@@ -205,8 +228,6 @@ export class EditCollaborateurComponent implements OnInit {
     )
   }
 
-
-
   deleteExpenseFromCollab(value: number) {
     this._service.deleteOneExpense(value).subscribe(
       data => {
@@ -221,49 +242,56 @@ export class EditCollaborateurComponent implements OnInit {
 
   /** Leaves commands */
 
-
-
-
-  dateLeaveRequest!: string;
-  dateStartLeave!: Date;
-  dateEndLeave!: Date;
-
   leaveRequestToUpdated = new Leave();
   updatedLeave = new Leave();
 
-  updateLeaveFromCollab(indexOfElement:number) {
+  dateOfDemandLeave!: string;
+  dateOfStartLeave!: string;
+  dateOfEndLeave!: string;
+
+  newTypeLeave = new TypeLeave();
+
+  updateLeaveFromCollab(indexOfElement: number) {
 
 
-    
-    this._service.selectOneLeaveRequestById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
-      data => {
-        this.leaveRequestToUpdated = data;
+    this._service.selectOneLeaveRequestById(+(<HTMLInputElement>document.getElementById(this.leaveRequestId[indexOfElement])).value).subscribe(
+      data1 => {
+        this.leaveRequestToUpdated = data1;
 
         this.updatedLeave.id = this.leaveRequestToUpdated.id;
-        this.updatedLeave.dateOfStartLeave
-        this.updatedLeave.dateOfEndLeave
-        this.updatedLeave.dateOfDemand
-        this.updatedLeave.collaboratorId
-        this.updatedLeave.clientInformed
-        this.updatedLeave.dateOfStartLeave
-        this.updatedLeave.statusDebut
-        this.updatedLeave.statusFin
-        this.updatedLeave.status
+        this.updatedLeave.collaboratorId = this.leaveRequestToUpdated.collaboratorId;
 
-        this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateLeaveRequest, this.dateStartLeave, this.dateEndLeave).subscribe(
-          data => {
-            console.log("ajout effectué");
+        this._service.selectLeaveTypeById(+(<HTMLInputElement>document.getElementById(this.leaveType[indexOfElement])).value).subscribe(
+          data2 => {
+            this.newTypeLeave = data2;
+
+            this.updatedLeave.leaveType =    this.newTypeLeave || this.leaveRequestToUpdated.leaveType
+  
+            this.dateOfStartLeave = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateStartLeave[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.leaveRequestToUpdated.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+            this.dateOfEndLeave = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndLeave[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.leaveRequestToUpdated.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
+            this.dateOfDemandLeave = this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+            this.updatedLeave.clientInformed = !(<HTMLInputElement>document.getElementById(this.leaveClientInformed[indexOfElement])).value || this.leaveRequestToUpdated.clientInformed
+            this.updatedLeave.statusDebut = (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[indexOfElement])).value || this.leaveRequestToUpdated.statusDebut
+            this.updatedLeave.statusFin = (<HTMLInputElement>document.getElementById(this.leaveStatusFin[indexOfElement])).value || this.leaveRequestToUpdated.statusFin
+            this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.leaveStatus[indexOfElement])).value || this.leaveRequestToUpdated.statusFin
+
+            this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(
+              data => {
+                console.log("ajout effectué");
+              },
+              error => {
+                console.log("erreur ajout non-effectué")
+              }
+            )
+            window.location.reload();
           },
-          error => {
-            console.log("erreur ajout non-effectué")
-          }
+          error => console.log("exception" + error),
         )
-        window.location.reload();
       },
       error => console.log("exception" + error),
     )
   }
-
 
   deleteLeaveFromCollab(value: any) {
     this._service.deleteOneLeaveRequest(value).subscribe(
@@ -277,9 +305,4 @@ export class EditCollaborateurComponent implements OnInit {
   }
 
 
-   WithoutTime(dateTime:Date) {
-    var date = new Date(dateTime.getTime());
-    date.setHours(0, 0, 0, 0);
-    return date;
-}
 }

@@ -10,7 +10,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
 
 import { AddCollaborateurComponent } from './administrateur/collaborateur/add/add-collaborateur.component';
-import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
 
 
 import { EditFraisComponent } from './administrateur/frais/edit/edit-frais.component';
@@ -41,6 +40,7 @@ import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-dec
 import { AccueilAdministrateurComponent } from './administrateur/accueil-administrateur/accueil-administrateur.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
 
 registerLocaleData(localeFr, 'fr');
 
