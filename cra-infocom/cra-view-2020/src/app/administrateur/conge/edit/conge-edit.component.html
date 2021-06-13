@@ -44,22 +44,33 @@
 
             </select>
           </div>
+
+          <div class="inputbox mt-3">
+            <span>Total jours :</span>
+            <div>
+              <br>
+
+              <label><input type="checkbox" value=""> jour(s) entier(s)</label>
+            </div>
+          </div>
+
+
         </div>
 
 
         <div class="bio-row">
           <div class="inputbox mt-1">
             <span class="input-title">Date de demande : {{leave.dateOfDemand | date: 'dd/MM/yyyy'}}</span>
-             <input type="Date" value="2000/02/20" disabled  name="dateLeaveReqest" id="dateLeaveReqest"></div>
+             <input type="Date" value="2000/02/20" disabled  name="dateLeaveReqest" id="dateLeaveReqest" ></div>
 
               <div class="inputbox mt-1">
                 <span class="input-title">Date de départ : {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span> 
-                <input type="Date"  name="dateStartLeave" id="dateStartLeave">
+                <input type="Date"  name="dateStartLeave" id="dateStartLeave"  (change)="howManyday()">
             </div>
 
             <div class="inputbox mt-1">
               <span class="input-title">Date de fin : {{leave.dateOfEndLeave | date: 'dd/MM/yyyy'}} </span>
-               <input type="Date" name="dateEndLeave" id="dateEndLeave" >
+               <input type="Date" name="dateEndLeave" id="dateEndLeave"  (change)="howManyday()" >
              </div>
 
               <div class="inputbox mt-3"> 
@@ -68,6 +79,12 @@
                   <option *ngFor="let timeStatu of timeStatus" value={{timeStatu}}>{{timeStatu}}</option>
                 </select>
               </div>
+
+              <div class="inputbox mt-3">
+                <span>Total jours :  {{leave.nbJours}} </span>
+                <input type="text" placeholder=" {{dayNumber}}" disabled>
+              </div>
+  
         </div>
 
 

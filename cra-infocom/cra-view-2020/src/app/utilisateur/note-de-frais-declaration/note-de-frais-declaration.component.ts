@@ -56,6 +56,9 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   
     this.expense.status = 'en-cours';
     this.expense.typeExpense = this.typeExpense;
+    this.expense.costTTC = +this.expense.costHT + +this.expense.costTVA;
+    console.log(this.expense.costTTC)
+
     this._service.addAndUpdateExpense(this.expense, this.dateExpense, this.dateRequest).subscribe(
       data => {
         console.log("ajout effectué");

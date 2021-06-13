@@ -91,6 +91,7 @@ export class CongeEditComponent implements OnInit {
             this.updatedLeave.statusFin = (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).value || this.leaveToUpdate.statusDebut;
             this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.statusLeave)).value || this.leaveToUpdate.status;
             this.updatedLeave.leaveType = this.newTypeLeave || this.leaveToUpdate.leaveType;
+            this.updatedLeave.nbJours =   this.dayNumber || this.leaveToUpdate.nbJours;
 
             this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(
               data => {
@@ -121,6 +122,17 @@ export class CongeEditComponent implements OnInit {
         console.log("erreur delete non-effectué")
       }
     )
+  }
+
+
+  dayNumber!: number;
+  newDateStartLeave!: Date;
+  newDateEndLeave!: Date;
+  howManyday() {
+    this.newDateStartLeave = new Date( this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateStartLeave)).valueAsDate, 'yyyy-MM-dd') || this.dateStartLeave) 
+    this.newDateEndLeave = new Date( this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndLeave)).valueAsDate, 'yyyy-MM-dd') || this.dateStartLeave) 
+    var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime();
+    this.dayNumber = Diff_temps / (1000 * 3600 * 24);
   }
 
 

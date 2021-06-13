@@ -14,6 +14,8 @@ export class Leave {
 	public name!: string;
 	public  statusDebut!: string;
 	public  statusFin!: string;
+	public  nbJours!: number;
+
 
 	public nomCollab!: string;
 	public prenomCollab!: string;

@@ -64,6 +64,7 @@ export class CongeDemandeComponent implements OnInit {
     this.leave.collaboratorId = 2;
     this.leave.status = 'en-cours';
     this.leave.leaveType = this.leaveType
+    this.leave.nbJours = this.dayNumber;
 
      
     this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
@@ -111,6 +112,21 @@ export class CongeDemandeComponent implements OnInit {
     }
     var annee = new Date().getFullYear();
     return annee + '-' + mois_toString + '-' + jour_toString;
+  }
+
+
+  dayNumber!: number;
+  newDateStartLeave!: Date;
+  newDateEndLeave!: Date;
+
+  howManyday(){
+
+this.newDateStartLeave = new Date(this.dateStartLeave)
+this.newDateEndLeave = new Date(this.dateEndLeave)
+
+var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime(); 
+this.dayNumber = Diff_temps / (1000 * 3600 * 24); 
+
   }
 
 

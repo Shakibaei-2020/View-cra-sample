@@ -323,6 +323,16 @@
                       <option value="après-midi">Apres-midi</option>
                     </select>
                   </div>
+
+                  <div class="inputbox mt-3">
+                    <span>Total jours :</span>
+                    <div>
+                      <br>
+                      <label><input type="checkbox" value=""> jour(s) entier(s)</label>
+                    </div>
+                  </div>
+
+
                 </div>
 
                 <!-- Colonne 2-->
@@ -335,12 +345,12 @@
 
                   <div class="inputbox mt-1">
                     <span> Date de départ : {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span><br>
-                    <input class="modal-input" type="date" name="dateStartLeave-{{indexOfelement}}" id="dateStartLeave-{{indexOfelement}}">
+                    <input class="modal-input" type="date" name="dateStartLeave-{{indexOfelement}}" id="dateStartLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1">
                     <span> Date de fin :  {{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</span><br>
-                    <input class="modal-input" type="date" name="dateEndLeave-{{indexOfelement}}" id="dateEndLeave-{{indexOfelement}}">
+                    <input class="modal-input" type="date" name="dateEndLeave-{{indexOfelement}}" id="dateEndLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1">
@@ -350,6 +360,13 @@
                       <option value="après-midi">Apres-midi</option>
                     </select>
                   </div>
+
+                  <div class="inputbox mt-3">
+                    <span>Total jours :  {{leave.nbJours}} </span>
+                    <input type="text" placeholder=" {{dayNumber}}" disabled>
+                  </div>
+
+
                 </div>
               </div>
               <div class="modal-footer">
