@@ -4,13 +4,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SecurityComponent } from './security/security.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
 import { AdministrateurComponent } from './administrateur/administrateur.component';
 
 import { AddCollaborateurComponent } from './administrateur/collaborateur/add/add-collaborateur.component';
-
 
 import { EditFraisComponent } from './administrateur/frais/edit/edit-frais.component';
 
@@ -52,6 +50,7 @@ registerLocaleData(localeFr, 'fr');
     AddCollaborateurComponent,
     EditCollaborateurComponent,
     EditFraisComponent,
+    SecurityComponent,
     CongeDemandeComponent,
     CongeEditComponent,
     UtilisateurComponent,
