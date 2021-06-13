@@ -59,6 +59,30 @@
     margin-bottom: 15px
 }
 
+.btnEditer {
+    float: left;
+    padding: 10px 25px;
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    margin-bottom: 5%;
+  }
+  
+  .btnEditer:hover {background-color: #464646}
+  
+  .btnEditer:active {
+    background-color: #363636;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
 
 .input-title{
     font-size: 13px;

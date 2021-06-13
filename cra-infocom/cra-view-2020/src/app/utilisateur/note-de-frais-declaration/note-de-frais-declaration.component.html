@@ -11,7 +11,9 @@
       <div class="row">
 
         <div class="bio-row">
-          <div   class="inputbox mt-1"><span class="input-title">Coût HT :</span> <input autocomplete="off"  type="text" requireds [(ngModel)]="expense.costHT" name="expense.costHT"> </div>
+          <div   class="inputbox mt-1"><span class="input-title">Coût HT :</span> 
+            <input autocomplete="off"  type="text" requireds [(ngModel)]="expense.costHT" name="expense.costHT">
+           </div>
 
         </div>
         <div class="bio-row">
@@ -71,6 +73,40 @@
         </div>
       </div>
     </div>
+
+
+    <h2>Vos demandes :</h2>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Date de la demande</th>
+          <th>Date de frais</th>
+          <th>Coût HT</th>
+          <th>Coût TVA</th>
+          <th>Coût TTC</th>
+          <th>Etat de la demande</th>
+          <th>Action</th>
+
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of expensesOfCollab">
+          <td>{{expense.dateRequest | date: 'dd/MM/yyyy'}}</td>
+          <td>{{expense.dateExpense | date: 'dd/MM/yyyy' }}</td>
+          <td>{{expense.costHT}} €</td>
+          <td>{{expense.costTVA}} €</td>
+          <td>{{expense.costTTC}} €</td>
+          <td>{{expense.status}}</td>
+          <td><button class="btnEditer" (click)="deleteExpenseById(expense.id)">Supprimer</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+ 
   </div>
+
+
+
 </div>
 

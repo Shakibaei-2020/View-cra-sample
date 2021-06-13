@@ -70,6 +70,7 @@ export class CongeDemandeComponent implements OnInit {
     this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
       data => {
         console.log("ajout effectué");
+        window.location.reload();
       },
       error => {
         console.log("erreur ajout non-effectué")
@@ -90,6 +91,7 @@ export class CongeDemandeComponent implements OnInit {
     this._service.deleteOneLeaveRequest(value).subscribe(
       data => {
         console.log("delete effectué");
+        window.location.reload();
       },
       error => {
         console.log("delete ajout non-effectué")

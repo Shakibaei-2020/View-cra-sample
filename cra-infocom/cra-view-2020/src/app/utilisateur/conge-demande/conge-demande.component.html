@@ -105,8 +105,11 @@
       <tr>
         <th>Date début</th>
         <th>Date Fin</th>
+        <th>nb jours</th>
         <th>Type</th>
         <th>Etat de la demande</th>
+        <th>Action</th>
+
         <th></th>
       </tr>
     </thead>
@@ -114,6 +117,8 @@
       <tr *ngFor="let leave of leaves">
         <td>{{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</td>
         <td>{{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</td>
+        <td>{{leave.nbJours}} Jours</td>
+
         <td>{{leave.leaveType.type}}</td>
         <td>{{leave.status}}</td>
         <td><button class="btnEditer" (click)="deleteLeaveById(leave.id)">Supprimer</button></td>

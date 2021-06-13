@@ -19,6 +19,8 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   allTypeExpense!: TypeExpense[];
   idOfExpenseType!: number;
 
+  expensesOfCollab!: Expense[];
+
   constructor(private _route: Router, private _service: NgserviceService) { }
 
   ngOnInit(): void {
@@ -27,6 +29,11 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
     /** id du collaborateur connecté suite à la connexion */
     this.expense.collaboratorId = 2;
 
+    /** select all expense en-cours */
+    this._service.listExpenseByCollabId(2).subscribe(
+     data => this.expensesOfCollab =data,
+     error => console.log("exception " + error),
+    )
 
     /** on recupere tous les types d'expense pour le <select> */
     this._service.selectAllTypeExpense().subscribe(
@@ -62,11 +69,21 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
     this._service.addAndUpdateExpense(this.expense, this.dateExpense, this.dateRequest).subscribe(
       data => {
         console.log("ajout effectué");
+        window.location.reload();
       },
       error => {
         console.log("erreur ajout non-effectué")
       }
     ) 
+  }
+
+  deleteExpenseById(expenseId:number){
+    this._service.deleteOneExpense(expenseId).subscribe(
+      data => {console.log("delete effectué");
+      window.location.reload();
+    },
+    error=>console.log("exception" + error),
+    )
   }
 
   /** retour vers l'accueil utilisateur */
