@@ -17,8 +17,8 @@ export class CongeEditComponent implements OnInit {
   updatedLeave = new Leave();
 
   dateOfDemand= "";
-  dateStartLeave =  new Date();
-  dateEndLeave = new Date();
+  dateStartLeave!: string;
+  dateEndLeave !: string;
   allLeaveType!: TypeLeave[];
 
   status =  ["en-cours", "validé", "refusé"]
@@ -75,7 +75,6 @@ export class CongeEditComponent implements OnInit {
   pipeDate = new DatePipe('fr-FR');
 
   updateLeave(){
-  /** Lancement de la mise à jour
 
     this.updatedLeave.id = this.leave.id;
     this.updatedLeave.leaveType = this.leaveType
@@ -92,7 +91,7 @@ export class CongeEditComponent implements OnInit {
       }
     )
 
-    window.location.reload();*/
+    window.location.reload();
   }
 
  

@@ -15,8 +15,8 @@ export class CongeDemandeComponent implements OnInit {
   leaves!: Leave[];
   leaveType = new TypeLeave();
   aujourdhui !: string;
-  dateStartLeave = new Date();
-  dateEndLeave = new Date();
+  dateStartLeave!: string;
+  dateEndLeave !: string;
   allLeaveType!: TypeLeave[];
   idOfLeaveType!: number;
 
@@ -65,7 +65,7 @@ export class CongeDemandeComponent implements OnInit {
     this.leave.status = 'en-cours';
     this.leave.leaveType = this.leaveType
 
-    /**  
+     
     this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
       data => {
         console.log("ajout effectué");
@@ -73,7 +73,7 @@ export class CongeDemandeComponent implements OnInit {
       error => {
         console.log("erreur ajout non-effectué")
       }
-    )*/
+    )
 
   }
 

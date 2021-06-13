@@ -45,8 +45,8 @@ export class NgserviceService {
     return this._http.get<Collaborator[]>("http://localhost:8900/collaborateurs/lister");
   }
 
-  addCollab(collaborator: Collaborator, date1: Date, date2: Date): Observable<any> {
-    return this._http.post<any>("http://localhost:8900/collaborateurs/ajouter/" + date1 + "/" + date2, collaborator);
+  addCollab(collaborator: Collaborator, dateEntre: string, dateSortie: string): Observable<Collaborator> {
+    return this._http.post<Collaborator>("http://localhost:8900/collaborateurs/ajouter/" + dateEntre + "/" + dateSortie, collaborator);
   }
 
   updateCollab(collaborator: Collaborator): Observable<Collaborator> {

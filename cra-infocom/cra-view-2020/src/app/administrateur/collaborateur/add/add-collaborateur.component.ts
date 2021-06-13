@@ -15,8 +15,7 @@ import { EditCollaborateurComponent } from '../edit/edit-collaborateur.component
 export class AddCollaborateurComponent implements OnInit {
 
   collaborator = new Collaborator();
-  date1 = new Date;
-  date2 = new Date;
+
 
   mdp!: string;
 
@@ -36,6 +35,9 @@ export class AddCollaborateurComponent implements OnInit {
 
   }
 
+  dateEntre!: string;
+  dateSortie!: string;
+
   addCollabFormSubmit(){
 
     this.mdp = this.randomMDP();
@@ -43,7 +45,7 @@ export class AddCollaborateurComponent implements OnInit {
     this.collaborator.password =  this.mdp;
     this.collaborator.typeCollaborator = this.collaboratorType;
 
-   this._service.addCollab(this.collaborator,this.date1,this.date2).subscribe(
+   this._service.addCollab(this.collaborator,this.dateEntre,this.dateSortie).subscribe(
       data =>{
         console.log("ajout effectué");
       },

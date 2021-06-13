@@ -22,8 +22,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form">
-                        <div class="inputbox mt-3"> <span for="dateOfEntry">Date d'entrée :</span> <input  type="date" required [(ngModel)]="date1" name="date1"> </div>
-                        <div class="inputbox mt-3"> <span for="dateOfRelease">Date de sortie :</span> <input  type="date" required [(ngModel)]="date2" name="date2"> </div>
+                        <div class="inputbox mt-3"> <span for="dateOfEntry">Date d'entrée :</span> <input  type="date" required [(ngModel)]="dateEntre" name="dateEntre"> </div>
+                        <div class="inputbox mt-3"> <span for="dateOfRelease">Date de sortie :</span> <input  type="date" required [(ngModel)]="dateSortie" name="dateSortie"> </div>
                         <div class="inputbox mt-3"><span>Type :</span><br>
                             <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfCollType" name="idOfCollType" (change)="getCollType()">
                                 <option *ngFor="let allTypeCollaborators of allTypeCollaborator" value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}

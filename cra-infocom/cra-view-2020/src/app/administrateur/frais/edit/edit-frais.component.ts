@@ -17,7 +17,6 @@ export class EditFraisComponent implements OnInit {
   expense = new Expense();
   updatedExpense = new Expense();
 
-  dateExpense = new Date();
   dateRequest !: string;
 
   allTypeExpense!:  TypeExpense[];
@@ -60,9 +59,12 @@ export class EditFraisComponent implements OnInit {
   }
 
 
+  dateExpense !: string;
+
+
   updateExpense(){
 
-    /** 
+   
     this.updatedExpense.id = this.expense.id;
     this.updatedExpense.collaboratorId = this.expense.collaboratorId;
     this.updatedExpense.typeExpense = this.expenseType;
@@ -75,7 +77,7 @@ export class EditFraisComponent implements OnInit {
         console.log("erreur ajout non-effectué")
       }
     )
-  window.location.reload(); */
+  window.location.reload(); 
   }
 
   deleteExpense(){
