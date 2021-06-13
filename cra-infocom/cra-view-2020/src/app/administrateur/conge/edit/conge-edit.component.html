@@ -19,62 +19,61 @@
 
         <div class="bio-row">
           <div class="inputbox mt-1"><span>Type de congé : {{leave.leaveType.type}}</span><br>
-            <select class="form-input" required [(ngModel)]="idOfLeaveType" placeholder="{{leave.leaveType.type}" name="getTypeLeave" (change)="getTypeLeave()">
+            <select class="form-input" placeholder="{{leave.leaveType.type}" name="typeLeave" id="typeLeave" >
               <option *ngFor="let typeConge of allLeaveType" value="{{typeConge.id}}">{{typeConge.type}}</option>
             </select>
           </div>
-
           
           <div class="inputbox mt-1"><span>État : {{leave.status}}</span><br>
-            <select class="form-input" aria-label="Default select example" required [(ngModel)]="inputedStatus"
-              name="inputedStatus" (change)="getNewStatusLeave()">
+            <select class="form-input" aria-label="Default select example" name="statusLeave" id="statusLeave" >
               <option *ngFor="let statu of status" value={{statu}}>{{statu}}</option>
             </select>
           </div>
 
           <div class="inputbox mt-1"><span>Client informé : {{leave.clientInformed}}</span><br>
-            <select class="form-input" aria-label="Default select example" required
-              [(ngModel)]="updatedLeave.clientInformed" name="clientInformed">
+            <select class="form-input" aria-label="Default select example"  name="clientInformedLeave" id="clientInformedLeave">
               <option value="true">Oui</option>
               <option value="false">Non</option>
             </select>
           </div>
 
-
           <div class="inputbox mt-3"> 
             <span>Début :  {{leave.statusDebut}}</span>
-            <select class="form-input"   required [(ngModel)]="updatedLeave.statusDebut" name="updatedLeave.statusDebut"  >
-              <option value="matin">Matinée</option> 
-              <option value="après-midi">Apres-midi</option> 
+            <select class="form-input"  name="leaveStartStatus" id="leaveStartStatus" >
+              <option *ngFor="let timeStatu of timeStatus" value={{timeStatu}}>{{timeStatu}}</option>
+
             </select>
           </div>
-
-
-
         </div>
 
 
         <div class="bio-row">
-          <div class="inputbox mt-1"><span class="input-title">Date de demande : {{leave.dateOfDemand | date:
-              'dd/MM/yyyy'}}</span> <input type="Date" value="2000/02/20" disabled></div>
+          <div class="inputbox mt-1">
+            <span class="input-title">Date de demande : {{leave.dateOfDemand | date: 'dd/MM/yyyy'}}</span>
+             <input type="Date" value="2000/02/20" disabled  name="dateLeaveReqest" id="dateLeaveReqest"></div>
 
-              <div class="inputbox mt-1"><span class="input-title">Date de départ : {{leave.dateOfStartLeave | date:
-                'dd/MM/yyyy'}}</span> <input type="Date" required [(ngModel)]="dateStartLeave" name="dateStartLeave">
+              <div class="inputbox mt-1">
+                <span class="input-title">Date de départ : {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span> 
+                <input type="Date"  name="dateStartLeave" id="dateStartLeave">
             </div>
-            <div class="inputbox mt-1"><span class="input-title">Date de fin : {{leave.dateOfEndLeave | date:
-              'dd/MM/yyyy'}} </span> <input type="Date" required [(ngModel)]="dateEndLeave" name="dateEndLeave"> </div>
+
+            <div class="inputbox mt-1">
+              <span class="input-title">Date de fin : {{leave.dateOfEndLeave | date: 'dd/MM/yyyy'}} </span>
+               <input type="Date" name="dateEndLeave" id="dateEndLeave" >
+             </div>
 
               <div class="inputbox mt-3"> 
                 <span>Fin :  {{leave.statusFin}}</span>
-                <select class="form-input"   required [(ngModel)]="updatedLeave.statusFin" name="updatedLeave.statusFin"  >
-                  <option value="matin">Matinée</option> 
-                  <option value="après-midi">Apres-midi</option> 
+                <select class="form-input" name="leaveEndStatus" id="leaveEndStatus"    >
+                  <option *ngFor="let timeStatu of timeStatus" value={{timeStatu}}>{{timeStatu}}</option>
                 </select>
               </div>
         </div>
 
-        <div class="bio-row"></div>
 
+
+
+        <div class="bio-row"></div>
         <div class="bio-row">
           <br> <br>
 

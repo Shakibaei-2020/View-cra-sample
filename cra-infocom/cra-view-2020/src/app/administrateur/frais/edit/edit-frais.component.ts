@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
@@ -14,100 +14,102 @@ import { DatePipe } from '@angular/common';
 })
 export class EditFraisComponent implements OnInit {
 
+
   expense = new Expense();
-  updatedExpense = new Expense();
+  collaborator = new Collaborator();
+  allTypeExpense!: TypeExpense[];
 
-  dateRequest !: string;
+  status = ["en-cours", "validé", "refusé"]
 
-  allTypeExpense!:  TypeExpense[];
+  /** collaborator inputs */
+  expenseCostHT = "expenseCostHT";
+  expenseCostTVA = "expenseCostTVA";
+  dateExpense = "dateExpense";
+  dateExpenseRequest = "dateExpenseRequest";
+  expenseBillable = "expenseBillable";
+  expenseType = "expenseType";
+  expenseStatus = "expenseStatus";
 
-  status =  ["en-cours", "validé", "refusé"]
-
-  date!: Date;
-
-  constructor(private _service:NgserviceService, private _route:Router, private datePipe: DatePipe) { }
+  constructor(private _service: NgserviceService, private _route: Router, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
 
+    this._service.selectOneCollabById(2).subscribe(
+      data => this.collaborator = data,
+      error => console.log("exception" + error)
+    )
+
     this._service.selectOneExpenseById(231).subscribe(
-      data=> this.expense = data,
-      error=>console.log("exception" +error)
-      )
-      
-      this._service.selectAllTypeExpense().subscribe(
-        data=> this.allTypeExpense = data,
-        error=>console.log("exception" +error)
-      )
-  }
-
-
-  idOfExpenseType!:number;
-  expenseType = new TypeExpense();
-  getExpenseType() {
-    this._service.selectTypeExpenseById(this.idOfExpenseType).subscribe(
-      data => { this.expenseType = data; },
-      error => console.log("exception" + error),
+      data => this.expense = data,
+      error => console.log("exception" + error)
     )
-    setTimeout(() => {
-    }, 50);
+
+    this._service.selectAllTypeExpense().subscribe(
+      data => this.allTypeExpense = data,
+      error => console.log("exception" + error)
+    )
+
   }
 
+  pipeDate = new DatePipe('fr-FR');
 
 
-  MajFrais(){
-    this._route.navigate(['/searchFrais']);
-  }
+  expenseToUpdate = new Expense();
+  updatedExpense = new Expense();
+  newTypeExpense = new TypeExpense();
 
+  newDateExpense!: string;
+  newDateRequest!: string;
 
-  dateExpense !: string;
+  updateExpense() {
 
+    this._service.selectOneExpenseById(231).subscribe(
+      data1=> {this.expenseToUpdate = data1;
 
-  updateExpense(){
+        this.updatedExpense.id = this.expenseToUpdate.id;
 
-   
-    this.updatedExpense.id = this.expense.id;
-    this.updatedExpense.collaboratorId = this.expense.collaboratorId;
-    this.updatedExpense.typeExpense = this.expenseType;
-    
-    this._service.addAndUpdateExpense(this.updatedExpense,this.dateExpense,this.dateRequest).subscribe(
-      data =>{
-        console.log("ajout effectué");
+        this._service.selectTypeExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseType)).value).subscribe(
+          data2=>{this.newTypeExpense = data2;
+
+            this.updatedExpense.typeExpense = this.newTypeExpense || this.expenseToUpdate.typeExpense
+            this.newDateExpense = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateExpense)).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+            this.newDateRequest = this.pipeDate.transform(this.expenseToUpdate.dateRequest, 'yyyy-MM-dd') || '2000-02-14';
+            this.updatedExpense.billable = !(<HTMLInputElement>document.getElementById(this.expenseBillable)).value || this.expenseToUpdate.billable;;
+            this.updatedExpense.status = (<HTMLInputElement>document.getElementById(this.expenseStatus)).value || this.expenseToUpdate.status;
+            this.updatedExpense.costHT = +(<HTMLInputElement>document.getElementById(this.expenseCostHT)).value || this.expenseToUpdate.costHT;
+            this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA)).value || this.expenseToUpdate.costTVA;
+            this.updatedExpense.costTTC = this.updatedExpense.costHT + this.updatedExpense.costTVA || this.expenseToUpdate.costTTC;
+
+            this._service.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
+              data => {
+                console.log("ajout effectué");
+              },
+              error => {
+                console.log("erreur ajout non-effectué")
+              }
+            )
+            window.location.reload();
+          },
+          error=>console.log("exception"+error), 
+        )
       },
-      error =>{
-        console.log("erreur ajout non-effectué")
-      }
+      error=> console.log("exception"+ error),
     )
-  window.location.reload(); 
+
   }
 
-  deleteExpense(){
+  deleteExpense() {
 
     this.expense.id;
     this._service.deleteOneExpense(2).subscribe(
-      data =>{
+      data => {
         console.log("delete effectué");
       },
-      error =>{
+      error => {
         console.log("erreur delete non-effectué")
       }
     )
   }
-
-  formatageDate() {
-    var jour = new Date().getDay() + 6;
-    var jour_toString = jour.toString();
-    if (jour < 10) {
-      jour_toString = "0" + jour_toString;
-    }
-    var mois = new Date().getMonth() + 1;
-    var mois_toString = mois.toString();
-    if (mois < 10) {
-      mois_toString = "0" + mois_toString;
-    }
-    var annee = new Date().getFullYear();
-    return annee + '-' + mois_toString + '-' + jour_toString;
-  }
-
 
 
 }

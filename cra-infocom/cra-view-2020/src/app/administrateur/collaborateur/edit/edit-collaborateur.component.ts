@@ -188,7 +188,6 @@ export class EditCollaborateurComponent implements OnInit {
         this.collaboratorToUpdate = data1;
 
         this.updatedCollaborator.id = this.collaboratorToUpdate.id;
-        this.updatedCollaborator.typeCollaborator = this.collaboratorToUpdate.typeCollaborator;
 
         this._service.selectTypeCollaboratorById(+(<HTMLInputElement>document.getElementById(this.typeCollab)).value ).subscribe(
           
