@@ -220,6 +220,7 @@ export class DeclarationActiviteComponent implements OnInit {
       this.totalProjet1 = this.daysInMonth;
       this.remplis = true;
     }
+    this.totalAllActivity();
   }
   /** calcule du total du l'activité declaré N1 */
   totalProjet1 = 0;
@@ -230,9 +231,10 @@ export class DeclarationActiviteComponent implements OnInit {
     for (var i = 0; i < this.daysInMonth; i++) {
       if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber != undefined) {
         this.totalProjet1 = this.totalProjet1 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
+        this.totalActivity = this.totalActivity + this.totalProjet1;
       }
     }
-    this.totalActivity = this.totalProjet1 + this.totalProjet2 + this.totalProjet3 + this.totalProjet4;
+    this.totalAllActivity();
   }
 
   /** ACTIVITE2  */
