@@ -44,14 +44,17 @@ export class AddClientComponent implements OnInit {
 
     this.newClient.typeClient  = this.clientType;
 
+
     this._service.addAndupdateClient(this.newClient).subscribe(
       data => {
         console.log("ajout effectué");
       },
       error => {
-        console.log("erreur ajout non-effectué")
+        console.log("Remplissé tout les champs !")
       }
     )
+
+
   }
 
 }

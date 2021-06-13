@@ -225,7 +225,7 @@ export class NgserviceService {
   }
 
 
-  addAndUpdateMission(mission: Mission, startDate: Date, endDate: Date): Observable<Mission> {
+  addAndUpdateMission(mission: Mission, startDate: string, endDate: string): Observable<Mission> {
     return this._http.post<Mission>("http://localhost:8801/mission/update/" + startDate + "/" + endDate, mission);
   }
 

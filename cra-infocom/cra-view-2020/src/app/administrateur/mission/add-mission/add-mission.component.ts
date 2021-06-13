@@ -26,31 +26,37 @@ export class AddMissionComponent implements OnInit {
   }
 
   newMission = new Mission();
-  startDate = new Date();
-  endDate = new Date();
+  startDate!:string;
+  endDate !: string;
 
 
   addMission() {
 
-    this.newMission.client.id =  this.idClientByRef;
+    this.newMission.client.id = this.idClientByRef;
+
 
     this._service.addAndUpdateMission(this.newMission, this.startDate, this.endDate).subscribe(
       data => {
         console.log("ajout effectué");
       },
       error => {
-        console.log("erreur ajout non-effectué")
+        console.log("Remplissé tout les champs !")
       }
     )
+
+
+
+
+
   }
 
   idClientByName!: number;
-  updateClientRef(){
+  updateClientRef() {
     this.idClientByRef = this.idClientByName;
   }
 
   idClientByRef!: number;
-  updateClientName(){
+  updateClientName() {
     this.idClientByName = this.idClientByRef;
   }
 

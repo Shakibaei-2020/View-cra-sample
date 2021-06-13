@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
@@ -18,51 +19,83 @@ export class EditMissionComponent implements OnInit {
   clients!: Client[];
 
 
+  /** data */
+
+  clientName = "clientName";
+  clientRef = "clientRef";
+  missionTitle = "missionTitle";
+  dateStartMission = "dateStartMission";
+  dateEndMission = "dateEndMission";
+
+
   ngOnInit(): void {
 
     this._service.selectMissionById(4).subscribe(
       data => {
-      this.mission = data
+        this.mission = data
 
-      this._service.selectClientById( this.mission.client.id).subscribe(
-        data => this.clientSeleted = data,
-        error => console.log("exception" + error)
-      ) },
+        this._service.selectClientById(this.mission.client.id).subscribe(
+          data => this.clientSeleted = data,
+          error => console.log("exception" + error)
+        )
+      },
       error => console.log("exception" + error)
     )
 
     this._service.selectAllClient().subscribe(
       data => this.clients = data,
       error => console.log("exception" + error)
-    ) 
+    )
+
   }
 
-  newEndDate = new Date();
-  newStartDate = new Date();
-  updatedMission = new Mission();
+  pipeDate = new DatePipe('fr-FR');
 
+  missionToUpdate = new Mission();
+  updatedMission = new Mission();
+  newClientMission = new Client();
+
+  newStartDate!: string;
+  newEndDate!: string;
 
   updateMission() {
 
-    this.updatedMission.id = this.mission.id;
-    this.updatedMission.client.id = this.idClientByRef;
+    this._service.selectMissionById(4).subscribe(
+      data1 => {
+        this.missionToUpdate = data1;
 
-    this._service.addAndUpdateMission(this.updatedMission, this.newStartDate, this.newEndDate).subscribe(
-      data => {
-        console.log("maj effectué");
+        this.updatedMission.id = this.missionToUpdate.id;
+
+        this._service.selectClientById(+(<HTMLInputElement>document.getElementById(this.clientRef)).value).subscribe(
+          data2 => {
+            this.newClientMission = data2;
+
+            this.updatedMission.missionTitle = (<HTMLInputElement>document.getElementById(this.missionTitle)).value;
+            this.newStartDate = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateStartMission)).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.missionToUpdate.startDate, 'yyyy-MM-dd') || '2000-02-14';
+            this.newEndDate = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndMission)).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.missionToUpdate.endDate, 'yyyy-MM-dd') || '2000-02-14';
+            this.updatedMission.client = this.newClientMission || this.missionToUpdate.client;
+
+            this._service.addAndUpdateMission(this.updatedMission, this.newStartDate, this.newEndDate).subscribe(
+              data => {
+                console.log("update effectué");
+              },
+              error => {
+                console.log("erreur ajout non-effectué")
+              }
+            )
+            window.location.reload();
+          },
+          error => console.log("exception" + error),
+        )
       },
-      error => {
-        console.log("erreur maj non-effectué")
-      }
+      error => console.log("exception" + error),
     )
-
-    window.location.reload();
-
   }
+
 
   deleteMission() {
 
-    this._service.deleteMission(2).subscribe(
+    this._service.deleteMission(4).subscribe(
       data => {
         console.log("delete effectué");
       },
@@ -71,6 +104,9 @@ export class EditMissionComponent implements OnInit {
       }
     )
   }
+
+
+
 
   idClientByName!: number;
   updateClientRef() {

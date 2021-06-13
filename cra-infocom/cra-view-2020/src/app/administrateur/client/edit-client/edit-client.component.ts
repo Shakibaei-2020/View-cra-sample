@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'selenium-webdriver';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Client } from 'src/app/z-model/Client/client';
 import { TypeClient } from 'src/app/z-model/Client/type-client';
@@ -17,13 +18,16 @@ export class EditClientComponent implements OnInit {
   allClientType!: TypeClient[];
 
   client = new Client();
-  updatedClient = new Client();
 
-  
+  clientName = "clientName"
+  clientRef = "clientRef"
+  clientType = "clientType"
 
 
   ngOnInit(): void {
-    this._service.selectClientById(1).subscribe(
+    
+    /** id client a recuperé du search */
+    this._service.selectClientById(2).subscribe(
       data=> this.client = data,
       error=>console.log("exception" +error)
       ) 
@@ -35,28 +39,46 @@ export class EditClientComponent implements OnInit {
   }
 
 
-  
-  updateClient(){
-    this.updatedClient.id = this.client.id;
-    this.updatedClient.typeClient = this.clientType;
+  clientToUpdate = new Client();
+  updatedClient = new Client();
+  newTypeClient = new TypeClient();
 
-    this._service.addAndupdateClient(this.updatedClient).subscribe(
-      data =>{
-        console.log("ajout effectué");
+  updateClient(){
+
+    this._service.selectClientById(2).subscribe(
+      data1=> {this.clientToUpdate = data1;
+        
+        this.updatedClient.id = this.clientToUpdate.id;
+
+        this._service.selectTypeClientById(+(<HTMLInputElement>document.getElementById(this.clientType)).value).subscribe(
+          data2 => {this.newTypeClient = data2;
+
+            this.updatedClient.name = (<HTMLInputElement>document.getElementById(this.clientName)).value  || this.clientToUpdate.name;
+            this.updatedClient.ref = (<HTMLInputElement>document.getElementById(this.clientRef)).value|| this.clientToUpdate.ref;
+            this.updatedClient.typeClient = this.newTypeClient || this.clientToUpdate.typeClient;
+
+            this._service.addAndupdateClient(this.updatedClient).subscribe(
+            data => {
+              console.log("ajout effectué");
+            },
+            error => {
+              console.log("erreur ajout non-effectué")
+            }
+            )
+            window.location.reload();
+          },
+          error=> console.log("exception" + error),
+        )
       },
-      error =>{
-        console.log("erreur ajout non-effectué")
-      }
+      error=> console.log("exception" + error),
+
     )
-    window.location.reload();
 
   }
 
   deleteClient(){
 
-    this.updatedClient.id = 2;
-    
-    this._service.deleteClient(this.updatedClient.id).subscribe(
+    this._service.deleteClient(2).subscribe(
       data =>{
         console.log("delete effectué");
       },
@@ -65,19 +87,5 @@ export class EditClientComponent implements OnInit {
       }
     )
   }
-
-
-  idOfClientType!: number;
-  clientType = new TypeClient();
-
-  getClientType() {
-    this._service.selectTypeClientById(this.idOfClientType).subscribe(
-      data => { this.clientType = data; },
-      error => console.log("exception" + error),
-    )
-    setTimeout(() => {
-    }, 50);
-  }
-
     
 }

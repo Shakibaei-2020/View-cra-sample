@@ -16,32 +16,42 @@
     <div class="panel-body bio-graph-info">
       <div class="row">
         <div class="bio-row">
-       
+
           <div class="inputbox mt-1">
             <span class="input-title">Nom du client : {{clientSeleted.name}}</span><br>
-            <select class="form-input" aria-label="Default select example"  required [(ngModel)]="idClientByName" name="idClientByName" (change)="updateClientRef()">
+            <select class="form-input" aria-label="Default select example" (change)="updateClientRef()" name="clientName" id="clientName">
               <option *ngFor="let client of clients" value="{{client.id}}">{{client.name}}</option>
-
-              </select>
-          </div>
-          <div class="inputbox mt-1">
-            <span class="input-title" >Ref client : {{clientSeleted.ref}}</span><br>
-            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idClientByRef" name="idClientByRef" (change)="updateClientName()">
-              <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
             </select>
           </div>
 
-          <div class="inputbox mt-1"><span class="input-title">Nom de la mission :  {{mission.missionTitle}}</span> <input type="text" required [(ngModel)]="updatedMission.missionTitle" name="updatedMission.missionTitle"> </div>
+          <div class="inputbox mt-1">
+            <span class="input-title">Ref client : {{clientSeleted.ref}}</span><br>
+            <select class="form-input" aria-label="Default select example" (change)="updateClientName()" name="clientRef" id="clientRef">
+              <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
+            </select>
+
+          </div>
+
+          <div class="inputbox mt-1">
+            <span class="input-title">Nom de la mission : {{mission.missionTitle}}</span>
+            <input type="text" name="missionTitle" id="missionTitle">
+          </div>
 
         </div>
         <div class="bio-row">
 
+          <div class="inputbox mt-1">
+            <span class="input-title">Date de début : {{mission.startDate | date: 'dd/MM/yyyy' }}</span>
+            <input type="Date" name="dateStartMission" id="dateStartMission">
+          </div>
 
-
-
-          <div class="inputbox mt-1"><span class="input-title">Date de début :  {{mission.startDate | date: 'dd/MM/yyyy' }}</span> <input type="Date" required [(ngModel)]="newStartDate" name="newStartDate"> </div>
           <br>
-          <div class="inputbox mt-1"><span class="input-title">Date de fin :  {{mission.endDate | date: 'dd/MM/yyyy' }}</span> <input type="Date" required [(ngModel)]="newEndDate" name="newEndDate"> </div>
+
+          <div class="inputbox mt-1">
+            <span class="input-title">Date de fin : {{mission.endDate | date: 'dd/MM/yyyy' }}</span>
+            <input type="Date" name="dateEndMission" id="dateEndMission">
+          </div>
+
         </div>
 
 
