@@ -108,14 +108,13 @@ export class EditMissionComponent implements OnInit {
 
 
 
-  idClientByName!: number;
+
   updateClientRef() {
-    this.idClientByRef = this.idClientByName;
+    (<HTMLInputElement>document.getElementById(this.clientRef)).value =  (<HTMLInputElement>document.getElementById(this.clientName)).value;
   }
 
-  idClientByRef!: number;
   updateClientName() {
-    this.idClientByName = this.idClientByRef;
+    (<HTMLInputElement>document.getElementById(this.clientName)).value =  (<HTMLInputElement>document.getElementById(this.clientRef)).value;
   }
 
 

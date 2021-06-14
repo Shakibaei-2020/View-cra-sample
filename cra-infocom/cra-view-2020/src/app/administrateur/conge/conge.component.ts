@@ -28,15 +28,15 @@ export class CongeComponent implements OnInit {
   taille = 30;
 
   myData = new Array();
+  nbResultat!: number;
 
 
   ngOnInit(): void {
 
   }
 
+  /** Methode afin de trouver un une demane de congé via  le status et entre quand ce situe ca date de demande */
   searchConge(){
-
-
     this._service.searchLeave(this.date1, this.date2, this.status).subscribe(
       data=> {  this.leaves = data;
 
@@ -48,8 +48,8 @@ export class CongeComponent implements OnInit {
                   item.nomCollab = data.lastName;
                   item.prenomCollab = data.firstName;
                 }
-                console.log(this.leaves)
-                },
+                this.nbResultat = this.leaves.length;
+              },
               error=>console.log("exception" +error)
               ) 
           }
@@ -59,11 +59,13 @@ export class CongeComponent implements OnInit {
       )
       setTimeout(() => {
       }, 50);
+
   }
 
 
 
   
+  /** recupere la demande de congé d'un collaborateur via son id */
   getCollabByLeaveId(){
     /** selectionne un collaborateur avec la clé etrangere idCollaborateur dans la table leave */
     this._service.selectCollabByLeaveId(2).subscribe(
@@ -74,12 +76,14 @@ export class CongeComponent implements OnInit {
       }, 50);
   }
 
+  /** routing vers ajout de demande de congé */
   goToAddConge(){
     this._route.navigate(['/addConge']);
   }
+
+  /** routing vers editer un congé */
   goGerer(){
     this._route.navigate(['/editLeave']);
 
   }
-
 }

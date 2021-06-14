@@ -8,42 +8,25 @@
       <button class="img-fluid bouttonMenu ">
         <img class="img1" src="https://image.flaticon.com/icons/png/512/4117/4117837.png ">
       </button>
-      <h2 class="page">Gestion de la note de frais de : {{collaborator.firstName}} {{collaborator.lastName}}</h2>
+      <h2 class="page">Gestion de la note de frais de : {{collaborator.firstName}} {{collaborator.lastName}} du  {{expense.dateRequest | date: 'dd/MM/yyyy'}}</h2>
     </span>
     <hr>
-
 
     <div class="panel-body bio-graph-info">
       <br>
       <div class="row">
-
         <div class="bio-row">
+
           <div class="inputbox mt-1">
             <span class="input-title">Cout HT : {{expense.costHT}} €</span> 
             <input type="text"  name="expenseCostHT" id="expenseCostHT" > 
           </div>
-        </div>
-        <div class="bio-row">
-          <div class="inputbox mt-1">
-            <span class="input-title">Date frais : {{expense.dateExpense | date:'dd/MM/yyyy'}}</span> 
-            <input type="Date"  name="dateExpense" id="dateExpense"  > </div>
-        </div>
 
-        <div class="bio-row">
           <div class="inputbox mt-1">
             <span class="input-title">Cout TVA : {{expense.costTVA}} €</span>
             <input type="text" name="expenseCostTVA" id="expenseCostTVA"> 
           </div>
-        </div>
-
-        <div class="bio-row">
-          <div class="inputbox mt-1">
-            <span class="input-title">Date demande de frais : {{expense.dateRequest | date: 'dd/MM/yyyy'}} </span> 
-            <input type="Date" name="dateExpenseRequest" id="dateExpenseRequest"  >
-           </div>
-
-        </div>
-        <div class="bio-row">
+      
           <div class="inputbox mt-1">
             <span class="input-title">Facturable : {{expense.billable}} </span><br>
             <select class="form-input" aria-label="Default select example" name="expenseBillable" id="expenseBillable"  >
@@ -52,30 +35,36 @@
             </select>
           </div>
 
-          <div class="inputbox mt-1"
-          ><span class="input-title">Type : {{expense.typeExpense.type}}</span><br>
+        </div>
+
+     
+        <div class="bio-row">
+          <div class="inputbox mt-1">
+            <span class="input-title">Date de frais : {{expense.dateExpense | date:'dd/MM/yyyy'}}</span> 
+            <input type="Date"  name="dateExpense" id="dateExpense"  > 
+          </div>
+
+          <div class="inputbox mt-1">
+            <span class="input-title">Type : {{expense.typeExpense.type}}</span><br>
             <select class="form-input" name="expenseType" id="expenseType"  >              
               <option *ngFor="let allTypeExpens of allTypeExpense" value="{{allTypeExpens.id}}">{{allTypeExpens.type}} </option>
             </select>
           </div>
 
-
-        </div>
-        <div class="bio-row">
-
-          <div class="inputbox mt-1"><span class="input-title">État : {{expense.status}}</span><br>
+          <div class="inputbox mt-1"><span class="input-title">État de la demande : {{expense.status}}</span><br>
             <select class="form-input" aria-label="Default select example" name="expenseStatus" id="expenseStatus">
               <option *ngFor="let statu of status" value={{statu}}>{{statu}}</option>
-
             </select>
           </div>
         </div>
+
+     
 
 
         <div class="bio-row"></div>
 
         <div class="bio-row">
-          <br> <br>
+        
 
           <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
 

@@ -14,21 +14,47 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form">
-                        <div class="inputbox mt-3"> <span for="lastName">Nom :</span> <input autocomplete="off" type="text" placeholder="Nom de famille" required [(ngModel)]="collaborator.lastName" name="lastName"> </div>
-                        <div class="inputbox mt-3"> <span for="firstName">Prénom :</span> <input autocomplete="off"  type="text" placeholder="Prenom" required [(ngModel)]="collaborator.firstName"  name="firstName"> </div>
-                        <div class="inputbox mt-3"> <span for="email">Adresse mail:</span> <input autocomplete="off" type="text" placeholder="Adresse mail" required [(ngModel)]="collaborator.email" name="email"> 
+                        <div class="inputbox mt-3"> <span for="lastName">Nom :</span>
+                            <input autocomplete="off" type="text" placeholder="Nom de famille" required [(ngModel)]="collaborator.lastName" name="lastName">
                         </div>
+                      
+                        <div class="inputbox mt-3">
+                            <span for="email">Adresse mail:</span>
+                            <input autocomplete="off" type="text" placeholder="Adresse mail" required [(ngModel)]="collaborator.email" name="email">
+                        </div>
+
+                        <div class="inputbox mt-3">
+                            <span for="dateOfEntry">Date d'entrée :</span>
+                            <input type="date" required [(ngModel)]="dateEntre" name="dateEntre">
+                        </div>
+                        
                     </div>
                 </div>
+
                 <div class="col-md-6">
+
                     <div class="form">
-                        <div class="inputbox mt-3"> <span for="dateOfEntry">Date d'entrée :</span> <input  type="date" required [(ngModel)]="dateEntre" name="dateEntre"> </div>
-                        <div class="inputbox mt-3"> <span for="dateOfRelease">Date de sortie :</span> <input  type="date" required [(ngModel)]="dateSortie" name="dateSortie"> </div>
+
+                        <div class="inputbox mt-3">
+                            <span for="firstName">Prénom :</span>
+                            <input autocomplete="off" type="text" placeholder="Prenom" required [(ngModel)]="collaborator.firstName" name="firstName">
+                        </div>
+
                         <div class="inputbox mt-3"><span>Type :</span><br>
                             <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfCollType" name="idOfCollType" (change)="getCollType()">
-                                <option *ngFor="let allTypeCollaborators of allTypeCollaborator" value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}
+                                <option *ngFor="let allTypeCollaborators of allTypeCollaborator"  value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}
                             </select>
                         </div>
+
+
+                      
+
+                        <div class="inputbox mt-3">
+                            <span for="dateOfRelease">Date de sortie :</span>
+                            <input type="date" required [(ngModel)]="dateSortie" name="dateSortie">
+
+                        </div>
+                     
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -40,4 +66,3 @@
         </div>
     </div>
 </form>
-

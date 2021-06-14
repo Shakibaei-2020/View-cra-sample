@@ -23,8 +23,8 @@ export class CollaborateurComponent implements OnInit {
 
   ngOnInit() { }
   
+  /** recherche d'un collaborateur via son nom de famille */
   searchOneCollab(){
-
   this._service.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
     data=> this.collaborators = data,
     error=>console.log("exception" +error)
@@ -32,13 +32,14 @@ export class CollaborateurComponent implements OnInit {
   }
 
   
+  /** redirection vers editer collab */
   goToEditCollab(){
 
     this._route.navigate(['/editCollaborateur']);
   }
 
+  /** redirection vers ajouter un collab */
   goToAddCollab(){
-
     this._route.navigate(['/addCollaborateur']);
   }
 

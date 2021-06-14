@@ -63,11 +63,13 @@ export class EditFraisComponent implements OnInit {
 
   updateExpense() {
 
+    /** on selectionne l'expense à mettre a jour */
     this._service.selectOneExpenseById(231).subscribe(
       data1=> {this.expenseToUpdate = data1;
 
         this.updatedExpense.id = this.expenseToUpdate.id;
 
+        /** on select le type qu'on veut lui imposé */
         this._service.selectTypeExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseType)).value).subscribe(
           data2=>{this.newTypeExpense = data2;
 
@@ -80,6 +82,7 @@ export class EditFraisComponent implements OnInit {
             this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA)).value || this.expenseToUpdate.costTVA;
             this.updatedExpense.costTTC = this.updatedExpense.costHT + this.updatedExpense.costTVA || this.expenseToUpdate.costTTC;
 
+            /** on effectue la mise à jour */
             this._service.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
               data => {
                 console.log("ajout effectué");
@@ -98,8 +101,8 @@ export class EditFraisComponent implements OnInit {
 
   }
 
+  /** on supprimer l'expense selectionné */
   deleteExpense() {
-
     this.expense.id;
     this._service.deleteOneExpense(2).subscribe(
       data => {

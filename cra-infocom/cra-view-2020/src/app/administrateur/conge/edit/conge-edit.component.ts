@@ -17,7 +17,7 @@ export class CongeEditComponent implements OnInit {
   allLeaveType!: TypeLeave[];
 
   status = ["en-cours", "validé", "refusé"]
-  timeStatus = ["matin", "après-midi"]
+  timeStatus = ["matin", "après-midi","Journée entière"]
   inputedStatus!: string;
   collaborator = new Collaborator();
 
@@ -68,9 +68,10 @@ export class CongeEditComponent implements OnInit {
   dateOfStartLeave!: string;
   dateOfEndLeave!: string;
 
+  /** mise à jour de la demande de congé */
   updateLeave() {
 
-    /** id du leave a recuperer lorsqu'il est selectionné lors du search */
+    /** On recupere la demande à mettre a jour*/
     this._service.selectOneLeaveRequestById(191).subscribe(
       data1 => {
         this.leaveToUpdate = data1;
@@ -78,6 +79,7 @@ export class CongeEditComponent implements OnInit {
         this.updatedLeave.id = this.leaveToUpdate.id;
         this.updatedLeave.collaboratorId = this.leaveToUpdate.id;
 
+        /** on recupere le nouveau type de la demande */
         this._service.selectLeaveTypeById(+(<HTMLInputElement>document.getElementById(this.typeLeave)).value).subscribe(
 
           data2 => {
@@ -93,6 +95,7 @@ export class CongeEditComponent implements OnInit {
             this.updatedLeave.leaveType = this.newTypeLeave || this.leaveToUpdate.leaveType;
             this.updatedLeave.nbJours =   this.dayNumber || this.leaveToUpdate.nbJours;
 
+            /** on effectue la mise à jour */
             this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(
               data => {
                 console.log("ajout effectué");
@@ -128,6 +131,8 @@ export class CongeEditComponent implements OnInit {
   dayNumber!: number;
   newDateStartLeave!: Date;
   newDateEndLeave!: Date;
+
+  /** calcule le nombre de jours entre la date de debut et fin de la demande */
   howManyday() {
     this.newDateStartLeave = new Date( this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateStartLeave)).valueAsDate, 'yyyy-MM-dd') || this.dateStartLeave) 
     this.newDateEndLeave = new Date( this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndLeave)).valueAsDate, 'yyyy-MM-dd') || this.dateStartLeave) 

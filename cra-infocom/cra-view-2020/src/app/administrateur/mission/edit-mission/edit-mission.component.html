@@ -25,11 +25,8 @@
           </div>
 
           <div class="inputbox mt-1">
-            <span class="input-title">Ref client : {{clientSeleted.ref}}</span><br>
-            <select class="form-input" aria-label="Default select example" (change)="updateClientName()" name="clientRef" id="clientRef">
-              <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
-            </select>
-
+            <span class="input-title">Date de début : {{mission.startDate | date: 'dd/MM/yyyy' }}</span>
+            <input type="Date" name="dateStartMission" id="dateStartMission">
           </div>
 
           <div class="inputbox mt-1">
@@ -41,11 +38,15 @@
         <div class="bio-row">
 
           <div class="inputbox mt-1">
-            <span class="input-title">Date de début : {{mission.startDate | date: 'dd/MM/yyyy' }}</span>
-            <input type="Date" name="dateStartMission" id="dateStartMission">
+            <span class="input-title">Ref client : {{clientSeleted.ref}}</span><br>
+            <select class="form-input" aria-label="Default select example" (change)="updateClientName()" name="clientRef" id="clientRef">
+              <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
+            </select>
+
           </div>
 
-          <br>
+       
+
 
           <div class="inputbox mt-1">
             <span class="input-title">Date de fin : {{mission.endDate | date: 'dd/MM/yyyy' }}</span>
@@ -57,7 +58,6 @@
 
         <div class="bio-row"></div>
         <div class="bio-row">
-          <br> <br>
           <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
 
           <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
