@@ -45,7 +45,7 @@ export class CongeComponent implements OnInit {
 
     console.log(this.status)
 
-    
+
     if ((this.date1 != undefined || this.date2 != undefined) && this.status != undefined && this.lastNameCollab != undefined) {
 
       this._service.searchLeave(this.date1, this.date2, this.status, this.lastNameCollab).subscribe(
@@ -71,13 +71,168 @@ export class CongeComponent implements OnInit {
       )
       setTimeout(() => {
       }, 50);
-    } else if( this.date1 === undefined || this.date2 === undefined && this.status != null){
-      console.log("on a seulement le status")
-    }else if((this.date1 != undefined || this.date2 != undefined) && this.status === undefined){
-      console.log("on a seulement le dates")
-    }else if((this.date1 === undefined || this.date2  === undefined) && this.status === undefined){
-      console.log("on a rien")
+    } else if ((this.date1 != undefined || this.date2 != undefined) && this.status != undefined && this.lastNameCollab === undefined) {
+
+      this._service.searchLeaveByDateStatus(this.date1, this.date2, this.status).subscribe(
+        data => {
+          this.leaves = data;
+
+          this.leaves.forEach(
+            (item) => {
+              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+                data => {
+                  if (item != null) {
+                    item.nomCollab = data.lastName;
+                    item.prenomCollab = data.firstName;
+                  }
+                  this.nbResultat = this.leaves.length;
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+        },
+        error => console.log("exception" + error)
+      )
+      setTimeout(() => {
+      }, 50);
+
+    } else if ((this.date1 != undefined || this.date2 != undefined) && this.status === undefined && this.lastNameCollab != undefined) {
+
+
+      this._service.searchLeaveByDateStatus(this.date1, this.date2, this.lastNameCollab).subscribe(
+        data => {
+          this.leaves = data;
+
+          this.leaves.forEach(
+            (item) => {
+              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+                data => {
+                  if (item != null) {
+                    item.nomCollab = data.lastName;
+                    item.prenomCollab = data.firstName;
+                  }
+                  this.nbResultat = this.leaves.length;
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+        },
+        error => console.log("exception" + error)
+      )
+      setTimeout(() => {
+      }, 50);
+
+    } else if ((this.date1 != undefined || this.date2 != undefined) && this.status === undefined && this.lastNameCollab === undefined) {
+
+
+      this._service.searchLeaveByDate(this.date1, this.date2).subscribe(
+        data => {
+          this.leaves = data;
+
+          this.leaves.forEach(
+            (item) => {
+              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+                data => {
+                  if (item != null) {
+                    item.nomCollab = data.lastName;
+                    item.prenomCollab = data.firstName;
+                  }
+                  this.nbResultat = this.leaves.length;
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+        },
+        error => console.log("exception" + error)
+      )
+      setTimeout(() => {
+      }, 50);
+
+    }else if ((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && this.lastNameCollab !=  undefined) {
+    
+      this._service.searchLeaveByStatusName(this.status, this.lastNameCollab).subscribe(
+        data => {
+          this.leaves = data;
+
+          this.leaves.forEach(
+            (item) => {
+              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+                data => {
+                  if (item != null) {
+                    item.nomCollab = data.lastName;
+                    item.prenomCollab = data.firstName;
+                  }
+                  this.nbResultat = this.leaves.length;
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+        },
+        error => console.log("exception" + error)
+      )
+      setTimeout(() => {
+      }, 50);
+    
+    }else if ((this.date1 === undefined || this.date2 === undefined) && this.status === undefined && this.lastNameCollab !=  undefined) {
+
+
+      this._service.searchLeaveByName( this.lastNameCollab).subscribe(
+        data => {
+          this.leaves = data;
+
+          this.leaves.forEach(
+            (item) => {
+              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+                data => {
+                  if (item != null) {
+                    item.nomCollab = data.lastName;
+                    item.prenomCollab = data.firstName;
+                  }
+                  this.nbResultat = this.leaves.length;
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+        },
+        error => console.log("exception" + error)
+      )
+      setTimeout(() => {
+      }, 50);
+    }else if ((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && this.lastNameCollab ===  undefined) {
+
+      
+      this._service.searchLeaveByStatus( this.status).subscribe(
+        data => {
+          this.leaves = data;
+
+          this.leaves.forEach(
+            (item) => {
+              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+                data => {
+                  if (item != null) {
+                    item.nomCollab = data.lastName;
+                    item.prenomCollab = data.firstName;
+                  }
+                  this.nbResultat = this.leaves.length;
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+        },
+        error => console.log("exception" + error)
+      )
+      setTimeout(() => {
+      }, 50);
+
+
     }
+
 
 
   }

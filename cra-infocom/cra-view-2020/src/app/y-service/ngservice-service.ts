@@ -160,9 +160,39 @@ export class NgserviceService {
     return this._http.get<Leave[]>("http://localhost:8950/conge/lister/leave/collab/" + id);
   }
 
-  searchLeave(dateDebut: string, dateFin: string, status: String, lastname: string): Observable<Leave[]> {
+/** SEARCH */
+
+  searchLeave(dateDebut: string, dateFin: string, status: string, lastname: string): Observable<Leave[]> {
     return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeave/" + dateDebut + "/" + dateFin + "/" + status + "/" + lastname);
   }
+
+  searchLeaveByDateName(dateDebut: string, dateFin: string,  lastname: string): Observable<Leave[]> {
+    return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeaveByDateName/" + dateDebut + "/" + dateFin + "/" + lastname);
+  }
+
+  searchLeaveByDateStatus(dateDebut: string, dateFin: string, status: string): Observable<Leave[]> {
+    return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeaveByDateStatus/" + dateDebut + "/" + dateFin + "/" + status );
+  }
+
+  searchLeaveByDate(dateDebut: string, dateFin: string): Observable<Leave[]> {
+    return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeaveByDate/" + dateDebut + "/" + dateFin );
+  }
+
+  searchLeaveByStatusName( status: string, lastname: string): Observable<Leave[]> {
+    return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeaveByStatusName/" +  status + "/" + lastname);
+  }
+
+  searchLeaveByName( lastname: string): Observable<Leave[]> {
+    return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeaveByName/"+ lastname);
+  }
+  
+  searchLeaveByStatus( status: string): Observable<Leave[]> {
+    return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeaveByStatus/" + status );
+  }
+
+  
+
+
 
   /** TYPE **/
   selectLeaveTypeById(id: number): Observable<TypeLeave> {
