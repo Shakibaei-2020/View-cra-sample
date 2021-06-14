@@ -13,7 +13,7 @@ export class FraisComponent implements OnInit {
 
   date1!: Date;
   date2!: Date;
-  status!: String;
+  status!: string;
   nbResultat!: number;
 
   lastNameCollab!: string;
@@ -84,7 +84,136 @@ export class FraisComponent implements OnInit {
     )
     setTimeout(() => {
     }, 50);
+  }else if((this.date1 != undefined || this.date2 != undefined) && this.status === undefined && this.lastNameCollab !== undefined){
+
+    this._service.searchExpenseByDateName(this.date1, this.date2, this.lastNameCollab).subscribe(
+      data => {
+        this.expenses = data;
+        this.nbResultat = this.expenses.length;
+
+        this.expenses.forEach(
+          (item) => {
+            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              data => {
+                if (item != null) {
+                  item.nomCollab = data.lastName;
+                  item.prenomCollab = data.firstName;
+                }
+              },
+              error => console.log("exception" + error)
+            )
+          }
+        )
+      },
+      error => console.log("exception" + error)
+    )
+    setTimeout(() => {
+    }, 50);
+  }else if((this.date1 != undefined || this.date2 != undefined) && this.status != undefined && this.lastNameCollab === undefined){
+
+    this._service.searchExpenseByDateStatus(this.date1, this.date2, this.status).subscribe(
+      data => {
+        this.expenses = data;
+        this.nbResultat = this.expenses.length;
+
+        this.expenses.forEach(
+          (item) => {
+            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              data => {
+                if (item != null) {
+                  item.nomCollab = data.lastName;
+                  item.prenomCollab = data.firstName;
+                }
+              },
+              error => console.log("exception" + error)
+            )
+          }
+        )
+      },
+      error => console.log("exception" + error)
+    )
+    setTimeout(() => {
+    }, 50);
+  }else if((this.date1 === undefined || this.date2 === undefined) && this.status === undefined && this.lastNameCollab != undefined){
+
+    this._service.searchExpenseByName(this.lastNameCollab).subscribe(
+      data => {
+        this.expenses = data;
+        this.nbResultat = this.expenses.length;
+
+        this.expenses.forEach(
+          (item) => {
+            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              data => {
+                if (item != null) {
+                  item.nomCollab = data.lastName;
+                  item.prenomCollab = data.firstName;
+                }
+              },
+              error => console.log("exception" + error)
+            )
+          }
+        )
+      },
+      error => console.log("exception" + error)
+    )
+    setTimeout(() => {
+    }, 50);
+  }else if((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && this.lastNameCollab === undefined){
+
+    this._service.searchExpenseByStatus(this.status).subscribe(
+      data => {
+        this.expenses = data;
+        this.nbResultat = this.expenses.length;
+
+        this.expenses.forEach(
+          (item) => {
+            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              data => {
+                if (item != null) {
+                  item.nomCollab = data.lastName;
+                  item.prenomCollab = data.firstName;
+                }
+              },
+              error => console.log("exception" + error)
+            )
+          }
+        )
+      },
+      error => console.log("exception" + error)
+    )
+    setTimeout(() => {
+    }, 50);
+  }else if((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && this.lastNameCollab != undefined){
+    this._service.searchExpenseByNameStatus(this.status,this.lastNameCollab).subscribe(
+      data => {
+        this.expenses = data;
+        this.nbResultat = this.expenses.length;
+
+        this.expenses.forEach(
+          (item) => {
+            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              data => {
+                if (item != null) {
+                  item.nomCollab = data.lastName;
+                  item.prenomCollab = data.firstName;
+                }
+              },
+              error => console.log("exception" + error)
+            )
+          }
+        )
+      },
+      error => console.log("exception" + error)
+    )
+    setTimeout(() => {
+    }, 50);
   }
+
+
+
+
+
   }
 
 
