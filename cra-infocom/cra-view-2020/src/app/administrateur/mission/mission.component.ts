@@ -14,6 +14,7 @@ export class MissionComponent implements OnInit {
   date1!:Date;
   date2!:Date;
   clientName!:string;
+  nbResultat!: number;
 
   public missions!:Mission[];  
   
@@ -25,7 +26,9 @@ export class MissionComponent implements OnInit {
 
   searchMission(){
     this._service.searchMission(this.date1, this.date2, this.clientName).subscribe(
-      data=> this.missions = data,
+      data=> {this.missions = data;
+      this.nbResultat = this.missions.length
+    },
       error=>console.log("exception" +error)
       )
       console.log(this.missions)
@@ -41,5 +44,8 @@ export class MissionComponent implements OnInit {
     this._route.navigate(['/addMission']);
 
   }
+  goToAccueil(){
+    this._route.navigate(['/administrateur']);
 
+  }
 }

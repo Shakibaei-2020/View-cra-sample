@@ -11,10 +11,10 @@
         <img class="img1" src="https://image.flaticon.com/icons/png/512/1719/1719522.png">
       </button>
 
-      <!--
-          <button  class="img-fluid buttonAdd ">  
-            <img  (click)="goToAddConge()" class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
-          </button> -->
+         
+      <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
+        <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
+      </button>
       <h2 class="page">Gestion des demandes de congés </h2>
     </span>
 
@@ -30,16 +30,33 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-4"><input type="date" required [(ngModel)]="date1" name="date1"></div>
-        <div class="col-sm-4"><input type="date" required [(ngModel)]="date2" name="date2"></div>
-        <div class="col-sm-4"><button class="btnSearch" type="submit" (click)="searchConge()">Chercher</button></div>
-        <div class="col-sm-8"><br><br> <span>État de la demande : </span>
-          <select class="form-input" aria-label="Default select example" required [(ngModel)]="status" name="status">
+        <div class="col-sm-4">
+          <input type="date" required [(ngModel)]="date1" name="date1">
+        </div>
+
+        <div class="col-sm-4">
+          <input type="date" required [(ngModel)]="date2" name="date2">
+        </div>
+
+        <div class="col-sm-4">
+          <button class="btnSearch" type="submit" (click)="searchConge()">Chercher</button>
+        </div>
+
+        <div class="col-sm-8"><br>
+           <span>État de la demande : </span>
+          <select class="form-input" value="" aria-label="Default select example" required [(ngModel)]="status" name="status">
             <option value="en-cours">En-cours</option>
             <option value="refusé">Refusé</option>
             <option value="validé">Validé</option>
           </select>
         </div>
+
+        <div class="col-sm-8"><br>
+          <span>Nom collaborateur : non-fonctionnel </span>
+          <input type="text"  required [(ngModel)]="lastNameCollab" name="lastNameCollab" >
+        </div>
+
+
       </div>
       <br><br>
       <h2>Résultat : {{nbResultat}}</h2>
@@ -72,14 +89,14 @@
           </tr>
         </thead>
         <tbody>        
-        <tr *ngFor="let leave of leaves; let i = index">
-          <th scope="row">{{i}}</th>
+        <tr *ngFor="let leave of leaves; index as i">
             <td>{{leave.nomCollab }}</td>
             <td>{{leave.prenomCollab }}</td>
             <td>{{leave.dateOfDemand | date: 'dd/MM/yyyy' }}</td>
             <td>{{leave.dateOfStartLeave | date: 'dd/MM/yyyy' }}</td>
             <td>{{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</td>
             <td>{{leave.leaveType.type }}</td>
+            
 
             <td>
               <button class="btnEditer" type="submit" (click)="goGerer()">Gérer</button>

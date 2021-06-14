@@ -2,7 +2,8 @@
 
 .button {
     padding: 10px 25px;
-    width: 100%;
+    width: 45%;
+    margin-left: 5%;
     font-size: 15px;
     text-align: center;
     cursor: pointer;

@@ -63,7 +63,8 @@
           </div>
 
           <div class="bio-row">
-            <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+            <button class="btnAction" (click)="goToSearch()">Retour</button>
+            <button class="btnAction" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
             <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -84,7 +85,7 @@
                 </div>
               </div>
             </div>
-            <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
+            <button class="btnAction" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
             <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -260,7 +261,7 @@
         <tr>
           <th>Date de la demande</th>
           <th>Date de début</th>
-          <th>Date de fin</th>
+          <th>Date de retour</th>
           <th>Type</th>
           <th>Action</th>
         </tr>
@@ -312,15 +313,11 @@
                     <span> Date de départ : {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span><br>
                     <input class="modal-input" type="date" name="dateStartLeave-{{indexOfelement}}" id="dateStartLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
                   </div>
-
+                  
                   <div class="inputbox mt-1">
-                    <span> Début : {{leave.statusDebut}}</span><br>
-                    <select class="modal-input" name="leaveStatusDebut-{{indexOfelement}}" id="leaveStatusDebut-{{indexOfelement}}">
-                      <option value="matin">Matinée</option>
-                      <option value="après-midi">Apres-midi</option>
-                    </select>
+                    <span> Date de retour :  {{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</span><br>
+                    <input class="modal-input" type="date" name="dateEndLeave-{{indexOfelement}}" id="dateEndLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
                   </div>
-
 
                   <div class="inputbox mt-1">
                     <span> Type de congé : {{leave.leaveType.type}}</span><br>
@@ -353,10 +350,7 @@
                 <div class="col-sm-6">
 
 
-                  <div class="inputbox mt-1">
-                    <span> Date de fin :  {{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</span><br>
-                    <input class="modal-input" type="date" name="dateEndLeave-{{indexOfelement}}" id="dateEndLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
-                  </div>
+              
 
 
 
@@ -365,6 +359,14 @@
                     <input class="modal-input" type="date" name="dateLeaveRequest-{{indexOfelement}}" id="dateLeaveRequest-{{indexOfelement}}" disabled>
                   </div>
 
+
+                  <div class="inputbox mt-1">
+                    <span> Début : {{leave.statusDebut}}</span><br>
+                    <select class="modal-input" name="leaveStatusDebut-{{indexOfelement}}" id="leaveStatusDebut-{{indexOfelement}}">
+                      <option value="matin">Matinée</option>
+                      <option value="après-midi">Apres-midi</option>
+                    </select>
+                  </div>
 
                
                   <div class="inputbox mt-1">

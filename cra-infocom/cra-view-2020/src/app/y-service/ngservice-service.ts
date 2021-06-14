@@ -80,10 +80,6 @@ export class NgserviceService {
 
   /****************************************************************************************** NOTE DE FRAIS SERVICES*************************************************************************/
 
-  searchExpense(date1: Date, date2: Date, status: String): Observable<Expense[]> {
-    return this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpense/" + date1 + "/" + date2 + "/" + status);
-  }
-
   listExpenseByCollabId(id: number): Observable<Expense[]> {
     return this._http.get<Expense[]>("http://localhost:7672/expenses/lister/expense/collab/" + id);
   }
@@ -103,6 +99,36 @@ export class NgserviceService {
   selectOneExpenseById(id: number): Observable<Expense> {
     return this._http.get<Expense>("http://localhost:7672/expenses/lister/" + id);
   }
+
+  /** SEARCH METHODS*/
+  searchExpense(date1: Date, date2: Date, status: String, lastNameCollab: String): Observable<Expense[]> {
+    return this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpense/" + date1 + "/" + date2 + "/" + status + "/" + lastNameCollab);
+  }
+
+  searchExpenseByDate(date1: Date, date2: Date): Observable<Expense[]> {
+    return this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpenseByDate/" + date1 + "/" + date2 );
+  }
+  
+  searchExpenseByDateName(date1: Date, date2: Date,lastNameCollab: String): Observable<Expense[]> {
+    return this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpenseByDateName/" + date1 + "/" + date2 + "/" + lastNameCollab);
+  }
+
+  searchExpenseByDateStatus(date1: Date, date2: Date, status: string): Observable<Expense[]> {
+    return this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpenseByDateStatus/" + date1 + "/" + date2 + "/" + status );
+  }
+
+  searchExpenseByName( lastNameCollab: String): Observable<Expense[]> {
+    return this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpenseByName/" + lastNameCollab);
+  }
+
+  searchExpenseByStatus(status: String): Observable<Expense[]> {
+    return this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpenseByStatus/" +  status);
+  }
+
+  searchExpenseByNameStatus( lastNameCollab: String, status : String): Observable<Expense[]> {
+    return this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpenseByNameStatus/" + lastNameCollab + "/" + status);
+  }
+
 
   /** TYPE **/
 
@@ -134,8 +160,8 @@ export class NgserviceService {
     return this._http.get<Leave[]>("http://localhost:8950/conge/lister/leave/collab/" + id);
   }
 
-  searchLeave(dateDebut: Date, dateFin: Date, status: String): Observable<Leave[]> {
-    return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeave/" + dateDebut + "/" + dateFin + "/" + status);
+  searchLeave(dateDebut: string, dateFin: string, status: String, lastname: string): Observable<Leave[]> {
+    return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeave/" + dateDebut + "/" + dateFin + "/" + status + "/" + lastname);
   }
 
   /** TYPE **/

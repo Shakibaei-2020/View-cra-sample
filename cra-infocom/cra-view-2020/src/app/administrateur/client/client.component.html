@@ -11,6 +11,11 @@
           src="https://img-premium.flaticon.com/png/512/1605/1605350.png?token=exp=1623225972~hmac=281810e2540b4ab7634a155fd570eaa2">
       </button>
 
+      <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
+        <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
+      </button>
+      
+
       <button class="img-fluid buttonAdd ">
         <img (click)="goToAddClient()" class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
       </button>
@@ -29,7 +34,7 @@
         </form>
 
         <br><br>
-        <h2>Résultat : </h2>
+        <h2>Résultat : {{nbResultat}} </h2>
         <table class="table table-condensed">
           <thead>
             <tr>

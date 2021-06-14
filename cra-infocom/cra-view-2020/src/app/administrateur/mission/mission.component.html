@@ -11,9 +11,15 @@
                   src="https://img-premium.flaticon.com/png/512/3233/3233497.png?token=exp=1623226098~hmac=3a138cb47c1e50795a2a9ef7a0d9e2e6">
               </button>
         
+              <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
+                <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
+              </button>
+
               <button (click)="goToAddMission()" class="img-fluid buttonAdd ">
                 <img class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
               </button>
+
+      
               <h2 class="page">Gestion des missions</h2>
             </div>    
         <hr>
@@ -43,7 +49,7 @@
 
         <br><br><br><br>
 
-        <h2>Résultat :</h2>
+        <h2>Résultat : {{nbResultat}}</h2>
         <hr>
         <table class="table ">
             <thead>

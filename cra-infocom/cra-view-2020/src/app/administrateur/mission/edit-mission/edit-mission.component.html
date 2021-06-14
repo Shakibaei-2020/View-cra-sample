@@ -55,10 +55,13 @@
 
         </div>
 
-
         <div class="bio-row"></div>
+
         <div class="bio-row">
-          <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+
+          <button class="btnAction" (click)="goToSearch()">Retour</button>
+
+          <button class="btnAction" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
 
           <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -84,7 +87,7 @@
 
 
 
-          <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
+          <button class="btnAction" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
 
           <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -107,10 +110,9 @@
               </div>
             </div>
           </div>
-
-
-
         </div>
+
+
 
       </div>
     </div>

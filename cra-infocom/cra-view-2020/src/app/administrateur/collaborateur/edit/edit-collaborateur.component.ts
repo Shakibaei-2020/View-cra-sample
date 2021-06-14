@@ -377,5 +377,9 @@ export class EditCollaborateurComponent implements OnInit {
   }
 
 
+  goToSearch(){
+    this._route.navigate(['/searchCollaborateur']);
+  }
+
 
 }

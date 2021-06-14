@@ -1,9 +1,9 @@
 
 
-.button {
+.btnAction {
     padding: 10px 25px;
-    margin-left: 5%;
-    width: 45%;
+    margin-left: 1%;
+    width: 150px;
     font-size: 15px;
     text-align: center;
     cursor: pointer;
@@ -16,9 +16,9 @@
     margin-bottom: 5%;
   }
   
-  .button:hover {background-color: #636363}
+  .btnAction:hover {background-color: #636363}
   
-  .button:active {
+  .btnAction:active {
     background-color: #464646;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
@@ -331,6 +331,7 @@ input[type=date] {
       width: 120px;
       padding: 12px 20px;
       margin: 8px 0;
+      height: 48px;
       box-sizing: border-box;
       border: none;
       border-bottom: 2px solid #464646;

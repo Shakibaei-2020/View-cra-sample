@@ -37,6 +37,35 @@
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
+
+
+
+  .btnForm {
+    margin-top: 5%;
+    float: left;
+    padding: 10px 25px;
+    width: 45%;
+    margin-left: 5%;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    margin-bottom: 5%;
+  }
+  
+  .btnForm:hover {background-color: #464646}
+  
+  .btnForm:active {
+    background-color: #363636;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  
   
 .btnRetour {
   float: left;
@@ -90,6 +119,7 @@
   .form-input{
     width: 100%;
     padding: 12px 20px;
+    height: 48px;
     margin: 8px 0;
     box-sizing: border-box;
     border: none;

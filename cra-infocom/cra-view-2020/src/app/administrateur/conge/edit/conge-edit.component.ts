@@ -141,7 +141,10 @@ export class CongeEditComponent implements OnInit {
   }
 
 
+  goToSearch(){
+    this._route.navigate(['/searchLeave']);
 
+  }
 
 
 

@@ -11,6 +11,10 @@
         <img class="img1" src="https://image.flaticon.com/icons/png/512/2590/2590848.png">
       </button>
 
+      <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
+        <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
+      </button>
+
       <button (click)="goToAddActivity()" class="img-fluid buttonAdd ">
         <img class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
       </button>
@@ -42,7 +46,7 @@
 
       <br><br>
 
-      <h2>Résultat :</h2>
+      <h2>Résultat : {{nbResultat}}</h2>
       <hr>
       <table class="table ">
         <thead>

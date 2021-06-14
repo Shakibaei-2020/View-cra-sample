@@ -118,5 +118,8 @@ export class EditMissionComponent implements OnInit {
   }
 
 
+  goToSearch(){
+    this._route.navigate(['/searchMission']);
 
+  }
 }

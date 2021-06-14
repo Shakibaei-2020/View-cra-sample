@@ -11,19 +11,20 @@ import { Leave } from 'src/app/z-model/Leave/leave';
 })
 export class CongeComponent implements OnInit {
 
-  date1!:Date;
-  date2!:Date;
-  status!:String;
+  date1!: string;
+  date2!: string;
+  status!: string;
+  lastNameCollab!: string;
 
 
-  
-  constructor(private _service:NgserviceService, private _route:Router) { }
+
+  constructor(private _service: NgserviceService, private _route: Router) { }
 
   collaborator = new Collaborator();
   leave = new Leave();
 
   collaborators !: Collaborator[];
-   leaves!:Leave[];  
+  leaves!: Leave[];
 
   taille = 30;
 
@@ -31,59 +32,82 @@ export class CongeComponent implements OnInit {
   nbResultat!: number;
 
 
+  public page = 1;
+  public pageSize = 10;
+
+
   ngOnInit(): void {
 
   }
 
   /** Methode afin de trouver un une demane de congé via  le status et entre quand ce situe ca date de demande */
-  searchConge(){
-    this._service.searchLeave(this.date1, this.date2, this.status).subscribe(
-      data=> {  this.leaves = data;
+  searchConge() {
 
-        this.leaves.forEach(
-          (item) =>{
-            this._service.selectOneCollabById(item.collaboratorId).subscribe(
-              data=> {
-                if(item != null){
-                  item.nomCollab = data.lastName;
-                  item.prenomCollab = data.firstName;
-                }
-                this.nbResultat = this.leaves.length;
-              },
-              error=>console.log("exception" +error)
-              ) 
-          }
-        )
-      },
-      error=>console.log("exception" +error)
+    console.log(this.status)
+
+    
+    if ((this.date1 != undefined || this.date2 != undefined) && this.status != undefined && this.lastNameCollab != undefined) {
+
+      this._service.searchLeave(this.date1, this.date2, this.status, this.lastNameCollab).subscribe(
+        data => {
+          this.leaves = data;
+
+          this.leaves.forEach(
+            (item) => {
+              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+                data => {
+                  if (item != null) {
+                    item.nomCollab = data.lastName;
+                    item.prenomCollab = data.firstName;
+                  }
+                  this.nbResultat = this.leaves.length;
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+        },
+        error => console.log("exception" + error)
       )
       setTimeout(() => {
       }, 50);
+    } else if( this.date1 === undefined || this.date2 === undefined && this.status != null){
+      console.log("on a seulement le status")
+    }else if((this.date1 != undefined || this.date2 != undefined) && this.status === undefined){
+      console.log("on a seulement le dates")
+    }else if((this.date1 === undefined || this.date2  === undefined) && this.status === undefined){
+      console.log("on a rien")
+    }
+
 
   }
 
 
 
-  
+
   /** recupere la demande de congé d'un collaborateur via son id */
-  getCollabByLeaveId(){
+  getCollabByLeaveId() {
     /** selectionne un collaborateur avec la clé etrangere idCollaborateur dans la table leave */
     this._service.selectCollabByLeaveId(2).subscribe(
-      data=> this.collaborator = data,
-      error=>console.log("exception" +error)
-      )
-      setTimeout(() => {
-      }, 50);
+      data => this.collaborator = data,
+      error => console.log("exception" + error)
+    )
+    setTimeout(() => {
+    }, 50);
   }
 
   /** routing vers ajout de demande de congé */
-  goToAddConge(){
+  goToAddConge() {
     this._route.navigate(['/addConge']);
   }
 
   /** routing vers editer un congé */
-  goGerer(){
+  goGerer() {
     this._route.navigate(['/editLeave']);
+  }
+
+  goToAccueil() {
+    this._route.navigate(['/administrateur']);
 
   }
 }

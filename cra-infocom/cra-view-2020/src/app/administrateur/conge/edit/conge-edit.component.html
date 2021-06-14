@@ -25,13 +25,11 @@
             <input type="Date"  name="dateStartLeave" id="dateStartLeave"  (change)="howManyday()">
         </div>
 
-        <div class="inputbox mt-3"> 
-          <span>Début :  {{leave.statusDebut}}</span>
-          <select class="form-input"  name="leaveStartStatus" id="leaveStartStatus" >
-            <option *ngFor="let timeStatu of timeStatus" value={{timeStatu}}>{{timeStatu}}</option>
+        <div class="inputbox mt-1">
+          <span class="input-title">Date de retour : {{leave.dateOfEndLeave | date: 'dd/MM/yyyy'}} </span>
+           <input type="Date" name="dateEndLeave" id="dateEndLeave"  (change)="howManyday()" >
+         </div>
 
-          </select>
-        </div>
 
 
           <div class="inputbox mt-1"><span>Type de congé : {{leave.leaveType.type}}</span><br>
@@ -57,11 +55,14 @@
 
         <div class="bio-row">
 
-          <div class="inputbox mt-1">
-            <span class="input-title">Date de fin : {{leave.dateOfEndLeave | date: 'dd/MM/yyyy'}} </span>
-             <input type="Date" name="dateEndLeave" id="dateEndLeave"  (change)="howManyday()" >
-           </div>
+       
 
+          <div class="inputbox mt-3"> 
+            <span>Début :  {{leave.statusDebut}}</span>
+            <select class="form-input"  name="leaveStartStatus" id="leaveStartStatus" >
+              <option *ngFor="let timeStatu of timeStatus" value={{timeStatu}}>{{timeStatu}}</option>
+            </select>
+          </div>
 
            <div class="inputbox mt-3"> 
             <span>Fin :  {{leave.statusFin}}</span>
@@ -96,9 +97,9 @@
 
         <div class="bio-row"></div>
         <div class="bio-row">
-          <br> <br>
+          <button class="btnAction" (click)="goToSearch()">Retour</button>
 
-          <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+          <button class="btnAction" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
 
           <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -124,7 +125,7 @@
 
 
 
-          <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
+          <button class="btnAction" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
 
           <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">

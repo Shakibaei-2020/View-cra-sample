@@ -60,4 +60,8 @@ export class AddMissionComponent implements OnInit {
     this.idClientByName = this.idClientByRef;
   }
 
+  goToSearch(){
+    this._route.navigate(['/searchMission']);
+  }
+
 }

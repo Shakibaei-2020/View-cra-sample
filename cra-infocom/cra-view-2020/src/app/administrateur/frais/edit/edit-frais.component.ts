@@ -114,5 +114,9 @@ export class EditFraisComponent implements OnInit {
     )
   }
 
+  
+  goToSearch(){
+    this._route.navigate(['/searchFrais']);
+  }
 
 }

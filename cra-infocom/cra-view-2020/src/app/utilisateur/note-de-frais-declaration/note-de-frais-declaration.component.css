@@ -59,6 +59,10 @@
     margin-bottom: 15px
 }
 
+.Action{
+    margin-left: 25%;
+    padding-top: 5px;
+}
 .btnEditer {
     float: left;
     padding: 10px 25px;
@@ -218,6 +222,7 @@ input[type=text] {
   .form-input{
     width: 100%;
     padding: 12px 20px;
+    height: 48px;
     margin: 8px 0;
     box-sizing: border-box;
     border: none;

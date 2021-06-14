@@ -53,8 +53,11 @@ export class AddClientComponent implements OnInit {
         console.log("Remplissé tout les champs !")
       }
     )
-
-
   }
+
+  goToSearch(){
+    this._route.navigate(['/searchClient']);
+  }
+    
 
 }

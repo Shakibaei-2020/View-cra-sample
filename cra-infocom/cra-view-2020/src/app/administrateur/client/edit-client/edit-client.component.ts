@@ -87,5 +87,9 @@ export class EditClientComponent implements OnInit {
       }
     )
   }
+
+  goToSearch(){
+    this._route.navigate(['/searchClient']);
+  }
     
 }

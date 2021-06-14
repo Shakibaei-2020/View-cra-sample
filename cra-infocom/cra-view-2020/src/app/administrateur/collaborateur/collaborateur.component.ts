@@ -15,6 +15,8 @@ export class CollaborateurComponent implements OnInit {
   collaboratorInputLastName = new Collaborator();
 
   public collaborators!:Collaborator[];  
+  nbResultat!: number;
+
 
 
 
@@ -26,7 +28,9 @@ export class CollaborateurComponent implements OnInit {
   /** recherche d'un collaborateur via son nom de famille */
   searchOneCollab(){
   this._service.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
-    data=> this.collaborators = data,
+    data=> {this.collaborators = data;
+    this.nbResultat = this.collaborators.length;
+  },
     error=>console.log("exception" +error)
     )
   }
@@ -41,6 +45,11 @@ export class CollaborateurComponent implements OnInit {
   /** redirection vers ajouter un collab */
   goToAddCollab(){
     this._route.navigate(['/addCollaborateur']);
+  }
+
+  goToAccueil(){
+    this._route.navigate(['/administrateur']);
+
   }
 
 }

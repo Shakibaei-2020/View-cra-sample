@@ -13,6 +13,9 @@ export class ActiviteComponent implements OnInit {
   date1!:Date;
   date2!:Date;
   lastName!:String;
+  nbResultat!: number;
+
+
   public activitys!:Activity[];  
 
   
@@ -23,7 +26,9 @@ export class ActiviteComponent implements OnInit {
 
   searchActivity(){
     this._service.searchActivity(this.date1, this.date2, this.lastName).subscribe(
-      data=> this.activitys = data,
+      data=> {this.activitys = data;
+      this.nbResultat = this.activitys.length
+    },
       error=>console.log("exception" +error)
       )
   }
@@ -37,5 +42,10 @@ export class ActiviteComponent implements OnInit {
     this._route.navigate(['/editActivite']);
   }
 
+  goToAccueil(){
+    this._route.navigate(['/administrateur']);
+
+  }
+  
 
 }

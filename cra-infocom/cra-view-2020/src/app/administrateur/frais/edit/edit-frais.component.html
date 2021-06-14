@@ -18,13 +18,15 @@
         <div class="bio-row">
 
           <div class="inputbox mt-1">
-            <span class="input-title">Cout HT : {{expense.costHT}} €</span> 
-            <input type="text"  name="expenseCostHT" id="expenseCostHT" > 
+            <span class="input-title ">Cout HT : {{expense.costHT}} €</span> 
+            <input type="text"   name="expenseCostHT" id="expenseCostHT" > 
           </div>
 
           <div class="inputbox mt-1">
-            <span class="input-title">Cout TVA : {{expense.costTVA}} €</span>
-            <input type="text" name="expenseCostTVA" id="expenseCostTVA"> 
+            <span class="input-title ">Cout TVA : {{expense.costTVA}} €</span>
+            <div class="input-group-prepend">
+              <input type="text" name="expenseCostTVA" id="expenseCostTVA" > 
+            </div>
           </div>
       
           <div class="inputbox mt-1">
@@ -64,9 +66,10 @@
         <div class="bio-row"></div>
 
         <div class="bio-row">
-        
 
-          <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+          <button class="btnAction" (click)="goToSearch()">Retour</button>
+
+          <button class="btnAction" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
 
 
 
@@ -93,8 +96,7 @@
           </div>
 
 
-
-          <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
+          <button class="btnAction" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
 
 
           <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

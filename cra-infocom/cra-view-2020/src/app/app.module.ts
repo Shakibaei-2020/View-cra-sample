@@ -38,6 +38,7 @@ import { AccueilAdministrateurComponent } from './administrateur/accueil-adminis
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -77,6 +78,7 @@ registerLocaleData(localeFr, 'fr');
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
     
   ],
   providers: [AppComponent],

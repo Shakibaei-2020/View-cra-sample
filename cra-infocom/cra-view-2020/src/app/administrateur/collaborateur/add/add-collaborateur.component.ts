@@ -82,6 +82,9 @@ export class AddCollaborateurComponent implements OnInit {
      return result;
   }
   
+  goToSearch(){
+    this._route.navigate(['/searchCollaborateur']);
+  }
 
  
 }

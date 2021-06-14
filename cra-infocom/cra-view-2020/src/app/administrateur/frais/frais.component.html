@@ -9,6 +9,11 @@
       <button class="img-fluid bouttonMenu ">
         <img class="img1" src="https://image.flaticon.com/icons/png/512/4117/4117837.png ">
       </button>
+
+      <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
+        <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
+      </button>
+
       <h2 class="page">Gestion des notes de frais</h2>
     </span>
 
@@ -31,38 +36,65 @@
         </div>
 
         <div class="row">
-          <div class="col-sm-4"><input type="date" required [(ngModel)]="date1" name="date1">
+
+          <div class="col-sm-4">
+            <input type="date" required [(ngModel)]="date1" name="date1">
           </div>
-          <div class="col-sm-4"><input type="date" required [(ngModel)]="date2" name="date2">
+
+          <div class="col-sm-4">
+            <input type="date" required [(ngModel)]="date2" name="date2">
           </div>
-          <div class="col-sm-4"><button class="btnSearch" type="submit">Chercher</button></div>
-          <div class="col-sm-8"><br><br><span>État de la demande : </span>
+
+          <div class="col-sm-4">
+            <button class="btnSearch" type="submit">Chercher</button>
+          </div>
+
+          <div class="col-sm-8"><br>
+            <span>État de la demande : </span>
             <select class="form-input" aria-label="Default select example" required [(ngModel)]="status" name="status">
               <option value="en-cours">En-cours</option>
               <option value="refusé">Refusé</option>
               <option value="validé">Validé</option>
             </select>
           </div>
+
+          <div class="col-sm-8"><br>
+            <span>Nom collaborateur : non-fonctionnel </span>
+            <input type="text"  required [(ngModel)]="lastNameCollab" name="lastNameCollab" >
+          </div>
+
         </div>
       </div>
     </form>
 
-    <br><br><br><br>
+    <br><br>
 
-    <h2>Résultat :</h2>
+    <h2>Résultat : {{nbResultat}}</h2>
     <hr>
     <table class="table ">
       <thead>
         <tr>
 
 
-          <th><p class="titreTable">Nom</p></th>
-          <th><p class="titreTable">Prénom</p></th>
-          <th><p class="titreTable">Date de la demande</p></th>
-          <th><p class="titreTable">Date de frais</p></th>
-          <th><p class="titreTable">État de la demande</p></th>
-          <th><p class="commande titreTable">Action</p></th>
-    
+          <th>
+            <p class="titreTable">Nom</p>
+          </th>
+          <th>
+            <p class="titreTable">Prénom</p>
+          </th>
+          <th>
+            <p class="titreTable">Date de la demande</p>
+          </th>
+          <th>
+            <p class="titreTable">Date de frais</p>
+          </th>
+          <th>
+            <p class="titreTable">État de la demande</p>
+          </th>
+          <th>
+            <p class="commande titreTable">Action</p>
+          </th>
+
         </tr>
       </thead>
       <tbody>

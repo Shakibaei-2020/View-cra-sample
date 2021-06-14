@@ -12,6 +12,7 @@ import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 })
 export class ClientComponent implements OnInit {
 
+  nbResultat!: number;
 
   clientInput = new Client();
   public clients!:Client[];  
@@ -33,9 +34,15 @@ export class ClientComponent implements OnInit {
   searchClientByName(){
 
     this._service.selectClientByName(this.clientInput.name).subscribe(
-      data=> this.clients = data,
+      data=> {this.clients = data;
+        this.nbResultat = this.clients.length;},
       error=>console.log("exception" +error)
       )
     }
 
-}
+    goToAccueil(){
+      this._route.navigate(['/administrateur']);
+  
+    }
+
+  }

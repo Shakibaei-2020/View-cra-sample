@@ -2,7 +2,8 @@
 
 .button {
     padding: 10px 25px;
-    width: 100%;
+    width: 45%;
+    margin-left: 5%;
     font-size: 15px;
     text-align: center;
     cursor: pointer;
@@ -192,6 +193,7 @@
   .form-input{
     width: 100%;
     padding: 12px 20px;
+    height: 48px;
     margin: 8px 0;
     box-sizing: border-box;
     border: none;

@@ -38,9 +38,9 @@ export class MonProfileComponent implements OnInit {
 
   updateCollab() {
 
-     if (this.newPassward == this.confirmationPassward) {
+     if (this.newPassward === this.confirmationPassward) {
  
-      if(this.newPassward != "" && this.confirmationPassward != ""){
+      if(this.newPassward != undefined && this.confirmationPassward != undefined){
 
         console.log(this.newPassward)
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Leave } from 'src/app/z-model/Leave/leave';
 import { TypeLeave } from 'src/app/z-model/Leave/type-leave';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-conge-demande',
@@ -20,7 +21,18 @@ export class CongeDemandeComponent implements OnInit {
   allLeaveType!: TypeLeave[];
   idOfLeaveType!: number;
 
-  constructor(private _route: Router, private _service: NgserviceService) { }
+
+  config: any;
+  collection = [];
+
+  constructor(private _route: Router, private _service: NgserviceService) {
+
+  
+  }
+
+  pageChange(newPage: number) {
+		this._route.navigate([''], { queryParams: { page: newPage } });
+	}
 
   ngOnInit(): void {
 
@@ -50,7 +62,7 @@ export class CongeDemandeComponent implements OnInit {
     this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
       data => { this.leaveType = data; },
       error => console.log("exception" + error),
-      
+
     )
     setTimeout(() => {
     }, 10);
@@ -66,7 +78,7 @@ export class CongeDemandeComponent implements OnInit {
     this.leave.leaveType = this.leaveType
     this.leave.nbJours = this.dayNumber;
 
-     
+
     this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
       data => {
         console.log("ajout effectué");
@@ -121,13 +133,13 @@ export class CongeDemandeComponent implements OnInit {
   newDateStartLeave!: Date;
   newDateEndLeave!: Date;
 
-  howManyday(){
+  howManyday() {
 
-this.newDateStartLeave = new Date(this.dateStartLeave)
-this.newDateEndLeave = new Date(this.dateEndLeave)
+    this.newDateStartLeave = new Date(this.dateStartLeave)
+    this.newDateEndLeave = new Date(this.dateEndLeave)
 
-var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime(); 
-this.dayNumber = Diff_temps / (1000 * 3600 * 24); 
+    var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime();
+    this.dayNumber = Diff_temps / (1000 * 3600 * 24);
 
   }
 
