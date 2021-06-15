@@ -105,7 +105,7 @@
 
                         <div class="inputbox mt-1">
                           <span> Date début de mission : </span><br>
-                          <input class="modal-input" type="date"  name="debutMission-{{indexOfelement}}" id="debutMission-{{indexOfelement}}" >
+                          <input class="modal-input" type="date"  value="{{mission.oldStartDate}}" name="debutMission-{{indexOfelement}}" id="debutMission-{{indexOfelement}}" >
                         </div>
       
                         <div class="inputbox mt-1">
@@ -121,15 +121,17 @@
                         <div class="inputbox mt-1">
                           <span> Réf client : </span><br>
                           <select class="modal-input"  name="refClientMission-{{indexOfelement}}" id="refClientMission-{{indexOfelement}}"  (change)="updateClientName(indexOfelement)" >
-                            <option hidden value="" disabled selected>blabla </option>
+                            <option hidden value="" disabled selected>{{mission.clientref}} </option>
                             <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
 
                           </select>
                         </div>
 
+
+
                         <div class="inputbox mt-1 " >
-                          <span> Date de fin : blabla</span><br>
-                          <input class="modal-input" type="date"   name="finMission-{{indexOfelement}}" id="finMission-{{indexOfelement}}" >
+                          <span> Date de fin :  </span><br>
+                          <input class="modal-input" type="date"   value="{{mission.oldEndDate}}" name="finMission-{{indexOfelement}}" id="finMission-{{indexOfelement}}" >
                         </div>
       
                       </div>

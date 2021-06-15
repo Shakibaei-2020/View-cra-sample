@@ -90,6 +90,9 @@ export class EditCollaborateurComponent implements OnInit {
       data => {
         this.collaborateur = data;
 
+        this.collaborateur.oldDateOfEntry = this.pipeDate.transform(data.dateOfEntry, 'yyyy-MM-dd') || '2000-02-14';
+        this.collaborateur.oldDateOfRelease =this.pipeDate.transform(data.dateOfRelease, 'yyyy-MM-dd') || '2000-02-14';
+
         this._service.selectTypeCollaboratorById(this.collaborateur.typeCollaborator.id).subscribe(
           data => this.typeCollaborator = data,
           error => console.log("exception" + error)
@@ -132,6 +135,24 @@ export class EditCollaborateurComponent implements OnInit {
           this.expenseType.push("expenseType-" + i);
           this.newCostTTC.push("newCostTTC" + i);
         }
+
+        this.expenses.forEach(
+          (item) => {
+            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              data => {
+                if (item != null) {
+                  item.nomCollab = data.lastName;
+                  item.prenomCollab = data.firstName;
+                  item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                }
+              },
+              error => console.log("exception" + error)
+            )
+          }
+        )
+
+
       },
       error => console.log("exception" + error)
     )
@@ -161,6 +182,24 @@ export class EditCollaborateurComponent implements OnInit {
           this.leaveStatusFin.push("leaveStatusFin-" + i);
           this.joursEntiers.push("joursEntiers-" + i)
         }
+
+        this.leaves.forEach(
+          (item) => {
+            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              data => {
+                if (item != null) {
+                  item.nomCollab = data.lastName;
+                  item.prenomCollab = data.firstName;
+                  item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+                  item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
+                }
+              },
+              error => console.log("exception" + error)
+            )
+          }
+        )
+
+
       },
       error => console.log("exception" + error)
     )
@@ -190,15 +229,15 @@ export class EditCollaborateurComponent implements OnInit {
 
         this.updatedCollaborator.id = this.collaboratorToUpdate.id;
 
-        this._service.selectTypeCollaboratorById(+(<HTMLInputElement>document.getElementById(this.typeCollab)).value ).subscribe(
-          
+        this._service.selectTypeCollaboratorById(+(<HTMLInputElement>document.getElementById(this.typeCollab)).value).subscribe(
+
           data2 => {
             this.newTypeCollab = data2;
 
-            this.updatedCollaborator.firstName = (<HTMLInputElement>document.getElementById(this.firstNameCollab)).value|| this.collaboratorToUpdate.firstName;
+            this.updatedCollaborator.firstName = (<HTMLInputElement>document.getElementById(this.firstNameCollab)).value || this.collaboratorToUpdate.firstName;
             this.updatedCollaborator.lastName = (<HTMLInputElement>document.getElementById(this.lastNameCollab)).value || this.collaboratorToUpdate.lastName;
-            this.updatedCollaborator.email = (<HTMLInputElement>document.getElementById(this.emailCollab)).value  || this.collaboratorToUpdate.email;
-            this.newDateEntry = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEntryCollab)).valueAsDate , 'yyyy-MM-dd') || this.pipeDate.transform(this.collaboratorToUpdate.dateOfEntry, 'yyyy-MM-dd') || '14-02-2000';
+            this.updatedCollaborator.email = (<HTMLInputElement>document.getElementById(this.emailCollab)).value || this.collaboratorToUpdate.email;
+            this.newDateEntry = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEntryCollab)).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.collaboratorToUpdate.dateOfEntry, 'yyyy-MM-dd') || '14-02-2000';
             this.newDateOut = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateOutCollab)).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.collaboratorToUpdate.dateOfRelease, 'yyyy-MM-dd') || '14-02-2000';
             this.updatedCollaborator.password = this.collaboratorToUpdate.password;
             this.updatedCollaborator.typeCollaborator = this.newTypeCollab || this.updatedCollaborator.typeCollaborator;
@@ -330,7 +369,7 @@ export class EditCollaborateurComponent implements OnInit {
             this.updatedLeave.statusDebut = (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[indexOfElement])).value || this.leaveRequestToUpdated.statusDebut;
             this.updatedLeave.statusFin = (<HTMLInputElement>document.getElementById(this.leaveStatusFin[indexOfElement])).value || this.leaveRequestToUpdated.statusFin;
             this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.leaveStatus[indexOfElement])).value || this.leaveRequestToUpdated.statusFin;
-            this.updatedLeave.nbJours =  this.dayNumber || this.leaveRequestToUpdated.nbJours;
+            this.updatedLeave.nbJours = this.dayNumber || this.leaveRequestToUpdated.nbJours;
 
             this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(
               data => {
@@ -368,14 +407,14 @@ export class EditCollaborateurComponent implements OnInit {
   newDateEndLeave!: Date;
 
   howManyday(indexOfElement: number) {
-    this.newDateStartLeave = new Date( this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateStartLeave[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.dateOfStartLeave) 
-    this.newDateEndLeave = new Date( this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndLeave[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.dateOfEndLeave) 
+    this.newDateStartLeave = new Date(this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateStartLeave[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.dateOfStartLeave)
+    this.newDateEndLeave = new Date(this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndLeave[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.dateOfEndLeave)
     var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime();
     this.dayNumber = Diff_temps / (1000 * 3600 * 24);
   }
 
 
-  goToSearch(){
+  goToSearch() {
     this._route.navigate(['/searchCollaborateur']);
   }
 
@@ -383,12 +422,12 @@ export class EditCollaborateurComponent implements OnInit {
 
     if (((<HTMLInputElement>document.getElementById(this.joursEntiers[i])).checked) === true) {
       (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[i])).disabled = true;
-      (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[i])).value= "";
+      (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[i])).value = "";
 
       (<HTMLInputElement>document.getElementById(this.leaveStatusFin[i])).disabled = true;
-      (<HTMLInputElement>document.getElementById(this.leaveStatusFin[i])).value= "";
+      (<HTMLInputElement>document.getElementById(this.leaveStatusFin[i])).value = "";
 
-    } else{
+    } else {
       (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[i])).disabled = false;
       (<HTMLInputElement>document.getElementById(this.leaveStatusFin[i])).disabled = false;
     }
@@ -396,9 +435,9 @@ export class EditCollaborateurComponent implements OnInit {
 
 
   TTCvalue!: number;
-  updateTTC(i : number){
-    
-  this.TTCvalue =   +(<HTMLInputElement>document.getElementById(this.expenseCostHT[i])).value + +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[i])).value ;
+  updateTTC(i: number) {
+
+    this.TTCvalue = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[i])).value + +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[i])).value;
 
   }
 

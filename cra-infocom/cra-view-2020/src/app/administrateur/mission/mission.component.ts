@@ -69,6 +69,11 @@ export class MissionComponent implements OnInit {
                 data => {
                   if (item != null) {
                     item.clientName = data.name;
+                    item.clientref = data.ref;
+                    item.oldStartDate = this.pipeDate.transform( item.startDate, 'yyyy-MM-dd') || '2000-02-14' ;
+                    item.oldEndDate = this.pipeDate.transform( item.endDate, 'yyyy-MM-dd') || '2000-02-14' ;
+
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -116,6 +121,10 @@ export class MissionComponent implements OnInit {
                 data => {
                   if (item != null) {
                     item.clientName = data.name;
+                    item.clientref = data.ref;
+                    item.oldStartDate = this.pipeDate.transform( item.startDate, 'yyyy-MM-dd') || '2000-02-14' ;
+                    item.oldEndDate = this.pipeDate.transform( item.endDate, 'yyyy-MM-dd') || '2000-02-14' ;
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -164,6 +173,12 @@ export class MissionComponent implements OnInit {
                 data => {
                   if (item != null) {
                     item.clientName = data.name;
+                    item.clientref = data.ref;
+                    item.oldStartDate = this.pipeDate.transform( item.startDate, 'yyyy-MM-dd') || '2000-02-14' ;
+                    item.oldEndDate = this.pipeDate.transform( item.endDate, 'yyyy-MM-dd') || '2000-02-14' ;
+
+                    
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -211,7 +226,11 @@ export class MissionComponent implements OnInit {
                 data => {
                   if (item != null) {
                     item.clientName = data.name;
-                  }
+                    item.clientref = data.ref;
+                    item.oldStartDate = this.pipeDate.transform( item.startDate, 'yyyy-MM-dd') || '2000-02-14' ;
+                    item.oldEndDate = this.pipeDate.transform( item.endDate, 'yyyy-MM-dd') || '2000-02-14' ;
+
+                    }
                 },
                 error => console.log("exception" + error)
               )
@@ -235,7 +254,7 @@ export class MissionComponent implements OnInit {
       )
     } else {
 
-      this.error = "Un problème est survenue, merci de vérifier que les deux dates champs ont été bien remplies.";
+      this.error = "Merci de vérifier que les deux champs dates  ont été bien remplies.";
 
     }
   }

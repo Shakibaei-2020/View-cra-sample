@@ -135,13 +135,13 @@
                   </div>
                   
                   <div class="inputbox mt-1">
-                    <span> Date de départ : {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span><br>
-                    <input class="modal-input"  type="date" name="dateStartLeave-{{indexOfelement}}" id="dateStartLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
+                    <span> Date de départ : </span><br>
+                    <input class="modal-input"  type="date" value={{leave.oldDateOfStartLeave}} name="dateStartLeave-{{indexOfelement}}" id="dateStartLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
                   </div>
                   
                   <div class="inputbox mt-1">
-                    <span> Date de retour :  {{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</span><br>
-                    <input class="modal-input" type="date" name="dateEndLeave-{{indexOfelement}}" id="dateEndLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
+                    <span> Date de retour : </span><br>
+                    <input class="modal-input" type="date"  value={{leave.oldDateOfEndLeave}} name="dateEndLeave-{{indexOfelement}}" id="dateEndLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1">

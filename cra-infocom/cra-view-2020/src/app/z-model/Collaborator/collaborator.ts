@@ -12,6 +12,10 @@ export class Collaborator {
     public dateOfRelease!:Date;
     public profileImagePath!: Blob;
 
+    
+    public oldDateOfEntry!: string;
+    public oldDateOfRelease!: string;
+    
     public typeCollaborator = new TypeCollaborator();
 
 }

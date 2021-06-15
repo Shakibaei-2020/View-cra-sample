@@ -8,7 +8,10 @@ export class Mission {
 	public  endDate!: Date;
 	public  client= new Client();
 
+	public oldStartDate!: string;
+	public oldEndDate!:string;
 
 	public clientName!: string;
+	public clientref!: string;
 	
 }

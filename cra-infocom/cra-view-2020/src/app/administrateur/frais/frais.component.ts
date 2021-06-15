@@ -96,12 +96,16 @@ export class FraisComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
+
                   }
                 },
                 error => console.log("exception" + error)
               )
             }
           )
+
+          
         },
         error => console.log("exception" + error)
       )
@@ -149,6 +153,8 @@ export class FraisComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -204,6 +210,8 @@ export class FraisComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -260,6 +268,8 @@ export class FraisComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -317,6 +327,8 @@ export class FraisComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -373,6 +385,8 @@ export class FraisComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -427,6 +441,8 @@ export class FraisComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -482,6 +498,8 @@ export class FraisComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
+
                   }
                 },
                 error => console.log("exception" + error)
@@ -499,7 +517,7 @@ export class FraisComponent implements OnInit {
       this.error = "";
 
     } else {
-      this.error = "Un problème est survenue, merci de vérifier que les deux champs dates  ont été bien remplies.";
+      this.error = "Merci de vérifier que les deux champs dates  ont été bien remplies.";
       this.nbResultat = 0;
     }
   }

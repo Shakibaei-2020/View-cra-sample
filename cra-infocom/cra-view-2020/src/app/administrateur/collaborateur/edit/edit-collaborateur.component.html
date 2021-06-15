@@ -32,8 +32,8 @@
 
 
             <div class="inputbox mt-1">
-              <span class="input-title">Date d'entrée : {{collaborateur.dateOfEntry | date: 'dd/MM/yyyy'}} </span>
-               <input type="date" name="dateEntryCollab" id="dateEntryCollab"> </div>
+              <span class="input-title">Date d'entrée :</span>
+               <input type="date" name="dateEntryCollab"  value="{{collaborateur.oldDateOfEntry}}" id="dateEntryCollab"> </div>
            
            
           </div>
@@ -44,7 +44,7 @@
               <input type="text" value="{{collaborateur.lastName}}" name="lastNameCollab" id="lastNameCollab"> </div>
            
               <div class="inputbox mt-3">
-                <span>Type : </span><br>
+                <span>Type :</span><br>
                 <select class="typeCollab" aria-label="Default select example" name="typeCollab" id="typeCollab">
                   <option hidden value="" disabled selected>{{typeCollaborator.type}} </option>
                   <option *ngFor="let allTypeCollaborators of allTypeCollaborator" value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}
@@ -52,8 +52,8 @@
               </div>
 
               <div class="inputbox mt-1">
-                <span class="input-title">Date de sortie :{{collaborateur.dateOfRelease | date: 'dd/MM/yyyy'}} </span>
-              <input type="date" name="dateOutCollab" id="dateOutCollab"> </div>
+                <span class="input-title">Date de sortie : </span>
+              <input type="date" name="dateOutCollab"  value="{{collaborateur.oldDateOfRelease}}" id="dateOutCollab"> </div>
 
          
          
@@ -202,8 +202,8 @@
             
 
                   <div class="inputbox mt-1">
-                    <span> Date de frais : {{expense.dateExpense  | date: 'dd/MM/yyyy'}}</span><br>
-                    <input class="modal-input" type="date"   name="dateExpense-{{indexOfelement}}" id="dateExpense-{{indexOfelement}}">
+                    <span> Date de frais :</span><br>
+                    <input class="modal-input" type="date"  value="{{expense.oldDateExpense}}"    name="dateExpense-{{indexOfelement}}" id="dateExpense-{{indexOfelement}}">
                   </div>
 
                 </div>
@@ -217,7 +217,7 @@
                   </div>
 
                   <div class="inputbox mt-1 expenseRequestId" >
-                    <span> Date demande : {{expense.dateRequest  | date: 'dd/MM/yyyy'}}</span><br>
+                    <span> Date demande :</span><br>
                     <input class="modal-input" type="date"   name="dateExpenseRequest-{{indexOfelement}}" id="dateExpenseRequest-{{indexOfelement}}" disabled>
                   </div>
 
@@ -320,13 +320,13 @@
                   </div>
                   
                   <div class="inputbox mt-1">
-                    <span> Date de départ : {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span><br>
-                    <input class="modal-input" type="date" name="dateStartLeave-{{indexOfelement}}" id="dateStartLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
+                    <span> Date de départ : </span><br>
+                    <input class="modal-input" type="date" value="{{leave.oldDateOfStartLeave}}"  name="dateStartLeave-{{indexOfelement}}" id="dateStartLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
                   </div>
                   
                   <div class="inputbox mt-1">
-                    <span> Date de retour :  {{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</span><br>
-                    <input class="modal-input" type="date" name="dateEndLeave-{{indexOfelement}}" id="dateEndLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
+                    <span> Date de retour : </span><br>
+                    <input class="modal-input" type="date" value="{{leave.oldDateOfEndLeave}}" name="dateEndLeave-{{indexOfelement}}" id="dateEndLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1">

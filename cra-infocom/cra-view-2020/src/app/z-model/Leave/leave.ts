@@ -17,6 +17,10 @@ export class Leave {
 	public  nbJours!: number;
 
 
+
+	public oldDateOfStartLeave!: string;
+	public oldDateOfEndLeave!: string;
+
 	public nomCollab!: string;
 	public prenomCollab!: string;
 

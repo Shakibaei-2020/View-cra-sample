@@ -83,7 +83,6 @@ export class CongeComponent implements OnInit {
           for (var i = 0; i < this.leaves.length; i++) {
 
             this.leaveRequestId.push("leaveRequestId-" + i);
-            console.log(this.leaveRequestId)
             this.leaveType.push("leaveType-" + i);
             this.leaveStatus.push("leaveStatus-" + i);
             this.leaveClientInformed.push("leaveClientInformed-" + i);
@@ -103,6 +102,8 @@ export class CongeComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
                   }
                   this.nbResultat = this.leaves.length;
                 },
@@ -141,7 +142,6 @@ export class CongeComponent implements OnInit {
           for (var i = 0; i < this.leaves.length; i++) {
 
             this.leaveRequestId.push("leaveRequestId-" + i);
-            console.log(this.leaveRequestId)
             this.leaveType.push("leaveType-" + i);
             this.leaveStatus.push("leaveStatus-" + i);
             this.leaveClientInformed.push("leaveClientInformed-" + i);
@@ -160,6 +160,8 @@ export class CongeComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
                   }
                   this.nbResultat = this.leaves.length;
                 },
@@ -198,7 +200,6 @@ export class CongeComponent implements OnInit {
           for (var i = 0; i < this.leaves.length; i++) {
 
             this.leaveRequestId.push("leaveRequestId-" + i);
-            console.log(this.leaveRequestId)
             this.leaveType.push("leaveType-" + i);
             this.leaveStatus.push("leaveStatus-" + i);
             this.leaveClientInformed.push("leaveClientInformed-" + i);
@@ -217,6 +218,8 @@ export class CongeComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
                   }
                   this.nbResultat = this.leaves.length;
                 },
@@ -253,7 +256,6 @@ export class CongeComponent implements OnInit {
           for (var i = 0; i < this.leaves.length; i++) {
 
             this.leaveRequestId.push("leaveRequestId-" + i);
-            console.log(this.leaveRequestId)
             this.leaveType.push("leaveType-" + i);
             this.leaveStatus.push("leaveStatus-" + i);
             this.leaveClientInformed.push("leaveClientInformed-" + i);
@@ -272,6 +274,8 @@ export class CongeComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
                   }
                   this.nbResultat = this.leaves.length;
                 },
@@ -309,7 +313,6 @@ export class CongeComponent implements OnInit {
           for (var i = 0; i < this.leaves.length; i++) {
 
             this.leaveRequestId.push("leaveRequestId-" + i);
-            console.log(this.leaveRequestId)
             this.leaveType.push("leaveType-" + i);
             this.leaveStatus.push("leaveStatus-" + i);
             this.leaveClientInformed.push("leaveClientInformed-" + i);
@@ -328,6 +331,9 @@ export class CongeComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
+                  
                   }
                   this.nbResultat = this.leaves.length;
                 },
@@ -365,7 +371,6 @@ export class CongeComponent implements OnInit {
           for (var i = 0; i < this.leaves.length; i++) {
 
             this.leaveRequestId.push("leaveRequestId-" + i);
-            console.log(this.leaveRequestId)
             this.leaveType.push("leaveType-" + i);
             this.leaveStatus.push("leaveStatus-" + i);
             this.leaveClientInformed.push("leaveClientInformed-" + i);
@@ -386,6 +391,8 @@ export class CongeComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
                   }
                   this.nbResultat = this.leaves.length;
                 },
@@ -423,7 +430,6 @@ export class CongeComponent implements OnInit {
           for (var i = 0; i < this.leaves.length; i++) {
 
             this.leaveRequestId.push("leaveRequestId-" + i);
-            console.log(this.leaveRequestId)
             this.leaveType.push("leaveType-" + i);
             this.leaveStatus.push("leaveStatus-" + i);
             this.leaveClientInformed.push("leaveClientInformed-" + i);
@@ -443,6 +449,8 @@ export class CongeComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
                   }
                   this.nbResultat = this.leaves.length;
                 },
@@ -480,7 +488,6 @@ export class CongeComponent implements OnInit {
           for (var i = 0; i < this.leaves.length; i++) {
 
             this.leaveRequestId.push("leaveRequestId-" + i);
-            console.log(this.leaveRequestId)
             this.leaveType.push("leaveType-" + i);
             this.leaveStatus.push("leaveStatus-" + i);
             this.leaveClientInformed.push("leaveClientInformed-" + i);
@@ -499,6 +506,8 @@ export class CongeComponent implements OnInit {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
+                    item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
                   }
                   this.nbResultat = this.leaves.length;
                 },
@@ -512,11 +521,11 @@ export class CongeComponent implements OnInit {
       setTimeout(() => {
       }, 50);
 
-      
+
       this.error = "";
 
     } else {
-      this.error = "Un problème est survenue, merci de vérifier que les deux champs dates  ont été bien remplies.";
+      this.error = "Merci de vérifier que les deux champs dates  ont été bien remplies.";
       this.nbResultat = 0;
     }
 
