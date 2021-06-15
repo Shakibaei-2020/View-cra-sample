@@ -44,7 +44,7 @@
 
         <div class="col-sm-8"><br>
            <span>État de la demande : </span>
-          <select class="form-input" value="" aria-label="Default select example" required [(ngModel)]="statusSearch" name="statusSearch">
+          <select class="form-input" required  aria-label="Default select example" required [(ngModel)]="statusSearch">
             <option value="en-cours">En-cours</option>
             <option value="refusé">Refusé</option>
             <option value="validé">Validé</option>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="col-sm-8"><br>
-          <span>Prénom collaborateur : </span>
+          <span>Prénom du collaborateur : </span>
           <input type="text" autocomplete="off" required [(ngModel)]="lastNameCollab" name="lastNameCollab" >
         </div>
 
@@ -181,6 +181,7 @@
                   <div class="inputbox mt-1">
                     <span> Fin : {{leave.statusFin}}</span><br>
                     <select class="modal-input" name="leaveStatusFin-{{indexOfelement}}" id="leaveStatusFin-{{indexOfelement}}">
+                      
                       <option value="matin">Matinée</option>
                       <option value="après-midi">Après-midi</option>
                       <option value="journée entière">Journée entière</option>
@@ -195,8 +196,8 @@
                     </select>
                   </div>
 
-                  <div class="inputbox mt-3">
-                    <span>Total jours :  {{leave.nbJours}} </span>
+                  <div class="inputbox mt-1">
+                    <span>Total jours :  {{leave.nbJours}} </span><br>
                     <input type="text" placeholder=" {{dayNumber}}" disabled>
                   </div>
 

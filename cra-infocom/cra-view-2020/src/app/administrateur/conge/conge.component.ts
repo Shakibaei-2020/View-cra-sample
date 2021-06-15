@@ -210,7 +210,6 @@ export class CongeComponent implements OnInit {
             this.joursEntiers.push("joursEntiers-" + i)
           }
 
-
           this.leaves.forEach(
             (item) => {
               this._service.selectOneCollabById(item.collaboratorId).subscribe(

@@ -51,7 +51,7 @@
 
           <div class="col-sm-8"><br>
             <span>État de la demande : </span>
-            <select class="form-input" aria-label="Default select example" required [(ngModel)]="status" name="status">
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="searchStatus" name="searchStatus">
               <option value="en-cours">En-cours</option>
               <option value="refusé">Refusé</option>
               <option value="validé">Validé</option>
@@ -59,7 +59,7 @@
           </div>
 
           <div class="col-sm-8"><br>
-            <span>Nom collaborateur :  </span>
+            <span>Prénom du collaborateur :  </span>
             <input type="text" autocomplete="off"  required [(ngModel)]="lastNameCollab" name="lastNameCollab" >
           </div>
 
@@ -99,7 +99,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let expense of expenses">
+        <tr *ngFor="let expense of expenses; let indexOfelement =index;">
 
           <td><p class="contentTable">{{expense.nomCollab}}</p></td>
           <td><p class="contentTable">{{expense.prenomCollab}}</p></td>
@@ -107,13 +107,96 @@
           <td><p class="contentTable">{{expense.dateExpense | date: 'dd/MM/yyyy' }}</p></td>
           <td><p class="contentTable">{{expense.status}}</p></td>
           <td>
-            <button class="btnEditer" type="submit" (click)="goToEditFrais()">Gérer</button>
+            <button type="button" class="btnTab" data-toggle="modal" [attr.data-target]=" '#myExpenseModal-' + indexOfelement">Éditer</button>
           </td>
         </tr>
       </tbody>
     </table>
 
+    
 
+    <!-- Modal -->
+    <div *ngFor="let expense of expenses; let indexOfelement =index;">
+
+      <div class="modal fade" id="myExpenseModal-{{indexOfelement}}" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Gestion de la demande de frais du  {{expense.dateRequest  | date: 'dd/MM/yyyy'}}</h3>
+              <div class="toHide">
+                 <input type="text" value="{{expense.id}}" name="expenseRequestId-{{indexOfelement}}" id="expenseRequestId-{{indexOfelement}}" disabled> 
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+
+                <!-- Colonne 1-->
+                <div class="col-sm-6">
+
+                  <div class="inputbox mt-1">
+                    <span> Cout HT : {{expense.costHT}} €</span><br>
+                    <input class="modal-input" type="text"   name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> Cout HT : {{expense.costTTC}} €</span><br>
+                    <input class="modal-input" type="text" name="newCostTTC-{{indexOfelement}}" id="newCostTTC-{{indexOfelement}}"  placeholder="{{TTCvalue}}" disabled>
+                  </div>
+                 
+                  <div class="inputbox mt-1">
+                    <span> Facturable : {{expense.billable}}</span><br>
+                    <select class="modal-input"  name="expenseBillable-{{indexOfelement}}" id="expenseBillable-{{indexOfelement}}">
+                      <option value="true">oui</option>
+                      <option value="false">non</option>
+                    </select>
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> Date de frais : {{expense.dateExpense  | date: 'dd/MM/yyyy'}}</span><br>
+                    <input class="modal-input" type="date"   name="dateExpense-{{indexOfelement}}" id="dateExpense-{{indexOfelement}}">
+                  </div>
+
+                </div>
+
+                <!-- Colonne 2-->
+                <div class="col-sm-6">
+
+                  <div class="inputbox mt-1">
+                    <span> CoutTVA : {{expense.costTVA}} €</span><br>
+                    <input class="modal-input" type="text"   name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
+                  </div>
+
+                  <div class="inputbox mt-1 toHide" >
+                    <span> Date demande : {{expense.dateRequest  | date: 'dd/MM/yyyy'}}</span><br>
+                    <input class="modal-input" type="date"   name="dateExpenseRequest-{{indexOfelement}}" id="dateExpenseRequest-{{indexOfelement}}" disabled>
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> Type : {{expense.typeExpense.type}}</span><br>
+                    <select class="modal-input"  name="expenseType-{{indexOfelement}}" id="expenseType-{{indexOfelement}}">
+                      <option *ngFor="let allExpenseTypes of allExpenseType" value="{{allExpenseTypes.id}}">{{allExpenseTypes.type}}
+                    </select>
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> État de la demande : {{expense.status}}</span><br>
+                    <select class="modal-input" name="expenseStatus-{{indexOfelement}}" id="expenseStatus-{{indexOfelement}}">
+                      <option *ngFor="let statue of status" value={{statue}}>{{statue}}</option>
+                    </select>
+                  </div>
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btnModal" type="submit" (click)="updateExpense(indexOfelement)">Maj</button>
+                <button class="btnModal" type="submit" (click)="deleteExpenseById(expense.id)">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
   </div>

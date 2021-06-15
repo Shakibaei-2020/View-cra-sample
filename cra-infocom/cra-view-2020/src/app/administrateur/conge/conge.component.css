@@ -42,7 +42,8 @@
     padding-top: 5px;
     width: 50px;
     font-size: 14px;
-    
+    padding-top: 5px;
+
     text-align: center;
     cursor: pointer;
     outline: none;
@@ -86,9 +87,7 @@
     transform: translateY(4px);
   }
 
-  .commande{
-    margin-left:40%;
-  }
+ 
 
   .error{
     color: red;
@@ -145,7 +144,7 @@
   }
 
 .contentTable{
-margin-top: 12px;
+margin-top: 7px;
 }
 
 
@@ -234,5 +233,6 @@ margin-top: 12px;
   }
 
   .rightInputs{
-    margin-top: 57px;
+    margin-top: 23%;
+    margin-bottom: 50px;
   }

@@ -173,8 +173,6 @@ export class EditCollaborateurComponent implements OnInit {
     )
   }
 
-
-
   /** Collab commands */
   collaboratorToUpdate = new Collaborator();
   updatedCollaborator = new Collaborator();
@@ -248,19 +246,14 @@ export class EditCollaborateurComponent implements OnInit {
   /** expense  */
   updateExpense(indexOfElement: number) {
 
-
-
     this._service.selectOneExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
       data1 => {
         this.expenseToUpdate = data1;
-
         this.updatedExpense.id = this.expenseToUpdate.id;
         this.updatedExpense.collaboratorId = this.expenseToUpdate.collaboratorId;
-
         this._service.selectTypeExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseType[indexOfElement])).value).subscribe(
           data2 => {
             this.newTypeExpense = data2;
-
             this.updatedExpense.typeExpense = this.newTypeExpense || this.expenseToUpdate.typeExpense
             this.newDateExpense = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateExpense[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
             this.newDateRequest = this.pipeDate.transform(this.expenseToUpdate.dateRequest, 'yyyy-MM-dd') || '2000-02-14';
@@ -270,7 +263,6 @@ export class EditCollaborateurComponent implements OnInit {
             this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[indexOfElement])).value || this.expenseToUpdate.costTVA;
             this.updatedExpense.costTTC = this.updatedExpense.costHT + this.updatedExpense.costTVA || this.expenseToUpdate.costTTC;
             this.TTCvalue = this.updatedExpense.costTTC;
-
             this._service.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
               data => {
                 console.log("ajout effectué");
@@ -316,7 +308,6 @@ export class EditCollaborateurComponent implements OnInit {
   newTypeLeave = new TypeLeave();
 
   updateLeaveFromCollab(indexOfElement: number) {
-
 
     this._service.selectOneLeaveRequestById(+(<HTMLInputElement>document.getElementById(this.leaveRequestId[indexOfElement])).value).subscribe(
       data1 => {
@@ -407,7 +398,6 @@ export class EditCollaborateurComponent implements OnInit {
   TTCvalue!: number;
   updateTTC(i : number){
     
-
   this.TTCvalue =   +(<HTMLInputElement>document.getElementById(this.expenseCostHT[i])).value + +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[i])).value ;
 
   }
