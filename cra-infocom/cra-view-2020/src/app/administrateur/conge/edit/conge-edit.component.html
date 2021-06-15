@@ -20,6 +20,14 @@
         <div class="bio-row">
 
 
+          
+          
+          <div class="inputbox mt-3">
+            <div>
+              <label><input type="checkbox" name="joursEntiers" id="joursEntiers" (change)="joursEntiersChecked()"> Jours entiers</label>
+            </div>
+          </div>
+
           <div class="inputbox mt-1">
             <span class="input-title">Date de départ : {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span> 
             <input type="Date"  name="dateStartLeave" id="dateStartLeave"  (change)="howManyday()">
@@ -44,17 +52,16 @@
             </select>
           </div>
 
-          
-          <div class="inputbox mt-3">
-            <div>
-              <label><input type="checkbox" value=""> jour(s) entier(s)</label>
-            </div>
-          </div>
         </div>
 
 
         <div class="bio-row">
 
+                 
+          
+          <div class="inputbox mt-3">
+            <p>᲼</p>
+          </div>
        
 
           <div class="inputbox mt-3"> 

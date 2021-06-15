@@ -18,6 +18,9 @@ export class FraisComponent implements OnInit {
 
   lastNameCollab!: string;
 
+  error!: string;
+
+
   public expenses!: Expense[];
 
 
@@ -34,7 +37,7 @@ export class FraisComponent implements OnInit {
 
   searchExpenses() {
 
-    if ((this.date1 != undefined || this.date2 != undefined) && this.status != undefined && this.lastNameCollab != undefined) {
+    if ((this.date1 != undefined && this.date2 != undefined) &&  (this.status != undefined  && this.status != "") &&  (this.lastNameCollab != undefined && this.lastNameCollab != "")) {
 
     this._service.searchExpense(this.date1, this.date2, this.status,this.lastNameCollab).subscribe(
       data => {
@@ -59,7 +62,10 @@ export class FraisComponent implements OnInit {
     )
     setTimeout(() => {
     }, 50);
-  }else if((this.date1 != undefined || this.date2 != undefined) && this.status === undefined && this.lastNameCollab === undefined){
+
+    console.log("s  ")
+
+  }else if((this.date1 != undefined  && this.date2 != undefined) && (this.status === undefined || this.status === "" ) && (this.lastNameCollab === undefined || this.lastNameCollab === "")){
 
     this._service.searchExpenseByDate(this.date1, this.date2).subscribe(
       data => {
@@ -84,7 +90,13 @@ export class FraisComponent implements OnInit {
     )
     setTimeout(() => {
     }, 50);
-  }else if((this.date1 != undefined || this.date2 != undefined) && this.status === undefined && this.lastNameCollab !== undefined){
+
+    this.lastNameCollab = "";
+    this.status = "";
+    this.error= "";
+
+
+  }else if((this.date1 != undefined && this.date2 != undefined) && (this.status === undefined || this.status === "") && (this.lastNameCollab != undefined && this.lastNameCollab != "")){
 
     this._service.searchExpenseByDateName(this.date1, this.date2, this.lastNameCollab).subscribe(
       data => {
@@ -109,7 +121,13 @@ export class FraisComponent implements OnInit {
     )
     setTimeout(() => {
     }, 50);
-  }else if((this.date1 != undefined || this.date2 != undefined) && this.status != undefined && this.lastNameCollab === undefined){
+
+    this.lastNameCollab = "";
+    this.status = "";
+    this.error= "";
+
+
+  }else if((this.date1 != undefined || this.date2 != undefined) && (this.status != undefined && this.status != "" ) && (this.lastNameCollab === undefined || this.lastNameCollab === "")){
 
     this._service.searchExpenseByDateStatus(this.date1, this.date2, this.status).subscribe(
       data => {
@@ -134,6 +152,12 @@ export class FraisComponent implements OnInit {
     )
     setTimeout(() => {
     }, 50);
+
+    this.lastNameCollab = "";
+    this.status = "";
+    this.error= "";
+
+
   }else if((this.date1 === undefined || this.date2 === undefined) && this.status === undefined && this.lastNameCollab != undefined){
 
     this._service.searchExpenseByName(this.lastNameCollab).subscribe(
@@ -159,7 +183,13 @@ export class FraisComponent implements OnInit {
     )
     setTimeout(() => {
     }, 50);
-  }else if((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && this.lastNameCollab === undefined){
+
+    this.lastNameCollab = "";
+    this.status = "";
+    this.error= "";
+
+
+  }else if((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && (this.lastNameCollab === undefined || this.lastNameCollab === "")){
 
     this._service.searchExpenseByStatus(this.status).subscribe(
       data => {
@@ -184,7 +214,7 @@ export class FraisComponent implements OnInit {
     )
     setTimeout(() => {
     }, 50);
-  }else if((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && this.lastNameCollab != undefined){
+  }else if((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && (this.lastNameCollab != undefined)){
     this._service.searchExpenseByNameStatus(this.status,this.lastNameCollab).subscribe(
       data => {
         this.expenses = data;
@@ -208,6 +238,43 @@ export class FraisComponent implements OnInit {
     )
     setTimeout(() => {
     }, 50);
+
+    this.lastNameCollab = "";
+    this.status = "";
+    this.error= "";
+
+
+  }else if((this.date1 === undefined && this.date2 === undefined) && this.status === undefined && (this.lastNameCollab === undefined)){
+    this._service.searchAllExpense().subscribe(
+      data => {
+        this.expenses = data;
+        this.nbResultat = this.expenses.length;
+
+        this.expenses.forEach(
+          (item) => {
+            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              data => {
+                if (item != null) {
+                  item.nomCollab = data.lastName;
+                  item.prenomCollab = data.firstName;
+                }
+              },
+              error => console.log("exception" + error)
+            )
+          }
+        )
+      },
+      error => console.log("exception" + error)
+    )
+    setTimeout(() => {
+    }, 50);
+
+    this.lastNameCollab = "";
+    this.status = "";
+    this.error= "";
+
+  }else{
+    this.error = "Un problème est survenue, merci de vérifier que les deux dates champs ont été bien remplies.";
   }
 
 

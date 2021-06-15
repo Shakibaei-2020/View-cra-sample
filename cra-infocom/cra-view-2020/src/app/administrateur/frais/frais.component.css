@@ -90,7 +90,15 @@
     border: none;
     border-bottom: 2px solid #464646;
   }
+
+  .error{
+    color: red;
+  }
   
+  
+  .contentTable{
+    margin-top: 12px;
+  }
   
   .au{
   margin-top: 25px;

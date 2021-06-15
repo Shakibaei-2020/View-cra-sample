@@ -19,7 +19,16 @@
     height:47px;
 
   }
-  
+
+  .titreTable{
+    margin-top: 3px;
+    margin-bottom: -3px;
+
+  }
+
+Table{
+  margin-top: 14px;
+}
   form.example button {
     float: left;
     width: 120px;

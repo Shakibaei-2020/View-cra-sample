@@ -17,7 +17,7 @@ export class CongeEditComponent implements OnInit {
   allLeaveType!: TypeLeave[];
 
   status = ["en-cours", "validé", "refusé"]
-  timeStatus = ["matin", "après-midi","Journée entière"]
+  timeStatus = ["Matin", "Après-midi", "Journée entière"]
   inputedStatus!: string;
   collaborator = new Collaborator();
 
@@ -30,7 +30,7 @@ export class CongeEditComponent implements OnInit {
   statusLeave = "statusLeave";
   leaveStartStatus = "leaveStartStatus";
   leaveEndStatus = "leaveEndStatus";
-
+  joursEntiers = "joursEntiers";
 
 
   constructor(private _service: NgserviceService, private _route: Router) { }
@@ -93,7 +93,7 @@ export class CongeEditComponent implements OnInit {
             this.updatedLeave.statusFin = (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).value || this.leaveToUpdate.statusDebut;
             this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.statusLeave)).value || this.leaveToUpdate.status;
             this.updatedLeave.leaveType = this.newTypeLeave || this.leaveToUpdate.leaveType;
-            this.updatedLeave.nbJours =   this.dayNumber || this.leaveToUpdate.nbJours;
+            this.updatedLeave.nbJours = this.dayNumber || this.leaveToUpdate.nbJours;
 
             /** on effectue la mise à jour */
             this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(
@@ -134,16 +134,26 @@ export class CongeEditComponent implements OnInit {
 
   /** calcule le nombre de jours entre la date de debut et fin de la demande */
   howManyday() {
-    this.newDateStartLeave = new Date( this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateStartLeave)).valueAsDate, 'yyyy-MM-dd') || this.dateStartLeave) 
-    this.newDateEndLeave = new Date( this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndLeave)).valueAsDate, 'yyyy-MM-dd') || this.dateStartLeave) 
+    this.newDateStartLeave = new Date(this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateStartLeave)).valueAsDate, 'yyyy-MM-dd') || this.dateStartLeave)
+    this.newDateEndLeave = new Date(this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndLeave)).valueAsDate, 'yyyy-MM-dd') || this.dateStartLeave)
     var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime();
     this.dayNumber = Diff_temps / (1000 * 3600 * 24);
   }
 
 
-  goToSearch(){
+  goToSearch() {
     this._route.navigate(['/searchLeave']);
 
+  }
+
+  joursEntiersChecked() {
+    if (!((<HTMLInputElement>document.getElementById(this.joursEntiers)).checked) === false) {
+      (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).disabled = true;
+      (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).disabled = true;
+    } else{
+      (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).disabled = false;
+      (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).disabled = false;
+    }
   }
 
 

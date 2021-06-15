@@ -16,7 +16,7 @@ export class CongeComponent implements OnInit {
   status!: string;
   lastNameCollab!: string;
 
-
+  error!: string;
 
   constructor(private _service: NgserviceService, private _route: Router) { }
 
@@ -43,10 +43,8 @@ export class CongeComponent implements OnInit {
   /** Methode afin de trouver un une demane de congé via  le status et entre quand ce situe ca date de demande */
   searchConge() {
 
-    console.log(this.status)
 
-
-    if ((this.date1 != undefined || this.date2 != undefined) && this.status != undefined && this.lastNameCollab != undefined) {
+    if ((this.date1 != undefined && this.date2 != undefined) && (this.status != undefined && this.status != "" )  && (this.lastNameCollab != undefined && this.lastNameCollab != "")) {
 
       this._service.searchLeave(this.date1, this.date2, this.status, this.lastNameCollab).subscribe(
         data => {
@@ -71,7 +69,11 @@ export class CongeComponent implements OnInit {
       )
       setTimeout(() => {
       }, 50);
-    } else if ((this.date1 != undefined || this.date2 != undefined) && this.status != undefined && this.lastNameCollab === undefined) {
+
+      this.lastNameCollab = "";
+      this.status = "";
+      this.error= "";
+    } else if ((this.date1 != undefined &&  this.date2 != undefined) && (this.status != undefined && this.status != "" ) && (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
 
       this._service.searchLeaveByDateStatus(this.date1, this.date2, this.status).subscribe(
         data => {
@@ -97,10 +99,13 @@ export class CongeComponent implements OnInit {
       setTimeout(() => {
       }, 50);
 
-    } else if ((this.date1 != undefined || this.date2 != undefined) && this.status === undefined && this.lastNameCollab != undefined) {
+      this.lastNameCollab = "";
+      this.status = "";
+      this.error= "";
+    } else if ((this.date1 != undefined && this.date2 != undefined) && (this.status === undefined || this.status === "") && (this.lastNameCollab != undefined && this.lastNameCollab != "")) {
 
 
-      this._service.searchLeaveByDateStatus(this.date1, this.date2, this.lastNameCollab).subscribe(
+      this._service.searchLeaveByDateName(this.date1, this.date2, this.lastNameCollab).subscribe(
         data => {
           this.leaves = data;
 
@@ -124,8 +129,10 @@ export class CongeComponent implements OnInit {
       setTimeout(() => {
       }, 50);
 
-    } else if ((this.date1 != undefined || this.date2 != undefined) && this.status === undefined && this.lastNameCollab === undefined) {
-
+      this.lastNameCollab = "";
+      this.status = "";
+      this.error= "";
+    } else if ((this.date1 != undefined && this.date2 != undefined) && (this.status === undefined || this.status === "" ) && (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
 
       this._service.searchLeaveByDate(this.date1, this.date2).subscribe(
         data => {
@@ -150,9 +157,12 @@ export class CongeComponent implements OnInit {
       )
       setTimeout(() => {
       }, 50);
+      this.lastNameCollab = "";
+      this.status = "";
+      this.error = "";
 
-    }else if ((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && this.lastNameCollab !=  undefined) {
-    
+    } else if ((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && this.lastNameCollab != undefined) {
+
       this._service.searchLeaveByStatusName(this.status, this.lastNameCollab).subscribe(
         data => {
           this.leaves = data;
@@ -176,11 +186,15 @@ export class CongeComponent implements OnInit {
       )
       setTimeout(() => {
       }, 50);
-    
-    }else if ((this.date1 === undefined || this.date2 === undefined) && this.status === undefined && this.lastNameCollab !=  undefined) {
+
+      this.lastNameCollab = "";
+      this.status = "";
+      this.error = "";
+
+    } else if ((this.date1 === undefined || this.date2 === undefined) && this.status === undefined && this.lastNameCollab != undefined) {
 
 
-      this._service.searchLeaveByName( this.lastNameCollab).subscribe(
+      this._service.searchLeaveByName(this.lastNameCollab).subscribe(
         data => {
           this.leaves = data;
 
@@ -203,10 +217,14 @@ export class CongeComponent implements OnInit {
       )
       setTimeout(() => {
       }, 50);
-    }else if ((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && this.lastNameCollab ===  undefined) {
+      this.lastNameCollab = "";
+      this.status = "";
+      this.error = "";
 
-      
-      this._service.searchLeaveByStatus( this.status).subscribe(
+    } else if ((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
+
+
+      this._service.searchLeaveByStatus(this.status).subscribe(
         data => {
           this.leaves = data;
 
@@ -230,11 +248,40 @@ export class CongeComponent implements OnInit {
       setTimeout(() => {
       }, 50);
 
+      this.lastNameCollab = "";
+      this.status = "";
+      this.error = "";
 
+    } else if ((this.date1 === undefined && this.date2 === undefined) && this.status === undefined && (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
+
+      this._service.searchAllLeave().subscribe(
+        data => {
+          this.leaves = data;
+
+          this.leaves.forEach(
+            (item) => {
+              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+                data => {
+                  if (item != null) {
+                    item.nomCollab = data.lastName;
+                    item.prenomCollab = data.firstName;
+                  }
+                  this.nbResultat = this.leaves.length;
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+        },
+        error => console.log("exception" + error)
+      )
+      setTimeout(() => {
+      }, 50);
+      this.error = "";
+
+    }else {
+      this.error = "Un problème est survenue, merci de vérifier que les deux dates champs ont été bien remplies.";
     }
-
-
-
   }
 
 

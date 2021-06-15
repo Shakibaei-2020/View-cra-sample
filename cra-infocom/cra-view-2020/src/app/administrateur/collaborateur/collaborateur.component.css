@@ -107,7 +107,13 @@
       margin-bottom: 5%;
       margin-right: 10px;
     }
-  
+
+    .titreTable{
+      margin-top: 3px;
+      margin-bottom: -3px;
+
+    }
+
   
     .buttonAdd{
       float: right;
@@ -124,7 +130,9 @@
       margin-right: 10px;
     }
   
-  
+  .contentTable{
+    margin-top: 15px;
+  }
   .buttonAdd:hover {background-color: bl}
     
   .buttonAdd:active {

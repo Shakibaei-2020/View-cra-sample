@@ -129,6 +129,10 @@ export class NgserviceService {
     return this._http.get<Expense[]>("http://localhost:7672/expenses/searchExpenseByNameStatus/" + lastNameCollab + "/" + status);
   }
 
+  searchAllExpense(): Observable<Expense[]> {
+    return this._http.get<Expense[]>("http://localhost:7672/expenses/lister");
+  }
+
 
   /** TYPE **/
 
@@ -190,8 +194,9 @@ export class NgserviceService {
     return this._http.get<Leave[]>("http://localhost:8950/conge/searchLeaveByStatus/" + status );
   }
 
-  
-
+  searchAllLeave(): Observable<Leave[]> {
+    return this._http.get<Leave[]>("http://localhost:8950/conge/lister" );
+  }
 
 
   /** TYPE **/
@@ -254,7 +259,7 @@ export class NgserviceService {
   }
 
   selectAllClient(): Observable<Client[]> {
-    return this._http.get<Client[]>("http://localhost:8801/client/lister/");
+    return this._http.get<Client[]>("http://localhost:8801/client/lister");
 
   } 
   
@@ -276,11 +281,6 @@ export class NgserviceService {
   }
 
 
-  searchMission(date1: Date, date2: Date, nameClient: string): Observable<Mission[]> {
-    return this._http.get<Mission[]>("http://localhost:8801/mission/searchMission/" + date1 + "/" + date2 + "/" + nameClient);
-  }
-
-
   addAndUpdateMission(mission: Mission, startDate: string, endDate: string): Observable<Mission> {
     return this._http.post<Mission>("http://localhost:8801/mission/update/" + startDate + "/" + endDate, mission);
   }
@@ -294,7 +294,26 @@ export class NgserviceService {
     return this._http.get<Mission[]>("http://localhost:8801/mission/lister/");
   }
 
+  /** SEARCH */
+
   
+  searchMission(debut: Date, fin: Date, nameClient: string): Observable<Mission[]> {
+    return this._http.get<Mission[]>("http://localhost:8801/mission/searchMission/" + debut + "/" + fin + "/" + nameClient);
+  }
+
+  searchMissionByDate(debut: Date, fin: Date): Observable<Mission[]> {
+    return this._http.get<Mission[]>("http://localhost:8801/mission/searchDate/" + debut + "/" + fin );
+  }
+
+  searchMissionByName( nameClient: string): Observable<Mission[]> {
+    return this._http.get<Mission[]>("http://localhost:8801/mission/searchName/" + nameClient);
+  }
+
+  searchAllMission( ): Observable<Mission[]> {
+    return this._http.get<Mission[]>("http://localhost:8801/mission/lister/");
+  }
+
+
   /*************************************************************************************** PROJECT SERVICES *******************************************************************************/
 
   selectProjectByMissionId(id: number): Observable<Project> {

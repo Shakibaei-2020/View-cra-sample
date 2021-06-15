@@ -62,6 +62,7 @@ export class EditCollaborateurComponent implements OnInit {
   dateExpenseRequest = new Array();
   expenseStatus = new Array();
   expenseType = new Array();
+  newCostTTC = new Array();
 
   /** leave-[i] data */
   leaveRequestId = new Array();
@@ -73,6 +74,7 @@ export class EditCollaborateurComponent implements OnInit {
   dateStartLeave = new Array();
   dateEndLeave = new Array();
   leaveStatusFin = new Array();
+  joursEntiers = new Array();
 
   allLeaveType!: TypeLeave[];
   allExpenseType!: TypeExpense[];
@@ -127,6 +129,7 @@ export class EditCollaborateurComponent implements OnInit {
           this.dateExpenseRequest.push("dateExpenseRequest-" + i);
           this.expenseStatus.push("expenseStatus-" + i);
           this.expenseType.push("expenseType-" + i);
+          this.newCostTTC.push("newCostTTC" + i);
         }
       },
       error => console.log("exception" + error)
@@ -155,6 +158,7 @@ export class EditCollaborateurComponent implements OnInit {
           this.dateStartLeave.push("dateStartLeave-" + i);
           this.dateEndLeave.push("dateEndLeave-" + i);
           this.leaveStatusFin.push("leaveStatusFin-" + i);
+          this.joursEntiers.push("joursEntiers-" + i)
         }
       },
       error => console.log("exception" + error)
@@ -266,6 +270,7 @@ export class EditCollaborateurComponent implements OnInit {
             this.updatedExpense.costHT = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[indexOfElement])).value || this.expenseToUpdate.costHT;
             this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[indexOfElement])).value || this.expenseToUpdate.costTVA;
             this.updatedExpense.costTTC = this.updatedExpense.costHT + this.updatedExpense.costTVA || this.expenseToUpdate.costTTC;
+            this.TTCvalue = this.updatedExpense.costTTC;
 
             this._service.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
               data => {
@@ -352,6 +357,7 @@ export class EditCollaborateurComponent implements OnInit {
       },
       error => console.log("exception" + error),
     )
+
   }
 
   deleteLeaveFromCollab(value: any) {
@@ -381,5 +387,24 @@ export class EditCollaborateurComponent implements OnInit {
     this._route.navigate(['/searchCollaborateur']);
   }
 
+  joursEntiersChecked(i: number) {
+
+    if (((<HTMLInputElement>document.getElementById(this.joursEntiers[i])).checked) === true) {
+      (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[i])).disabled = true;
+      (<HTMLInputElement>document.getElementById(this.leaveStatusFin[i])).disabled = true;
+    } else{
+      (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[i])).disabled = false;
+      (<HTMLInputElement>document.getElementById(this.leaveStatusFin[i])).disabled = false;
+    }
+  }
+
+
+  TTCvalue!: number;
+  updateTTC(i : number){
+    
+
+  this.TTCvalue =   +(<HTMLInputElement>document.getElementById(this.expenseCostHT[i])).value + +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[i])).value ;
+
+  }
 
 }

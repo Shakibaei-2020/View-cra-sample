@@ -52,14 +52,18 @@
         </div>
 
         <div class="col-sm-8"><br>
-          <span>Nom collaborateur : non-fonctionnel </span>
-          <input type="text"  required [(ngModel)]="lastNameCollab" name="lastNameCollab" >
+          <span>Nom collaborateur : </span>
+          <input type="text" autocomplete="off" required [(ngModel)]="lastNameCollab" name="lastNameCollab" >
         </div>
+
+       
 
 
       </div>
       <br><br>
-      <h2>Résultat : {{nbResultat}}</h2>
+      <h2>Résultat : {{nbResultat}} </h2>      
+      <p class="error">{{error}}</p>
+
       <hr>
       <table class="table ">
         <thead>
@@ -81,6 +85,9 @@
               <p class="titreTable">Date de fin</p>
             </th>
             <th>
+              <p class="titreTable">Status</p>
+            </th>
+            <th>
               <p class="titreTable">Type</p>
             </th>
             <th>
@@ -90,12 +97,13 @@
         </thead>
         <tbody>        
         <tr *ngFor="let leave of leaves; index as i">
-            <td>{{leave.nomCollab }}</td>
-            <td>{{leave.prenomCollab }}</td>
-            <td>{{leave.dateOfDemand | date: 'dd/MM/yyyy' }}</td>
-            <td>{{leave.dateOfStartLeave | date: 'dd/MM/yyyy' }}</td>
-            <td>{{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</td>
-            <td>{{leave.leaveType.type }}</td>
+            <td><p class="contentTable"> {{leave.nomCollab }}</p></td>
+            <td><p class="contentTable">{{leave.prenomCollab }}</p></td>
+            <td><p class="contentTable">{{leave.dateOfDemand | date: 'dd/MM/yyyy' }}</p></td>
+            <td><p class="contentTable">{{leave.dateOfStartLeave | date: 'dd/MM/yyyy' }}</p></td>
+            <td><p class="contentTable">{{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</p></td>
+            <td><p class="contentTable">{{leave.status }}</p></td>
+            <td><p class="contentTable">{{leave.leaveType.type }}</p></td>
             
 
             <td>

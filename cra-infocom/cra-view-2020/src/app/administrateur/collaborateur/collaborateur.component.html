@@ -36,7 +36,6 @@
         <table class="table ">
             <thead>
               <tr>
-                <th><p class="titreTable">id</p></th>
                 <th><p class="titreTable">Nom</p></th>
                 <th><p class="titreTable">Prénom</p></th>
                 <th><p class="titreTable">Mail</p></th>
@@ -48,10 +47,9 @@
             </thead>
             <tbody>
                 <tr  *ngFor="let collaborator of collaborators">
-                  <td>{{collaborator.id}}</td>
-                    <td>{{collaborator.firstName}}</td>
-                    <td>{{collaborator.lastName}}</td>
-                    <td>{{collaborator.email}}</td>
+                    <td><p class="contentTable">{{collaborator.firstName}}</p></td>
+                    <td><p class="contentTable">{{collaborator.lastName}}</p></td>
+                    <td><p class="contentTable">{{collaborator.email}}</p></td>
         
                 <td>
                     <button class="btnEditer" type="submit" (click)="goToEditCollab()">Gérer </button>

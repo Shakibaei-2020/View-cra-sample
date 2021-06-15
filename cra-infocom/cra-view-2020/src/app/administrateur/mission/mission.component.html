@@ -42,7 +42,7 @@
             <div class="col-sm-4"><input type="date" required [(ngModel)]="date2" name="date2" ></div>
             <div class="col-sm-4"><button class="btnSearch" type="submit" (click)="searchMission()">Chercher</button></div>
             <div class="col-sm-8"><br><br>
-              <span>Nom du client : </span>  <input type="text" required [(ngModel)]="clientName" name="clientName" >
+              <span>Nom du client : </span>  <input type="text"  autocomplete="off" required [(ngModel)]="clientName" name="clientName" >
             </div>
 
     </div>
@@ -50,6 +50,7 @@
         <br><br><br><br>
 
         <h2>Résultat : {{nbResultat}}</h2>
+        <p class="error">{{error}}</p>
         <hr>
         <table class="table ">
             <thead>
@@ -66,11 +67,9 @@
             </thead>
             <tbody>
               <tr *ngFor="let mission of missions">
-                <td>{{mission.missionTitle}}</td>
-                <td>{{mission.startDate | date: 'dd/MM/yyyy' }}</td>
-                <td>{{mission.endDate | date: 'dd/MM/yyyy' }}</td>
-       
-
+                <td><p class="contentTable">{{mission.missionTitle}}</p></td>
+                <td><p class="contentTable">{{mission.startDate | date: 'dd/MM/yyyy' }}</p></td>
+                <td><p class="contentTable">{{mission.endDate | date: 'dd/MM/yyyy' }}</p></td>
                 <td>
                     <button class="btnEditer" type="submit" (click)="goGerer()" >Gérer</button>
                 </td>

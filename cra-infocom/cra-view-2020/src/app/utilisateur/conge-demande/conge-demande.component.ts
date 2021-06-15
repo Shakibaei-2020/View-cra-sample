@@ -21,6 +21,8 @@ export class CongeDemandeComponent implements OnInit {
   allLeaveType!: TypeLeave[];
   idOfLeaveType!: number;
 
+  leaveEndStatus=  "leaveEndStatus"
+  leaveStartStatus = "leaveStartStatus"
 
   config: any;
   collection = [];
@@ -141,6 +143,20 @@ export class CongeDemandeComponent implements OnInit {
     var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime();
     this.dayNumber = Diff_temps / (1000 * 3600 * 24);
 
+  }
+
+
+  joursEntiers!:boolean;
+
+  joursEntiersChecked() {
+
+    if (this.joursEntiers=== true) {
+      (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).disabled = true;
+      (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).disabled = true;
+    } else{
+      (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).disabled = false;
+      (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).disabled = false;
+    }
   }
 
 

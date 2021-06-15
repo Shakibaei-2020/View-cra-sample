@@ -180,9 +180,13 @@
 
                   <div class="inputbox mt-1">
                     <span> Cout HT : {{expense.costHT}} €</span><br>
-                    <input class="modal-input" type="text"   name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}">
+                    <input class="modal-input" type="text"   name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}" (change)="updateTTC(indexOfelement)">
                   </div>
 
+                  <div class="inputbox mt-1">
+                    <span> Cout HT : {{expense.costTTC}} €</span><br>
+                    <input class="modal-input" type="text" name="newCostTTC-{{indexOfelement}}" id="newCostTTC-{{indexOfelement}}"  placeholder="{{TTCvalue}}" disabled>
+                  </div>
                  
 
                   <div class="inputbox mt-1">
@@ -207,7 +211,7 @@
 
                   <div class="inputbox mt-1">
                     <span> CoutTVA : {{expense.costTVA}} €</span><br>
-                    <input class="modal-input" type="text"   name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}">
+                    <input class="modal-input" type="text"   name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}" (change)="updateTTC(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1 expenseRequestId" >
@@ -309,6 +313,13 @@
                   
 
                   
+                  <div class="inputbox mt-3">
+                    <div>
+                      <label><input type="checkbox" name="joursEntiers-{{indexOfelement}}" id="joursEntiers-{{indexOfelement}}" (change)="joursEntiersChecked(indexOfelement)"> jours entiers</label>
+                    </div>
+                  </div>
+
+                  
                   <div class="inputbox mt-1">
                     <span> Date de départ : {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span><br>
                     <input class="modal-input" type="date" name="dateStartLeave-{{indexOfelement}}" id="dateStartLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
@@ -337,11 +348,6 @@
                 
               
 
-                  <div class="inputbox mt-3">
-                    <div>
-                      <label><input type="checkbox" value=""> jour(s) entier(s)</label>
-                    </div>
-                  </div>
 
 
                 </div>
@@ -351,7 +357,8 @@
 
 
               
-
+  
+        
 
 
                   <div class="inputbox mt-1 expenseRequestId">
@@ -360,11 +367,13 @@
                   </div>
 
 
+                  <div class="rightInputs"> 
                   <div class="inputbox mt-1">
                     <span> Début : {{leave.statusDebut}}</span><br>
                     <select class="modal-input" name="leaveStatusDebut-{{indexOfelement}}" id="leaveStatusDebut-{{indexOfelement}}">
                       <option value="matin">Matinée</option>
-                      <option value="après-midi">Apres-midi</option>
+                      <option value="après-midi">Après-midi</option>
+                      <option value="journée entière">Journée entière</option>
                     </select>
                   </div>
 
@@ -373,7 +382,9 @@
                     <span> Fin : {{leave.statusFin}}</span><br>
                     <select class="modal-input" name="leaveStatusFin-{{indexOfelement}}" id="leaveStatusFin-{{indexOfelement}}">
                       <option value="matin">Matinée</option>
-                      <option value="après-midi">Apres-midi</option>
+                      <option value="après-midi">Après-midi</option>
+                      <option value="journée entière">Journée entière</option>
+
                     </select>
                   </div>
 
@@ -392,7 +403,7 @@
                     <input type="text" placeholder=" {{dayNumber}}" disabled>
                   </div>
 
-
+                </div>
                 </div>
               </div>
               <div class="modal-footer">

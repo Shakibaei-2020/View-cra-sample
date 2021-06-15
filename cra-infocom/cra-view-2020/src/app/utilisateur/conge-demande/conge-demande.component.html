@@ -8,9 +8,18 @@
     <div class="container ">
       <h2>Demande de congé </h2>
       <hr>
-      
+
       <div class="row">
         <div class="col-md-6">
+
+
+          <div class="inputbox mt-3">
+            <div>
+              <label><input type="checkbox" required [(ngModel)]="joursEntiers" name="joursEntiers "
+                  (change)="joursEntiersChecked()"> jours entiers</label>
+            </div>
+          </div>
+
           <div class="inputbox mt-3">
             <span>Date de départ :</span>
             <input type="date" required [(ngModel)]="dateStartLeave" name="dateStartLeave" (change)="howManyday()">
@@ -31,92 +40,93 @@
           </div>
 
 
-          <div class="inputbox mt-3">
-            <span>Total jours :</span>
-            <div>
-              <br>
-              <label><input type="checkbox" value=""> jour(s) entier(s)</label>
-            </div>
-          </div>
         </div>
 
 
-        <div class="col-md-6 " >
-          <div class="inputbox mt-3">
-            <span>᲼᲼᲼</span>
-            <select class="form-input"  required [(ngModel)]="leave.statusDebut" name="leave.statusDebut">
-              <option value="matin">Matin</option>
-              <option value="après-midi">Apres-midi</option>
-              <option value="Journée entière">Journée entière</option>
-            </select>
-          </div>
+        <div class="col-md-6 ">
 
-          <div class="inputbox mt-3">
-            <span>᲼᲼᲼</span>
-            <select class="form-input" required [(ngModel)]="leave.statusFin" name="leave.statusFin">
-              <option value="matin">Matinée</option>
-              <option value="après-midi">Apres-midi</option>
-              <option value="Journée entière">Journée entière</option>
-            </select>
-          </div>
 
-          <div class="inputbox mt-3">
-            <span>Client informé :</span>
-            <select class="form-input" required [(ngModel)]="leave.clientInformed" name="leave.clientInformed">
-              <option value="true">Oui</option>
-              <option value="false">Non</option>
-            </select>
-          </div>
 
-          <div class="inputbox mt-3">
-            <span>Total jours : </span>
-            <input type="text" placeholder=" {{dayNumber}}" disabled>
-          </div>
+          <div class="rightInputs">
+            <div class="inputbox mt-3">
+              <span>᲼᲼᲼</span>
+              <select class="form-input" required [(ngModel)]="leave.statusDebut" name="leaveStartStatus"
+                id="leaveStartStatus">
+                <option value="matin">Matin</option>
+                <option value="après-midi">Apres-midi</option>
+                <option value="Journée entière">Journée entière</option>
+              </select>
+            </div>
+
+            <div class="inputbox mt-3">
+              <span>᲼᲼᲼</span>
+              <select class="form-input" required [(ngModel)]="leave.statusFin" name="leaveEndStatus"
+                id="leaveEndStatus">
+                <option value="matin">Matinée</option>
+                <option value="après-midi">Apres-midi</option>
+                <option value="Journée entière">Journée entière</option>
+              </select>
+            </div>
+
+            <div class="inputbox mt-3">
+              <span>Client informé :</span>
+              <select class="form-input" required [(ngModel)]="leave.clientInformed" name="leave.clientInformed">
+                <option value="true">Oui</option>
+                <option value="false">Non</option>
+              </select>
+            </div>
+
+            <div class="inputbox mt-3">
+              <span>Total jours : </span>
+              <input type="text" placeholder=" {{dayNumber}}" disabled>
+            </div>
 
             <button class="btnForm" (click)="retour()">Retour</button>
             <button class="btnForm" type="submit">Ajouter demande de congé</button>
 
+          </div>
+
+
         </div>
 
-      
       </div>
     </div>
 
   </div>
 
 
-<div class="container">
-  <h2>Vos demandes :</h2>
-  <table class="table table-condensed">
-    <thead>
-      <tr>
-        <th>Date début</th>
-        <th>Date Fin</th>
-        <th>nb jours</th>
-        <th>Type</th>
-        <th>Etat de la demande</th>
-        <th>Action</th>
+  <div class="container">
+    <h2>Vos demandes :</h2>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Date début</th>
+          <th>Date Fin</th>
+          <th>nb jours</th>
+          <th>Type</th>
+          <th>Etat de la demande</th>
+          <th>Action</th>
 
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let leave of leaves ">
-        <td>{{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</td>
-        <td>{{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</td>
-        <td>{{leave.nbJours}} Jours</td>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of leaves ">
+          <td>{{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</td>
+          <td>{{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</td>
+          <td>{{leave.nbJours}} Jours</td>
 
-        <td>{{leave.leaveType.type}}</td>
-        <td>{{leave.status}}</td>
-        <td><button class="btnEditer" (click)="deleteLeaveById(leave.id)">Supprimer</button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
+          <td>{{leave.leaveType.type}}</td>
+          <td>{{leave.status}}</td>
+          <td><button class="btnEditer" (click)="deleteLeaveById(leave.id)">Supprimer</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 
 
 
-<br><br><br><br><br><br>
+
+
+  <br><br><br><br><br><br>

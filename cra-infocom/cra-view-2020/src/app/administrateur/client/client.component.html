@@ -27,7 +27,7 @@
     <div>
       <div class="container mt-3"><br>
         <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchClientByName()">
-          <input type="text" placeholder="Nom du client" required [(ngModel)]="clientInput.name" name="name">
+          <input type="text" placeholder="Nom du client"   autocomplete="off" required [(ngModel)]="clientInput.name" name="name">
           <button type="submit">
             <p>Chercher</p>
           </button>
@@ -35,10 +35,10 @@
 
         <br><br>
         <h2>Résultat : {{nbResultat}} </h2>
-        <table class="table table-condensed">
+        <table class="table table-condensed resultat">
           <thead>
             <tr>
-              <th><p class="titreTable">Réference</p></th>
+              <th><p class="titreTable">Référence</p></th>
               <th><p class="titreTable">Nom </p></th>
               <th><p class="titreTable">Infrastructure</p></th>
               <th><p class="commande titreTable">Action</p></th>
@@ -46,9 +46,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let client of clients">
-              <td>{{client.ref}}</td>
-              <td>{{client.name}}</td>
-              <td>{{client.typeClient.type}}</td>
+              <td><p class="contentTable">{{client.ref}}</p></td>
+              <td><p class="contentTable">{{client.name}}</p></td>
+              <td><p class="contentTable">{{client.typeClient.type}}</p></td>
               <td>
                 <button type="button" class="btnEditer" (click)="goToEditCollab()">Gérer</button>
               </td>

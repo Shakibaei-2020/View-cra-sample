@@ -33,12 +33,22 @@ export class ClientComponent implements OnInit {
 
   searchClientByName(){
 
+    if(this.clientInput.name != undefined && this.clientInput.name !=""){
+
     this._service.selectClientByName(this.clientInput.name).subscribe(
       data=> {this.clients = data;
         this.nbResultat = this.clients.length;},
       error=>console.log("exception" +error)
       )
+      this.clientInput.name = "";
+    }else{
+      this._service.selectAllClient().subscribe(
+        data=> {this.clients = data;
+          this.nbResultat = this.clients.length;},
+        error=>console.log("exception" +error)
+        )
     }
+  }
 
     goToAccueil(){
       this._route.navigate(['/administrateur']);

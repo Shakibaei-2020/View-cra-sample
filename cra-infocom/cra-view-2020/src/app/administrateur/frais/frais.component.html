@@ -59,8 +59,8 @@
           </div>
 
           <div class="col-sm-8"><br>
-            <span>Nom collaborateur : non-fonctionnel </span>
-            <input type="text"  required [(ngModel)]="lastNameCollab" name="lastNameCollab" >
+            <span>Nom collaborateur :  </span>
+            <input type="text" autocomplete="off"  required [(ngModel)]="lastNameCollab" name="lastNameCollab" >
           </div>
 
         </div>
@@ -70,6 +70,7 @@
     <br><br>
 
     <h2>Résultat : {{nbResultat}}</h2>
+    <p class="error">{{error}}</p>
     <hr>
     <table class="table ">
       <thead>
@@ -100,11 +101,11 @@
       <tbody>
         <tr *ngFor="let expense of expenses">
 
-          <td>{{expense.nomCollab}}</td>
-          <td>{{expense.prenomCollab}}</td>
-          <td>{{expense.dateRequest | date: 'dd/MM/yyyy' }}</td>
-          <td>{{expense.dateExpense | date: 'dd/MM/yyyy' }}</td>
-          <td>{{expense.status}}</td>
+          <td><p class="contentTable">{{expense.nomCollab}}</p></td>
+          <td><p class="contentTable">{{expense.prenomCollab}}</p></td>
+          <td><p class="contentTable">{{expense.dateRequest | date: 'dd/MM/yyyy' }}</p></td>
+          <td><p class="contentTable">{{expense.dateExpense | date: 'dd/MM/yyyy' }}</p></td>
+          <td><p class="contentTable">{{expense.status}}</p></td>
           <td>
             <button class="btnEditer" type="submit" (click)="goToEditFrais()">Gérer</button>
           </td>
