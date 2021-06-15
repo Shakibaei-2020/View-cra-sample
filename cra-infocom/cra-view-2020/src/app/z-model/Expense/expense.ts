@@ -8,8 +8,8 @@ export class Expense {
 	public  dateExpense!:Date;
 	public  billable!:boolean;
 	public  costHT!:number;
-	public  costTVA!:number;
-	public  costTTC!:number;
+	public  costTVA =0;
+	public  costTTC = 0;
 	public  status!:string;
 
 

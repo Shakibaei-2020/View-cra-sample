@@ -158,7 +158,7 @@ export class FraisComponent implements OnInit {
     this.error= "";
 
 
-  }else if((this.date1 === undefined || this.date2 === undefined) && this.status === undefined && this.lastNameCollab != undefined){
+  }else if((this.date1 === undefined || this.date2 === undefined) && (this.status === undefined || this.status === "") && (this.lastNameCollab != undefined  && this.lastNameCollab != "")){
 
     this._service.searchExpenseByName(this.lastNameCollab).subscribe(
       data => {
@@ -214,7 +214,7 @@ export class FraisComponent implements OnInit {
     )
     setTimeout(() => {
     }, 50);
-  }else if((this.date1 === undefined || this.date2 === undefined) && this.status != undefined && (this.lastNameCollab != undefined)){
+  }else if((this.date1 === undefined || this.date2 === undefined) &&( this.status != undefined && this.status != "" ) && (this.lastNameCollab != undefined && this.lastNameCollab != "")){
     this._service.searchExpenseByNameStatus(this.status,this.lastNameCollab).subscribe(
       data => {
         this.expenses = data;
@@ -244,7 +244,7 @@ export class FraisComponent implements OnInit {
     this.error= "";
 
 
-  }else if((this.date1 === undefined && this.date2 === undefined) && this.status === undefined && (this.lastNameCollab === undefined)){
+  }else if((this.date1 === undefined && this.date2 === undefined) && this.status === undefined && (this.lastNameCollab === undefined || this.lastNameCollab === "")){
     this._service.searchAllExpense().subscribe(
       data => {
         this.expenses = data;

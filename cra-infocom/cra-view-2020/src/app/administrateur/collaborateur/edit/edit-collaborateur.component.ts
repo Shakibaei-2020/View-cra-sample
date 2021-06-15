@@ -77,6 +77,7 @@ export class EditCollaborateurComponent implements OnInit {
   joursEntiers = new Array();
 
   allLeaveType!: TypeLeave[];
+
   allExpenseType!: TypeExpense[];
 
   status = ["en-cours", "validé", "refusé"]
@@ -177,10 +178,8 @@ export class EditCollaborateurComponent implements OnInit {
   /** Collab commands */
   collaboratorToUpdate = new Collaborator();
   updatedCollaborator = new Collaborator();
-
   newDateEntry!: string;
   newDateOut!: string;
-
   idOfCollType!: number
   newTypeCollab = new TypeCollaborator();
 
@@ -301,6 +300,7 @@ export class EditCollaborateurComponent implements OnInit {
         console.log("erreur delete expense non-effectué")
       }
     )
+    window.location.reload();
   }
 
 
@@ -369,6 +369,7 @@ export class EditCollaborateurComponent implements OnInit {
         console.log("erreur delete leave non-effectué")
       }
     )
+    window.location.reload();
   }
 
   dayNumber!: number;
@@ -391,7 +392,11 @@ export class EditCollaborateurComponent implements OnInit {
 
     if (((<HTMLInputElement>document.getElementById(this.joursEntiers[i])).checked) === true) {
       (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[i])).disabled = true;
+      (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[i])).value= "";
+
       (<HTMLInputElement>document.getElementById(this.leaveStatusFin[i])).disabled = true;
+      (<HTMLInputElement>document.getElementById(this.leaveStatusFin[i])).value= "";
+
     } else{
       (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[i])).disabled = false;
       (<HTMLInputElement>document.getElementById(this.leaveStatusFin[i])).disabled = false;

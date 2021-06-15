@@ -19,13 +19,21 @@
 
           <div class="inputbox mt-1">
             <span class="input-title ">Cout HT : {{expense.costHT}} €</span> 
-            <input type="text"   name="expenseCostHT" id="expenseCostHT" > 
+            <input type="text"   name="expenseCostHT" id="expenseCostHT" (input)="updateTTC()" > 
           </div>
 
           <div class="inputbox mt-1">
             <span class="input-title ">Cout TVA : {{expense.costTVA}} €</span>
             <div class="input-group-prepend">
-              <input type="text" name="expenseCostTVA" id="expenseCostTVA" > 
+              <input type="text" name="expenseCostTVA" id="expenseCostTVA" (input)="updateTTC()" > 
+            </div>
+          </div>
+
+          
+          <div class="inputbox mt-1">
+            <span class="input-title ">Cout TTC : {{expense.costTTC}} €</span>
+            <div class="input-group-prepend">
+              <input type="text" placeholder="{{costTTC}}" disabled > 
             </div>
           </div>
       

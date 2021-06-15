@@ -119,4 +119,8 @@ export class EditFraisComponent implements OnInit {
     this._route.navigate(['/searchFrais']);
   }
 
+  costTTC !: number;
+  updateTTC(){
+    this.costTTC =  +(<HTMLInputElement>document.getElementById(this.expenseCostHT)).value + +(<HTMLInputElement>document.getElementById(this.expenseCostTVA)).value;
+  }
 }

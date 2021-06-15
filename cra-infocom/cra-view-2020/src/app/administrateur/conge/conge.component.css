@@ -37,6 +37,55 @@
     transform: translateY(4px);
   }
 
+  .btnTab {
+    padding-bottom: 25px;
+    padding-top: 5px;
+    width: 50px;
+    font-size: 14px;
+    
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #464646;
+    border: none;
+    border-radius: 15px;
+    height: 5px;
+  }
+  
+  .btnTab:hover {background-color: #636363}
+  
+  .btnTab:active {
+    background-color: #464646;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+
+  .btnModal {
+    padding-bottom: 25px;
+    padding-top: 5px;
+    width: 100px;
+    font-size: 14px;
+    
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #464646;
+    border: none;
+    border-radius: 15px;
+    height: 5px;
+  }
+  
+  .btnModal:hover {background-color: #636363}
+  
+  .btnModal:active {
+    background-color: #464646;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
   .commande{
     margin-left:40%;
   }
@@ -166,3 +215,24 @@ margin-top: 12px;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
+/** FOR MODAL */
+
+ .modal-input{
+    width: 215px;
+    padding: 14px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+
+  }
+
+  
+  .toHide{
+    display: none;
+  }
+
+  .rightInputs{
+    margin-top: 57px;
+  }

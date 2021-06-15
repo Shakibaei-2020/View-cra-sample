@@ -44,7 +44,7 @@
 
         <div class="col-sm-8"><br>
            <span>État de la demande : </span>
-          <select class="form-input" value="" aria-label="Default select example" required [(ngModel)]="status" name="status">
+          <select class="form-input" value="" aria-label="Default select example" required [(ngModel)]="statusSearch" name="statusSearch">
             <option value="en-cours">En-cours</option>
             <option value="refusé">Refusé</option>
             <option value="validé">Validé</option>
@@ -52,11 +52,9 @@
         </div>
 
         <div class="col-sm-8"><br>
-          <span>Nom collaborateur : </span>
+          <span>Prénom collaborateur : </span>
           <input type="text" autocomplete="off" required [(ngModel)]="lastNameCollab" name="lastNameCollab" >
         </div>
-
-       
 
 
       </div>
@@ -96,7 +94,7 @@
           </tr>
         </thead>
         <tbody>        
-        <tr *ngFor="let leave of leaves; index as i">
+        <tr *ngFor="let leave of leaves; let indexOfelement =index;">
             <td><p class="contentTable"> {{leave.nomCollab }}</p></td>
             <td><p class="contentTable">{{leave.prenomCollab }}</p></td>
             <td><p class="contentTable">{{leave.dateOfDemand | date: 'dd/MM/yyyy' }}</p></td>
@@ -104,15 +102,116 @@
             <td><p class="contentTable">{{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</p></td>
             <td><p class="contentTable">{{leave.status }}</p></td>
             <td><p class="contentTable">{{leave.leaveType.type }}</p></td>
-            
-
             <td>
-              <button class="btnEditer" type="submit" (click)="goGerer()">Gérer</button>
+              <button class="btnTab" data-toggle="modal" [attr.data-target]=" '#myLeaveModal-' + indexOfelement">Éditer</button>
             </td>
           </tr>
         </tbody>
       </table>
 
+
+      
+    <!-- Modal -->
+    <div *ngFor="let leave of leaves; let indexOfelement =index;">
+      <div class="modal fade" id="myLeaveModal-{{indexOfelement}}" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Gestion de la demande de congé du  {{leave.dateOfDemand | date: 'dd/MM/yyyy'}}</h3>
+              <div class="toHide">
+                <input type="text" value="{{leave.id}}" name="leaveRequestId-{{indexOfelement}}"  id="leaveRequestId-{{indexOfelement}}" disabled>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <!-- Colonne 1-->
+                <div class="col-sm-6">
+              
+                  <div class="inputbox mt-3">
+                    <div>
+                      <label><input type="checkbox" name="joursEntiers-{{indexOfelement}}" id="joursEntiers-{{indexOfelement}}" (change)="joursEntiersChecked(indexOfelement)"> jours entiers</label>
+                    </div>
+                  </div>
+                  
+                  <div class="inputbox mt-1">
+                    <span> Date de départ : {{leave.dateOfStartLeave | date: 'dd/MM/yyyy'}}</span><br>
+                    <input class="modal-input" type="date" name="dateStartLeave-{{indexOfelement}}" id="dateStartLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
+                  </div>
+                  
+                  <div class="inputbox mt-1">
+                    <span> Date de retour :  {{leave.dateOfEndLeave | date: 'dd/MM/yyyy' }}</span><br>
+                    <input class="modal-input" type="date" name="dateEndLeave-{{indexOfelement}}" id="dateEndLeave-{{indexOfelement}}" (change)="howManyday(indexOfelement)">
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> Type de congé : {{leave.leaveType.type}}</span><br>
+                    <select class="modal-input" name="leaveType-{{indexOfelement}}" id="leaveType-{{indexOfelement}}">
+                      <option *ngFor="let typeConge of allLeaveType" value="{{typeConge.id}}">{{typeConge.type}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> État de la demande : {{leave.status}}</span><br>
+                    <select class="modal-input" name="leaveStatus-{{indexOfelement}}" id="leaveStatus-{{indexOfelement}}">
+                      <option *ngFor="let statue of status" value={{statue}}>{{statue}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Colonne 2-->
+                <div class="col-sm-6">
+
+                  <div class="inputbox mt-1 toHide">
+                    <span> Date de demande : {{leave.dateOfDemand | date: 'dd/MM/yyyy'}}</span><br>
+                    <input class="modal-input" type="date" name="dateLeaveRequest-{{indexOfelement}}" id="dateLeaveRequest-{{indexOfelement}}" disabled>
+                  </div>
+
+                  <div class="rightInputs"> 
+                  <div class="inputbox mt-1">
+                    <span> Début : {{leave.statusDebut}}</span><br>
+                    <select class="modal-input" name="leaveStatusDebut-{{indexOfelement}}" id="leaveStatusDebut-{{indexOfelement}}">
+                      <option value="matin">Matinée</option>
+                      <option value="après-midi">Après-midi</option>
+                      <option value="journée entière">Journée entière</option>
+                    </select>
+                  </div>
+               
+                  <div class="inputbox mt-1">
+                    <span> Fin : {{leave.statusFin}}</span><br>
+                    <select class="modal-input" name="leaveStatusFin-{{indexOfelement}}" id="leaveStatusFin-{{indexOfelement}}">
+                      <option value="matin">Matinée</option>
+                      <option value="après-midi">Après-midi</option>
+                      <option value="journée entière">Journée entière</option>
+                    </select>
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> Cleint informé : {{leave.clientInformed}}</span><br>
+                    <select class="modal-input" name="leaveClientInformed-{{indexOfelement}}" id="leaveClientInformed-{{indexOfelement}}">
+                      <option value="true">Oui</option>
+                      <option value="false">Non</option>
+                    </select>
+                  </div>
+
+                  <div class="inputbox mt-3">
+                    <span>Total jours :  {{leave.nbJours}} </span>
+                    <input type="text" placeholder=" {{dayNumber}}" disabled>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btnModal" type="submit" (click)="updateLeaveFromCollab(indexOfelement)">Maj</button>
+                <button class="btnModal" type="submit" (click)="deleteLeaveFromCollab(leave.id)">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 

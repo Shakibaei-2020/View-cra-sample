@@ -152,7 +152,11 @@ export class CongeDemandeComponent implements OnInit {
 
     if (this.joursEntiers=== true) {
       (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).disabled = true;
+      (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).value = "";
+
       (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).disabled = true;
+      (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).value = "";
+
     } else{
       (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).disabled = false;
       (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).disabled = false;

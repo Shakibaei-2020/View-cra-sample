@@ -12,7 +12,7 @@
 
         <div class="bio-row">
           <div   class="inputbox mt-1"><span class="input-title">Coût HT :</span> 
-            <input autocomplete="off"  type="text" requireds [(ngModel)]="expense.costHT" name="expense.costHT">
+            <input autocomplete="off"  type="text" requireds [(ngModel)]="expense.costHT" name="expense.costHT" (input)="updateTTC()">
            </div>
 
            <div class="inputbox mt-1">
@@ -38,7 +38,12 @@
         <div class="bio-row">
           <div class="inputbox mt-1">
             <span class="input-title">Coût TVA :</span>
-            <input autocomplete="off"  type="text" required [(ngModel)]="expense.costTVA" name="expense.costTVA"> 
+            <input autocomplete="off"  type="text" required [(ngModel)]="expense.costTVA" (input)="updateTTC()"> 
+          </div>
+
+          <div class="inputbox mt-1">
+            <span class="input-title">Coût TTC :</span>
+            <input autocomplete="off"  type="text" placeholder="{{costTTC}}" disabled> 
           </div>
 
           <div class="inputbox mt-1">
