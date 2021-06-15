@@ -280,7 +280,8 @@ export class CongeComponent implements OnInit {
       this.error = "";
 
     }else {
-      this.error = "Un problème est survenue, merci de vérifier que les deux dates champs ont été bien remplies.";
+      this.error = "Un problème est survenue, merci de vérifier que les deux champs dates  ont été bien remplies.";
+      this.nbResultat = 0;
     }
   }
 
