@@ -135,18 +135,19 @@
                 <div class="col-sm-6">
 
                   <div class="inputbox mt-1">
-                    <span> Cout HT : {{expense.costHT}} €</span><br>
-                    <input class="modal-input" type="text"   name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
+                    <span> Cout HT : </span><br>
+                    <input class="modal-input" type="text"  value="{{expense.costHT}} " name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1">
-                    <span> Cout HT : {{expense.costTTC}} €</span><br>
+                    <span> Cout TTC : {{expense.costTTC}} €</span><br>
                     <input class="modal-input" type="text" name="newCostTTC-{{indexOfelement}}" id="newCostTTC-{{indexOfelement}}"  placeholder="{{TTCvalue}}" disabled>
                   </div>
                  
                   <div class="inputbox mt-1">
-                    <span> Facturable : {{expense.billable}}</span><br>
+                    <span> Facturable : </span><br>
                     <select class="modal-input"  name="expenseBillable-{{indexOfelement}}" id="expenseBillable-{{indexOfelement}}">
+                      <option hidden value="" disabled selected>{{expense.billable}} </option>
                       <option value="true">oui</option>
                       <option value="false">non</option>
                     </select>
@@ -163,8 +164,8 @@
                 <div class="col-sm-6">
 
                   <div class="inputbox mt-1">
-                    <span> CoutTVA : {{expense.costTVA}} €</span><br>
-                    <input class="modal-input" type="text"   name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
+                    <span> CoutTVA : </span><br>
+                    <input class="modal-input" type="text" value="{{expense.costTVA}}"   name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1 toHide" >
@@ -173,15 +174,18 @@
                   </div>
 
                   <div class="inputbox mt-1">
-                    <span> Type : {{expense.typeExpense.type}}</span><br>
+                    <span> Type : </span><br>
                     <select class="modal-input"  name="expenseType-{{indexOfelement}}" id="expenseType-{{indexOfelement}}">
+                      <option hidden value="" disabled selected>{{expense.typeExpense.type}} </option>
+
                       <option *ngFor="let allExpenseTypes of allExpenseType" value="{{allExpenseTypes.id}}">{{allExpenseTypes.type}}
                     </select>
                   </div>
 
                   <div class="inputbox mt-1">
-                    <span> État de la demande : {{expense.status}}</span><br>
+                    <span> État de la demande :</span><br>
                     <select class="modal-input" name="expenseStatus-{{indexOfelement}}" id="expenseStatus-{{indexOfelement}}">
+                      <option hidden value="" disabled selected>{{expense.status}} </option>
                       <option *ngFor="let statue of status" value={{statue}}>{{statue}}</option>
                     </select>
                   </div>

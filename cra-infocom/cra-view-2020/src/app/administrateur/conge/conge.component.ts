@@ -511,6 +511,8 @@ export class CongeComponent implements OnInit {
       )
       setTimeout(() => {
       }, 50);
+
+      
       this.error = "";
 
     } else {

@@ -58,24 +58,93 @@
                 <th><p class="titreTable">Nom de la mission </p></th>
                 <th><p class="titreTable">Date de début</p></th>
                 <th><p class="titreTable">Date de fin</p></th>
-           
-
-
                 <th ><p class="commande titreTable">Action</p></th>
-
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let mission of missions">
+              <tr *ngFor="let mission of missions; let indexOfelement = index">
                 <td><p class="contentTable">{{mission.missionTitle}}</p></td>
                 <td><p class="contentTable">{{mission.startDate | date: 'dd/MM/yyyy' }}</p></td>
                 <td><p class="contentTable">{{mission.endDate | date: 'dd/MM/yyyy' }}</p></td>
                 <td>
-                    <button class="btnEditer" type="submit" (click)="goGerer()" >Gérer</button>
+                  <button type="button" class="btnTab" data-toggle="modal" [attr.data-target]=" '#myMissionModal-' + indexOfelement">Éditer</button>
                 </td>
             </tr>
             </tbody>
           </table>
+
+
+
+          <div *ngFor="let mission of missions; let indexOfelement =index;">
+
+            <div class="modal fade" id="myMissionModal-{{indexOfelement}}" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3>Gestion de la mission: </h3>
+                    <div class="toHide">
+                       <input type="text" value="{{mission.id}}" name="missionId-{{indexOfelement}}" id="missionId-{{indexOfelement}}" disabled> 
+                    </div>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+      
+                      <!-- Colonne 1-->
+                      <div class="col-sm-6">
+      
+
+                        <div class="inputbox mt-1">
+                          <span> Nom du client :  </span><br>
+                          <select class="modal-input"  name="clientNameMission-{{indexOfelement}}" id="clientNameMission-{{indexOfelement}}" (change)="updateClientRef(indexOfelement)">
+                            <option hidden value="" disabled selected>{{mission.clientName}}</option>
+                            <option *ngFor="let client of clients" value="{{client.id}}">{{client.name}}</option>
+
+                          </select>
+                        </div>
+
+                        <div class="inputbox mt-1">
+                          <span> Date début de mission : </span><br>
+                          <input class="modal-input" type="date"  name="debutMission-{{indexOfelement}}" id="debutMission-{{indexOfelement}}" >
+                        </div>
+      
+                        <div class="inputbox mt-1">
+                          <span> Nom de la mission : </span><br>
+                          <input class="modal-input" type="text"  value="{{mission.missionTitle}}" name="nameMission-{{indexOfelement}}" id="nameMission-{{indexOfelement}}">
+                        </div>
+                  
+                      </div>
+      
+                      <!-- Colonne 2-->
+                      <div class="col-sm-6">
+      
+                        <div class="inputbox mt-1">
+                          <span> Réf client : </span><br>
+                          <select class="modal-input"  name="refClientMission-{{indexOfelement}}" id="refClientMission-{{indexOfelement}}"  (change)="updateClientName(indexOfelement)" >
+                            <option hidden value="" disabled selected>blabla </option>
+                            <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
+
+                          </select>
+                        </div>
+
+                        <div class="inputbox mt-1 " >
+                          <span> Date de fin : blabla</span><br>
+                          <input class="modal-input" type="date"   name="finMission-{{indexOfelement}}" id="finMission-{{indexOfelement}}" >
+                        </div>
+      
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btnModal" type="submit" (click)="updateMission(indexOfelement)">Maj</button>
+                      <button class="btnModal" type="submit" (click)="deleteMission(mission.id)">Supprimer</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
 
 
 

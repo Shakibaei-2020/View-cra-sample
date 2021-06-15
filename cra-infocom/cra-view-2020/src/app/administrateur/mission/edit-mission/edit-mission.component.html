@@ -18,8 +18,11 @@
         <div class="bio-row">
 
           <div class="inputbox mt-1">
-            <span class="input-title">Nom du client : {{clientSeleted.name}}</span><br>
-            <select class="form-input" aria-label="Default select example" (change)="updateClientRef()" name="clientName" id="clientName">
+            <span class="input-title">Nom de la mission :</span><br>
+            <select class="form-input" aria-label="Default select example" (change)="updateClientRef()"
+              name="clientName" id="clientName">
+              <option hidden value="" disabled selected>{{clientSeleted.name}} </option>
+
               <option *ngFor="let client of clients" value="{{client.id}}">{{client.name}}</option>
             </select>
           </div>
@@ -30,28 +33,30 @@
           </div>
 
           <div class="inputbox mt-1">
-            <span class="input-title">Nom de la mission : {{mission.missionTitle}}</span>
-            <input type="text" name="missionTitle" id="missionTitle">
+            <span class="input-title">Nom de la mission :</span>
+            <input type="text" value=" {{mission.missionTitle}}" name="missionTitle" id="missionTitle">
           </div>
 
         </div>
         <div class="bio-row">
 
           <div class="inputbox mt-1">
-            <span class="input-title">Ref client : {{clientSeleted.ref}}</span><br>
-            <select class="form-input" aria-label="Default select example" (change)="updateClientName()" name="clientRef" id="clientRef">
+            <span class="input-title">Ref client : </span><br>
+            <select class="form-input" aria-label="Default select example" (change)="updateClientName()"
+              name="clientRef" id="clientRef">
+              <option hidden value="" disabled selected>{{clientSeleted.ref}} </option>
               <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
             </select>
 
-          </div>
-
-       
-
-
+            
           <div class="inputbox mt-1">
             <span class="input-title">Date de fin : {{mission.endDate | date: 'dd/MM/yyyy' }}</span>
             <input type="Date" name="dateEndMission" id="dateEndMission">
           </div>
+          </div>
+
+
+
 
         </div>
 

@@ -7,5 +7,8 @@ export class Mission {
 	public  startDate!: Date;
 	public  endDate!: Date;
 	public  client= new Client();
+
+
+	public clientName!: string;
 	
 }

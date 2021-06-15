@@ -21,22 +21,24 @@
 
         <div class="bio-row">
           <div class="inputbox mt-1">
-            <span class="input-title">Nom du client : {{client.name}}</span>
-            <input type="text" name="clientName" id="clientName" >
+            <span class="input-title">Nom du client : </span>
+            <input type="text"  value=" {{client.name}}" name="clientName" id="clientName" >
           </div>
         </div>
         <div class="bio-row">
 
           <div class="inputbox mt-1">
-            <span class="input-title">Référence du client : {{client.ref}}</span>
-            <input type="text" name="clientRef" id="clientRef">
+            <span class="input-title">Référence du client :</span>
+            <input type="text" value ="{{client.ref}}" name="clientRef" id="clientRef">
           </div>
 
           <div class="inputbox mt-1">
 
             <div class="inputbox mt-1">
-              <span class="input-title">Type de client : {{client.typeClient.type}}</span><br>
+              <span class="input-title">Type de client : </span><br>
               <select class="form-input" aria-label="Default select example" name="clientType" id="clientType">
+                <option hidden value="" disabled selected>{{client.typeClient.type}} </option>
+
                 <option *ngFor="let allClientTypes of allClientType" value="{{allClientTypes.id}}">{{allClientTypes.type}}</option>
               </select>
             </div>

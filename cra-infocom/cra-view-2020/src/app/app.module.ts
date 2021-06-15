@@ -40,6 +40,7 @@ import localeFr from '@angular/common/locales/fr';
 import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -79,6 +80,7 @@ registerLocaleData(localeFr, 'fr');
     HttpClientModule,
     FormsModule,
     NgxPaginationModule,
+
     
   ],
   providers: [AppComponent],

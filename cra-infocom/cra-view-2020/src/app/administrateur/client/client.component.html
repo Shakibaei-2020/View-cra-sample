@@ -45,16 +45,77 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let client of clients">
+            <tr *ngFor="let client of clients; let indexOfelement = index">
               <td><p class="contentTable">{{client.ref}}</p></td>
               <td><p class="contentTable">{{client.name}}</p></td>
               <td><p class="contentTable">{{client.typeClient.type}}</p></td>
               <td>
-                <button type="button" class="btnEditer" (click)="goToEditCollab()">Gérer</button>
+                <button type="button" class="btnTab" data-toggle="modal" [attr.data-target]=" '#myClientModal-' + indexOfelement">Éditer</button>
               </td>
             </tr>
           </tbody>
         </table>
+
+    
+
+
+
+        <div *ngFor="let client of clients; let indexOfelement =index;">
+
+          <div class="modal fade" id="myClientModal-{{indexOfelement}}" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3>Gestion du client : {{client.name}} </h3>
+                  <div class="toHide">
+                     <input type="text" value="{{client.id}}" name="clientId-{{indexOfelement}}" id="clientId-{{indexOfelement}}" disabled> 
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+    
+                    <!-- Colonne 1-->
+                    <div class="col-sm-6">
+       
+                      <div class="inputbox mt-1">
+                        <span> Nom du client : </span><br>
+                        <input class="modal-input" type="text" value="{{client.name}}"  name="nameClient-{{indexOfelement}}" id="nameClient-{{indexOfelement}}">
+                      </div>
+                
+                    </div>
+    
+                    <!-- Colonne 2-->
+                    <div class="col-sm-6">
+    
+                      <div class="inputbox mt-1 " >
+                        <span> ref client: </span><br>
+                        <input class="modal-input" type="text" value="{{client.ref}}"  name="refClient-{{indexOfelement}}" id="refClient-{{indexOfelement}}" >
+                      </div>
+
+                      <div class="inputbox mt-1">
+                        <span> Type de client : </span><br>
+                        <select class="modal-input"  name="typeClient-{{indexOfelement}}" id="typeClient-{{indexOfelement}}"   >
+                          <option hidden value="" disabled selected>{{client.typeClient.type}} </option>
+                          <option *ngFor="let allClientTypes of allClientType" value="{{allClientTypes.id}}">{{allClientTypes.type}}</option>
+                        </select>
+                      </div>
+    
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btnModal" type="submit" (click)="updateClient(indexOfelement)">Maj</button>
+                    <button class="btnModal" type="submit" (click)="deleteClient(client.id)">Supprimer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
       </div>
     </div>
   </div>
