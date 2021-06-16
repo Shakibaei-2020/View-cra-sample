@@ -6,4 +6,8 @@ export class Project {
 	public  collaboratorId!: number;
 	public projectTitle!: string;
 	public  mission = new Mission();
+
+
+	public missionTitle!: string;
+	public prenomCollab!: string;
 }

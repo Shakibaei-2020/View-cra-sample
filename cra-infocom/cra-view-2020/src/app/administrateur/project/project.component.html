@@ -1,0 +1,153 @@
+<app-administrateur></app-administrateur>
+<br><br><br>
+
+<div class="container">
+    <div>
+        <button class="img-fluid bouttonMenu">
+            <img class="img1" src="https://image.flaticon.com/icons/png/512/775/775578.png">
+        </button>
+
+        <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
+            <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
+        </button>
+
+
+        <button class="img-fluid buttonAdd ">
+            <img (click)="goToAddProject()" class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
+        </button>
+        <h2 class="page">Gestion des projets</h2>
+    </div>
+    <hr>
+
+
+
+    <div>
+        <div class="container mt-3"><br>
+
+
+            <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchProjectByName()">
+                <div class="container">
+         
+          
+                  <div class="row">
+          
+                    <div class="col-sm-4">
+                        <span>Nom du projet</span>
+
+                        <input type="text" placeholder="Nom du projet" autocomplete="off" required [(ngModel)]="searchByProjectName" name="projectNameSearch">
+                    </div>
+          
+                    <div class="col-sm-4">
+                        <span>Nom de la mission</span>
+                        <input type="text" placeholder="Nom de la mission" autocomplete="off" required [(ngModel)]="searchByMissionName" name="searchByMissionName">
+                    </div>
+          
+                    <div class="col-sm-4">
+                        <span>Nom du client</span>
+                        <input type="text" placeholder="Nom du client" autocomplete="off" required [(ngModel)]="searchByClientName" name="searchByClientName">
+                    </div>
+          
+                    <div class="container"><br>
+
+                        <button class="btnSearch" type="submit">
+                            <p>Chercher</p>
+                        </button>
+                    </div>
+          
+                    <div class="col-sm-8"><br>
+                    </div>
+          
+                  </div>
+                </div>
+              </form>
+
+
+            <br><br>
+            <h2>Résultat : {{nbResultat}} </h2>
+            <table class="table table-condensed resultat">
+                <thead>
+                    <tr>
+                        <th>
+                            <p class="titreTable">Nom du project</p>
+                        </th>
+                        <th>
+                            <p class="titreTable">Prénom du collab</p>
+                        </th>
+                        <th>
+                            <p class="titreTable">Nom de la mission</p>
+                        </th>
+
+
+                        <th>
+                            <p class="commande titreTable">Action</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let project of projects; let indexOfelement = index">
+                        <td>
+                            <p class="contentTable">{{project.projectTitle}}</p>
+                        </td>
+                        <td>
+                            <p class="contentTable">{{project.prenomCollab}}</p>
+                        </td>
+                        <td>
+                            <p class="contentTable">{{project.missionTitle}}</p>
+                        </td>
+                        <td>
+                            <button type="button" class="btnTab" data-toggle="modal"
+                                [attr.data-target]=" '#myProjectModal-' + indexOfelement">Éditer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div *ngFor="let project of projects; let indexOfelement =index;">
+
+                <div class="modal fade" id="myProjectModal-{{indexOfelement}}" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Gestion du projet de : {{project.prenomCollab}} </h3>
+                                <div class="toHide">
+                                    <input type="text" value="{{project.id}}" name="projectId-{{indexOfelement}}"
+                                        id="projectId-{{indexOfelement}}" disabled>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+
+                                    <!-- Colonne 1-->
+                                    <div class="col-sm-6">
+                                        <div class="inputbox mt-1">
+                                        </div>
+                                    </div>
+
+                                    <!-- Colonne 2-->
+                                    <div class="col-sm-6">
+                                        <div class="inputbox mt-1 ">
+                                        </div>
+
+                                        <div class="inputbox mt-1">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+
+                                    <button class="btnModal" type="submit" (click)="updateProject(indexOfelement)">Maj</button>
+                                    <button class="btnModal" type="submit" (click)="deleteProject(project.id)">Supprimer</button>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -323,4 +323,14 @@ export class NgserviceService {
   SelectAllProjectForOneCollab(id: number): Observable<Project[]> {
     return this._http.get<Project[]>("http://localhost:8801/project/projectByCollab/" + id);
   }
+
+  searchProjectByTitle( projectTitle: string): Observable<Project[]> {
+    return this._http.get<Project[]>("http://localhost:8801/project/lister/Title/" + projectTitle);
+  }
+
+  selectAllproject( ): Observable<Project[]> {
+    return this._http.get<Project[]>("http://localhost:8801/project/lister/");
+  }
+
+
 }

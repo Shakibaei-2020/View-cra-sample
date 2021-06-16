@@ -39,6 +39,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProjectComponent } from './administrateur/project/project.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -71,6 +72,7 @@ registerLocaleData(localeFr, 'fr');
     AccueilUtilisateurComponent,
     NoteDeFraisDeclarationComponent,
     AccueilAdministrateurComponent,
+    ProjectComponent,
 
   ],
   imports: [

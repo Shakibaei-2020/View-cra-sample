@@ -53,6 +53,11 @@ export class AccueilAdministrateurComponent implements OnInit {
     this._route.navigate(['/searchMission']);
   }
 
+  
+  goToProject(){
+    this._route.navigate(['/searchProject']);
+
+  }
 
 
 
