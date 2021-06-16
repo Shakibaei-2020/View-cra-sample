@@ -36,7 +36,7 @@ export class NgserviceService {
   selectCollabByName(lastName: String): Observable<Collaborator[]> {
     return this._http.get<Collaborator[]>("http://localhost:8900/collaborateurs/lister/Nom/" + lastName);
   }
-
+  
   selectCollabByMail(email: String): Observable<Collaborator> {
     return this._http.get<Collaborator>("http://localhost:8900/collaborateurs/lister/email/" + email);
   }
@@ -305,7 +305,7 @@ export class NgserviceService {
     return this._http.get<Mission[]>("http://localhost:8801/mission/searchDate/" + debut + "/" + fin );
   }
 
-  searchMissionByName( nameClient: string): Observable<Mission[]> {
+  searchMissionByClientName( nameClient: string): Observable<Mission[]> {
     return this._http.get<Mission[]>("http://localhost:8801/mission/searchName/" + nameClient);
   }
 
@@ -320,16 +320,39 @@ export class NgserviceService {
     return this._http.get<Project>("http://localhost:8801/project/foundProject/" + id);
   }
 
+
+  selectAllProjectByMissionId(id: number): Observable<Project[]> {
+    return this._http.get<Project[]>("http://localhost:8801/project/foundProject/" + id);
+  }
+
+
   SelectAllProjectForOneCollab(id: number): Observable<Project[]> {
     return this._http.get<Project[]>("http://localhost:8801/project/projectByCollab/" + id);
   }
 
-  searchProjectByTitle( projectTitle: string): Observable<Project[]> {
-    return this._http.get<Project[]>("http://localhost:8801/project/lister/Title/" + projectTitle);
-  }
 
   selectAllproject( ): Observable<Project[]> {
     return this._http.get<Project[]>("http://localhost:8801/project/lister/");
+  }
+
+  selectProjectById(id: number): Observable<Project> {
+    return this._http.get<Project>("http://localhost:8801/project/lister/" + id);
+  }
+/** search  */
+
+
+  searchProjectByProjectTitle( projectTitle: string): Observable<Project[]> {
+    return this._http.get<Project[]>("http://localhost:8801/project/lister/ProjectTitle/" + projectTitle);
+  }
+
+
+  searchProjectByMissionTitle( missionTitle: string): Observable<Project[]> {
+    return this._http.get<Project[]>("http://localhost:8801/project/lister/MissionTitle/" + missionTitle);
+  }
+
+
+  searchProjectByMissionProjectTitle( missionTitle: string, projectTitle:string): Observable<Project[]> {
+    return this._http.get<Project[]>("http://localhost:8801/project/lister/MissionProjectTitle/" + projectTitle + "/" + missionTitle );
   }
 
 

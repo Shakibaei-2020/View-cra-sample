@@ -110,7 +110,7 @@ export class MissionComponent implements OnInit {
       this.refClientMission = [];
       this.finMission = [];
 
-      this._service.searchMissionByName(this.clientName).subscribe(
+      this._service.searchMissionByClientName(this.clientName).subscribe(
         data => {
           this.missions = data;
 

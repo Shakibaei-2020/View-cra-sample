@@ -1,3 +1,4 @@
+import { Project } from "../Project/project";
 import { TypeCollaborator } from "./type-collaborator";
 
 export class Collaborator {
@@ -12,6 +13,8 @@ export class Collaborator {
     public dateOfRelease!:Date;
     public profileImagePath!: Blob;
 
+
+    public projects!: Project[];
     
     public oldDateOfEntry!: string;
     public oldDateOfRelease!: string;

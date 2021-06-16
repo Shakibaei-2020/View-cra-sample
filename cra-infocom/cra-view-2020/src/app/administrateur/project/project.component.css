@@ -88,6 +88,31 @@
 }
 
 
+.btnModal2 {
+  padding-bottom: 25px;
+  padding-top: 15px;
+  width: 100px;
+  height: 48px;
+  font-size: 14px;
+  
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #464646;
+  border: none;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+
+}
+
+.btnModal2:hover {background-color: #636363}
+
+
+
+
+
+
 
 .error{
   color: red;
@@ -221,7 +246,7 @@ transform: translateY(4px);
 /** FOR MODAL */
 
 .modal-input{
-  width: 215px;
+  width: 100%;
   padding: 14px 20px;
   margin: 8px 0;
   box-sizing: border-box;
@@ -230,6 +255,15 @@ transform: translateY(4px);
 
 }
 
+.modal-inputText{
+  width: 100%;
+  padding: 14px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #464646;
+
+}
 
 .toHide{
   display: none;
