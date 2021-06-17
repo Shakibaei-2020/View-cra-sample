@@ -14,6 +14,7 @@ import { TypeLeave } from '../z-model/Leave/type-leave';
 import { TypeExpense } from '../z-model/Expense/type-expense';
 import { TypeClient } from '../z-model/Client/type-client';
 import { TypeCollaborator } from '../z-model/Collaborator/type-collaborator';
+import { ProjectCollaborator } from '../z-model/ProjectCollaborator/project-collaborator';
 
 
 @Injectable({
@@ -353,6 +354,20 @@ export class NgserviceService {
 
   searchProjectByMissionProjectTitle( missionTitle: string, projectTitle:string): Observable<Project[]> {
     return this._http.get<Project[]>("http://localhost:8801/project/lister/MissionProjectTitle/" + projectTitle + "/" + missionTitle );
+  }
+
+  /** PROJECT COLLABORATOR JOINTURE */
+
+
+
+
+  addAndUpdateProjectCollaborator(projectCollab: ProjectCollaborator): Observable<ProjectCollaborator> {
+    return this._http.post<ProjectCollaborator>("http://localhost:8900/projetCollaborator/affectCollaborator" , projectCollab);
+  }
+
+  
+  addCollabToProject( idCollab:number,idProject:number):Observable<any>{
+    return this._http.get<any>("http://localhost:8900//addCollabToProject/" + idCollab + "/" + idProject);
   }
 
 

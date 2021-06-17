@@ -298,6 +298,7 @@ export class ProjectComponent implements OnInit {
   theCollabToAffect = new Collaborator();
   projectToAffect = new Project();
 
+
   affectCollabToProject(indexOfElement: number) {
 
 
@@ -308,15 +309,19 @@ export class ProjectComponent implements OnInit {
 
         this.theCollabToAffect = data;
 
+        
+
         this._service.selectProjectById(+(<HTMLInputElement>document.getElementById(this.projectId[indexOfElement])).value).subscribe(
           data1 => {
             this.projectToAffect = data1;
 
-            this.theCollabToAffect.projects[1] = this.projectToAffect;
 
-            this._service.updateCollab(this.theCollabToAffect).subscribe(
-              data=>console.log("project affecté effectué"),
-              error=>console.log("affectaiton non effectué")
+   
+
+            
+            this._service.addCollabToProject(this.theCollabToAffect.id,this.projectToAffect.id).subscribe(
+              data=>console.log("affectation reussie"),
+              error=>console.log("affectation raté")
             )
 
 
