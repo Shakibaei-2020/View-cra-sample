@@ -452,25 +452,30 @@ export class ProjectComponent implements OnInit {
   collaboratorInputLastName = new Collaborator();
   searchedCollabs!: Collaborator[];
 
+  nbResultatRecherche!: number;
   searchOneCollab() {
 
     if (this.collaboratorInputLastName.lastName != undefined && this.collaboratorInputLastName.lastName != "") {
+      this.nbResultatRecherche = 0;
 
       this._service.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
         data => {
           this.searchedCollabs = data;
-
-      
-
+          this.nbResultatRecherche = this.searchedCollabs.length;
+          console.log(this.nbResultatRecherche)
         },
         error => console.log("exception" + error)
       )
+
+      if( this.nbResultatRecherche = 0){
+      }
       this.collaboratorInputLastName.lastName = "";
     } else {
+      this.nbResultatRecherche = 0;
       this._service.selectAllCollab().subscribe(
         data => {
           this.searchedCollabs = data;
-          this.searchedCollabs.pop()
+          this.nbResultatRecherche = this.searchedCollabs.length;
 
         },
         error => console.log("exception" + error)
@@ -478,76 +483,11 @@ export class ProjectComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   theCollabToAffect = new Collaborator();
   projectToAffect = new Project();
+  nbCollabOnProject!: number;
 
-
-  affectCollabToProject(idProject: number, idCollab: number, searchedCollabs:Collaborator[],collaborateur:Collaborator) {
+  affectCollabToProject(idProject: number, idCollab: number, searchedCollabs: Collaborator[], collaborateur: Collaborator) {
 
 
 
@@ -569,7 +509,7 @@ export class ProjectComponent implements OnInit {
                 if (index > -1) {
                   searchedCollabs.splice(index, 1);
                 }
-        
+
               },
               error => console.log("affectation raté")
             )

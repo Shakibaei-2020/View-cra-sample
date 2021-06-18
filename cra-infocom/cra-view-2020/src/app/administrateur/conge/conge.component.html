@@ -117,7 +117,7 @@
     <!-- Modal -->
     <div *ngFor="let leave of leaves; let indexOfelement =index;">
       <div class="modal fade" id="myLeaveModal-{{indexOfelement}}" role="dialog">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -215,13 +215,60 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button class="btnModal" type="submit" (click)="updateLeaveFromCollab(indexOfelement)">Maj</button>
-                <button class="btnModal" type="submit"  data-dismiss="modal"(click)="deleteLeaveFromCollab(leave.id,leaves,leave)">Supprimer</button>
+                <button type="button" class="btnModal"  data-toggle="modal" data-target="#updateModal">Maj</button>
+                <button type="button" class="btnModal"  data-toggle="modal" data-target="#deleteModal">Supprimer</button>
 
+              </div>
+
+
+                   <!-- modal de validation suppression-->
+           <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Supression de la demande de congé</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Êtes-vous sûr de vouloir supprimer cet demande ?                </div>
+                <div class="modal-footer">
+                  <button class="btnModal"  data-dismiss="modal">Fermer</button>
+                  <button class="btnModal" type="submit"  data-dismiss="modal"(click)="deleteLeaveFromCollab(leave.id,leaves,leave)">Supprimer</button>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- modal validation mise à jour-->
+          <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Mise à jour de la  demande de congé</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Êtes-vous sûr de vouloir mettre à jour cet demande ?                </div>
+                <div class="modal-footer">
+                  <button class="btnModal"  data-dismiss="modal">Fermer</button>
+                  <button class="btnModal" type="submit" (click)="updateLeaveFromCollab(indexOfelement)">Maj</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+            </div>
+          </div>
         </div>
+
+      
+          
       </div>
     </div>
 

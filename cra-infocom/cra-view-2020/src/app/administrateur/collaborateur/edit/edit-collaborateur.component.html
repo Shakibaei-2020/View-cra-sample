@@ -164,7 +164,7 @@
     <div *ngFor="let expense of expenses; let indexOfelement =index;">
 
       <div class="modal fade" id="myExpenseModal-{{indexOfelement}}" role="dialog">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl modal-dialog-centered" >
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -246,6 +246,13 @@
                 <button class="btnModal" type="submit" (click)="updateExpense(indexOfelement)">Maj</button>
                 <button class="btnModal" type="submit" (click)="deleteExpenseById(expense.id)">Supprimer</button>
               </div>
+
+              
+
+
+                
+
+
             </div>
           </div>
         </div>
@@ -299,7 +306,7 @@
     <!-- Modal -->
     <div *ngFor="let leave of leaves; let indexOfelement =index;">
       <div class="modal fade" id="myLeaveModal-{{indexOfelement}}" role="dialog">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl modal-dialog-centered" >
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -398,6 +405,19 @@
                 <button class="btnModal" type="submit" (click)="updateLeaveFromCollab(indexOfelement)">Maj</button>
                 <button class="btnModal" type="submit" (click)="deleteLeaveFromCollab(leave.id)">Supprimer</button>
               </div>
+
+
+
+
+
+
+
+
+
+
+
+
+              
             </div>
           </div>
         </div>

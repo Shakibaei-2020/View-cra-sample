@@ -421,5 +421,9 @@ export class NgserviceService {
     return this._http.get<any>("http://localhost:8900/collaborateurs/collabsByProjectId/" + id);
   }
 
+  selectCollabNotAffectedToProject(idProject:number):Observable<Collaborator[]>{
+    return this._http.get<Collaborator[]>("http://localhost:8900/projetCollaborator/selectCollabNotAffectedToProject/" + idProject);
+  }
+
 
 }
