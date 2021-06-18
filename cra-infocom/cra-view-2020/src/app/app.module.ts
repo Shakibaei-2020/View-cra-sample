@@ -36,6 +36,8 @@ import localeFr from '@angular/common/locales/fr';
 import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
 import { ProjectComponent } from './administrateur/project/project.component';
 import { AddProjectComponent } from './administrateur/project/add-project/add-project.component';
+import { ClientServiceComponent } from './y-service/Client/client-service/client-service.component';
+import { TypeClientServiceComponent } from './y-service/Client/type-client-service/type-client-service.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -66,6 +68,8 @@ registerLocaleData(localeFr, 'fr');
     AccueilAdministrateurComponent,
     ProjectComponent,
     AddProjectComponent,
+    ClientServiceComponent,
+    TypeClientServiceComponent,
 
   ],
   imports: [

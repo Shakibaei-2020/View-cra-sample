@@ -49,6 +49,9 @@ export class MissionComponent implements OnInit {
     )
   }
 
+
+  info!: string;
+
   searchMission() {
 
 
@@ -112,6 +115,9 @@ export class MissionComponent implements OnInit {
 
 
           this.nbResultat = this.missions.length
+          if(this.nbResultat= 0){
+            this.error = " aucun resultat";
+          }
         },
         error => console.log("exception" + error)
       )
@@ -163,7 +169,10 @@ export class MissionComponent implements OnInit {
 
 
 
-          this.nbResultat = this.missions.length
+          this.nbResultat = this.missions.length;
+          if(this.nbResultat= 0){
+            this.error = " aucun resultat";
+          }
         },
         error => console.log("exception" + error)
       )
@@ -217,7 +226,10 @@ export class MissionComponent implements OnInit {
 
 
 
-          this.nbResultat = this.missions.length
+          this.nbResultat = this.missions.length;
+          if(this.nbResultat= 0){
+            this.error = " aucun resultat";
+          }
         },
         error => console.log("exception" + error)
       )
@@ -272,7 +284,10 @@ export class MissionComponent implements OnInit {
 
 
 
-          this.nbResultat = this.missions.length
+          this.nbResultat = this.missions.length;
+          if(this.nbResultat= 0){
+            this.error = " aucun resultat";
+          }
         },
         error => console.log("exception" + error)
       )
@@ -412,11 +427,6 @@ export class MissionComponent implements OnInit {
   valeur!: string;
 
   majTheProject(idProject: number, indexOfElement: number) {
-
-    console.log(idProject);
-    console.log(indexOfElement)
-    console.log((<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value)
-
 
     this._service.selectProjectById(idProject).subscribe(
       data => {
