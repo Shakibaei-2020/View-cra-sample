@@ -163,7 +163,7 @@
                       <tbody>
                           <tr *ngFor="let project of allProjectOfMission; let i =index">
                               <td>
-                                <input class="modal-input" type="text"   placeholder="{{project.projectTitle}}"  type="text"  name="projectToUpdateName-{{i}}" id="projectToUpdateName-{{i}}" />
+                                <input class="modal-input" type="text"   placeholder="{{project.projectTitle}}"  [(ngModel)]="valeur" type="text"  name="projectToUpdateName-{{i}}" id="projectToUpdateName-{{i}}" />
                               </td>
                               <td>
                                   <button class="btn btn-dark btn-block" type="button" (click)="majTheProject(project.id,i)">Maj</button>

@@ -406,6 +406,7 @@ export class MissionComponent implements OnInit {
   
   projectToUpdate = new Project;
   newtitle!: string;
+  valeur!: string;
 
   majTheProject(idProject: number, indexOfElement: number) {
 
