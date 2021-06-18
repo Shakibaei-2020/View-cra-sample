@@ -68,17 +68,17 @@
 
             <br><br>
             <h2>Résultat : {{nbResultat}} </h2>
-            <table class="table table-condensed resultat">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>
-                            <p class="titreTable">Nom du project</p>
-                        </th>
-                        <th>
-                            <p class="titreTable">Prénom du client</p>
+                            <p class="titreTable">Nom du client </p>
                         </th>
                         <th>
                             <p class="titreTable">Nom de la mission</p>
+                        </th>
+                        <th>
+                            <p class="titreTable">Nom  du projet </p>
                         </th>
 
 
@@ -90,17 +90,19 @@
                 <tbody>
                     <tr *ngFor="let project of projects; let indexOfelement = index">
                         <td>
-                            <p class="contentTable">{{project.projectTitle}}</p>
+                            <p class="contentTable">{{project.prenomClient}}</p>
                         </td>
                         <td>
-                            <p class="contentTable">{{project.prenomClient}}</p>
+                            <p class="contentTable">{{project.missionTitle}}</p>
+
                         </td>
                         
                         <td>
-                            <p class="contentTable">{{project.missionTitle}}</p>
+                            <p class="contentTable">{{project.projectTitle}}</p>
+
                         </td>
                         <td>
-                            <button type="button" class="btnTab" data-toggle="modal" [attr.data-target]=" '#myProjectModal-' + indexOfelement" (click)="modelInfo(project.id)">Éditer</button>
+                            <button type="button" class="btn btn-dark btn-block" data-toggle="modal" [attr.data-target]=" '#myProjectModal-' + indexOfelement" (click)="modelInfo(project.id)">Éditer</button>
                         </td>
                     </tr>
                 </tbody>
@@ -138,7 +140,7 @@
 
                             <div class="container">
                                 <h2>Collaborateur : {{nbResultat}} </h2>
-                                <table class="table table-condensed resultat">
+                                <table class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>
@@ -171,7 +173,7 @@
                                          
                                             <td>
                                             <!-- <button type="button" class="btnTab"  (click)="modelInfo(collaborator.id)">Affecter</button> -->
-                                            <button type="button" class="btnTab"  (click)="affectCollabToProject(project.id,collaborator.id)">Affecter</button>
+                                            <button type="button" class="btn btn-dark btn-block" (click)="affectCollabToProject(project.id,collaborator.id)">Affecter</button>
                                         </td>
                                         </tr>
                                     </tbody>
@@ -181,7 +183,7 @@
                                 <br><hr><br>
                                 <div class="container">
                                     <h2> Collaborateur(s) sur le projet : {{nbResultat}} </h2>
-                                    <table class="table table-condensed resultat">
+                                    <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>
@@ -213,7 +215,7 @@
                                                     <p class="contentTable">{{collaborator.email}}</p>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btnTab"  (click)="deleteCollabOfProject(project.id,collaborator.id)">Supprimer</button>
+                                                    <button type="button" class="btn btn-dark btn-block"  (click)="deleteCollabOfProject(project.id,collaborator.id)">Supprimer</button>
 
                                                 </td>
                                             </tr>
