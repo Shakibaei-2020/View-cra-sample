@@ -34,6 +34,8 @@
         </form>
 
         <br><br>
+
+        <div *ngIf="clients"> 
         <h2>Résultat : {{nbResultat}} </h2>
         <table class="table table-striped table-bordered">
           <thead>
@@ -57,7 +59,7 @@
         </table>
 
     
-
+      </div>
 
 
         <div *ngFor="let client of clients; let indexOfelement =index;">

@@ -30,7 +30,7 @@ export class ProjectComponent implements OnInit {
   projectId = new Array();
   collabToAffect = new Array();
   collabToDelete = new Array();
-  newNameProject= new Array();
+  newNameProject = new Array();
   //projectCollaboratorId = new Array();
   //projectTitle = new Array();
   //projectMission = new Array();
@@ -86,20 +86,20 @@ export class ProjectComponent implements OnInit {
             (item) => {
               this._service.selectMissionById(item.mission.id).subscribe(
                 data => {
-                    item.missionTitle = data.missionTitle;
+                  item.missionTitle = data.missionTitle;
 
-                    this._service.selectClientById(data.client.id).subscribe(
-                      data=>{
-                        item.prenomClient = data.name;
-                      },
-                      error=>console.log("exception" + error)
-                    )
+                  this._service.selectClientById(data.client.id).subscribe(
+                    data => {
+                      item.prenomClient = data.name;
+                    },
+                    error => console.log("exception" + error)
+                  )
                 },
                 error => console.log("exception" + error)
               )
             }
           )
-          
+
         },
         error => console.log("exception" + error)
       )
@@ -130,14 +130,14 @@ export class ProjectComponent implements OnInit {
             (item) => {
               this._service.selectMissionById(item.mission.id).subscribe(
                 data => {
-                    item.missionTitle = data.missionTitle;
+                  item.missionTitle = data.missionTitle;
 
-                    this._service.selectClientById(data.client.id).subscribe(
-                      data=>{
-                        item.prenomClient = data.name;
-                      },
-                      error=>console.log("exception" + error)
-                    )
+                  this._service.selectClientById(data.client.id).subscribe(
+                    data => {
+                      item.prenomClient = data.name;
+                    },
+                    error => console.log("exception" + error)
+                  )
                 },
                 error => console.log("exception" + error)
               )
@@ -186,14 +186,14 @@ export class ProjectComponent implements OnInit {
                     (item) => {
                       this._service.selectMissionById(item.mission.id).subscribe(
                         data => {
-                            item.missionTitle = data.missionTitle;
-        
-                            this._service.selectClientById(data.client.id).subscribe(
-                              data=>{
-                                item.prenomClient = data.name;
-                              },
-                              error=>console.log("exception" + error)
-                            )
+                          item.missionTitle = data.missionTitle;
+
+                          this._service.selectClientById(data.client.id).subscribe(
+                            data => {
+                              item.prenomClient = data.name;
+                            },
+                            error => console.log("exception" + error)
+                          )
                         },
                         error => console.log("exception" + error)
                       )
@@ -240,14 +240,14 @@ export class ProjectComponent implements OnInit {
             (item) => {
               this._service.selectMissionById(item.mission.id).subscribe(
                 data => {
-                    item.missionTitle = data.missionTitle;
+                  item.missionTitle = data.missionTitle;
 
-                    this._service.selectClientById(data.client.id).subscribe(
-                      data=>{
-                        item.prenomClient = data.name;
-                      },
-                      error=>console.log("exception" + error)
-                    )
+                  this._service.selectClientById(data.client.id).subscribe(
+                    data => {
+                      item.prenomClient = data.name;
+                    },
+                    error => console.log("exception" + error)
+                  )
                 },
                 error => console.log("exception" + error)
               )
@@ -295,14 +295,14 @@ export class ProjectComponent implements OnInit {
                     (item) => {
                       this._service.selectMissionById(item.mission.id).subscribe(
                         data => {
-                            item.missionTitle = data.missionTitle;
-        
-                            this._service.selectClientById(data.client.id).subscribe(
-                              data=>{
-                                item.prenomClient = data.name;
-                              },
-                              error=>console.log("exception" + error)
-                            )
+                          item.missionTitle = data.missionTitle;
+
+                          this._service.selectClientById(data.client.id).subscribe(
+                            data => {
+                              item.prenomClient = data.name;
+                            },
+                            error => console.log("exception" + error)
+                          )
                         },
                         error => console.log("exception" + error)
                       )
@@ -354,14 +354,14 @@ export class ProjectComponent implements OnInit {
                     (item) => {
                       this._service.selectMissionById(item.mission.id).subscribe(
                         data => {
-                            item.missionTitle = data.missionTitle;
-        
-                            this._service.selectClientById(data.client.id).subscribe(
-                              data=>{
-                                item.prenomClient = data.name;
-                              },
-                              error=>console.log("exception" + error)
-                            )
+                          item.missionTitle = data.missionTitle;
+
+                          this._service.selectClientById(data.client.id).subscribe(
+                            data => {
+                              item.prenomClient = data.name;
+                            },
+                            error => console.log("exception" + error)
+                          )
                         },
                         error => console.log("exception" + error)
                       )
@@ -412,25 +412,25 @@ export class ProjectComponent implements OnInit {
             (item) => {
               this._service.selectMissionById(item.mission.id).subscribe(
                 data => {
-                    item.missionTitle = data.missionTitle;
+                  item.missionTitle = data.missionTitle;
 
-                    this._service.selectClientById(data.client.id).subscribe(
-                      data=>{
-                        item.prenomClient = data.name;
-                      },
-                      error=>console.log("exception" + error)
-                    )
+                  this._service.selectClientById(data.client.id).subscribe(
+                    data => {
+                      item.prenomClient = data.name;
+                    },
+                    error => console.log("exception" + error)
+                  )
                 },
                 error => console.log("exception" + error)
               )
             }
           )
 
-       
 
 
 
-          
+
+
         },
         error => console.log("exception" + error)
       )
@@ -450,32 +450,39 @@ export class ProjectComponent implements OnInit {
 
 
   collaboratorInputLastName = new Collaborator();
-  searchedCollabs!: Collaborator[]; 
+  searchedCollabs!: Collaborator[];
 
-  searchOneCollab(){
+  searchOneCollab() {
 
-    if(this.collaboratorInputLastName.lastName != undefined && this.collaboratorInputLastName.lastName != ""  ){
+    if (this.collaboratorInputLastName.lastName != undefined && this.collaboratorInputLastName.lastName != "") {
 
       this._service.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
-        data=> {this.searchedCollabs = data;
-      },
-        error=>console.log("exception" +error)
-        )
-        this.collaboratorInputLastName.lastName ="";
-      }else{        
+        data => {
+          this.searchedCollabs = data;
+
+      
+
+        },
+        error => console.log("exception" + error)
+      )
+      this.collaboratorInputLastName.lastName = "";
+    } else {
       this._service.selectAllCollab().subscribe(
-        data=> {this.searchedCollabs = data;
-      },
-        error=>console.log("exception" +error)
-        )
-      }
+        data => {
+          this.searchedCollabs = data;
+          this.searchedCollabs.pop()
+
+        },
+        error => console.log("exception" + error)
+      )
     }
-
-  
-
+  }
 
 
-  
+
+
+
+
 
 
 
@@ -540,7 +547,7 @@ export class ProjectComponent implements OnInit {
   projectToAffect = new Project();
 
 
-  affectCollabToProject(idProject: number, idCollab:number) {
+  affectCollabToProject(idProject: number, idCollab: number, searchedCollabs:Collaborator[],collaborateur:Collaborator) {
 
 
 
@@ -552,9 +559,19 @@ export class ProjectComponent implements OnInit {
         this._service.selectProjectById(idProject).subscribe(
           data1 => {
             this.projectToAffect = data1;
-            this._service.addCollabToProject(this.theCollabToAffect.id,this.projectToAffect.id).subscribe(
-              data=>console.log("affectation reussie"),
-              error=>console.log("affectation raté")
+            this._service.addCollabToProject(this.theCollabToAffect.id, this.projectToAffect.id).subscribe(
+              data => {
+                console.log("affectation reussie");
+
+                this.allCollabOfProject.push(this.theCollabToAffect)
+
+                const index = searchedCollabs.indexOf(collaborateur);
+                if (index > -1) {
+                  searchedCollabs.splice(index, 1);
+                }
+        
+              },
+              error => console.log("affectation raté")
             )
           },
           error => console.log("exception" + error)
@@ -563,41 +580,55 @@ export class ProjectComponent implements OnInit {
       error => console.log("exception" + error)
     )
 
+
   }
 
   deleteTheProject(indexOfElement: number) {
 
-    this._service.deleteAllCollabAffectedToProject(indexOfElement).subscribe( 
-      data=>{console.log("All project collab of this id project deleted");
-    
-      this._service.deleteProjectById(indexOfElement).subscribe(
-        data=>console.log("project deleted"),
-        error=>console.log("project not deleted")
-      )
+    this._service.deleteAllCollabAffectedToProject(indexOfElement).subscribe(
+      data => {
+        console.log("All project collab of this id project deleted");
 
-    },
-      error=>console.log("Collabs of project not deleted")
-      )
+        this._service.deleteProjectById(indexOfElement).subscribe(
+          data => console.log("project deleted"),
+          error => console.log("project not deleted")
+        )
+
+      },
+      error => console.log("Collabs of project not deleted")
+    )
   }
 
 
   allCollabOfProject!: Collaborator[];
-  modelInfo(indexOfElement:number){   
+  modelInfo(indexOfElement: number) {
 
     this._service.selectCollabByProjectId(indexOfElement).subscribe(
-      data=> {this.allCollabOfProject = data;
+      data => {
+        this.allCollabOfProject = data;
       },
-      error=> console.log("exception" + error),
-    ) 
+      error => console.log("exception" + error),
+    )
 
 
   }
 
 
-  deleteCollabOfProject(projetId:number,collaboratorId:number){
-    this._service.deleteCollabOfThisProject(collaboratorId,projetId).subscribe(
-      data=>console.log("collaborateur supprimer"),
-      error=>console.log("collaborateur non supprimer")
+  deleteCollabOfProject(projetId: number, collaboratorId: number, allCollabOfProject: Collaborator[], collaborateur: Collaborator) {
+
+
+    this._service.deleteCollabOfThisProject(collaboratorId, projetId).subscribe(
+      data => {
+        console.log("collaborateur supprimer");
+
+        const index = allCollabOfProject.indexOf(collaborateur);
+        if (index > -1) {
+          allCollabOfProject.splice(index, 1);
+        }
+
+      },
+
+      error => console.log("collaborateur non supprimer")
     )
 
   }
@@ -605,9 +636,10 @@ export class ProjectComponent implements OnInit {
 
   updateTheProjectName(indexOfElement: number) {
 
-    this._service.majProjectTitle(+((<HTMLInputElement>document.getElementById(this.projectId[indexOfElement])).value),(<HTMLInputElement>document.getElementById(this.newNameProject[indexOfElement])).value ).subscribe(
-      data=>console.log("maj reussi"),
-      error=>console.log("maj raté")
+
+    this._service.majProjectTitle(+((<HTMLInputElement>document.getElementById(this.projectId[indexOfElement])).value), (<HTMLInputElement>document.getElementById(this.newNameProject[indexOfElement])).value).subscribe(
+      data => console.log("maj reussi"),
+      error => console.log("maj raté")
     )
 
   }

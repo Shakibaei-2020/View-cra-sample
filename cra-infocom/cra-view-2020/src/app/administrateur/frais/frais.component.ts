@@ -55,7 +55,7 @@ export class FraisComponent implements OnInit {
     this._route.navigate(['/editFrais']);
   }
 
-
+  
   searchExpenses() {
 
     if ((this.date1 != undefined && this.date2 != undefined) && (this.searchStatus != undefined && this.searchStatus != "") && (this.lastNameCollab != undefined && this.lastNameCollab != "")) {
@@ -256,6 +256,8 @@ export class FraisComponent implements OnInit {
             this.expenseStatus.push("expenseStatus-" + i);
             this.expenseType.push("expenseType-" + i);
             this.newCostTTC.push("newCostTTC" + i);
+
+       
           }
 
 
@@ -346,7 +348,7 @@ export class FraisComponent implements OnInit {
       this.error = "";
 
 
-    } else if ((this.date1 === undefined || this.date2 === undefined) && (this.searchStatus != undefined && this.searchStatus != "") && (this.lastNameCollab != undefined && this.lastNameCollab != "")) {
+    } else if ((this.date1 === undefined && this.date2 === undefined) && (this.searchStatus != undefined && this.searchStatus != "") && (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
 
       this.expenseRequestId = [];
       this.dateExpense  = [];
@@ -477,6 +479,7 @@ export class FraisComponent implements OnInit {
         data => {
           this.expenses = data;
 
+
           for (var i = 0; i < this.expenses.length; i++) {
             this.expenseRequestId.push("expenseRequestId-" + i);
             this.dateExpense.push("dateExpense-" + i);
@@ -487,6 +490,8 @@ export class FraisComponent implements OnInit {
             this.expenseStatus.push("expenseStatus-" + i);
             this.expenseType.push("expenseType-" + i);
             this.newCostTTC.push("newCostTTC" + i);
+
+
           }
       
           this.nbResultat = this.expenses.length;
@@ -534,16 +539,22 @@ export class FraisComponent implements OnInit {
   }
 
 
-  deleteExpenseById(value: number) {
+  deleteExpenseById(value: number,expensesTodel:Expense[],expense:Expense) {
+
     this._service.deleteOneExpense(value).subscribe(
       data => {
         console.log("delete expense effectué");
+
+        const index = expensesTodel.indexOf(expense);
+        if (index > -1) {
+          expensesTodel.splice(index, 1);
+
+        }
       },
       error => {
         console.log("erreur delete expense non-effectué")
       }
     )
-    window.location.reload();
   }
 
 
@@ -559,6 +570,8 @@ export class FraisComponent implements OnInit {
 
   updateExpense(indexOfElement: number) {
 
+
+    
     this._service.selectOneExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
       data1 => {
         this.expenseToUpdate = data1;
@@ -566,16 +579,19 @@ export class FraisComponent implements OnInit {
         this.updatedExpense.collaboratorId = this.expenseToUpdate.collaboratorId;
         this._service.selectTypeExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseType[indexOfElement])).value).subscribe(
           data2 => {
+            console.log(!(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value)
+
             this.newTypeExpense = data2;
             this.updatedExpense.typeExpense = this.newTypeExpense || this.expenseToUpdate.typeExpense
             this.newDateExpense = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateExpense[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
             this.newDateRequest = this.pipeDate.transform(this.expenseToUpdate.dateRequest, 'yyyy-MM-dd') || '2000-02-14';
-            this.updatedExpense.billable = !(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value || this.expenseToUpdate.billable;;
+            this.updatedExpense.billable = !(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value ;
             this.updatedExpense.status = (<HTMLInputElement>document.getElementById(this.expenseStatus[indexOfElement])).value || this.expenseToUpdate.status;
             this.updatedExpense.costHT = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[indexOfElement])).value || this.expenseToUpdate.costHT;
             this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[indexOfElement])).value || this.expenseToUpdate.costTVA;
             this.updatedExpense.costTTC = this.updatedExpense.costHT + this.updatedExpense.costTVA || this.expenseToUpdate.costTTC;
             this.TTCvalue = this.updatedExpense.costTTC;
+            
             this._service.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
               data => {
                 console.log("ajout effectué");
@@ -584,7 +600,7 @@ export class FraisComponent implements OnInit {
                 console.log("erreur ajout non-effectué")
               }
             )
-            window.location.reload();
+            //window.location.reload();
           },
           error => console.log("exception" + error),
         )

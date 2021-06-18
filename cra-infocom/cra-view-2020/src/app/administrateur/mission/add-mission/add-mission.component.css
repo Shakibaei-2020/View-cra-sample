@@ -268,3 +268,30 @@
 
     margin-top: 8.5%;
   }
+
+  .buttonModal{
+    margin-top: 16px;
+    height:5%;
+    width:40px;
+    float: right;
+
+  }
+
+  .rightColumn{
+    margin-top: 2%;
+  }
+
+
+.input-modal{
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #464646;}
+
+
+.projectTable{
+  margin-top: 5%;
+  
+}

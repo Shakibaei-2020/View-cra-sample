@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'selenium-webdriver';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Client } from 'src/app/z-model/Client/client';
 import { Leave } from 'src/app/z-model/Leave/leave';
@@ -247,24 +248,18 @@ export class MissionComponent implements OnInit {
                     item.clientref = data.ref;
                     item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
                     item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
-
                   }
                 },
                 error => console.log("exception" + error)
               )
-
               this._service.selectProjectByMissionId(item.id).subscribe(
                 data => {
                   item.porjectName = data.missionTitle;
                 },
                 error => console.log("exception" + error)
               )
-
-
             }
           )
-
-
 
           for (var i = 0; i < this.missions.length; i++) {
             this.missionId.push("missionId-" + i);
@@ -357,7 +352,13 @@ export class MissionComponent implements OnInit {
 
 
 
-  deleteTheProject(IndexOfElement: number) {
+  deleteTheProject(idProject: number) {
+
+
+    this._service.deleteProjectById(idProject).subscribe(
+      data => console.log("delete effectué"),
+      error => console.log("delete non effectué")
+    )
 
   }
 
@@ -383,27 +384,29 @@ export class MissionComponent implements OnInit {
 
   projectToUpdateName = new Array();
 
-  OnInitModal(missionId: number) {
+  OnInitModal(missionId: number,indexOfelement:number) {
     this.projectToUpdateName = [];
+
 
     this._service.selectAllProjectByMissionId(missionId).subscribe(
       data => {
         this.allProjectOfMission = data;
 
-        for (var i = 0; i < this.allProjectOfMission.length; i++) {
-          this.projectToUpdateName.push("projectToUpdateName-" + i);
-          console.log(this.projectToUpdateName)
+
+          for (var i = 0; i < this.allProjectOfMission.length; i++) {
+            this.projectToUpdateName.push("projectToUpdateName-" + i+ "-"  + indexOfelement);
+            console.log(this.projectToUpdateName)
         }
 
-      },
-
-      error => console.log("exception" + error)
+        },
     )
+
+
 
   }
 
 
-  
+
   projectToUpdate = new Project;
   newtitle!: string;
   valeur!: string;
@@ -420,9 +423,9 @@ export class MissionComponent implements OnInit {
         this.projectToUpdate = data;
 
         console.log((<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value)
-        this.projectToUpdate.projectTitle =(<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value;
+        this.projectToUpdate.projectTitle = (<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value;
 
-        console.log( this.projectToUpdate.projectTitle)
+        console.log(this.projectToUpdate.projectTitle)
 
 
         this._service.addAndUpdateProject2(this.projectToUpdate).subscribe(

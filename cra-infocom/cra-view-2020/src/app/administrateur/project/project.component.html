@@ -11,7 +11,7 @@
             <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
         </button>
 
- 
+
         <button class="img-fluid buttonAdd ">
             <img (click)="goToAddProject()" class="img1"
                 src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
@@ -65,54 +65,57 @@
                 </div>
             </form>
 
+            <div *ngIf="projects">
 
-            <br><br>
-            <h2>Résultat : {{nbResultat}} </h2>
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            <p class="titreTable">Nom du client </p>
-                        </th>
-                        <th>
-                            <p class="titreTable">Nom de la mission</p>
-                        </th>
-                        <th>
-                            <p class="titreTable">Nom  du projet </p>
-                        </th>
+                <br><br>
+                <h2>Résultat : {{nbResultat}} </h2>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <p class="titreTable">Nom du client </p>
+                            </th>
+                            <th>
+                                <p class="titreTable">Nom de la mission</p>
+                            </th>
+                            <th>
+                                <p class="titreTable">Nom du projet </p>
+                            </th>
 
 
-                        <th>
-                            <p class="commande titreTable">Action</p>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let project of projects; let indexOfelement = index">
-                        <td>
-                            <p class="contentTable">{{project.prenomClient}}</p>
-                        </td>
-                        <td>
-                            <p class="contentTable">{{project.missionTitle}}</p>
+                            <th>
+                                <p class="commande titreTable">Action</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let project of projects; let indexOfelement = index">
+                            <td>
+                                <p class="contentTable">{{project.prenomClient}}</p>
+                            </td>
+                            <td>
+                                <p class="contentTable">{{project.missionTitle}}</p>
 
-                        </td>
-                        
-                        <td>
-                            <p class="contentTable">{{project.projectTitle}}</p>
+                            </td>
 
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-dark btn-block" data-toggle="modal" [attr.data-target]=" '#myProjectModal-' + indexOfelement" (click)="modelInfo(project.id)">Éditer</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            <td>
+                                <p class="contentTable">{{project.projectTitle}}</p>
 
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-dark btn-block" data-toggle="modal"
+                                    [attr.data-target]=" '#myProjectModal-' + indexOfelement"
+                                    (click)="modelInfo(project.id)">Éditer</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <div *ngFor="let project of projects; let indexOfelement =index;">
 
 
-                
+
                 <div class="modal fade" id="myProjectModal-{{indexOfelement}}" role="dialog">
                     <div class="modal-dialog modal-xl">
                         <!-- Modal content-->
@@ -120,7 +123,8 @@
                             <div class="modal-header">
                                 <h2> Gestion du projet {{project.projectTitle}} </h2>
                                 <div class="toHide">
-                                    <input type="text" value="{{project.id}}" name="projectId-{{indexOfelement}}" id="projectId-{{indexOfelement}}" disabled>
+                                    <input type="text" value="{{project.id}}" name="projectId-{{indexOfelement}}"
+                                        id="projectId-{{indexOfelement}}" disabled>
                                 </div>
                             </div>
 
@@ -128,104 +132,118 @@
                             <div class="modal-body ">
 
                                 <div class="container">
-                                    <span>Nom du projet : </span>
+                                    <span>Prénom du collaborateur : </span>
                                     <div class="d-table-cell w-100">
-                                   <input class="modal-inputText"  autocomplete="off" required [(ngModel)]="collaboratorInputLastName.lastName" name="lastName">
+                                        <input class="modal-inputText" autocomplete="off" required
+                                            [(ngModel)]="collaboratorInputLastName.lastName" name="lastName">
                                     </div>
-                                    
+
                                     <div class="d-table-cell align-middle">
-                                        <button class="btnModal2"  (click)="searchOneCollab()">Chercher</button>
+                                        <button class="btnModal2" (click)="searchOneCollab()">Chercher</button>
                                     </div>
                                 </div>
 
-                            <div class="container">
-                                <h2>Collaborateur : {{nbResultat}} </h2>
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <p class="titreTable">Nom </p>
-                                            </th>
-                                            <th>
-                                                <p class="titreTable">Prénom</p>
-                                            </th>
-                                            <th>
-                                                <p class="titreTable">Adresse mail</p>
-                                            </th>
-                    
-                                            <th>
-                                                <p class="commande titreTable">Action</p>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let collaborator of searchedCollabs; let indexOfelement = index">
-                                            <td>
-                                                <p class="contentTable">{{collaborator.firstName}}</p>
-                                            </td>
-                                            <td>
-                                                <p class="contentTable">{{collaborator.lastName}}</p>
-                                            </td>
-                                            <td>
-                                                <p class="contentTable">{{collaborator.email}}</p>
-                                            </td>
-                                            
-                                         
-                                            <td>
-                                            <!-- <button type="button" class="btnTab"  (click)="modelInfo(collaborator.id)">Affecter</button> -->
-                                            <button type="button" class="btn btn-dark btn-block" (click)="affectCollabToProject(project.id,collaborator.id)">Affecter</button>
-                                        </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
 
-                                </div>
-                                <br><hr><br>
-                                <div class="container">
-                                    <h2> Collaborateur(s) sur le projet : {{nbResultat}} </h2>
-                                    <table class="table table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    <p class="titreTable">Nom </p>
-                                                </th>
-                                                <th>
-                                                    <p class="titreTable">Prénom</p>
-                                                </th>
-                                                <th>
-                                                    <p class="titreTable">Adresse mail</p>
-                                                </th>
-                    
-                                                <th>
-                                                    <p class="commande titreTable">Action</p>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let collaborator of allCollabOfProject; let indexOfelement = index">
-                                                
-                                                <td>
-                                                    <p class="contentTable">{{collaborator.firstName}}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="contentTable">{{collaborator.lastName}}</p>
-                                                </td>
-                                                
-                                                <td>
-                                                    <p class="contentTable">{{collaborator.email}}</p>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-dark btn-block"  (click)="deleteCollabOfProject(project.id,collaborator.id)">Supprimer</button>
+                                <div *ngIf="searchedCollabs">
 
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="container">
+                                        <h2>Collaborateur(s) : {{nbResultat}} </h2>
+                                        <table class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <p class="titreTable">Nom </p>
+                                                    </th>
+                                                    <th>
+                                                        <p class="titreTable">Prénom</p>
+                                                    </th>
+                                                    <th>
+                                                        <p class="titreTable">Adresse mail</p>
+                                                    </th>
+
+                                                    <th>
+                                                        <p class="commande titreTable">Action</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let collaborator of searchedCollabs; let indexOfelement = index">
+                                                    <td>
+                                                        <p class="contentTable">{{collaborator.firstName}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="contentTable">{{collaborator.lastName}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="contentTable">{{collaborator.email}}</p>
+                                                    </td>
+
+
+                                                    <td>
+                                                        <!-- <button type="button" class="btnTab"  (click)="modelInfo(collaborator.id)">Affecter</button> -->
+                                                        <button type="button" class="btn btn-dark btn-block"
+                                                            (click)="affectCollabToProject(project.id,collaborator.id,searchedCollabs,collaborator)">Affecter</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                
+                                </div>
 
                                 <br>
-                 
+                                <hr><br>
+                                <div class="container">
+                                    <h2> Collaborateur(s) sur le projet : {{nbResultat}} </h2>
+
+                                    <div *ngIf="allCollabOfProject">
+                                        <table class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <p class="titreTable">Nom </p>
+                                                    </th>
+                                                    <th>
+                                                        <p class="titreTable">Prénom</p>
+                                                    </th>
+                                                    <th>
+                                                        <p class="titreTable">Adresse mail</p>
+                                                    </th>
+
+                                                    <th>
+                                                        <p class="commande titreTable">Action</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let collaborator of allCollabOfProject; let indexOfelement = index">
+
+                                                    <td>
+                                                        <p class="contentTable">{{collaborator.firstName}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="contentTable">{{collaborator.lastName}}</p>
+                                                    </td>
+
+                                                    <td>
+                                                        <p class="contentTable">{{collaborator.email}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-dark btn-block"
+                                                        data-dismiss="myProjectModal-indexOfelement"  (click)="deleteCollabOfProject(project.id,collaborator.id,allCollabOfProject,collaborator)">Supprimer</button>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+
+                                <br>
+
 
 
                             </div>
