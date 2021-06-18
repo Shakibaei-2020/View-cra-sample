@@ -313,7 +313,6 @@ export class NgserviceService {
     return this._http.get<Mission[]>("http://localhost:8801/mission/lister/");
   }
 
-
   /*************************************************************************************** PROJECT SERVICES *******************************************************************************/
 
   selectProjectByMissionId(id: number): Observable<Project> {
