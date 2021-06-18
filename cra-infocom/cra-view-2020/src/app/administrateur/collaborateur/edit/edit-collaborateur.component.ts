@@ -261,6 +261,7 @@ export class EditCollaborateurComponent implements OnInit {
 
   /** delete collaborateur by id */
   deleteCollab() {
+    this._service.deleteProjectById
     this._service.deleteCollabById(this.collaborateur.id).subscribe(
       data => {
         console.log("delete effectué");

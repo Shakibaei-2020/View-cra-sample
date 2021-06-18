@@ -13,5 +13,7 @@ export class Mission {
 
 	public clientName!: string;
 	public clientref!: string;
+	public porjectName!: string;
+	
 	
 }

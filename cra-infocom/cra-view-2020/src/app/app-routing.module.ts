@@ -27,6 +27,7 @@ import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-dec
 import { AccueilAdministrateurComponent } from './administrateur/accueil-administrateur/accueil-administrateur.component';
 import { PreloadAllModules } from '@angular/router';
 import { ProjectComponent } from './administrateur/project/project.component';
+import { AddProjectComponent } from './administrateur/project/add-project/add-project.component';
 
 
 
@@ -59,6 +60,7 @@ export const routes: Routes = [
   { path: 'monProfil', component: MonProfileComponent },
   { path: 'ajouterNoteDeFraisUser', component: NoteDeFraisDeclarationComponent },
   { path: 'searchProject', component: ProjectComponent },
+  { path: 'addProject', component: AddProjectComponent },
 
 ];
 

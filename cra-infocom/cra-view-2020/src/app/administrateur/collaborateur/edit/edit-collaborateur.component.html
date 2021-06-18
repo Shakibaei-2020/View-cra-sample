@@ -118,7 +118,7 @@
       <p class="titre"> Notes de frais : En-cours </p>
     </div>
     <br>
-    <table class="table table-condensed ">
+    <table class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Date de la demande</th>
@@ -148,7 +148,7 @@
           </td>
        
           <td>
-            <button type="button" class="btnTab" data-toggle="modal" [attr.data-target]=" '#myExpenseModal-' + indexOfelement">Éditer</button>
+            <button type="button" class="btn btn-dark btn-block"  data-toggle="modal" [attr.data-target]=" '#myExpenseModal-' + indexOfelement">Éditer</button>
           </td>
         </tr>
       </tbody>
@@ -164,7 +164,7 @@
     <div *ngFor="let expense of expenses; let indexOfelement =index;">
 
       <div class="modal fade" id="myExpenseModal-{{indexOfelement}}" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -264,7 +264,7 @@
       <p class="titre"> Demande de congées : En-cours </p>
     </div>
     <br>
-    <table class="table table-condensed ">
+    <table class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Date de la demande</th>
@@ -289,7 +289,7 @@
             <span class=""> {{leave.leaveType.type}}</span>
           </td>
           <td>
-            <button class="btnTab" data-toggle="modal" [attr.data-target]=" '#myLeaveModal-' + indexOfelement">Éditer</button>
+            <button class="btn btn-dark btn-block" data-toggle="modal" [attr.data-target]=" '#myLeaveModal-' + indexOfelement">Éditer</button>
           </td>
         </tr>
       </tbody>
@@ -299,7 +299,7 @@
     <!-- Modal -->
     <div *ngFor="let leave of leaves; let indexOfelement =index;">
       <div class="modal fade" id="myLeaveModal-{{indexOfelement}}" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -378,7 +378,7 @@
                   </div>
 
                   <div class="inputbox mt-1">
-                    <span> Cleint informé : </span><br>
+                    <span> Client informé : </span><br>
                     <select class="modal-input" name="leaveClientInformed-{{indexOfelement}}" id="leaveClientInformed-{{indexOfelement}}">
                       <option hidden value="" disabled selected>{{leave.clientInformed}} </option>
                       <option value="true">Oui</option>

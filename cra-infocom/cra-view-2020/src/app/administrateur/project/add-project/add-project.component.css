@@ -1,9 +1,9 @@
 
 
-.btnAction {
+.button {
     padding: 10px 25px;
-    margin-left: 1%;
-    width: 150px;
+    width: 45%;
+    margin-left: 5%;
     font-size: 15px;
     text-align: center;
     cursor: pointer;
@@ -16,90 +16,67 @@
     margin-bottom: 5%;
   }
   
-  .btnAction:hover {background-color: #636363}
+  .button:hover {background-color: #636363}
   
-  .btnAction:active {
+  .button:active {
     background-color: #464646;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
-
   
-.container {
+  
+  .container {
     height: 100vh;
-}
-
-.card {
-	   	border-radius: 45px;
-
+  }
+  
+  .card {
+       border-radius: 45px;
+  
     width: 100%;
     padding: 30px;
-
-}
-
-.form {
+  
+  }
+  
+  .form {
     padding: 20px
-}
-
-.form-control {
+  }
+  
+  .form-control {
     height: 50px;
     background-color: #eee
-
-}
-
-.form-control:focus {
+  
+  }
+  
+  .form-control:focus {
     color: #495057;
     background-color: #fff;
     outline: 0;
     box-shadow: none;
     background-color: #eee
-}
-
-.inputbox {
+  }
+  
+  .inputbox {
     margin-bottom: 15px
-}
-
-
-.input-title{
+  }
+  
+  
+  .input-title{
     font-size: 13px;
     font-weight: 300;
-}
-
-.div-edit{
-    margin-top: 4%;
-}
-
-.btnModal {
-  padding-bottom: 25px;
-  padding-top: 5px;
-  width: 100px;
-  font-size: 14px;
+  }
   
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: #fff;
-  background-color: #464646;
-  border: none;
-  border-radius: 15px;
-  height: 5px;
-}
-
-.btnModal:hover {background-color: #636363}
-
-.btnModal:active {
-  background-color: #464646;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-
-.btnTab {
+  .div-edit{
+    margin-top: 4%;
+  }
+  
+  
+  
+  .btnTab {
+    padding: 6px 25px;
     padding-bottom: 25px;
-    padding-top: 5px;
-    width: 50px;
+    margin-left: 5%;
+    width: 100%;
     font-size: 14px;
-    
     text-align: center;
     cursor: pointer;
     outline: none;
@@ -107,6 +84,7 @@
     background-color: #464646;
     border: none;
     border-radius: 15px;
+    box-shadow: 0 9px #999;
     height: 5px;
   }
   
@@ -117,15 +95,16 @@
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
-
-
-
-
-.profile-nav, .profile-info{
+  
+  
+  
+  
+  
+  .profile-nav, .profile-info{
     margin-top:30px;   
-}
-
-.profile-nav .user-heading {
+  }
+  
+  .profile-nav .user-heading {
     background: #252525;
     color: #fff;
     border-radius: 4px 4px 0 0;
@@ -134,59 +113,26 @@
     height:125px;
     padding-top: 52px;
     border-radius: 15px;
-
-}
-
-.profile-nav .user-heading.round a  {
+  
+  }
+  
+  .profile-nav .user-heading.round a  {
     border-radius: 8px;
     -webkit-border-radius: 50%;
     border: 10px solid rgba(255,255,255,0.3);
     display: inline-block;
-}
-
-.profile-nav .user-heading h1 {
+  }
+  
+  .profile-nav .user-heading h1 {
     font-size: 22px;
     font-weight: 300;
     margin-bottom: 5px;
-}
-
-.expenseId{
-  display: none;
-}
-
-.form-input{
-    width: 100%;
-    padding: 14px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid #464646;
-
-  }
-
-  .modal-input{
-    width: 100%;
-    padding: 14px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid #464646;
-
-  }
-
-  .typeCollab{
-    width: 100%;
-    padding: 14px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid #464646;
-
+  
   }
   
-
-
-.bio-graph-heading {
+  
+  
+  .bio-graph-heading {
     background: #252525;
     color: #fff;
     text-align: center;
@@ -196,73 +142,20 @@
     font-size: 8px;
     height:30px;
     border-radius: 15px;
-
-}
-
-.noteDeFraisTable{
-  margin-left: -110px;
-}
-input[type=text] {
+  
+  }
+  
+  input[type=text] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
   border: none;
   border-bottom: 2px solid #464646;
-}
-
-.leaveTable{
-  width: 1200px;
-}
-
-.dayInput{
-  width: 200px;
-}
-
-
-.expenseInput{
-  width: 100px;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: none;
-  border-bottom: 2px solid #464646;
-}
-
-
-
-input[type=date] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid #464646;
   }
-
-  input[type=date] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid #464646;
-
-  }
-
-  .costInput{
-      width: 100px;
-      padding: 12px 20px;
-      margin: 8px 0;
-
-      box-sizing: border-box;
-      border: none;
-      border-bottom: 2px solid #464646;
   
-
-  }
-
-.bio-graph-heading-profil{
+  
+  .bio-graph-heading-profil{
     text-align: center;
     padding: 5px 110px;
     border-radius: 4px 4px 0 0;
@@ -270,37 +163,55 @@ input[type=date] {
     font-size: 8px;
     height:30px;
     border-radius: 15px;
-}
-.titre{
+  }
+  .titre{
     font-size: 15px;
-}
-.bio-row {
+  }
+  .bio-row {
     width: 50%;
     float: left;
     margin-bottom: 10px;
     padding:0 30px;
-}
-
-.bio-row p span {
+  }
+  
+  .bio-row p span {
     width: 100px;
     display: inline-block;
     
-}
-
-
-.form-control{
+  }
+  
+  
+  .form-control{
     height: 27px;
-}
-
-.profil-image{
+  }
+  
+  .profil-image{
     height: 70px;
     border-radius: 60px;
     margin-bottom: 8px;
-}
+  }
+  
+  .form-input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+  
+  }
+  
+  input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+    
+  }
 
-
-
-.img1{
+  .img1{
     height: 30px;
   }
   
@@ -311,7 +222,7 @@ input[type=date] {
     transform: translateY(4px);
   }
   
-  .bouttonSousMenu {
+  .bouttonMenu {
       float: left;
       height: 40px;
       width: 40px;
@@ -325,21 +236,6 @@ input[type=date] {
       border-radius: 100%;
       margin-bottom: 5%;
       margin-right: 10px;
-    }
-
-    .form-input{
-      width: 120px;
-      padding: 12px 20px;
-      margin: 8px 0;
-      height: 48px;
-      box-sizing: border-box;
-      border: none;
-      border-bottom: 2px solid #464646;
-  
-    }
-
-    .rightInputs{
-      margin-top: 57px;
     }
   
   
@@ -364,8 +260,4 @@ input[type=date] {
   .buttonAdd:active {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
-  }
-
-  .expenseRequestId{
-    display: none;
   }

@@ -39,6 +39,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
 import { ProjectComponent } from './administrateur/project/project.component';
+import { AddProjectComponent } from './administrateur/project/add-project/add-project.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -72,6 +73,7 @@ registerLocaleData(localeFr, 'fr');
     NoteDeFraisDeclarationComponent,
     AccueilAdministrateurComponent,
     ProjectComponent,
+    AddProjectComponent,
 
   ],
   imports: [

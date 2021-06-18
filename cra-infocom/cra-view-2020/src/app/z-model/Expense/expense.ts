@@ -17,6 +17,7 @@ export class Expense {
 
 	public nomCollab!: string;
 	public prenomCollab!: string;
+	public billableFR!: string;
 
 	public typeExpense = new TypeExpense();
 

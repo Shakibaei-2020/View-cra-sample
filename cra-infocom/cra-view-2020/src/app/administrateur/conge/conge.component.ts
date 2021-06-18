@@ -645,16 +645,23 @@ export class CongeComponent implements OnInit {
     var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime();
     this.dayNumber = Diff_temps / (1000 * 3600 * 24);
   }
-  deleteLeaveFromCollab(value: any) {
+  deleteLeaveFromCollab(value: any,leaves:Leave[],leave:Leave) {
+
     this._service.deleteOneLeaveRequest(value).subscribe(
       data => {
         console.log("delete leave effectué");
+
+        const index = leaves.indexOf(leave);
+        if (index > -1) {
+          leaves.splice(index, 1);
+
+        }
+
       },
       error => {
         console.log("erreur delete leave non-effectué")
       }
     )
-    window.location.reload();
   }
 
 }

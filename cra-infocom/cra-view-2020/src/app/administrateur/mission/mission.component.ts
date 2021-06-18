@@ -1,10 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'selenium-webdriver';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Client } from 'src/app/z-model/Client/client';
 import { Leave } from 'src/app/z-model/Leave/leave';
 import { Mission } from 'src/app/z-model/Mission/mission';
+import { Project } from 'src/app/z-model/Project/project';
 
 @Component({
   selector: 'app-mission',
@@ -70,16 +72,33 @@ export class MissionComponent implements OnInit {
                   if (item != null) {
                     item.clientName = data.name;
                     item.clientref = data.ref;
-                    item.oldStartDate = this.pipeDate.transform( item.startDate, 'yyyy-MM-dd') || '2000-02-14' ;
-                    item.oldEndDate = this.pipeDate.transform( item.endDate, 'yyyy-MM-dd') || '2000-02-14' ;
-
-
+                    item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
                   }
+                },
+                error => console.log("exception" + error)
+              )
+
+
+
+            }
+          )
+
+
+
+          this.missions.forEach(
+            (item) => {
+              this._service.selectProjectByMissionId(item.id).subscribe(
+                data => {
+                  console.log(data)
+                  item.porjectName = data.missionTitle;
+
                 },
                 error => console.log("exception" + error)
               )
             }
           )
+
 
 
           for (var i = 0; i < this.missions.length; i++) {
@@ -110,7 +129,7 @@ export class MissionComponent implements OnInit {
       this.refClientMission = [];
       this.finMission = [];
 
-      this._service.searchMissionByName(this.clientName).subscribe(
+      this._service.searchMissionByClientName(this.clientName).subscribe(
         data => {
           this.missions = data;
 
@@ -122,8 +141,8 @@ export class MissionComponent implements OnInit {
                   if (item != null) {
                     item.clientName = data.name;
                     item.clientref = data.ref;
-                    item.oldStartDate = this.pipeDate.transform( item.startDate, 'yyyy-MM-dd') || '2000-02-14' ;
-                    item.oldEndDate = this.pipeDate.transform( item.endDate, 'yyyy-MM-dd') || '2000-02-14' ;
+                    item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
 
                   }
                 },
@@ -174,10 +193,10 @@ export class MissionComponent implements OnInit {
                   if (item != null) {
                     item.clientName = data.name;
                     item.clientref = data.ref;
-                    item.oldStartDate = this.pipeDate.transform( item.startDate, 'yyyy-MM-dd') || '2000-02-14' ;
-                    item.oldEndDate = this.pipeDate.transform( item.endDate, 'yyyy-MM-dd') || '2000-02-14' ;
+                    item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
 
-                    
+
 
                   }
                 },
@@ -227,10 +246,15 @@ export class MissionComponent implements OnInit {
                   if (item != null) {
                     item.clientName = data.name;
                     item.clientref = data.ref;
-                    item.oldStartDate = this.pipeDate.transform( item.startDate, 'yyyy-MM-dd') || '2000-02-14' ;
-                    item.oldEndDate = this.pipeDate.transform( item.endDate, 'yyyy-MM-dd') || '2000-02-14' ;
-
-                    }
+                    item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
+                    item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
+                  }
+                },
+                error => console.log("exception" + error)
+              )
+              this._service.selectProjectByMissionId(item.id).subscribe(
+                data => {
+                  item.porjectName = data.missionTitle;
                 },
                 error => console.log("exception" + error)
               )
@@ -270,9 +294,6 @@ export class MissionComponent implements OnInit {
   newEndDate!: string;
 
   updateMission(indexOfElement: number) {
-
-    console.log(indexOfElement)
-    console.log(+(<HTMLInputElement>document.getElementById(this.missionId[indexOfElement])).value)
 
     this._service.selectMissionById(+(<HTMLInputElement>document.getElementById(this.missionId[indexOfElement])).value).subscribe(
       data1 => {
@@ -329,6 +350,20 @@ export class MissionComponent implements OnInit {
 
 
 
+
+
+  deleteTheProject(idProject: number) {
+
+
+    this._service.deleteProjectById(idProject).subscribe(
+      data => console.log("delete effectué"),
+      error => console.log("delete non effectué")
+    )
+
+  }
+
+
+
   /** NAVIGATION */
 
   goGerer() {
@@ -344,4 +379,65 @@ export class MissionComponent implements OnInit {
     this._route.navigate(['/administrateur']);
 
   }
+
+  allProjectOfMission!: Project[];
+
+  projectToUpdateName = new Array();
+
+  OnInitModal(missionId: number,indexOfelement:number) {
+    this.projectToUpdateName = [];
+
+
+    this._service.selectAllProjectByMissionId(missionId).subscribe(
+      data => {
+        this.allProjectOfMission = data;
+
+
+          for (var i = 0; i < this.allProjectOfMission.length; i++) {
+            this.projectToUpdateName.push("projectToUpdateName-" + i+ "-"  + indexOfelement);
+            console.log(this.projectToUpdateName)
+        }
+
+        },
+    )
+
+
+
+  }
+
+
+
+  projectToUpdate = new Project;
+  newtitle!: string;
+  valeur!: string;
+
+  majTheProject(idProject: number, indexOfElement: number) {
+
+    console.log(idProject);
+    console.log(indexOfElement)
+    console.log((<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value)
+
+
+    this._service.selectProjectById(idProject).subscribe(
+      data => {
+        this.projectToUpdate = data;
+
+        console.log((<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value)
+        this.projectToUpdate.projectTitle = (<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value;
+
+        console.log(this.projectToUpdate.projectTitle)
+
+
+        this._service.addAndUpdateProject2(this.projectToUpdate).subscribe(
+          data => console.log("maj reussie"),
+          error => console.log("maj echoué")
+        )
+
+      },
+      error => console.log("select echoué"),
+    )
+
+
+  }
+
 }

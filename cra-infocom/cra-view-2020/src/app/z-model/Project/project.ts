@@ -9,5 +9,5 @@ export class Project {
 
 
 	public missionTitle!: string;
-	public prenomCollab!: string;
+	public prenomClient!: string;
 }

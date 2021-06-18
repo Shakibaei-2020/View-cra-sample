@@ -13,7 +13,7 @@
       <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
         <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
       </button>
-      
+
 
 
       <button (click)="goToAddCollab()" class="img-fluid buttonAdd ">
@@ -23,45 +23,67 @@
     </div>
 
     <hr>
-<div>
-    <div class="container mt-3"><br>
+    <div>
+      <div class="container mt-3"><br>
         <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchOneCollab()">
-            <input type="text" autocomplete="off" placeholder="Prénom du collaborateur"  required [(ngModel)]="collaboratorInputLastName.lastName" name="lastName">
-            <button type="submit"><p>Chercher</p></button>
+          <input type="text" autocomplete="off" placeholder="Prénom du collaborateur" required
+            [(ngModel)]="collaboratorInputLastName.lastName" name="lastName">
+          <button type="submit">
+            <p>Chercher</p>
+          </button>
 
-          </form>
+        </form>
 
         <br><br><br>
-        <h2>Résultat : {{nbResultat}} </h2> 
-        <table class="table ">
+
+        <div *ngIf="collaborators">
+
+          <h2>Résultat : {{nbResultat}} </h2>
+          <table class="table table-striped table-bordered">
             <thead>
               <tr>
-                <th><p class="titreTable">Nom</p></th>
-                <th><p class="titreTable">Prénom</p></th>
-                <th><p class="titreTable">Mail</p></th>
+                <th>
+                  <p class="titreTable">Nom</p>
+                </th>
+                <th>
+                  <p class="titreTable">Prénom</p>
+                </th>
+                <th>
+                  <p class="titreTable">Mail</p>
+                </th>
 
-                <th><p class="commande titreTable">Action</p></th>
-          
+                <th>
+                  <p class="commande titreTable">Action</p>
+                </th>
+
 
               </tr>
             </thead>
             <tbody>
-                <tr  *ngFor="let collaborator of collaborators">
-                    <td><p class="contentTable">{{collaborator.firstName}}</p></td>
-                    <td><p class="contentTable">{{collaborator.lastName}}</p></td>
-                    <td><p class="contentTable">{{collaborator.email}}</p></td>
-        
+              <tr *ngFor="let collaborator of collaborators">
                 <td>
-                    <button class="btnTab" type="submit" (click)="goToEditCollab()">Éditer </button>
+                  <p class="contentTable">{{collaborator.firstName}}</p>
                 </td>
-            </tr>
+                <td>
+                  <p class="contentTable">{{collaborator.lastName}}</p>
+                </td>
+                <td>
+                  <p class="contentTable">{{collaborator.email}}</p>
+                </td>
+
+                <td>
+                  <button class="btn btn-dark btn-block" type="submit" (click)="goToEditCollab()">Éditer </button>
+                </td>
+              </tr>
             </tbody>
           </table>
+
         </div>
+      </div>
     </div>
-    </div>
-    </div>
-    
-    
+  </div>
+</div>
+
+
 <!--     <app-child [childMessage]="parentMessage"></app-child>
  -->

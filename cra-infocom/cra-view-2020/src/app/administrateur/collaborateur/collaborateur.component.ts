@@ -26,9 +26,9 @@ export class CollaborateurComponent implements OnInit {
   ngOnInit() { }
   
   /** recherche d'un collaborateur via son nom de famille */
-  searchOneCollab(){
 
- 
+  
+  searchOneCollab(){
 
     if(this.collaboratorInputLastName.lastName != undefined && this.collaboratorInputLastName.lastName != ""  ){
 

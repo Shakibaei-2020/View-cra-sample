@@ -1,0 +1,85 @@
+<app-administrateur></app-administrateur>
+
+<br><br><br>
+
+
+<div class="container">
+  <div class="panel">
+    <div>
+      <button class="img-fluid bouttonMenu">
+        <img class="img1"
+          src="https://image.flaticon.com/icons/png/512/775/775578.png">
+      </button>
+      <h2>Ajouter un nouveau mission</h2>
+    </div>
+    <hr>
+
+
+
+
+    <div class="panel-body bio-graph-info">
+
+      <br>
+      <div class="row">
+
+        <div class="bio-row">
+    
+       
+          <div class="inputbox mt-1">
+            <span class="input-title">Nom du projet :</span>
+             <input type="text" required [(ngModel)]="projectTitle" name="projectTitle">
+             </div>
+
+        </div>
+
+        <div class="bio-row">
+
+          <div class="inputbox mt-1">
+            <span class="input-title" > Missions :</span><br>
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="missionOfproject" name="missionOfproject">
+              <option *ngFor="let mission of missions" value="{{mission.id}}">{{mission.missionTitle}}</option>
+            </select>
+          </div>
+
+        </div>
+
+
+
+        <div class="bio-row"></div>
+
+        <div class="bio-row">
+
+
+          <button class="button" (click)="goToSearch()">Retour</button>
+
+          <button class="button" data-toggle="modal" data-target="#DeleteModal">Ajouter</button>
+
+          <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Alert delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Êtes vous sur de vouloir supprimer?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addProject()">Ajouter</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
