@@ -35,7 +35,7 @@
 
         <br><br>
         <h2>Résultat : {{nbResultat}} </h2>
-        <table class="table table-condensed resultat">
+        <table class="table table-striped table-bordered">
           <thead>
             <tr>
               <th><p class="titreTable">Référence</p></th>
@@ -50,7 +50,7 @@
               <td><p class="contentTable">{{client.name}}</p></td>
               <td><p class="contentTable">{{client.typeClient.type}}</p></td>
               <td>
-                <button type="button" class="btnTab" data-toggle="modal" [attr.data-target]=" '#myClientModal-' + indexOfelement">Éditer</button>
+                <button type="button"class="btn btn-dark btn-block"  data-toggle="modal" [attr.data-target]=" '#myClientModal-' + indexOfelement">Éditer</button>
               </td>
             </tr>
           </tbody>
@@ -63,7 +63,7 @@
         <div *ngFor="let client of clients; let indexOfelement =index;">
 
           <div class="modal fade" id="myClientModal-{{indexOfelement}}" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-xl">
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
@@ -94,7 +94,7 @@
                       </div>
 
                       <div class="inputbox mt-1">
-                        <span> Type de client : </span><br>
+                        <span> Catégorie: </span><br>
                         <select class="modal-input"  name="typeClient-{{indexOfelement}}" id="typeClient-{{indexOfelement}}"   >
                           <option hidden value="" disabled selected>{{client.typeClient.type}} </option>
                           <option *ngFor="let allClientTypes of allClientType" value="{{allClientTypes.id}}">{{allClientTypes.type}}</option>

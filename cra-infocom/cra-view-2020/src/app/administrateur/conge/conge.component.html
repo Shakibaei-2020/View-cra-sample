@@ -63,7 +63,7 @@
       <p class="error">{{error}}</p>
 
       <hr>
-      <table class="table ">
+      <table class="table table-striped table-bordered">
         <thead>
           <tr>
        
@@ -103,7 +103,7 @@
             <td><p class="contentTable">{{leave.status }}</p></td>
             <td><p class="contentTable">{{leave.leaveType.type }}</p></td>
             <td>
-              <button class="btnTab" data-toggle="modal" [attr.data-target]=" '#myLeaveModal-' + indexOfelement">Éditer</button>
+              <button class="btn btn-dark btn-block"  data-toggle="modal" [attr.data-target]=" '#myLeaveModal-' + indexOfelement">Éditer</button>
             </td>
           </tr>
         </tbody>
@@ -114,11 +114,11 @@
     <!-- Modal -->
     <div *ngFor="let leave of leaves; let indexOfelement =index;">
       <div class="modal fade" id="myLeaveModal-{{indexOfelement}}" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <h3>Gestion de la demande de congé du  {{leave.dateOfDemand | date: 'dd/MM/yyyy'}}</h3>
+              <h3>Gestion de la demande de congé de {{leave.prenomCollab}} {{leave.nomCollab}} du  {{leave.dateOfDemand | date: 'dd/MM/yyyy'}}</h3>
               <div class="toHide">
                 <input type="text" value="{{leave.id}}" name="leaveRequestId-{{indexOfelement}}"  id="leaveRequestId-{{indexOfelement}}" disabled>
               </div>

@@ -33,7 +33,7 @@
 
         <br><br><br>
         <h2>Résultat : {{nbResultat}} </h2> 
-        <table class="table ">
+        <table class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th><p class="titreTable">Nom</p></th>
@@ -52,7 +52,7 @@
                     <td><p class="contentTable">{{collaborator.email}}</p></td>
         
                 <td>
-                    <button class="btnTab" type="submit" (click)="goToEditCollab()">Éditer </button>
+                    <button class="btn btn-dark btn-block" type="submit" (click)="goToEditCollab()">Éditer </button>
                 </td>
             </tr>
             </tbody>

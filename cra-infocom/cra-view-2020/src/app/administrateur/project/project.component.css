@@ -37,10 +37,14 @@
   transform: translateY(4px);
 }
 
+.commande{
+  margin-left: 20px;
+}
+
 .btnTab {
   padding-bottom: 25px;
   padding-top: 5px;
-  width: 50px;
+  width: 90px;
   font-size: 14px;
   padding-top: 5px;
 
@@ -241,7 +245,9 @@ box-shadow: 0 5px #666;
 transform: translateY(4px);
 }
 
-
+.modalSize{
+  width: 700px;
+}
 
 /** FOR MODAL */
 

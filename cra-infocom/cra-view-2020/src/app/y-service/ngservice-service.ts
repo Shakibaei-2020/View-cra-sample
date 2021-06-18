@@ -295,6 +295,11 @@ export class NgserviceService {
     return this._http.get<Mission[]>("http://localhost:8801/mission/lister/");
   }
 
+
+  selectLastIdMission(): Observable<number> {
+    return this._http.get<number>("http://localhost:8801/mission/lastId/");
+  }
+
   /** SEARCH */
 
   
@@ -339,6 +344,13 @@ export class NgserviceService {
   selectProjectById(id: number): Observable<Project> {
     return this._http.get<Project>("http://localhost:8801/project/lister/" + id);
   }
+
+  addAndUpdateProject2(project: Project): Observable<Project> {
+    return this._http.post<Project>("http://localhost:8801/project/update" , project);
+  }
+
+
+
 /** search  */
 
 
@@ -356,6 +368,8 @@ export class NgserviceService {
     return this._http.get<Project[]>("http://localhost:8801/project/lister/MissionProjectTitle/" + projectTitle + "/" + missionTitle );
   }
 
+
+
   /** PROJECT COLLABORATOR JOINTURE */
 
 
@@ -367,7 +381,44 @@ export class NgserviceService {
 
   
   addCollabToProject( idCollab:number,idProject:number):Observable<any>{
-    return this._http.get<any>("http://localhost:8900//addCollabToProject/" + idCollab + "/" + idProject);
+    return this._http.get<any>("http://localhost:8900/projetCollaborator/addCollabToProject/" + idCollab + "/" + idProject);
+  }
+
+
+  deleteAllCollabAffectedToProject(id: number): Observable<any> {
+    return this._http.get<any>("http://localhost:8900/projetCollaborator/delete/" + id);
+  }
+
+  selectAllProjectCollabbyProjectId( id: number): Observable<ProjectCollaborator[]> {
+    return this._http.get<ProjectCollaborator[]>("http://localhost:8900/projetCollaborator/collabsByProject/"+ id);
+  }
+
+
+
+
+
+  /** project join */
+
+  deleteProjectById(id: number): Observable<any> {
+    return this._http.get<any>("http://localhost:8801/project/supprimer/" + id);
+  }
+
+  majProjectTitle(idProject: number, newTitle:string): Observable<any> {
+    return this._http.get<any>("http://localhost:8801/project/majProjectTitle/" + idProject + "/" + newTitle);
+  }
+
+  addAndUpdateProject(project: Project): Observable<ProjectCollaborator> {
+    return this._http.post<ProjectCollaborator>("http://localhost:8801/project/ajouter" , project);
+  }
+
+  deleteCollabOfThisProject(idCollab: number, idProject:number): Observable<any> {
+    return this._http.get<any>("http://localhost:8900/projetCollaborator/deleteCollabOfThisProject/" + idCollab + "/" + idProject );
+  }
+
+
+  /** COLAB */
+  selectCollabByProjectId(id: number): Observable<any> {
+    return this._http.get<any>("http://localhost:8900/collaborateurs/collabsByProjectId/" + id);
   }
 
 

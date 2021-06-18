@@ -218,7 +218,7 @@ margin-top: 7px;
 /** FOR MODAL */
 
  .modal-input{
-    width: 215px;
+    width: 100%;
     padding: 14px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -233,7 +233,7 @@ margin-top: 7px;
   }
 
   .rightInputs{
-    margin-top: 23%;
+    margin-top: 10%;
     margin-bottom: 50px;
   }
 

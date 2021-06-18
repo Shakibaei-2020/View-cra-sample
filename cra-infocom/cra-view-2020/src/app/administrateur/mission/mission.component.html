@@ -52,7 +52,7 @@
         <h2>Résultat : {{nbResultat}}</h2>
         <p class="error">{{error}}</p>
         <hr>
-        <table class="table ">
+        <table class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th><p class="titreTable">Nom de la mission </p></th>
@@ -70,7 +70,7 @@
                 <td><p class="contentTable">{{mission.startDate | date: 'dd/MM/yyyy' }}</p></td>
                 <td><p class="contentTable">{{mission.endDate | date: 'dd/MM/yyyy' }}</p></td>
                 <td>
-                  <button type="button" class="btnTab" data-toggle="modal" [attr.data-target]=" '#myMissionModal-' + indexOfelement">Éditer</button>
+                  <button type="button" class="btn btn-dark btn-block" data-toggle="modal" [attr.data-target]=" '#myMissionModal-' + indexOfelement" (click)="OnInitModal(mission.id)">Éditer</button>
                 </td>
             </tr>
             </tbody>
@@ -81,11 +81,13 @@
           <div *ngFor="let mission of missions; let indexOfelement =index;">
 
             <div class="modal fade" id="myMissionModal-{{indexOfelement}}" role="dialog">
-              <div class="modal-dialog">
+
+              
+              <div class="modal-dialog modal-xl">
                 <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h3>Gestion de la mission:  {{mission.missionTitle}}</h3>
+                    <h2>Gestion de la mission:  {{mission.missionTitle}}</h2>
                     <div class="toHide">
                        <input type="text" value="{{mission.id}}" name="missionId-{{indexOfelement}}" id="missionId-{{indexOfelement}}" disabled> 
                     </div>
@@ -126,7 +128,6 @@
                           <select class="modal-input"  name="refClientMission-{{indexOfelement}}" id="refClientMission-{{indexOfelement}}"  (change)="updateClientName(indexOfelement)" >
                             <option hidden value="" disabled selected>{{mission.clientref}} </option>
                             <option *ngFor="let client of clients" value="{{client.id}}">{{client.ref}}</option>
-
                           </select>
                         </div>
 
@@ -136,19 +137,61 @@
                           <span> Date de fin :  </span><br>
                           <input class="modal-input" type="date"   value="{{mission.oldEndDate}}" name="finMission-{{indexOfelement}}" id="finMission-{{indexOfelement}}" >
                         </div>
+
+                        <div class="inputbox mt-1">
+                          <span> Nom du projet : {{mission.porjectName}} </span><br>
+                          <input class="modal-input" type="text"  value="{{mission.porjectName}}" name="missionprojectName-{{indexOfelement}}" id="missionprojectName-{{indexOfelement}}">
+                        </div>
+                  
       
-                      </div>
+                      </div>                    
                     </div>
+
+                    <br>
+                    <hr>
+                    <br>
+            
+
+                    <h2>Les projets affectées:</h2>
+                    <table class="table table-striped table-bordered">
+                      <thead>
+                          <tr>
+                              <th>Nom projet</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let project of allProjectOfMission; let i =index">
+                              <td>
+                                <input class="modal-input" type="text"   placeholder="{{project.projectTitle}}"  type="text"  name="projectToUpdateName-{{i}}" id="projectToUpdateName-{{i}}" />
+                              </td>
+                              <td>
+                                  <button class="btn btn-dark btn-block" type="button" (click)="majTheProject(project.id,i)">Maj</button>
+                                  <button class="btn btn-dark btn-block" type="button" (click)="deleteTheProject(project.id)">Supprimer</button>
+          
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table> 
+
+                  
+
                     <div class="modal-footer">
                       <button class="btnModal" type="submit" (click)="updateMission(indexOfelement)">Maj</button>
                       <button class="btnModal" type="submit" (click)="deleteMission(mission.id)">Supprimer</button>
                     </div>
+
+
                   </div>
                 </div>
               </div>
             </div>
+
+            
           </div>
 
+
+      
 
 
 

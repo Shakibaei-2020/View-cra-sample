@@ -1,3 +1,4 @@
+import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'selenium-webdriver';
@@ -29,6 +30,7 @@ export class ProjectComponent implements OnInit {
   projectId = new Array();
   collabToAffect = new Array();
   collabToDelete = new Array();
+  newNameProject= new Array();
   //projectCollaboratorId = new Array();
   //projectTitle = new Array();
   //projectMission = new Array();
@@ -66,6 +68,7 @@ export class ProjectComponent implements OnInit {
       this.projectId = [];
       this.collabToAffect = [];
       this.collabToDelete = [];
+      this.newNameProject = [];
 
       this._service.searchProjectByProjectTitle(this.searchByProjectName).subscribe(
         data => {
@@ -74,8 +77,29 @@ export class ProjectComponent implements OnInit {
             this.projectId.push("projectId-" + i);
             this.collabToAffect.push("collabToAffect-" + i);
             this.collabToDelete.push("collabToDelete-" + i);
+            this.newNameProject.push("newNameProject-" + i);
+
 
           }
+
+          this.projects.forEach(
+            (item) => {
+              this._service.selectMissionById(item.mission.id).subscribe(
+                data => {
+                    item.missionTitle = data.missionTitle;
+
+                    this._service.selectClientById(data.client.id).subscribe(
+                      data=>{
+                        item.prenomClient = data.name;
+                      },
+                      error=>console.log("exception" + error)
+                    )
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+          
         },
         error => console.log("exception" + error)
       )
@@ -98,7 +122,28 @@ export class ProjectComponent implements OnInit {
             this.projectId.push("projectId-" + i);
             this.collabToAffect.push("collabToAffect-" + i);
             this.collabToDelete.push("collabToDelete-" + i);
+            this.newNameProject.push("newNameProject-" + i);
+
           }
+
+          this.projects.forEach(
+            (item) => {
+              this._service.selectMissionById(item.mission.id).subscribe(
+                data => {
+                    item.missionTitle = data.missionTitle;
+
+                    this._service.selectClientById(data.client.id).subscribe(
+                      data=>{
+                        item.prenomClient = data.name;
+                      },
+                      error=>console.log("exception" + error)
+                    )
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+
         },
         error => console.log("exception" + error)
       )
@@ -114,6 +159,7 @@ export class ProjectComponent implements OnInit {
       this.projectId = [];
       this.collabToAffect = [];
       this.collabToDelete = [];
+      this.newNameProject = [];
 
       this._service.searchMissionByClientName(this.searchByClientName).subscribe(
         data => {
@@ -132,7 +178,27 @@ export class ProjectComponent implements OnInit {
                     this.projectId.push("projectId-" + i);
                     this.collabToAffect.push("collabToAffect-" + i);
                     this.collabToDelete.push("collabToDelete-" + i);
+                    this.newNameProject.push("newNameProject-" + i);
+
                   }
+
+                  this.projects.forEach(
+                    (item) => {
+                      this._service.selectMissionById(item.mission.id).subscribe(
+                        data => {
+                            item.missionTitle = data.missionTitle;
+        
+                            this._service.selectClientById(data.client.id).subscribe(
+                              data=>{
+                                item.prenomClient = data.name;
+                              },
+                              error=>console.log("exception" + error)
+                            )
+                        },
+                        error => console.log("exception" + error)
+                      )
+                    }
+                  )
 
 
                 },
@@ -157,6 +223,7 @@ export class ProjectComponent implements OnInit {
       this.projectId = [];
       this.collabToAffect = [];
       this.collabToDelete = [];
+      this.newNameProject = [];
 
       this._service.searchProjectByMissionProjectTitle(this.searchByProjectName, this.searchByMissionName).subscribe(
         data => {
@@ -165,7 +232,27 @@ export class ProjectComponent implements OnInit {
             this.projectId.push("projectId-" + i);
             this.collabToAffect.push("collabToAffect-" + i);
             this.collabToDelete.push("collabToDelete-" + i);
+            this.newNameProject.push("newNameProject-" + i);
+
           }
+
+          this.projects.forEach(
+            (item) => {
+              this._service.selectMissionById(item.mission.id).subscribe(
+                data => {
+                    item.missionTitle = data.missionTitle;
+
+                    this._service.selectClientById(data.client.id).subscribe(
+                      data=>{
+                        item.prenomClient = data.name;
+                      },
+                      error=>console.log("exception" + error)
+                    )
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
         },
         error => console.log("exception" + error)
       )
@@ -185,6 +272,7 @@ export class ProjectComponent implements OnInit {
       this.projectId = [];
       this.collabToAffect = [];
       this.collabToDelete = [];
+      this.newNameProject = [];
 
       this._service.searchMissionByClientName(this.searchByClientName).subscribe(
         data => {
@@ -199,7 +287,27 @@ export class ProjectComponent implements OnInit {
                     this.projectId.push("projectId-" + i);
                     this.collabToAffect.push("collabToAffect-" + i);
                     this.collabToDelete.push("collabToDelete-" + i);
+                    this.newNameProject.push("newNameProject-" + i);
+
                   }
+
+                  this.projects.forEach(
+                    (item) => {
+                      this._service.selectMissionById(item.mission.id).subscribe(
+                        data => {
+                            item.missionTitle = data.missionTitle;
+        
+                            this._service.selectClientById(data.client.id).subscribe(
+                              data=>{
+                                item.prenomClient = data.name;
+                              },
+                              error=>console.log("exception" + error)
+                            )
+                        },
+                        error => console.log("exception" + error)
+                      )
+                    }
+                  )
                 },
                 error => console.log("exception" + error)
               )
@@ -223,6 +331,7 @@ export class ProjectComponent implements OnInit {
       this.projectId = [];
       this.collabToAffect = [];
       this.collabToDelete = [];
+      this.newNameProject = [];
 
       this._service.searchMissionByClientName(this.searchByClientName).subscribe(
         data => {
@@ -237,7 +346,27 @@ export class ProjectComponent implements OnInit {
                     this.projectId.push("projectId-" + i);
                     this.collabToAffect.push("collabToAffect-" + i);
                     this.collabToDelete.push("collabToDelete-" + i);
+                    this.newNameProject.push("newNameProject-" + i);
+
                   }
+
+                  this.projects.forEach(
+                    (item) => {
+                      this._service.selectMissionById(item.mission.id).subscribe(
+                        data => {
+                            item.missionTitle = data.missionTitle;
+        
+                            this._service.selectClientById(data.client.id).subscribe(
+                              data=>{
+                                item.prenomClient = data.name;
+                              },
+                              error=>console.log("exception" + error)
+                            )
+                        },
+                        error => console.log("exception" + error)
+                      )
+                    }
+                  )
 
 
                 },
@@ -263,6 +392,7 @@ export class ProjectComponent implements OnInit {
       this.projectId = [];
       this.collabToAffect = [];
       this.collabToDelete = [];
+      this.newNameProject = [];
 
       this._service.selectAllproject().subscribe(
         data => {
@@ -273,7 +403,34 @@ export class ProjectComponent implements OnInit {
             this.projectId.push("projectId-" + i);
             this.collabToAffect.push("collabToAffect-" + i);
             this.collabToDelete.push("collabToDelete-" + i);
+            this.newNameProject.push("newNameProject-" + i);
+
           }
+
+
+          this.projects.forEach(
+            (item) => {
+              this._service.selectMissionById(item.mission.id).subscribe(
+                data => {
+                    item.missionTitle = data.missionTitle;
+
+                    this._service.selectClientById(data.client.id).subscribe(
+                      data=>{
+                        item.prenomClient = data.name;
+                      },
+                      error=>console.log("exception" + error)
+                    )
+                },
+                error => console.log("exception" + error)
+              )
+            }
+          )
+
+       
+
+
+
+          
         },
         error => console.log("exception" + error)
       )
@@ -288,8 +445,92 @@ export class ProjectComponent implements OnInit {
 
       console.log("hello")
     }
-
   }
+
+
+
+  collaboratorInputLastName = new Collaborator();
+  searchedCollabs!: Collaborator[]; 
+
+  searchOneCollab(){
+
+    if(this.collaboratorInputLastName.lastName != undefined && this.collaboratorInputLastName.lastName != ""  ){
+
+      this._service.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
+        data=> {this.searchedCollabs = data;
+      },
+        error=>console.log("exception" +error)
+        )
+        this.collaboratorInputLastName.lastName ="";
+      }else{        
+      this._service.selectAllCollab().subscribe(
+        data=> {this.searchedCollabs = data;
+      },
+        error=>console.log("exception" +error)
+        )
+      }
+    }
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -299,68 +540,86 @@ export class ProjectComponent implements OnInit {
   projectToAffect = new Project();
 
 
-  affectCollabToProject(indexOfElement: number) {
+  affectCollabToProject(idProject: number, idCollab:number) {
 
 
-    console.log((<HTMLInputElement>document.getElementById(this.collabToAffect[indexOfElement])).value)
 
-    this._service.selectOneCollabById(+(<HTMLInputElement>document.getElementById(this.collabToAffect[indexOfElement])).value).subscribe(
+    this._service.selectOneCollabById(idCollab).subscribe(
       data => {
 
         this.theCollabToAffect = data;
 
-        
-
-        this._service.selectProjectById(+(<HTMLInputElement>document.getElementById(this.projectId[indexOfElement])).value).subscribe(
+        this._service.selectProjectById(idProject).subscribe(
           data1 => {
             this.projectToAffect = data1;
-
-
-   
-
-            
             this._service.addCollabToProject(this.theCollabToAffect.id,this.projectToAffect.id).subscribe(
               data=>console.log("affectation reussie"),
               error=>console.log("affectation raté")
             )
-
-
-
           },
           error => console.log("exception" + error)
         )
-
-
-
-
       },
       error => console.log("exception" + error)
     )
 
+  }
+
+  deleteTheProject(indexOfElement: number) {
+
+    this._service.deleteAllCollabAffectedToProject(indexOfElement).subscribe( 
+      data=>{console.log("All project collab of this id project deleted");
+    
+      this._service.deleteProjectById(indexOfElement).subscribe(
+        data=>console.log("project deleted"),
+        error=>console.log("project not deleted")
+      )
+
+    },
+      error=>console.log("Collabs of project not deleted")
+      )
+  }
+
+
+  allCollabOfProject!: Collaborator[];
+  modelInfo(indexOfElement:number){   
+
+    this._service.selectCollabByProjectId(indexOfElement).subscribe(
+      data=> {this.allCollabOfProject = data;
+      },
+      error=> console.log("exception" + error),
+    ) 
 
 
   }
 
-  deleteCollabOfProject(indexOfElement: number) {
 
-    console.log((<HTMLInputElement>document.getElementById(this.collabToDelete[indexOfElement])).value)
+  deleteCollabOfProject(projetId:number,collaboratorId:number){
+    this._service.deleteCollabOfThisProject(collaboratorId,projetId).subscribe(
+      data=>console.log("collaborateur supprimer"),
+      error=>console.log("collaborateur non supprimer")
+    )
 
   }
+
 
   updateTheProjectName(indexOfElement: number) {
 
+    this._service.majProjectTitle(+((<HTMLInputElement>document.getElementById(this.projectId[indexOfElement])).value),(<HTMLInputElement>document.getElementById(this.newNameProject[indexOfElement])).value ).subscribe(
+      data=>console.log("maj reussi"),
+      error=>console.log("maj raté")
+    )
+
   }
 
-  deleteProject(indexOfElement: number) {
-
-  }
 
   goToAccueil() {
+    this._route.navigate(['/administrateur']);
 
   }
 
   goToAddProject() {
-
+    this._route.navigate(['addProject']);
   }
 
 }

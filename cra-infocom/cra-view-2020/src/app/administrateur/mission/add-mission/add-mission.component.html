@@ -28,7 +28,6 @@
             <span class="input-title">Nom du client  : </span><br>
             <select class="form-input" aria-label="Default select example"  required [(ngModel)]="idClientByName" name="idClientByName" (change)="updateClientRef()">
               <option *ngFor="let client of clients" value="{{client.id}}">{{client.name}}</option>
-
               </select>
           </div>
       
@@ -39,8 +38,11 @@
 
           <div class="inputbox mt-1">
             <span class="input-title">Nom de la mission :</span>
-             <input type="text" required [(ngModel)]="newMission.missionTitle" name="newMission.missionTitle">
+             <input type="text" autocomplete="off" required [(ngModel)]="newMission.missionTitle" name="newMission.missionTitle">
            </div>
+
+
+
         </div>
 
         <div class="bio-row">
@@ -57,8 +59,110 @@
             <span class="input-title">Date de fin :</span>
              <input type="Date" required [(ngModel)]="endDate" name="endDate"> 
             </div>
+
+            
+           <div class="inputbox mt-1">
+            <!-- <button type="button" class="btnTab" data-toggle="modal" [attr.data-target]=" '#myMissionModal'">Assigne project</button>-->
+
+            <button type="button" class="btn btn-dark btn-lg btn-block assignProject" (click) ="toggleDisplay()">Assigner un projet</button>
+
+             </div>
         </div>
 
+      </div>
+
+
+        <div [hidden]="isShow" class="">
+
+          <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Nom projet</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let field of fieldArray; let indexOfElement = index">
+                    <td>
+                      <input [(ngModel)]="field.code" class="form-control" type="text" name="{{field.code}}" id="projectName-{{indexOfElement}}" disabled />
+                    </td>
+                    <td>
+                        <button class="btn btn-dark btn-block"  type="button" (click)="deleteFieldValue(indexOfElement)">supprimer</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                      <input class="form-control" type="text" id="newAttributeCode" [(ngModel)]="newAttribute.code" name="newAttributeCode" />
+                    </td>
+                    <td>
+                        <button class="btn btn-dark btn-block" type="button" (click)="addFieldValue()">Ajouter</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table> 
+        
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="modal fade" id="myMissionModal" role="dialog">
+          <div class="modal-dialog modal-xl">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Projets à attribuer:</h3>
+                <div class="toHide">
+                   <!-- <input type="text" disabled> -->
+                </div>
+              </div>
+              <div class="modal-body">
+         
+              <!-- 
+                <table class="table table-striped table-bordered">
+                  <thead>
+                      <tr>
+                          <th>Nom projet</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let field of fieldArray; let indexOfElement = index">
+                          <td>
+                            <input  class="form-control" type="text" name="projectName-{{indexOfElement}}" id="projectName-{{indexOfElement}}"/>
+                          </td>
+                          <td>
+                              <button class="btn btn-default"  type="button" (click)="deleteFieldValue(indexOfElement)">Delete</button>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <input class="form-control" type="text" id="newAttributePrice" />
+                          </td>
+                          <td>
+                              <button class="btn btn-default" type="button" (click)="addFieldValue()">Add</button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+
+              -->
+
+
+                <div class="modal-footer">
+                  <button class="btnModal" type="submit" >Maj</button>
+                  <button class="btnModal" type="submit">Supprimer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
         <div class="bio-row"></div>
@@ -94,9 +198,7 @@
 
 
 
-        </div>
 
       </div>
     </div>
   </div>
-</div>

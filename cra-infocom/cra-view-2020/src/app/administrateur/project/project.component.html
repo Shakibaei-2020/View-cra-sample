@@ -11,7 +11,7 @@
             <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
         </button>
 
-
+ 
         <button class="img-fluid buttonAdd ">
             <img (click)="goToAddProject()" class="img1"
                 src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
@@ -33,7 +33,7 @@
                     <div class="row">
 
                         <div class="col-sm-4">
-                            <span>Nom du projet</span>
+                            <span>Prénom du collaborateur</span>
 
                             <input type="text" placeholder="Nom du projet" autocomplete="off" required
                                 [(ngModel)]="searchByProjectName" name="projectNameSearch">
@@ -75,7 +75,7 @@
                             <p class="titreTable">Nom du project</p>
                         </th>
                         <th>
-                            <p class="titreTable">Prénom du collab</p>
+                            <p class="titreTable">Prénom du client</p>
                         </th>
                         <th>
                             <p class="titreTable">Nom de la mission</p>
@@ -93,14 +93,14 @@
                             <p class="contentTable">{{project.projectTitle}}</p>
                         </td>
                         <td>
-                            <p class="contentTable">{{project.prenomCollab}}</p>
+                            <p class="contentTable">{{project.prenomClient}}</p>
                         </td>
+                        
                         <td>
                             <p class="contentTable">{{project.missionTitle}}</p>
                         </td>
                         <td>
-                            <button type="button" class="btnTab" data-toggle="modal"
-                                [attr.data-target]=" '#myProjectModal-' + indexOfelement">Éditer</button>
+                            <button type="button" class="btnTab" data-toggle="modal" [attr.data-target]=" '#myProjectModal-' + indexOfelement" (click)="modelInfo(project.id)">Éditer</button>
                         </td>
                     </tr>
                 </tbody>
@@ -109,65 +109,121 @@
 
             <div *ngFor="let project of projects; let indexOfelement =index;">
 
+
+                
                 <div class="modal fade" id="myProjectModal-{{indexOfelement}}" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-xl">
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h3> Gestion du projet {{project.projectTitle}} </h3>
+                                <h2> Gestion du projet {{project.projectTitle}} </h2>
                                 <div class="toHide">
                                     <input type="text" value="{{project.id}}" name="projectId-{{indexOfelement}}" id="projectId-{{indexOfelement}}" disabled>
                                 </div>
                             </div>
-                            <div class="modal-body">
 
 
-                                <div class="container">
-                                    <span>Affecter collaborateur:</span>
-                                    <div class="d-table-cell w-100">
-                                        <select class="modal-input" name="collabToAffect-{{indexOfelement}}" id="collabToAffect-{{indexOfelement}}" >
-                                            <option *ngFor="let collaborateur of allCollaborators" value="{{collaborateur.id}}">{{collaborateur.firstName}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="d-table-cell align-middle">
-                                        <button class="btnModal2" (click)="affectCollabToProject(indexOfelement)">Affecter</button>
-                                    </div>
-                                </div>
+                            <div class="modal-body ">
 
-                                <hr>
-
-                                <div class="container">
-                                    <span>supprimer le collaborateur: </span>
-                                    <div class="d-table-cell w-100">
-                                        <select class="modal-input" name="collabToDelete-{{indexOfelement}}" id="collabToDelete-{{indexOfelement}}">
-                                            <option *ngFor="let collaborateur of allCollaborators" value="{{collaborateur.id}}">{{collaborateur.firstName}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="d-table-cell align-middle">
-                                        <button class="btnModal2"  (click)="deleteCollabOfProject(indexOfelement)">Supprimer</button>
-                                    </div>
-
-
-                                    
                                 <div class="container">
                                     <span>Nom du projet : </span>
                                     <div class="d-table-cell w-100">
-                                   <input class="modal-inputText">
+                                   <input class="modal-inputText"  autocomplete="off" required [(ngModel)]="collaboratorInputLastName.lastName" name="lastName">
                                     </div>
+                                    
                                     <div class="d-table-cell align-middle">
-                                        <button class="btnModal2"  (click)="updateTheProjectName(indexOfelement)">Update</button>
+                                        <button class="btnModal2"  (click)="searchOneCollab()">Chercher</button>
                                     </div>
+                                </div>
 
-
-
+                            <div class="container">
+                                <h2>Collaborateur : {{nbResultat}} </h2>
+                                <table class="table table-condensed resultat">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <p class="titreTable">Nom </p>
+                                            </th>
+                                            <th>
+                                                <p class="titreTable">Prénom</p>
+                                            </th>
+                                            <th>
+                                                <p class="titreTable">Adresse mail</p>
+                                            </th>
+                    
+                                            <th>
+                                                <p class="commande titreTable">Action</p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let collaborator of searchedCollabs; let indexOfelement = index">
+                                            <td>
+                                                <p class="contentTable">{{collaborator.firstName}}</p>
+                                            </td>
+                                            <td>
+                                                <p class="contentTable">{{collaborator.lastName}}</p>
+                                            </td>
+                                            <td>
+                                                <p class="contentTable">{{collaborator.email}}</p>
+                                            </td>
+                                            
+                                         
+                                            <td>
+                                            <!-- <button type="button" class="btnTab"  (click)="modelInfo(collaborator.id)">Affecter</button> -->
+                                            <button type="button" class="btnTab"  (click)="affectCollabToProject(project.id,collaborator.id)">Affecter</button>
+                                        </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
                                 </div>
+                                <br><hr><br>
+                                <div class="container">
+                                    <h2> Collaborateur(s) sur le projet : {{nbResultat}} </h2>
+                                    <table class="table table-condensed resultat">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <p class="titreTable">Nom </p>
+                                                </th>
+                                                <th>
+                                                    <p class="titreTable">Prénom</p>
+                                                </th>
+                                                <th>
+                                                    <p class="titreTable">Adresse mail</p>
+                                                </th>
+                    
+                                                <th>
+                                                    <p class="commande titreTable">Action</p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let collaborator of allCollabOfProject; let indexOfelement = index">
+                                                
+                                                <td>
+                                                    <p class="contentTable">{{collaborator.firstName}}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="contentTable">{{collaborator.lastName}}</p>
+                                                </td>
+                                                
+                                                <td>
+                                                    <p class="contentTable">{{collaborator.email}}</p>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btnTab"  (click)="deleteCollabOfProject(project.id,collaborator.id)">Supprimer</button>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                
+
                                 <br>
-                                <div class="modal-footer">
-
-                                        <button class="btnModal" type="submit" (click)="deleteProject(project.id)">Supprimer</button>
-
-                                </div>
+                 
 
 
                             </div>
