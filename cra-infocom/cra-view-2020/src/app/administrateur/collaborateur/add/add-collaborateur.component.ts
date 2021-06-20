@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
+import { TypeCollaboratorService } from 'src/app/y-service/Collaborator/type-collaborator.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { TypeClient } from 'src/app/z-model/Client/type-client';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
@@ -21,13 +23,17 @@ export class AddCollaborateurComponent implements OnInit {
 
   
 
-  constructor(private _route:Router,private _service:NgserviceService) { }
+  constructor(
+    private _route:Router,
+    private _CollaboratorService:CollaboratorService,
+    private _TypeCollaboratorService:TypeCollaboratorService,
+     ) {}
 
   allTypeCollaborator!: TypeCollaborator[];
 
   ngOnInit(): void {
 
-    this._service.selectAllTypeCollaborator().subscribe(
+    this._TypeCollaboratorService.selectAllTypeCollaborator().subscribe(
       data => this.allTypeCollaborator = data,
       error => console.log("exception" + error)
     )
@@ -45,7 +51,7 @@ export class AddCollaborateurComponent implements OnInit {
     this.collaborator.password =  this.mdp;
     this.collaborator.typeCollaborator = this.collaboratorType;
 
-   this._service.addCollab(this.collaborator,this.dateEntre,this.dateSortie).subscribe(
+   this._CollaboratorService.addCollab(this.collaborator,this.dateEntre,this.dateSortie).subscribe(
       data =>{
         console.log("ajout effectué");
       },
@@ -60,7 +66,7 @@ export class AddCollaborateurComponent implements OnInit {
     collaboratorType = new TypeCollaborator();
   
     getCollType() {
-      this._service.selectTypeCollaboratorById(this.idOfCollType).subscribe(
+      this._TypeCollaboratorService.selectTypeCollaboratorById(this.idOfCollType).subscribe(
         data => { this.collaboratorType = data; },
         error => console.log("exception" + error),
       )

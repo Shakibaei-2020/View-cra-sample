@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
+import { TypeCollaboratorService } from 'src/app/y-service/Collaborator/type-collaborator.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 
@@ -21,7 +23,10 @@ export class CollaborateurComponent implements OnInit {
 
 
 
-  constructor(private _service:NgserviceService, private _route:Router) { }
+  constructor(
+     private _route:Router,
+     private _CollaboratorService:CollaboratorService,
+     ) {}
 
   ngOnInit() { }
   
@@ -32,7 +37,7 @@ export class CollaborateurComponent implements OnInit {
 
     if(this.collaboratorInputLastName.lastName != undefined && this.collaboratorInputLastName.lastName != ""  ){
 
-      this._service.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
+      this._CollaboratorService.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
         data=> {this.collaborators = data;
         this.nbResultat = this.collaborators.length;
       },
@@ -40,7 +45,7 @@ export class CollaborateurComponent implements OnInit {
         )
         this.collaboratorInputLastName.lastName ="";
       }else{        
-      this._service.selectAllCollab().subscribe(
+      this._CollaboratorService.selectAllCollab().subscribe(
         data=> {this.collaborators = data;
         this.nbResultat = this.collaborators.length;
       },

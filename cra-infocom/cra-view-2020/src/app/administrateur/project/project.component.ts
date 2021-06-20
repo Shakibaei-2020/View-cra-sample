@@ -2,7 +2,14 @@ import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'selenium-webdriver';
+import { ClientService } from 'src/app/y-service/Client/client.service';
+import { TypeClientService } from 'src/app/y-service/Client/type-client.service';
+import { CollabJoinProjectService } from 'src/app/y-service/CollabJoinProject/collab-join-project.service';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
+import { TypeCollaboratorService } from 'src/app/y-service/Collaborator/type-collaborator.service';
+import { MissionService } from 'src/app/y-service/Mission/mission.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
+import { ProjectService } from 'src/app/y-service/Project/project.service';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 import { Mission } from 'src/app/z-model/Mission/mission';
 import { Project } from 'src/app/z-model/Project/project';
@@ -45,12 +52,21 @@ export class ProjectComponent implements OnInit {
 
   allCollaborators!: Collaborator[];
 
-  constructor(private _service: NgserviceService, private _route: Router) { }
+  constructor(
+     private _route: Router,
+     private _CollaboratorService:CollaboratorService,
+     private _ClientService: ClientService,
+     private _MissionService: MissionService,
+     private _ProjectService : ProjectService,
+     private _CollabJoinProjectService:CollabJoinProjectService,
+
+     
+     ) { }
 
   ngOnInit(): void {
 
 
-    this._service.selectAllCollab().subscribe(
+    this._CollaboratorService.selectAllCollab().subscribe(
       data => this.allCollaborators = data,
       error => console.log("excepetion" + error)
 
@@ -70,7 +86,7 @@ export class ProjectComponent implements OnInit {
       this.collabToDelete = [];
       this.newNameProject = [];
 
-      this._service.searchProjectByProjectTitle(this.searchByProjectName).subscribe(
+      this._ProjectService.searchProjectByProjectTitle(this.searchByProjectName).subscribe(
         data => {
           this.projects = data;
           for (var i = 0; i < this.projects.length; i++) {
@@ -84,11 +100,11 @@ export class ProjectComponent implements OnInit {
 
           this.projects.forEach(
             (item) => {
-              this._service.selectMissionById(item.mission.id).subscribe(
+              this._MissionService.selectMissionById(item.mission.id).subscribe(
                 data => {
                   item.missionTitle = data.missionTitle;
 
-                  this._service.selectClientById(data.client.id).subscribe(
+                  this._ClientService.selectClientById(data.client.id).subscribe(
                     data => {
                       item.prenomClient = data.name;
                     },
@@ -115,7 +131,7 @@ export class ProjectComponent implements OnInit {
       this.collabToAffect = [];
       this.collabToDelete = [];
 
-      this._service.searchProjectByMissionTitle(this.searchByMissionName).subscribe(
+      this._ProjectService.searchProjectByMissionTitle(this.searchByMissionName).subscribe(
         data => {
           this.projects = data;
           for (var i = 0; i < this.projects.length; i++) {
@@ -128,11 +144,11 @@ export class ProjectComponent implements OnInit {
 
           this.projects.forEach(
             (item) => {
-              this._service.selectMissionById(item.mission.id).subscribe(
+              this._MissionService.selectMissionById(item.mission.id).subscribe(
                 data => {
                   item.missionTitle = data.missionTitle;
 
-                  this._service.selectClientById(data.client.id).subscribe(
+                  this._ClientService.selectClientById(data.client.id).subscribe(
                     data => {
                       item.prenomClient = data.name;
                     },
@@ -161,7 +177,7 @@ export class ProjectComponent implements OnInit {
       this.collabToDelete = [];
       this.newNameProject = [];
 
-      this._service.searchMissionByClientName(this.searchByClientName).subscribe(
+      this._MissionService.searchMissionByClientName(this.searchByClientName).subscribe(
         data => {
           this.missions = data;
 
@@ -169,7 +185,7 @@ export class ProjectComponent implements OnInit {
 
             (item) => {
 
-              this._service.selectAllProjectByMissionId(item.id).subscribe(
+              this._ProjectService.selectAllProjectByMissionId(item.id).subscribe(
                 data => {
 
                   this.projects = data;
@@ -184,11 +200,11 @@ export class ProjectComponent implements OnInit {
 
                   this.projects.forEach(
                     (item) => {
-                      this._service.selectMissionById(item.mission.id).subscribe(
+                      this._MissionService.selectMissionById(item.mission.id).subscribe(
                         data => {
                           item.missionTitle = data.missionTitle;
 
-                          this._service.selectClientById(data.client.id).subscribe(
+                          this._ClientService.selectClientById(data.client.id).subscribe(
                             data => {
                               item.prenomClient = data.name;
                             },
@@ -225,7 +241,7 @@ export class ProjectComponent implements OnInit {
       this.collabToDelete = [];
       this.newNameProject = [];
 
-      this._service.searchProjectByMissionProjectTitle(this.searchByProjectName, this.searchByMissionName).subscribe(
+      this._ProjectService.searchProjectByMissionProjectTitle(this.searchByProjectName, this.searchByMissionName).subscribe(
         data => {
           this.projects = data;
           for (var i = 0; i < this.projects.length; i++) {
@@ -238,11 +254,11 @@ export class ProjectComponent implements OnInit {
 
           this.projects.forEach(
             (item) => {
-              this._service.selectMissionById(item.mission.id).subscribe(
+              this._MissionService.selectMissionById(item.mission.id).subscribe(
                 data => {
                   item.missionTitle = data.missionTitle;
 
-                  this._service.selectClientById(data.client.id).subscribe(
+                  this._ClientService.selectClientById(data.client.id).subscribe(
                     data => {
                       item.prenomClient = data.name;
                     },
@@ -274,13 +290,13 @@ export class ProjectComponent implements OnInit {
       this.collabToDelete = [];
       this.newNameProject = [];
 
-      this._service.searchMissionByClientName(this.searchByClientName).subscribe(
+      this._MissionService.searchMissionByClientName(this.searchByClientName).subscribe(
         data => {
           this.missions = data;
           this.missions.forEach(
             (item) => {
 
-              this._service.searchProjectByMissionProjectTitle(item.missionTitle, this.searchByProjectName).subscribe(
+              this._ProjectService.searchProjectByMissionProjectTitle(item.missionTitle, this.searchByProjectName).subscribe(
                 data => {
                   this.projects = data;
                   for (var i = 0; i < this.projects.length; i++) {
@@ -293,11 +309,11 @@ export class ProjectComponent implements OnInit {
 
                   this.projects.forEach(
                     (item) => {
-                      this._service.selectMissionById(item.mission.id).subscribe(
+                      this._MissionService.selectMissionById(item.mission.id).subscribe(
                         data => {
                           item.missionTitle = data.missionTitle;
 
-                          this._service.selectClientById(data.client.id).subscribe(
+                          this._ClientService.selectClientById(data.client.id).subscribe(
                             data => {
                               item.prenomClient = data.name;
                             },
@@ -333,12 +349,12 @@ export class ProjectComponent implements OnInit {
       this.collabToDelete = [];
       this.newNameProject = [];
 
-      this._service.searchMissionByClientName(this.searchByClientName).subscribe(
+      this._MissionService.searchMissionByClientName(this.searchByClientName).subscribe(
         data => {
           this.missions = data;
           this.missions.forEach(
             (item) => {
-              this._service.selectAllProjectByMissionId(item.id).subscribe(
+              this._ProjectService.selectAllProjectByMissionId(item.id).subscribe(
                 data => {
                   this.projects = data;
 
@@ -352,11 +368,11 @@ export class ProjectComponent implements OnInit {
 
                   this.projects.forEach(
                     (item) => {
-                      this._service.selectMissionById(item.mission.id).subscribe(
+                      this._MissionService.selectMissionById(item.mission.id).subscribe(
                         data => {
                           item.missionTitle = data.missionTitle;
 
-                          this._service.selectClientById(data.client.id).subscribe(
+                          this._ClientService.selectClientById(data.client.id).subscribe(
                             data => {
                               item.prenomClient = data.name;
                             },
@@ -394,7 +410,7 @@ export class ProjectComponent implements OnInit {
       this.collabToDelete = [];
       this.newNameProject = [];
 
-      this._service.selectAllproject().subscribe(
+      this._ProjectService.selectAllproject().subscribe(
         data => {
           this.projects = data;
 
@@ -410,11 +426,11 @@ export class ProjectComponent implements OnInit {
 
           this.projects.forEach(
             (item) => {
-              this._service.selectMissionById(item.mission.id).subscribe(
+              this._MissionService.selectMissionById(item.mission.id).subscribe(
                 data => {
                   item.missionTitle = data.missionTitle;
 
-                  this._service.selectClientById(data.client.id).subscribe(
+                  this._ClientService.selectClientById(data.client.id).subscribe(
                     data => {
                       item.prenomClient = data.name;
                     },
@@ -458,7 +474,7 @@ export class ProjectComponent implements OnInit {
     if (this.collaboratorInputLastName.lastName != undefined && this.collaboratorInputLastName.lastName != "") {
       this.nbResultatRecherche = 0;
 
-      this._service.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
+      this._CollaboratorService.selectCollabByName(this.collaboratorInputLastName.lastName).subscribe(
         data => {
           this.searchedCollabs = data;
           this.nbResultatRecherche = this.searchedCollabs.length;
@@ -472,7 +488,7 @@ export class ProjectComponent implements OnInit {
       this.collaboratorInputLastName.lastName = "";
     } else {
       this.nbResultatRecherche = 0;
-      this._service.selectAllCollab().subscribe(
+      this._CollaboratorService.selectAllCollab().subscribe(
         data => {
           this.searchedCollabs = data;
           this.nbResultatRecherche = this.searchedCollabs.length;
@@ -491,15 +507,15 @@ export class ProjectComponent implements OnInit {
 
 
 
-    this._service.selectOneCollabById(idCollab).subscribe(
+    this._CollaboratorService.selectOneCollabById(idCollab).subscribe(
       data => {
 
         this.theCollabToAffect = data;
 
-        this._service.selectProjectById(idProject).subscribe(
+        this._ProjectService.selectProjectById(idProject).subscribe(
           data1 => {
             this.projectToAffect = data1;
-            this._service.addCollabToProject(this.theCollabToAffect.id, this.projectToAffect.id).subscribe(
+            this._CollabJoinProjectService.addCollabToProject(this.theCollabToAffect.id, this.projectToAffect.id).subscribe(
               data => {
                 console.log("affectation reussie");
 
@@ -525,11 +541,11 @@ export class ProjectComponent implements OnInit {
 
   deleteTheProject(indexOfElement: number) {
 
-    this._service.deleteAllCollabAffectedToProject(indexOfElement).subscribe(
+    this._CollabJoinProjectService.deleteAllCollabAffectedToProject(indexOfElement).subscribe(
       data => {
         console.log("All project collab of this id project deleted");
 
-        this._service.deleteProjectById(indexOfElement).subscribe(
+        this._ProjectService.deleteProjectById(indexOfElement).subscribe(
           data => console.log("project deleted"),
           error => console.log("project not deleted")
         )
@@ -543,7 +559,7 @@ export class ProjectComponent implements OnInit {
   allCollabOfProject!: Collaborator[];
   modelInfo(indexOfElement: number) {
 
-    this._service.selectCollabByProjectId(indexOfElement).subscribe(
+    this._CollaboratorService.selectCollabByProjectId(indexOfElement).subscribe(
       data => {
         this.allCollabOfProject = data;
       },
@@ -557,7 +573,7 @@ export class ProjectComponent implements OnInit {
   deleteCollabOfProject(projetId: number, collaboratorId: number, allCollabOfProject: Collaborator[], collaborateur: Collaborator) {
 
 
-    this._service.deleteCollabOfThisProject(collaboratorId, projetId).subscribe(
+    this._CollabJoinProjectService.deleteCollabOfThisProject(collaboratorId, projetId).subscribe(
       data => {
         console.log("collaborateur supprimer");
 
@@ -577,7 +593,7 @@ export class ProjectComponent implements OnInit {
   updateTheProjectName(indexOfElement: number) {
 
 
-    this._service.majProjectTitle(+((<HTMLInputElement>document.getElementById(this.projectId[indexOfElement])).value), (<HTMLInputElement>document.getElementById(this.newNameProject[indexOfElement])).value).subscribe(
+    this._ProjectService.majProjectTitle(+((<HTMLInputElement>document.getElementById(this.projectId[indexOfElement])).value), (<HTMLInputElement>document.getElementById(this.newNameProject[indexOfElement])).value).subscribe(
       data => console.log("maj reussi"),
       error => console.log("maj raté")
     )

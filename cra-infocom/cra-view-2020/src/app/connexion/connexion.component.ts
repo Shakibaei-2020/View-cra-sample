@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CollaboratorService } from '../y-service/Collaborator/collaborator.service';
+import { TypeCollaboratorService } from '../y-service/Collaborator/type-collaborator.service';
 import { NgserviceService } from '../y-service/ngservice-service';
 import { Collaborator } from '../z-model/Collaborator/collaborator';
 
@@ -14,14 +16,18 @@ export class ConnexionComponent implements OnInit {
 
   nvcollaborator = new Collaborator();
 
-  constructor(private _route:Router,private _service:NgserviceService) { }
+  constructor(
+    private _CollaboratorService:CollaboratorService,
+    private _TypeCollaboratorService:TypeCollaboratorService,
+    
+    ) { }
 
   ngOnInit(): void {
   }
 
   connexionCollabFormSubmit(){
 
-    this._service.selectCollabByMail(this.collaborator.email).subscribe(
+    this._CollaboratorService.selectCollabByMail(this.collaborator.email).subscribe(
       data=> this.nvcollaborator = data,
       error=>console.log("exception" +error)
       )

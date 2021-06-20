@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { $, error } from 'protractor';
+import { ClientService } from 'src/app/y-service/Client/client.service';
+import { TypeClientService } from 'src/app/y-service/Client/type-client.service';
+import { MissionService } from 'src/app/y-service/Mission/mission.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
+import { ProjectService } from 'src/app/y-service/Project/project.service';
 import { Client } from 'src/app/z-model/Client/client';
 import { Mission } from 'src/app/z-model/Mission/mission';
 import { Project } from 'src/app/z-model/Project/project';
@@ -13,13 +17,22 @@ import { Project } from 'src/app/z-model/Project/project';
 })
 export class AddMissionComponent implements OnInit {
 
-  constructor(private _route: Router, private _service: NgserviceService) { }
+  constructor(
+    private _route: Router,
+     private _service: NgserviceService,
+     private _ClientService: ClientService,
+     private _MissionService: MissionService,
+     private _ProjectService: ProjectService,
+
+
+     
+     ) { }
 
   clients!: Client[];
 
   ngOnInit(): void {
 
-    this._service.selectAllClient().subscribe(
+    this._ClientService.selectAllClient().subscribe(
       data => this.clients = data,
       error => console.log("exception" + error)
     )
@@ -60,7 +73,7 @@ export class AddMissionComponent implements OnInit {
 
 
 
-    this._service.addAndUpdateMission(this.newMission, this.startDate, this.endDate).subscribe(
+    this._MissionService.addAndUpdateMission(this.newMission, this.startDate, this.endDate).subscribe(
       data => {
         console.log("ajout effectué")
 
@@ -69,14 +82,14 @@ export class AddMissionComponent implements OnInit {
 
         this.projectsToinsert.forEach(
           (item) => {
-            this._service.selectMissionById(this.addedMission.id).subscribe(
+            this._MissionService.selectMissionById(this.addedMission.id).subscribe(
               data => {
                 this.missionToAdd = data;
 
                 this.projectToAdd.projectTitle = item;
                 this.projectToAdd.mission = this.missionToAdd;
 
-                this._service.addAndUpdateProject(this.projectToAdd).subscribe(
+                this._ProjectService.addAndUpdateProject(this.projectToAdd).subscribe(
                   data => console.log("ajout reussie"),
                   error => console.log("exception" + error)
                 )

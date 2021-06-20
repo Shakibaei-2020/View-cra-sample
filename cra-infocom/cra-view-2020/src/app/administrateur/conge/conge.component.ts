@@ -1,6 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Type } from '@angular/core';
 import { Router } from '@angular/router';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
+import { TypeCollaboratorService } from 'src/app/y-service/Collaborator/type-collaborator.service';
+import { LeaveService } from 'src/app/y-service/Leave/leave.service';
+import { TypeLeaveService } from 'src/app/y-service/Leave/type-leave.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 import { Leave } from 'src/app/z-model/Leave/leave';
@@ -21,7 +25,14 @@ export class CongeComponent implements OnInit {
 
   error!: string;
 
-  constructor(private _service: NgserviceService, private _route: Router) { }
+  constructor(
+    private _service: NgserviceService,
+    private _route: Router,
+    private _CollaboratorService: CollaboratorService,
+
+    private _LeaveService: LeaveService,
+    private _TypeLeaveService: TypeLeaveService,
+  ) { }
 
   collaborator = new Collaborator();
   leave = new Leave();
@@ -50,7 +61,7 @@ export class CongeComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this._service.selectAllLeaveType().subscribe(
+    this._TypeLeaveService.selectAllLeaveType().subscribe(
       data => this.allLeaveType = data,
       error => console.log("exception" + error)
     )
@@ -75,7 +86,7 @@ export class CongeComponent implements OnInit {
       this.leaveStatusFin = [];
       this.joursEntiers = [];
 
-      this._service.searchLeave(this.date1, this.date2, this.statusSearch, this.lastNameCollab).subscribe(
+      this._LeaveService.searchLeave(this.date1, this.date2, this.statusSearch, this.lastNameCollab).subscribe(
         data => {
           this.leaves = data;
 
@@ -97,7 +108,7 @@ export class CongeComponent implements OnInit {
 
           this.leaves.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -134,7 +145,7 @@ export class CongeComponent implements OnInit {
       this.joursEntiers = [];
 
 
-      this._service.searchLeaveByDateStatus(this.date1, this.date2, this.statusSearch).subscribe(
+      this._LeaveService.searchLeaveByDateStatus(this.date1, this.date2, this.statusSearch).subscribe(
         data => {
           this.leaves = data;
 
@@ -155,7 +166,7 @@ export class CongeComponent implements OnInit {
 
           this.leaves.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -193,7 +204,7 @@ export class CongeComponent implements OnInit {
 
 
 
-      this._service.searchLeaveByDateName(this.date1, this.date2, this.lastNameCollab).subscribe(
+      this._LeaveService.searchLeaveByDateName(this.date1, this.date2, this.lastNameCollab).subscribe(
         data => {
           this.leaves = data;
 
@@ -213,7 +224,7 @@ export class CongeComponent implements OnInit {
 
           this.leaves.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -249,7 +260,7 @@ export class CongeComponent implements OnInit {
       this.leaveStatusFin = [];
       this.joursEntiers = [];
 
-      this._service.searchLeaveByDate(this.date1, this.date2).subscribe(
+      this._LeaveService.searchLeaveByDate(this.date1, this.date2).subscribe(
         data => {
           this.leaves = data;
 
@@ -269,7 +280,7 @@ export class CongeComponent implements OnInit {
 
           this.leaves.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -306,7 +317,7 @@ export class CongeComponent implements OnInit {
       this.joursEntiers = [];
 
 
-      this._service.searchLeaveByStatusName(this.statusSearch, this.lastNameCollab).subscribe(
+      this._LeaveService.searchLeaveByStatusName(this.statusSearch, this.lastNameCollab).subscribe(
         data => {
           this.leaves = data;
 
@@ -326,14 +337,14 @@ export class CongeComponent implements OnInit {
 
           this.leaves.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
                     item.prenomCollab = data.firstName;
                     item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
                     item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
-                  
+
                   }
                   this.nbResultat = this.leaves.length;
                 },
@@ -364,7 +375,7 @@ export class CongeComponent implements OnInit {
       this.leaveStatusFin = [];
       this.joursEntiers = [];
 
-      this._service.searchLeaveByName(this.lastNameCollab).subscribe(
+      this._LeaveService.searchLeaveByName(this.lastNameCollab).subscribe(
         data => {
           this.leaves = data;
 
@@ -386,7 +397,7 @@ export class CongeComponent implements OnInit {
 
           this.leaves.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -423,7 +434,7 @@ export class CongeComponent implements OnInit {
       this.leaveStatusFin = [];
       this.joursEntiers = [];
 
-      this._service.searchLeaveByStatus(this.statusSearch).subscribe(
+      this._LeaveService.searchLeaveByStatus(this.statusSearch).subscribe(
         data => {
           this.leaves = data;
 
@@ -444,7 +455,7 @@ export class CongeComponent implements OnInit {
 
           this.leaves.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -481,7 +492,7 @@ export class CongeComponent implements OnInit {
       this.leaveStatusFin = [];
       this.joursEntiers = [];
 
-      this._service.searchAllLeave().subscribe(
+      this._LeaveService.searchAllLeave().subscribe(
         data => {
           this.leaves = data;
 
@@ -501,7 +512,7 @@ export class CongeComponent implements OnInit {
 
           this.leaves.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -539,7 +550,7 @@ export class CongeComponent implements OnInit {
   /** recupere la demande de congé d'un collaborateur via son id */
   getCollabByLeaveId() {
     /** selectionne un collaborateur avec la clé etrangere idCollaborateur dans la table leave */
-    this._service.selectCollabByLeaveId(2).subscribe(
+    this._CollaboratorService.selectCollabByLeaveId(2).subscribe(
       data => this.collaborator = data,
       error => console.log("exception" + error)
     )
@@ -581,14 +592,14 @@ export class CongeComponent implements OnInit {
 
   updateLeaveFromCollab(indexOfElement: number) {
 
-    this._service.selectOneLeaveRequestById(+(<HTMLInputElement>document.getElementById(this.leaveRequestId[indexOfElement])).value).subscribe(
+    this._LeaveService.selectOneLeaveRequestById(+(<HTMLInputElement>document.getElementById(this.leaveRequestId[indexOfElement])).value).subscribe(
       data1 => {
         this.leaveRequestToUpdated = data1;
 
         this.updatedLeave.id = this.leaveRequestToUpdated.id;
         this.updatedLeave.collaboratorId = this.leaveRequestToUpdated.collaboratorId;
 
-        this._service.selectLeaveTypeById(+(<HTMLInputElement>document.getElementById(this.leaveType[indexOfElement])).value).subscribe(
+        this._TypeLeaveService.selectLeaveTypeById(+(<HTMLInputElement>document.getElementById(this.leaveType[indexOfElement])).value).subscribe(
           data2 => {
             this.newTypeLeave = data2;
 
@@ -604,7 +615,7 @@ export class CongeComponent implements OnInit {
             this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.leaveStatus[indexOfElement])).value || this.leaveRequestToUpdated.statusFin;
             this.updatedLeave.nbJours = this.dayNumber || this.leaveRequestToUpdated.nbJours;
 
-            this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(
+            this._LeaveService.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(
               data => {
                 console.log("ajout effectué");
                 window.location.reload();
@@ -645,9 +656,9 @@ export class CongeComponent implements OnInit {
     var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime();
     this.dayNumber = Diff_temps / (1000 * 3600 * 24);
   }
-  deleteLeaveFromCollab(value: any,leaves:Leave[],leave:Leave) {
+  deleteLeaveFromCollab(value: any, leaves: Leave[], leave: Leave) {
 
-    this._service.deleteOneLeaveRequest(value).subscribe(
+    this._LeaveService.deleteOneLeaveRequest(value).subscribe(
       data => {
         console.log("delete leave effectué");
 

@@ -2,7 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'selenium-webdriver';
+import { ClientService } from 'src/app/y-service/Client/client.service';
+import { TypeClientService } from 'src/app/y-service/Client/type-client.service';
+import { MissionService } from 'src/app/y-service/Mission/mission.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
+import { ProjectService } from 'src/app/y-service/Project/project.service';
 import { Client } from 'src/app/z-model/Client/client';
 import { Leave } from 'src/app/z-model/Leave/leave';
 import { Mission } from 'src/app/z-model/Mission/mission';
@@ -38,12 +42,21 @@ export class MissionComponent implements OnInit {
 
 
 
-  constructor(private _service: NgserviceService, private _route: Router) { }
+  constructor(
+    private _service: NgserviceService, 
+    private _route: Router,
+    private _ClientService: ClientService,
+
+    private _ProjectService: ProjectService,
+
+    private _MissionService: MissionService,
+    
+    ) { }
 
   ngOnInit(): void {
 
 
-    this._service.selectAllClient().subscribe(
+    this._ClientService.selectAllClient().subscribe(
       data => this.clients = data,
       error => console.log("exception" + error)
     )
@@ -64,13 +77,13 @@ export class MissionComponent implements OnInit {
       this.refClientMission = [];
       this.finMission = [];
 
-      this._service.searchMission(this.date1, this.date2, this.clientName).subscribe(
+      this._MissionService.searchMission(this.date1, this.date2, this.clientName).subscribe(
         data => {
           this.missions = data;
 
           this.missions.forEach(
             (item) => {
-              this._service.selectClientById(item.client.id).subscribe(
+              this._ClientService.selectClientById(item.client.id).subscribe(
                 data => {
                   if (item != null) {
                     item.clientName = data.name;
@@ -91,7 +104,7 @@ export class MissionComponent implements OnInit {
 
           this.missions.forEach(
             (item) => {
-              this._service.selectProjectByMissionId(item.id).subscribe(
+              this._ProjectService.selectProjectByMissionId(item.id).subscribe(
                 data => {
                   console.log(data)
                   item.porjectName = data.missionTitle;
@@ -135,14 +148,14 @@ export class MissionComponent implements OnInit {
       this.refClientMission = [];
       this.finMission = [];
 
-      this._service.searchMissionByClientName(this.clientName).subscribe(
+      this._MissionService.searchMissionByClientName(this.clientName).subscribe(
         data => {
           this.missions = data;
 
 
           this.missions.forEach(
             (item) => {
-              this._service.selectClientById(item.client.id).subscribe(
+              this._ClientService.selectClientById(item.client.id).subscribe(
                 data => {
                   if (item != null) {
                     item.clientName = data.name;
@@ -190,14 +203,14 @@ export class MissionComponent implements OnInit {
       this.finMission = [];
 
 
-      this._service.searchMissionByDate(this.date1, this.date2).subscribe(
+      this._MissionService.searchMissionByDate(this.date1, this.date2).subscribe(
         data => {
           this.missions = data;
 
 
           this.missions.forEach(
             (item) => {
-              this._service.selectClientById(item.client.id).subscribe(
+              this._ClientService.selectClientById(item.client.id).subscribe(
                 data => {
                   if (item != null) {
                     item.clientName = data.name;
@@ -246,14 +259,14 @@ export class MissionComponent implements OnInit {
       this.refClientMission = [];
       this.finMission = [];
 
-      this._service.searchAllMission().subscribe(
+      this._MissionService.searchAllMission().subscribe(
         data => {
           this.missions = data;
 
 
           this.missions.forEach(
             (item) => {
-              this._service.selectClientById(item.client.id).subscribe(
+              this._ClientService.selectClientById(item.client.id).subscribe(
                 data => {
                   if (item != null) {
                     item.clientName = data.name;
@@ -264,7 +277,7 @@ export class MissionComponent implements OnInit {
                 },
                 error => console.log("exception" + error)
               )
-              this._service.selectProjectByMissionId(item.id).subscribe(
+              this._ProjectService.selectProjectByMissionId(item.id).subscribe(
                 data => {
                   item.porjectName = data.missionTitle;
                 },
@@ -310,13 +323,13 @@ export class MissionComponent implements OnInit {
 
   updateMission(indexOfElement: number) {
 
-    this._service.selectMissionById(+(<HTMLInputElement>document.getElementById(this.missionId[indexOfElement])).value).subscribe(
+    this._MissionService.selectMissionById(+(<HTMLInputElement>document.getElementById(this.missionId[indexOfElement])).value).subscribe(
       data1 => {
         this.missionToUpdate = data1;
 
         this.updatedMission.id = this.missionToUpdate.id;
 
-        this._service.selectClientById(+(<HTMLInputElement>document.getElementById(this.refClientMission[indexOfElement])).value).subscribe(
+        this._ClientService.selectClientById(+(<HTMLInputElement>document.getElementById(this.refClientMission[indexOfElement])).value).subscribe(
           data2 => {
             this.newClientMission = data2;
 
@@ -325,7 +338,7 @@ export class MissionComponent implements OnInit {
             this.newEndDate = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.finMission[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.missionToUpdate.endDate, 'yyyy-MM-dd') || '2000-02-14';
             this.updatedMission.client = this.newClientMission || this.missionToUpdate.client;
 
-            this._service.addAndUpdateMission(this.updatedMission, this.newStartDate, this.newEndDate).subscribe(
+            this._MissionService.addAndUpdateMission(this.updatedMission, this.newStartDate, this.newEndDate).subscribe(
               data => {
                 console.log("update effectué");
               },
@@ -344,7 +357,7 @@ export class MissionComponent implements OnInit {
 
   deleteMission(indexOfElement: number) {
 
-    this._service.deleteMission(indexOfElement).subscribe(
+    this._MissionService.deleteMission(indexOfElement).subscribe(
       data => {
         console.log("delete effectué");
       },
@@ -370,7 +383,7 @@ export class MissionComponent implements OnInit {
   deleteTheProject(idProject: number) {
 
 
-    this._service.deleteProjectById(idProject).subscribe(
+    this._ProjectService.deleteProjectById(idProject).subscribe(
       data => console.log("delete effectué"),
       error => console.log("delete non effectué")
     )
@@ -403,7 +416,7 @@ export class MissionComponent implements OnInit {
     this.projectToUpdateName = [];
 
 
-    this._service.selectAllProjectByMissionId(missionId).subscribe(
+    this._ProjectService.selectAllProjectByMissionId(missionId).subscribe(
       data => {
         this.allProjectOfMission = data;
 
@@ -428,7 +441,7 @@ export class MissionComponent implements OnInit {
 
   majTheProject(idProject: number, indexOfElement: number) {
 
-    this._service.selectProjectById(idProject).subscribe(
+    this._ProjectService.selectProjectById(idProject).subscribe(
       data => {
         this.projectToUpdate = data;
 
@@ -438,7 +451,7 @@ export class MissionComponent implements OnInit {
         console.log(this.projectToUpdate.projectTitle)
 
 
-        this._service.addAndUpdateProject2(this.projectToUpdate).subscribe(
+        this._ProjectService.addAndUpdateProject2(this.projectToUpdate).subscribe(
           data => console.log("maj reussie"),
           error => console.log("maj echoué")
         )

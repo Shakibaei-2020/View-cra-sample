@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivityService } from 'src/app/y-service/Activity/activity.service';
+import { TypeActivityService } from 'src/app/y-service/Activity/type-activity.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Activity } from 'src/app/z-model/Activity/activity';
 
@@ -14,10 +16,15 @@ export class EditComponent implements OnInit {
   updatedActivity = new Activity();
 
 
-  constructor(private _service:NgserviceService, private _route:Router) { }
+  constructor(
+    private _service:NgserviceService, 
+    private _route:Router,
+    private _ActivityService:ActivityService,
+    private _TypeActivityService:TypeActivityService,
+    ) { }
 
   ngOnInit(): void {
-    this._service.selectActivityById(2).subscribe(
+    this._ActivityService.selectActivityById(2).subscribe(
       data=> this.activity = data,
       error=>console.log("exception" +error)
       )
@@ -33,7 +40,7 @@ export class EditComponent implements OnInit {
     this.updatedActivity.collaboratorId = this.activity.collaboratorId;
 
 
-    this._service.addAndUpdateActivity(this.updatedActivity,this.dateOfStart).subscribe(
+    this._ActivityService.addAndUpdateActivity(this.updatedActivity,this.dateOfStart).subscribe(
       data =>{
         console.log("ajout effectué");
       },
@@ -46,7 +53,7 @@ export class EditComponent implements OnInit {
   deleteActivity(){
 
     this.activity.id;
-    this._service.DeleteActivityById(2).subscribe(
+    this._ActivityService.DeleteActivityById(2).subscribe(
       data =>{
         console.log("delete effectué");
       },

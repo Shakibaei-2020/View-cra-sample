@@ -8,6 +8,10 @@ import { Project } from 'src/app/z-model/Project/project';
 import { TypeActivity } from 'src/app/z-model/Activity/type-activity';
 import joursFeriees from '../../z-sources/data/joursFeriées.json'
 import { DatePipe } from '@angular/common';
+import { MissionService } from 'src/app/y-service/Mission/mission.service';
+import { ProjectService } from 'src/app/y-service/Project/project.service';
+import { ActivityService } from 'src/app/y-service/Activity/activity.service';
+import { TypeActivityService } from 'src/app/y-service/Activity/type-activity.service';
 
 @Component({
   selector: 'app-declaration-activite',
@@ -56,7 +60,14 @@ export class DeclarationActiviteComponent implements OnInit {
 
   toalDuTotalAcitivty = 0;
 
-  constructor(private _route: Router, private _service: NgserviceService) {
+  constructor(
+    private _route: Router,
+     private _service: NgserviceService,
+     private _MissionService: MissionService,
+     private _ProjectService: ProjectService,
+     private _ActivityService:ActivityService,
+     private _TypeActivityService:TypeActivityService,
+     ) {
   }
 
   public missions!: Mission[];
@@ -75,21 +86,21 @@ export class DeclarationActiviteComponent implements OnInit {
     this.aujourdhui = this.formatageDate();
 
     // Pour récupérer la liste des types d'activité : opérationnelle
-    this._service.selectAllTypeActivity().subscribe(
+    this._TypeActivityService.selectAllTypeActivity().subscribe(
       data => this.lesTypeActivity = data,
       error => console.log("exception" + error),
       () => this.isLoading = false
     )
 
     // Pour récupérer la liste des missions : opérationnelle mais avoir si on en a vraiment besoin
-    this._service.selectAllMission().subscribe(
+    this._MissionService.selectAllMission().subscribe(
       data => this.missions = data,
       error => console.log("exception" + error)
     )
 
     // Pour récupérer la liste des projects affectés à un collaborateur : opérationnelle mais faut l'automatiser
     // TODO : attention c'es en dur
-    this._service.SelectAllProjectForOneCollab(2).subscribe(
+    this._ProjectService.SelectAllProjectForOneCollab(2).subscribe(
       data => {this.projects = data;},
       error => console.log("exception" + error)
     )
@@ -250,7 +261,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
   updatedAfterSelect2() {
     this.refinterne2 = this.collaborateur.id;
-    this._service.selectMissionById(this.selectedOption2).subscribe(
+    this._MissionService.selectMissionById(this.selectedOption2).subscribe(
       data => this.laMission2 = data,
       error => console.log("exception" + error)
     )
@@ -311,7 +322,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
   updatedAfterSelect3() {
     this.refinterne3 = this.collaborateur.id;
-    this._service.selectMissionById(this.selectedOption3).subscribe(
+    this._MissionService.selectMissionById(this.selectedOption3).subscribe(
       data => this.laMission3 = data,
       error => console.log("exception" + error)
     )
@@ -370,7 +381,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
   updatedAfterSelect4() {
     this.refinterne4 = this.collaborateur.id;
-    this._service.selectMissionById(this.selectedOption4).subscribe(
+    this._MissionService.selectMissionById(this.selectedOption4).subscribe(
       data => this.laMission4 = data,
       error => console.log("exception" + error)
     )
@@ -442,7 +453,7 @@ export class DeclarationActiviteComponent implements OnInit {
   }
 
   updateAfterSelectAstreinte1() {
-    this._service.selectMissionById(this.selectedProjectAstreint1).subscribe(
+    this._MissionService.selectMissionById(this.selectedProjectAstreint1).subscribe(
       data => this.laMissionAstreinte1 = data,
       error => console.log("exception" + error)
     )
@@ -452,7 +463,7 @@ export class DeclarationActiviteComponent implements OnInit {
   theTypeActivity1 = new TypeActivity();
   selectedTypeUpdate1() {
 
-    this._service.selectTypeActivityById(this.selectedTypeUpdateValue1).subscribe(
+    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue1).subscribe(
       data => this.theTypeActivity1 = data,
       error => console.log("exception" + error)
     )
@@ -493,7 +504,7 @@ export class DeclarationActiviteComponent implements OnInit {
   }
 
   updateAfterSelectAstreinte2() {
-    this._service.selectMissionById(this.selectedProjectAstreint2).subscribe(
+    this._MissionService.selectMissionById(this.selectedProjectAstreint2).subscribe(
       data => this.laMissionAstreinte2 = data,
       error => console.log("exception" + error)
     )
@@ -504,7 +515,7 @@ export class DeclarationActiviteComponent implements OnInit {
   /** Select Type activité via l'id */
   selectedTypeUpdate2() {
 
-    this._service.selectTypeActivityById(this.selectedTypeUpdateValue2).subscribe(
+    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue2).subscribe(
       data => this.theTypeActivity2 = data,
       error => console.log("exception" + error)
     )
@@ -547,7 +558,7 @@ export class DeclarationActiviteComponent implements OnInit {
   }
 
   updateAfterSelectAstreinte3() {
-    this._service.selectMissionById(this.selectedProjectAstreint3).subscribe(
+    this._MissionService.selectMissionById(this.selectedProjectAstreint3).subscribe(
       data => this.laMissionAstreinte3 = data,
       error => console.log("exception" + error)
     )
@@ -558,7 +569,7 @@ export class DeclarationActiviteComponent implements OnInit {
   /** Select Type activité via l'id */
 
   selectedTypeUpdate3() {
-    this._service.selectTypeActivityById(this.selectedTypeUpdateValue3).subscribe(
+    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue3).subscribe(
       data => this.theTypeActivity3 = data,
       error => console.log("exception" + error)
     )
@@ -603,17 +614,17 @@ export class DeclarationActiviteComponent implements OnInit {
       error => console.log("exception" + error)
     ) */
 
-    this._service.selectTypeActivityById(2).subscribe(
+    this._TypeActivityService.selectTypeActivityById(2).subscribe(
       data => this.typeActivity2 = data,
       error => console.log("exception" + error)
     )
 
-    this._service.selectTypeActivityById(2).subscribe(
+    this._TypeActivityService.selectTypeActivityById(2).subscribe(
       data => this.typeActivity3 = data,
       error => console.log("exception" + error)
     )
 
-    this._service.selectTypeActivityById(2).subscribe(
+    this._TypeActivityService.selectTypeActivityById(2).subscribe(
       data => this.typeActivity4 = data,
       error => console.log("exception" + error)
     )
@@ -627,21 +638,21 @@ export class DeclarationActiviteComponent implements OnInit {
     }
 
     if (this.selectedOption2 != null) {
-      this._service.selectProjectByMissionId(this.selectedOption2).subscribe(
+      this._ProjectService.selectProjectByMissionId(this.selectedOption2).subscribe(
         data => this.ProjectActivity2 = data,
         error => console.log("exception" + error)
       )
     }
 
     if (this.selectedOption3 != null) {
-      this._service.selectProjectByMissionId(this.selectedOption3).subscribe(
+      this._ProjectService.selectProjectByMissionId(this.selectedOption3).subscribe(
         data => this.ProjectActivity3 = data,
         error => console.log("exception" + error)
       )
     }
 
     if (this.selectedOption4 != null) {
-      this._service.selectProjectByMissionId(this.selectedOption4).subscribe(
+      this._ProjectService.selectProjectByMissionId(this.selectedOption4).subscribe(
         data => this.ProjectActivity4 = data,
         error => console.log("exception" + error)
       )
@@ -657,7 +668,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.aujourdhui = this.pipeDate.transform(this.activityNormal.startDate, 'yyyy-MM-dd') || this.aujourdhui;
         // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
 
-        this._service.addAndUpdateActivity(this.activityNormal, this.aujourdhui).subscribe(
+        this._ActivityService.addAndUpdateActivity(this.activityNormal, this.aujourdhui).subscribe(
           data => {
             console.log("activity 1 ajouté");
           },
@@ -675,7 +686,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.activity2.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked;
         this.activity2.typeActivity = this.typeActivity2;
 
-        this._service.addAndUpdateActivity(this.activity2, this.aujourdhui).subscribe(
+        this._ActivityService.addAndUpdateActivity(this.activity2, this.aujourdhui).subscribe(
           data => {
             console.log("activity 2 ajouté");
           },
@@ -695,7 +706,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.activity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
         this.activity3.typeActivity = this.typeActivity3;
 
-        this._service.addAndUpdateActivity(this.activity3, this.aujourdhui).subscribe(
+        this._ActivityService.addAndUpdateActivity(this.activity3, this.aujourdhui).subscribe(
           data => {
             console.log("activity  3 ajouté");
           },
@@ -716,7 +727,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.activity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
         this.activity4.typeActivity = this.typeActivity4;
 
-        this._service.addAndUpdateActivity(this.activity, this.aujourdhui).subscribe(
+        this._ActivityService.addAndUpdateActivity(this.activity, this.aujourdhui).subscribe(
           data => {
             console.log("activity 4 ajouté");
           },
@@ -730,7 +741,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
       if (this.totalAstreinte1 != 0) {
 
-        this._service.selectProjectByMissionId(2).subscribe(
+        this._ProjectService.selectProjectByMissionId(2).subscribe(
           data => this.projectAstreinte1 = data,
           error => console.log("exception" + error)
         )
@@ -746,7 +757,7 @@ export class DeclarationActiviteComponent implements OnInit {
         console.log(this.astreinte1.typeActivity)
 
 
-        this._service.addAndUpdateActivity(this.astreinte1, this.aujourdhui).subscribe(
+        this._ActivityService.addAndUpdateActivity(this.astreinte1, this.aujourdhui).subscribe(
           data => {
             console.log("astreinte  ajouté");
           },
@@ -760,7 +771,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
       if (this.totalAstreinte2 != 0) {
 
-        this._service.selectProjectByMissionId(2).subscribe(
+        this._ProjectService.selectProjectByMissionId(2).subscribe(
           data => this.projectAstreinte2 = data,
           error => console.log("exception" + error)
         )
@@ -770,7 +781,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
         this.astreinte2.typeActivity = this.theTypeActivity2;
 
-        this._service.addAndUpdateActivity(this.astreinte2, this.aujourdhui).subscribe(
+        this._ActivityService.addAndUpdateActivity(this.astreinte2, this.aujourdhui).subscribe(
           data => {
             console.log("astreinte  ajouté");
           },
@@ -788,7 +799,7 @@ export class DeclarationActiviteComponent implements OnInit {
         this.astreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
         this.astreinte3.typeActivity = this.theTypeActivity3;
 
-        this._service.addAndUpdateActivity(this.astreinte3, this.aujourdhui).subscribe(
+        this._ActivityService.addAndUpdateActivity(this.astreinte3, this.aujourdhui).subscribe(
           data => {
             console.log("astreinte  ajouté");
           },

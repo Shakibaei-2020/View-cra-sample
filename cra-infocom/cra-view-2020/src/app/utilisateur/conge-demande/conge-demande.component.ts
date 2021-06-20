@@ -4,6 +4,10 @@ import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Leave } from 'src/app/z-model/Leave/leave';
 import { TypeLeave } from 'src/app/z-model/Leave/type-leave';
 import { map } from 'rxjs/operators';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
+import { TypeCollaboratorService } from 'src/app/y-service/Collaborator/type-collaborator.service';
+import { LeaveService } from 'src/app/y-service/Leave/leave.service';
+import { TypeLeaveService } from 'src/app/y-service/Leave/type-leave.service';
 
 @Component({
   selector: 'app-conge-demande',
@@ -27,10 +31,14 @@ export class CongeDemandeComponent implements OnInit {
   config: any;
   collection = [];
 
-  constructor(private _route: Router, private _service: NgserviceService) {
+  constructor(
+    private _route: Router,
+     private _service: NgserviceService,
 
-  
-  }
+     private _LeaveService: LeaveService,
+     private _TypeLeaveService: TypeLeaveService,
+
+     ) { }
 
   pageChange(newPage: number) {
 		this._route.navigate([''], { queryParams: { page: newPage } });
@@ -46,13 +54,13 @@ export class CongeDemandeComponent implements OnInit {
 
 
     /** on recupere tous les types */
-    this._service.selectAllLeaveType().subscribe(
+    this._TypeLeaveService.selectAllLeaveType().subscribe(
       data => this.allLeaveType = data,
       error => console.log("exception" + error)
     )
 
     /** id du collaborateur recuperé a la connexion */
-    this._service.selectLeaveByCollabId(2).subscribe(
+    this._LeaveService.selectLeaveByCollabId(2).subscribe(
       data => this.leaves = data,
       error => console.log("exception" + error)
     )
@@ -61,7 +69,7 @@ export class CongeDemandeComponent implements OnInit {
 
   /** On recupere le congé selectionné a chaque <select> */
   getTypeLeave() {
-    this._service.selectLeaveTypeById(this.idOfLeaveType).subscribe(
+    this._TypeLeaveService.selectLeaveTypeById(this.idOfLeaveType).subscribe(
       data => { this.leaveType = data; },
       error => console.log("exception" + error),
 
@@ -81,7 +89,7 @@ export class CongeDemandeComponent implements OnInit {
     this.leave.nbJours = this.dayNumber;
 
 
-    this._service.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
+    this._LeaveService.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
       data => {
         console.log("ajout effectué");
         window.location.reload();
@@ -102,7 +110,7 @@ export class CongeDemandeComponent implements OnInit {
 
   /** delete de la note de frais via l'id*/
   deleteLeaveById(value: number) {
-    this._service.deleteOneLeaveRequest(value).subscribe(
+    this._LeaveService.deleteOneLeaveRequest(value).subscribe(
       data => {
         console.log("delete effectué");
         window.location.reload();

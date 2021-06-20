@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivityService } from 'src/app/y-service/Activity/activity.service';
+import { TypeActivityService } from 'src/app/y-service/Activity/type-activity.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Activity } from 'src/app/z-model/Activity/activity';
 
@@ -19,13 +21,19 @@ export class ActiviteComponent implements OnInit {
   public activitys!:Activity[];  
 
   
-  constructor(private _service:NgserviceService, private _route:Router) { }
+  constructor(
+    private _service:NgserviceService, 
+    private _route:Router,
+    private _ActivityService:ActivityService,
+    private _TypeActivityService:TypeActivityService,
+    
+    ) { }
 
   ngOnInit(): void {
   }
 
   searchActivity(){
-    this._service.searchActivity(this.date1, this.date2, this.lastName).subscribe(
+    this._ActivityService.searchActivity(this.date1, this.date2, this.lastName).subscribe(
       data=> {this.activitys = data;
       this.nbResultat = this.activitys.length
     },

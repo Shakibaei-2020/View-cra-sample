@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClientService } from 'src/app/y-service/Client/client.service';
+import { TypeClientService } from 'src/app/y-service/Client/type-client.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Client } from 'src/app/z-model/Client/client';
 import { TypeClient } from 'src/app/z-model/Client/type-client';
@@ -11,11 +13,17 @@ import { TypeClient } from 'src/app/z-model/Client/type-client';
 })
 export class AddClientComponent implements OnInit {
 
-  constructor(private _route: Router, private _service: NgserviceService) { }
+  constructor(
+    private _route: Router, 
+    private _service: NgserviceService,
+    private _ClientService: ClientService,
+    private _TypeClientService: TypeClientService,
+
+    ) { }
 
   ngOnInit(): void {
 
-    this._service.selectAllTypeClient().subscribe(
+    this._TypeClientService.selectAllTypeClient().subscribe(
       data => this.allClientType = data,
       error => console.log("exception" + error)
     )
@@ -27,7 +35,7 @@ export class AddClientComponent implements OnInit {
   clientType = new TypeClient();
 
   getClientType() {
-    this._service.selectTypeClientById(this.idOfClientType).subscribe(
+    this._TypeClientService.selectTypeClientById(this.idOfClientType).subscribe(
       data => { this.clientType = data; },
       error => console.log("exception" + error),
     )
@@ -45,7 +53,7 @@ export class AddClientComponent implements OnInit {
     this.newClient.typeClient  = this.clientType;
 
 
-    this._service.addAndupdateClient(this.newClient).subscribe(
+    this._ClientService.addAndupdateClient(this.newClient).subscribe(
       data => {
         console.log("ajout effectué");
       },

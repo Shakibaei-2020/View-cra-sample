@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
+import { TypeCollaboratorService } from 'src/app/y-service/Collaborator/type-collaborator.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 
@@ -12,11 +14,15 @@ export class AccueilUtilisateurComponent implements OnInit {
 
   collaborateur = new Collaborator();
 
-  constructor(private _route: Router, private _service: NgserviceService) { }
+  constructor(
+    private _route: Router,
+     private _CollaboratorService:CollaboratorService,
+     
+     ) { }
 
   ngOnInit(): void {
     /** */
-    this._service.selectOneCollabById(3).subscribe(
+    this._CollaboratorService.selectOneCollabById(3).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)
     )

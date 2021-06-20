@@ -1,4 +1,5 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+
+import {  NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -6,19 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
-
 import { AddCollaborateurComponent } from './administrateur/collaborateur/add/add-collaborateur.component';
-
-
 import { ConnexionComponent } from './connexion/connexion.component';
-
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { DeclarationActiviteComponent } from './utilisateur/declaration-activite/declaration-activite.component';
-
 import { FraisComponent } from './administrateur/frais/frais.component';
 import { CongeComponent } from './administrateur/conge/conge.component';
 import{ CongeDemandeComponent} from './utilisateur/conge-demande/conge-demande.component';
-
 import { CollaborateurComponent } from './administrateur/collaborateur/collaborateur.component';
 import { ActiviteComponent } from './administrateur/activite/activite.component';
 import { AddComponent } from './administrateur/activite/add/add.component';
@@ -36,8 +31,6 @@ import localeFr from '@angular/common/locales/fr';
 import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
 import { ProjectComponent } from './administrateur/project/project.component';
 import { AddProjectComponent } from './administrateur/project/add-project/add-project.component';
-import { ClientServiceComponent } from './y-service/Client/client-service/client-service.component';
-import { TypeClientServiceComponent } from './y-service/Client/type-client-service/type-client-service.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -68,8 +61,6 @@ registerLocaleData(localeFr, 'fr');
     AccueilAdministrateurComponent,
     ProjectComponent,
     AddProjectComponent,
-    ClientServiceComponent,
-    TypeClientServiceComponent,
 
   ],
   imports: [

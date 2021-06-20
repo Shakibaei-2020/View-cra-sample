@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'selenium-webdriver';
+import { MissionService } from 'src/app/y-service/Mission/mission.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
+import { ProjectService } from 'src/app/y-service/Project/project.service';
 import { Mission } from 'src/app/z-model/Mission/mission';
 import { Project } from 'src/app/z-model/Project/project';
 
@@ -12,7 +14,13 @@ import { Project } from 'src/app/z-model/Project/project';
 })
 export class AddProjectComponent implements OnInit {
 
-  constructor( private _service:NgserviceService,private _route:Router) { }
+  constructor( 
+    private _service:NgserviceService,
+    private _route:Router,
+    private _MissionService: MissionService,
+    private _ProjectService : ProjectService,
+
+    ) { }
 
   missions!: Mission[];
 
@@ -22,7 +30,7 @@ export class AddProjectComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._service.selectAllMission().subscribe(
+    this._MissionService.selectAllMission().subscribe(
       data=>this.missions = data,
       error=>console.log("exception" + error),
     )
@@ -33,13 +41,13 @@ export class AddProjectComponent implements OnInit {
   projectToAdd= new Project();
 
   addProject(){
-    this._service.selectMissionById(this.missionOfproject).subscribe(
+    this._MissionService.selectMissionById(this.missionOfproject).subscribe(
       data=>{this.missionToAdd = data;
       
         this.projectToAdd.projectTitle = this.projectTitle;
         this.projectToAdd.mission = this.missionToAdd;
 
-      this._service.addAndUpdateProject(this.projectToAdd).subscribe(
+      this._ProjectService.addAndUpdateProject(this.projectToAdd).subscribe(
         data=>console.log("ajout reussie"),
         error=>console.log("exception"+error)
       )

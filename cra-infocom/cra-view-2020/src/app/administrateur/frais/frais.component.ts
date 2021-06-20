@@ -1,6 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
+import { TypeCollaboratorService } from 'src/app/y-service/Collaborator/type-collaborator.service';
+import { ExpenseService } from 'src/app/y-service/Expense/expense.service';
+import { TypeExpenseService } from 'src/app/y-service/Expense/type-expense.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Expense } from 'src/app/z-model/Expense/expense';
 import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
@@ -40,12 +44,19 @@ export class FraisComponent implements OnInit {
 
 
 
-  constructor(private _service: NgserviceService, private _route: Router) { }
+  constructor(
+    private _service: NgserviceService, 
+    private _route: Router,
+    private _CollaboratorService:CollaboratorService,
+    private _ExpenseService:ExpenseService,
+    private _TypeExpenseService:TypeExpenseService,
+
+    ) { }
 
   ngOnInit(): void {
 
     /** select all type Expense */
-    this._service.selectAllTypeExpense().subscribe(
+    this._TypeExpenseService.selectAllTypeExpense().subscribe(
       data => this.allExpenseType = data,
       error => console.log("exception" + error)
     )
@@ -70,7 +81,7 @@ export class FraisComponent implements OnInit {
       this.expenseType  = [];
       this.newCostTTC  = [];
 
-      this._service.searchExpense(this.date1, this.date2, this.searchStatus, this.lastNameCollab).subscribe(
+      this._ExpenseService.searchExpense(this.date1, this.date2, this.searchStatus, this.lastNameCollab).subscribe(
         data => {
           this.expenses = data;
 
@@ -91,7 +102,7 @@ export class FraisComponent implements OnInit {
 
           this.expenses.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -127,7 +138,7 @@ export class FraisComponent implements OnInit {
       this.newCostTTC  = [];
 
 
-      this._service.searchExpenseByDate(this.date1, this.date2).subscribe(
+      this._ExpenseService.searchExpenseByDate(this.date1, this.date2).subscribe(
         data => {
           this.expenses = data;
 
@@ -148,7 +159,7 @@ export class FraisComponent implements OnInit {
 
           this.expenses.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -185,7 +196,7 @@ export class FraisComponent implements OnInit {
       this.newCostTTC  = [];
 
 
-      this._service.searchExpenseByDateName(this.date1, this.date2, this.lastNameCollab).subscribe(
+      this._ExpenseService.searchExpenseByDateName(this.date1, this.date2, this.lastNameCollab).subscribe(
         data => {
           this.expenses = data;
 
@@ -205,7 +216,7 @@ export class FraisComponent implements OnInit {
 
           this.expenses.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -242,7 +253,7 @@ export class FraisComponent implements OnInit {
       this.newCostTTC  = [];
 
 
-      this._service.searchExpenseByDateStatus(this.date1, this.date2, this.searchStatus).subscribe(
+      this._ExpenseService.searchExpenseByDateStatus(this.date1, this.date2, this.searchStatus).subscribe(
         data => {
           this.expenses = data;
 
@@ -265,7 +276,7 @@ export class FraisComponent implements OnInit {
 
           this.expenses.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -302,7 +313,7 @@ export class FraisComponent implements OnInit {
       this.newCostTTC  = [];
 
 
-      this._service.searchExpenseByName(this.lastNameCollab).subscribe(
+      this._ExpenseService.searchExpenseByName(this.lastNameCollab).subscribe(
         data => {
           this.expenses = data;
 
@@ -324,7 +335,7 @@ export class FraisComponent implements OnInit {
 
           this.expenses.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -361,7 +372,7 @@ export class FraisComponent implements OnInit {
       this.newCostTTC  = [];
 
 
-      this._service.searchExpenseByStatus(this.searchStatus).subscribe(
+      this._ExpenseService.searchExpenseByStatus(this.searchStatus).subscribe(
         data => {
           this.expenses = data;
 
@@ -382,7 +393,7 @@ export class FraisComponent implements OnInit {
 
           this.expenses.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -418,7 +429,7 @@ export class FraisComponent implements OnInit {
       this.newCostTTC  = [];
 
       
-      this._service.searchExpenseByNameStatus(this.searchStatus, this.lastNameCollab).subscribe(
+      this._ExpenseService.searchExpenseByNameStatus(this.searchStatus, this.lastNameCollab).subscribe(
         data => {
           this.expenses = data;
 
@@ -438,7 +449,7 @@ export class FraisComponent implements OnInit {
 
           this.expenses.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -475,7 +486,7 @@ export class FraisComponent implements OnInit {
       this.newCostTTC  = [];
 
       
-      this._service.searchAllExpense().subscribe(
+      this._ExpenseService.searchAllExpense().subscribe(
         data => {
           this.expenses = data;
 
@@ -498,7 +509,7 @@ export class FraisComponent implements OnInit {
 
           this.expenses.forEach(
             (item) => {
-              this._service.selectOneCollabById(item.collaboratorId).subscribe(
+              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
                 data => {
                   if (item != null) {
                     item.nomCollab = data.lastName;
@@ -541,7 +552,7 @@ export class FraisComponent implements OnInit {
 
   deleteExpenseById(value: number,expensesTodel:Expense[],expense:Expense) {
 
-    this._service.deleteOneExpense(value).subscribe(
+    this._ExpenseService.deleteOneExpense(value).subscribe(
       data => {
         console.log("delete expense effectué");
 
@@ -572,12 +583,12 @@ export class FraisComponent implements OnInit {
 
 
     
-    this._service.selectOneExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
+    this._ExpenseService.selectOneExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
       data1 => {
         this.expenseToUpdate = data1;
         this.updatedExpense.id = this.expenseToUpdate.id;
         this.updatedExpense.collaboratorId = this.expenseToUpdate.collaboratorId;
-        this._service.selectTypeExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseType[indexOfElement])).value).subscribe(
+        this._TypeExpenseService.selectTypeExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseType[indexOfElement])).value).subscribe(
           data2 => {
             console.log(!(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value)
 
@@ -592,7 +603,7 @@ export class FraisComponent implements OnInit {
             this.updatedExpense.costTTC = this.updatedExpense.costHT + this.updatedExpense.costTVA || this.expenseToUpdate.costTTC;
             this.TTCvalue = this.updatedExpense.costTTC;
             
-            this._service.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
+            this._ExpenseService.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
               data => {
                 console.log("ajout effectué");
               },

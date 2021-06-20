@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClientService } from 'src/app/y-service/Client/client.service';
+import { TypeClientService } from 'src/app/y-service/Client/type-client.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Activity } from 'src/app/z-model/Activity/activity';
 import { Client } from 'src/app/z-model/Client/client';
@@ -25,7 +27,12 @@ export class ClientComponent implements OnInit {
   refClient = new Array();
   typeClient = new Array();
 
-  constructor(private _service: NgserviceService, private _route: Router) { }
+  constructor(
+    private _service: NgserviceService, 
+    private _route: Router,
+    private _ClientService: ClientService,
+    private _TypeClientService: TypeClientService,
+    ) { }
 
 
   allClientType!: TypeClient[];
@@ -33,7 +40,7 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
 
 
-    this._service.selectAllTypeClient().subscribe(
+    this._TypeClientService.selectAllTypeClient().subscribe(
       data => this.allClientType = data,
       error => console.log("exception" + error)
     )
@@ -50,7 +57,7 @@ export class ClientComponent implements OnInit {
       this.refClient = [];
       this.typeClient = [];
 
-      this._service.selectClientByName(this.clientInput.name).subscribe(
+      this._ClientService.selectClientByName(this.clientInput.name).subscribe(
         data => {
           this.clients = data;
 
@@ -73,7 +80,7 @@ export class ClientComponent implements OnInit {
       this.refClient = [];
       this.typeClient = [];
 
-      this._service.selectAllClient().subscribe(
+      this._ClientService.selectAllClient().subscribe(
         data => {
           this.clients = data;
 
@@ -101,12 +108,12 @@ export class ClientComponent implements OnInit {
 
     console.log(indexOfElement)
     console.log(+((<HTMLInputElement>document.getElementById(this.clientId[indexOfElement])).value))
-  this._service.selectClientById(+((<HTMLInputElement>document.getElementById(this.clientId[indexOfElement])).value)).subscribe(
+  this._ClientService.selectClientById(+((<HTMLInputElement>document.getElementById(this.clientId[indexOfElement])).value)).subscribe(
       data1=> {this.clientToUpdate = data1;
         
         this.updatedClient.id = this.clientToUpdate.id;
 
-        this._service.selectTypeClientById(+(<HTMLInputElement>document.getElementById(this.typeClient[indexOfElement])).value).subscribe(
+        this._TypeClientService.selectTypeClientById(+(<HTMLInputElement>document.getElementById(this.typeClient[indexOfElement])).value).subscribe(
           data2 => {
             
             this.newTypeClient = data2;
@@ -115,7 +122,7 @@ export class ClientComponent implements OnInit {
             this.updatedClient.ref = (<HTMLInputElement>document.getElementById(this.refClient[indexOfElement])).value|| this.clientToUpdate.ref;
             this.updatedClient.typeClient = this.newTypeClient || this.clientToUpdate.typeClient;
 
-            this._service.addAndupdateClient(this.updatedClient).subscribe(
+            this._ClientService.addAndupdateClient(this.updatedClient).subscribe(
             data => {
               console.log("ajout effectué");
             },
@@ -135,7 +142,7 @@ export class ClientComponent implements OnInit {
 
   deleteClient(clientIndex: number) {
     console.log(clientIndex)
-    this._service.deleteClient(clientIndex).subscribe(
+    this._ClientService.deleteClient(clientIndex).subscribe(
       data =>{
         console.log("delete effectué");
       },

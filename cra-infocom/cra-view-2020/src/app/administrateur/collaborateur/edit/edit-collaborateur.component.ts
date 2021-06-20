@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
-import { Subscription } from 'rxjs';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Router } from '@angular/router';
 import { Expense } from 'src/app/z-model/Expense/expense';
@@ -9,6 +8,12 @@ import { TypeCollaborator } from 'src/app/z-model/Collaborator/type-collaborator
 import { DatePipe } from '@angular/common';
 import { TypeLeave } from 'src/app/z-model/Leave/type-leave';
 import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
+import { TypeCollaboratorService } from 'src/app/y-service/Collaborator/type-collaborator.service';
+import { ExpenseService } from 'src/app/y-service/Expense/expense.service';
+import { TypeExpenseService } from 'src/app/y-service/Expense/type-expense.service';
+import { LeaveService } from 'src/app/y-service/Leave/leave.service';
+import { TypeLeaveService } from 'src/app/y-service/Leave/type-leave.service';
 
 @Component({
   selector: 'app-edit-collaborateur',
@@ -19,24 +24,28 @@ export class EditCollaborateurComponent implements OnInit {
 
 
   collaborateur = new Collaborator();
-
-
   expenses !: Expense[];
   expense = new Expense();
-
-
   leaves !: Leave[];
   leave = new Leave();
-
-
-
   nullDate = new Date(0);
   pipeDate = new DatePipe('fr-FR');
 
+  constructor(
+    private _service: NgserviceService,
+     private _route: Router,
 
+     private _CollaboratorService:CollaboratorService,
+     private _TypeCollaboratorService:TypeCollaboratorService,
 
+     private _ExpenseService:ExpenseService,
+     private _TypeExpenseService:TypeExpenseService,
 
-  constructor(private _service: NgserviceService, private _route: Router) { }
+     
+     private _LeaveService:LeaveService,
+     private _TypeLeaveService:TypeLeaveService,
+     
+     ) { }
 
 
 
@@ -86,14 +95,14 @@ export class EditCollaborateurComponent implements OnInit {
   ngOnInit() {
 
     /**  Collaborator info*/
-    this._service.selectOneCollabById(2).subscribe(
+    this._CollaboratorService.selectOneCollabById(2).subscribe(
       data => {
         this.collaborateur = data;
 
         this.collaborateur.oldDateOfEntry = this.pipeDate.transform(data.dateOfEntry, 'yyyy-MM-dd') || '2000-02-14';
         this.collaborateur.oldDateOfRelease =this.pipeDate.transform(data.dateOfRelease, 'yyyy-MM-dd') || '2000-02-14';
 
-        this._service.selectTypeCollaboratorById(this.collaborateur.typeCollaborator.id).subscribe(
+        this._TypeCollaboratorService.selectTypeCollaboratorById(this.collaborateur.typeCollaborator.id).subscribe(
           data => this.typeCollaborator = data,
           error => console.log("exception" + error)
         )
@@ -103,7 +112,7 @@ export class EditCollaborateurComponent implements OnInit {
     )
 
     /**select All Type of collaborators */
-    this._service.selectAllTypeCollaborator().subscribe(
+    this._TypeCollaboratorService.selectAllTypeCollaborator().subscribe(
       data => this.allTypeCollaborator = data,
       error => console.log("exception" + error)
     )
@@ -120,7 +129,7 @@ export class EditCollaborateurComponent implements OnInit {
 
 
     /** get all request data input */
-    this._service.listExpenseByCollabId(2).subscribe(
+    this._ExpenseService.listExpenseByCollabId(2).subscribe(
       data => {
         this.expenses = data;
 
@@ -138,7 +147,7 @@ export class EditCollaborateurComponent implements OnInit {
 
         this.expenses.forEach(
           (item) => {
-            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+            this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
               data => {
                 if (item != null) {
                   item.nomCollab = data.lastName;
@@ -157,7 +166,7 @@ export class EditCollaborateurComponent implements OnInit {
       error => console.log("exception" + error)
     )
     /** select all type Expense */
-    this._service.selectAllTypeExpense().subscribe(
+    this._TypeExpenseService.selectAllTypeExpense().subscribe(
       data => this.allExpenseType = data,
       error => console.log("exception" + error)
     )
@@ -165,7 +174,7 @@ export class EditCollaborateurComponent implements OnInit {
 
 
     /** get all Leave request input */
-    this._service.selectLeaveByCollabId(2).subscribe(
+    this._LeaveService.selectLeaveByCollabId(2).subscribe(
       data => {
         this.leaves = data;
 
@@ -185,7 +194,7 @@ export class EditCollaborateurComponent implements OnInit {
 
         this.leaves.forEach(
           (item) => {
-            this._service.selectOneCollabById(item.collaboratorId).subscribe(
+            this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
               data => {
                 if (item != null) {
                   item.nomCollab = data.lastName;
@@ -206,7 +215,7 @@ export class EditCollaborateurComponent implements OnInit {
 
 
     /** on recupere tous les types de congé*/
-    this._service.selectAllLeaveType().subscribe(
+    this._TypeLeaveService.selectAllLeaveType().subscribe(
       data => this.allLeaveType = data,
       error => console.log("exception" + error)
     )
@@ -223,13 +232,13 @@ export class EditCollaborateurComponent implements OnInit {
   updateCollab() {
 
     /** id du collaborateur a recup */
-    this._service.selectOneCollabById(this.collaborateur.id).subscribe(
+    this._CollaboratorService.selectOneCollabById(this.collaborateur.id).subscribe(
       data1 => {
         this.collaboratorToUpdate = data1;
 
         this.updatedCollaborator.id = this.collaboratorToUpdate.id;
 
-        this._service.selectTypeCollaboratorById(+(<HTMLInputElement>document.getElementById(this.typeCollab)).value).subscribe(
+        this._TypeCollaboratorService.selectTypeCollaboratorById(+(<HTMLInputElement>document.getElementById(this.typeCollab)).value).subscribe(
 
           data2 => {
             this.newTypeCollab = data2;
@@ -242,7 +251,7 @@ export class EditCollaborateurComponent implements OnInit {
             this.updatedCollaborator.password = this.collaboratorToUpdate.password;
             this.updatedCollaborator.typeCollaborator = this.newTypeCollab || this.updatedCollaborator.typeCollaborator;
 
-            this._service.addCollab(this.updatedCollaborator, this.newDateEntry, this.newDateOut).subscribe(
+            this._CollaboratorService.addCollab(this.updatedCollaborator, this.newDateEntry, this.newDateOut).subscribe(
               data => {
                 console.log("ajout effectué");
               },
@@ -261,8 +270,7 @@ export class EditCollaborateurComponent implements OnInit {
 
   /** delete collaborateur by id */
   deleteCollab() {
-    this._service.deleteProjectById
-    this._service.deleteCollabById(this.collaborateur.id).subscribe(
+    this._CollaboratorService.deleteCollabById(this.collaborateur.id).subscribe(
       data => {
         console.log("delete effectué");
       },
@@ -286,12 +294,12 @@ export class EditCollaborateurComponent implements OnInit {
   /** expense  */
   updateExpense(indexOfElement: number) {
 
-    this._service.selectOneExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
+    this._ExpenseService.selectOneExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
       data1 => {
         this.expenseToUpdate = data1;
         this.updatedExpense.id = this.expenseToUpdate.id;
         this.updatedExpense.collaboratorId = this.expenseToUpdate.collaboratorId;
-        this._service.selectTypeExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseType[indexOfElement])).value).subscribe(
+        this._TypeExpenseService.selectTypeExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseType[indexOfElement])).value).subscribe(
           data2 => {
             this.newTypeExpense = data2;
             this.updatedExpense.typeExpense = this.newTypeExpense || this.expenseToUpdate.typeExpense
@@ -303,7 +311,7 @@ export class EditCollaborateurComponent implements OnInit {
             this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[indexOfElement])).value || this.expenseToUpdate.costTVA;
             this.updatedExpense.costTTC = this.updatedExpense.costHT + this.updatedExpense.costTVA || this.expenseToUpdate.costTTC;
             this.TTCvalue = this.updatedExpense.costTTC;
-            this._service.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
+            this._ExpenseService.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
               data => {
                 console.log("ajout effectué");
               },
@@ -324,7 +332,7 @@ export class EditCollaborateurComponent implements OnInit {
 
   /** Delete expense by id */
   deleteExpenseById(value: number) {
-    this._service.deleteOneExpense(value).subscribe(
+    this._ExpenseService.deleteOneExpense(value).subscribe(
       data => {
         console.log("delete expense effectué");
       },
@@ -349,14 +357,14 @@ export class EditCollaborateurComponent implements OnInit {
 
   updateLeaveFromCollab(indexOfElement: number) {
 
-    this._service.selectOneLeaveRequestById(+(<HTMLInputElement>document.getElementById(this.leaveRequestId[indexOfElement])).value).subscribe(
+    this._LeaveService.selectOneLeaveRequestById(+(<HTMLInputElement>document.getElementById(this.leaveRequestId[indexOfElement])).value).subscribe(
       data1 => {
         this.leaveRequestToUpdated = data1;
 
         this.updatedLeave.id = this.leaveRequestToUpdated.id;
         this.updatedLeave.collaboratorId = this.leaveRequestToUpdated.collaboratorId;
 
-        this._service.selectLeaveTypeById(+(<HTMLInputElement>document.getElementById(this.leaveType[indexOfElement])).value).subscribe(
+        this._TypeLeaveService.selectLeaveTypeById(+(<HTMLInputElement>document.getElementById(this.leaveType[indexOfElement])).value).subscribe(
           data2 => {
             this.newTypeLeave = data2;
 
@@ -372,7 +380,7 @@ export class EditCollaborateurComponent implements OnInit {
             this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.leaveStatus[indexOfElement])).value || this.leaveRequestToUpdated.statusFin;
             this.updatedLeave.nbJours = this.dayNumber || this.leaveRequestToUpdated.nbJours;
 
-            this._service.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(
+            this._LeaveService.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(
               data => {
                 console.log("ajout effectué");
                 window.location.reload();
@@ -392,7 +400,7 @@ export class EditCollaborateurComponent implements OnInit {
   }
 
   deleteLeaveFromCollab(value: any) {
-    this._service.deleteOneLeaveRequest(value).subscribe(
+    this._LeaveService.deleteOneLeaveRequest(value).subscribe(
       data => {
         console.log("delete leave effectué");
       },

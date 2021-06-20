@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ExpenseService } from 'src/app/y-service/Expense/expense.service';
+import { TypeExpenseService } from 'src/app/y-service/Expense/type-expense.service';
 import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Expense } from 'src/app/z-model/Expense/expense';
 import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
@@ -21,7 +23,13 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
 
   expensesOfCollab!: Expense[];
 
-  constructor(private _route: Router, private _service: NgserviceService) { }
+  constructor(
+    private _route: Router,
+     private _service: NgserviceService,
+     private _ExpenseService:ExpenseService,
+     private _TypeExpenseService:TypeExpenseService,
+     
+     ) { }
 
   ngOnInit(): void {
 
@@ -30,13 +38,13 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
     this.expense.collaboratorId = 2;
 
     /** select all expense en-cours */
-    this._service.listExpenseByCollabId(2).subscribe(
+    this._ExpenseService.listExpenseByCollabId(2).subscribe(
      data => this.expensesOfCollab =data,
      error => console.log("exception " + error),
     )
 
     /** on recupere tous les types d'expense pour le <select> */
-    this._service.selectAllTypeExpense().subscribe(
+    this._TypeExpenseService.selectAllTypeExpense().subscribe(
       data => this.allTypeExpense = data,
       error => console.log("exception" + error)
     )
@@ -49,7 +57,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   /** On recupere l'expense selectioné a chaque <select> */
   getExpenseType(){
     console.log(this.idOfExpenseType)
-    this._service.selectTypeExpenseById(this.idOfExpenseType).subscribe(
+    this._TypeExpenseService.selectTypeExpenseById(this.idOfExpenseType).subscribe(
       data => { this.typeExpense = data; },
       error => console.log("exception" + error),
     )
@@ -65,7 +73,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
     this.expense.typeExpense = this.typeExpense;
     this.expense.costTTC = +this.expense.costHT + +this.expense.costTVA;
 
-    this._service.addAndUpdateExpense(this.expense, this.dateExpense, this.dateRequest).subscribe(
+    this._ExpenseService.addAndUpdateExpense(this.expense, this.dateExpense, this.dateRequest).subscribe(
       data => {
         console.log("ajout effectué");
         window.location.reload();
@@ -77,7 +85,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   }
 
   deleteExpenseById(expenseId:number){
-    this._service.deleteOneExpense(expenseId).subscribe(
+    this._ExpenseService.deleteOneExpense(expenseId).subscribe(
       data => {console.log("delete effectué");
       window.location.reload();
     },
