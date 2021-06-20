@@ -68,7 +68,7 @@
             <div *ngIf="projects">
 
                 <br><br>
-                <h2>Résultat : {{nbResultat}} </h2>
+                <h2>Résultat : {{nbResultat}} résultat trouvé pour cette recherche.</h2>
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -148,6 +148,7 @@
 
                                     <div class="container">
                                         <h2>Collaborateur(s) : {{nbResultatRecherche}} </h2>
+                                        <span class="affectNotDone">{{affectNotDone}}</span>
                                         <table class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
@@ -240,11 +241,7 @@
                                     </div>
                                 </div>
 
-
-
                                 <br>
-
-
 
                             </div>
                         </div>

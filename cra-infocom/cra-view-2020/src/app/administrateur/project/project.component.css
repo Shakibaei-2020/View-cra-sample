@@ -175,7 +175,9 @@ input[type=text] {
 
 
 
-
+.affectNotDone{
+  color: red;
+}
 .au{
 margin-top: 25px;
 }

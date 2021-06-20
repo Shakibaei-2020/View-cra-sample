@@ -21,13 +21,13 @@ export class AddCollaborateurComponent implements OnInit {
 
   mdp!: string;
 
-  
+
 
   constructor(
-    private _route:Router,
-    private _CollaboratorService:CollaboratorService,
-    private _TypeCollaboratorService:TypeCollaboratorService,
-     ) {}
+    private _route: Router,
+    private _CollaboratorService: CollaboratorService,
+    private _TypeCollaboratorService: TypeCollaboratorService,
+  ) { }
 
   allTypeCollaborator!: TypeCollaborator[];
 
@@ -43,54 +43,68 @@ export class AddCollaborateurComponent implements OnInit {
 
   dateEntre!: string;
   dateSortie!: string;
+  validation!: string;
+  notValidation!: string;
 
-  addCollabFormSubmit(){
+  addCollabFormSubmit() {
 
     this.mdp = this.randomMDP();
 
-    this.collaborator.password =  this.mdp;
+    this.collaborator.password = this.mdp;
     this.collaborator.typeCollaborator = this.collaboratorType;
 
-   this._CollaboratorService.addCollab(this.collaborator,this.dateEntre,this.dateSortie).subscribe(
-      data =>{
-        console.log("ajout effectué");
-      },
-      error =>{
-        console.log("erreur ajout non-effectué")
-      }
-    )
+    if ((this.collaborator.firstName != "" && this.collaborator.firstName != undefined) && (this.collaborator.lastName != "" && this.collaborator.lastName != undefined) && (this.collaborator.email != "" && this.collaborator.email != undefined)) {
 
-    }
 
-    idOfCollType!: number;
-    collaboratorType = new TypeCollaborator();
-  
-    getCollType() {
-      this._TypeCollaboratorService.selectTypeCollaboratorById(this.idOfCollType).subscribe(
-        data => { this.collaboratorType = data; },
-        error => console.log("exception" + error),
+      this._CollaboratorService.addCollab(this.collaborator, this.dateEntre, this.dateSortie).subscribe(
+        data => {
+          console.log("ajout effectué");
+          this.validation = "L'ajout a bien été effectué.";
+          this.notValidation = "";
+        },
+        error => {
+          console.log("erreur ajout non-effectué")
+          this.validation = "";
+          this.notValidation = "L'ajout n'a pas été effectué. Merci de remplir tous les champs.";
+        }
       )
-      setTimeout(() => {
-      }, 50);
+
+    } else {
+      this.validation = "";
+      this.notValidation = "L'ajout n'a pas été effectué. Merci de remplir tous les champs.";
     }
 
-
-    randomMDP() {
-      length = 10
-      var result           = '';
-      var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      var charactersLength = characters.length;
-      for ( var i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * 
-   charactersLength));
-     }
-     console.log(result)
-     return result;
   }
-  
-  goToSearch(){
+
+  idOfCollType!: number;
+  collaboratorType = new TypeCollaborator();
+
+  getCollType() {
+    this._TypeCollaboratorService.selectTypeCollaboratorById(this.idOfCollType).subscribe(
+      data => { this.collaboratorType = data; },
+      error => console.log("exception" + error),
+    )
+    setTimeout(() => {
+    }, 50);
+  }
+
+
+  randomMDP() {
+    length = 10
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() *
+        charactersLength));
+    }
+    console.log(result)
+    return result;
+  }
+
+  goToSearch() {
     this._route.navigate(['/searchCollaborateur']);
   }
 
- 
+
 }

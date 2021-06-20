@@ -15,7 +15,31 @@
     box-shadow: 0 9px #999;
     margin-bottom: 5%;
   }
+
+  .validation{
+    color: green;
+  }
   
+  .notValidation{
+    color:red;
+  }
+  .btnEditer2 {
+    margin-left: 1%;
+    float: left;
+      padding: 10px 25px;
+      width: 110px;
+      font-size: 15px;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      color: #fff;
+      background-color: #363636;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 9px #999;
+    }
+
+    
   .button:hover {background-color: #636363}
   
   .button:active {

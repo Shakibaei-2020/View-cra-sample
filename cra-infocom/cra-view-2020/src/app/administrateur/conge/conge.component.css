@@ -240,3 +240,14 @@ margin-top: 7px;
   .matlabel{
     color: black;
   }
+
+
+
+
+  .validation{
+    color:green;
+  }
+
+  .notValidation{
+    color:red;
+  }

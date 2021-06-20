@@ -116,6 +116,8 @@ export class ProjectComponent implements OnInit {
             }
           )
 
+          this.nbResultat = this.projects.length;
+
         },
         error => console.log("exception" + error)
       )
@@ -159,6 +161,7 @@ export class ProjectComponent implements OnInit {
               )
             }
           )
+          this.nbResultat = this.projects.length;
 
         },
         error => console.log("exception" + error)
@@ -215,6 +218,7 @@ export class ProjectComponent implements OnInit {
                       )
                     }
                   )
+                  this.nbResultat = this.projects.length;
 
 
                 },
@@ -269,6 +273,9 @@ export class ProjectComponent implements OnInit {
               )
             }
           )
+
+          this.nbResultat = this.projects.length;
+
         },
         error => console.log("exception" + error)
       )
@@ -324,6 +331,9 @@ export class ProjectComponent implements OnInit {
                       )
                     }
                   )
+
+                  this.nbResultat = this.projects.length;
+
                 },
                 error => console.log("exception" + error)
               )
@@ -383,6 +393,7 @@ export class ProjectComponent implements OnInit {
                       )
                     }
                   )
+                  this.nbResultat = this.projects.length;
 
 
                 },
@@ -444,6 +455,7 @@ export class ProjectComponent implements OnInit {
 
 
 
+          this.nbResultat = this.projects.length;
 
 
 
@@ -478,7 +490,6 @@ export class ProjectComponent implements OnInit {
         data => {
           this.searchedCollabs = data;
           this.nbResultatRecherche = this.searchedCollabs.length;
-          console.log(this.nbResultatRecherche)
         },
         error => console.log("exception" + error)
       )
@@ -503,6 +514,9 @@ export class ProjectComponent implements OnInit {
   projectToAffect = new Project();
   nbCollabOnProject!: number;
 
+  affectNotDone!: string;
+  affectDone!: string;
+
   affectCollabToProject(idProject: number, idCollab: number, searchedCollabs: Collaborator[], collaborateur: Collaborator) {
 
 
@@ -519,15 +533,25 @@ export class ProjectComponent implements OnInit {
               data => {
                 console.log("affectation reussie");
 
+                this.affectNotDone="";
+                this.affectDone="";
                 this.allCollabOfProject.push(this.theCollabToAffect)
 
                 const index = searchedCollabs.indexOf(collaborateur);
                 if (index > -1) {
                   searchedCollabs.splice(index, 1);
+                  this.nbResultatRecherche = this.nbResultatRecherche - 1;
+                  this.nbCollabOnProject = this.nbCollabOnProject + 1;
+
                 }
 
               },
-              error => console.log("affectation raté")
+              error => {console.log("affectation raté");
+
+              this.affectNotDone="Le collaborateur est déjà affecté à ce projet.";
+              this.affectDone="";
+              
+            },
             )
           },
           error => console.log("exception" + error)
@@ -562,6 +586,7 @@ export class ProjectComponent implements OnInit {
     this._CollaboratorService.selectCollabByProjectId(indexOfElement).subscribe(
       data => {
         this.allCollabOfProject = data;
+        this.nbCollabOnProject = this.allCollabOfProject.length;
       },
       error => console.log("exception" + error),
     )
@@ -580,6 +605,7 @@ export class ProjectComponent implements OnInit {
         const index = allCollabOfProject.indexOf(collaborateur);
         if (index > -1) {
           allCollabOfProject.splice(index, 1);
+          this.nbCollabOnProject = this.nbCollabOnProject -1;
         }
 
       },

@@ -43,15 +43,15 @@ export class MissionComponent implements OnInit {
 
 
   constructor(
-    private _service: NgserviceService, 
+    private _service: NgserviceService,
     private _route: Router,
     private _ClientService: ClientService,
 
     private _ProjectService: ProjectService,
 
     private _MissionService: MissionService,
-    
-    ) { }
+
+  ) { }
 
   ngOnInit(): void {
 
@@ -80,57 +80,55 @@ export class MissionComponent implements OnInit {
       this._MissionService.searchMission(this.date1, this.date2, this.clientName).subscribe(
         data => {
           this.missions = data;
+          if (this.missions.length != 0) {
 
-          this.missions.forEach(
-            (item) => {
-              this._ClientService.selectClientById(item.client.id).subscribe(
-                data => {
-                  if (item != null) {
-                    item.clientName = data.name;
-                    item.clientref = data.ref;
-                    item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
-                    item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
-                  }
-                },
-                error => console.log("exception" + error)
-              )
+            this.missions.forEach(
+              (item) => {
+                this._ClientService.selectClientById(item.client.id).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.clientName = data.name;
+                      item.clientref = data.ref;
+                      item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
+                      item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+
+            this.missions.forEach(
+              (item) => {
+                this._ProjectService.selectProjectByMissionId(item.id).subscribe(
+                  data => {
+                    console.log(data)
+                    item.porjectName = data.missionTitle;
+
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
 
 
-
+            for (var i = 0; i < this.missions.length; i++) {
+              this.missionId.push("missionId-" + i);
+              this.clientNameMission.push("clientNameMission-" + i);
+              this.debutMission.push("debutMission-" + i);
+              this.nameMission.push("nameMission-" + i);
+              this.refClientMission.push("refClientMission-" + i);
+              this.finMission.push("finMission-" + i);
             }
-          )
 
 
-
-          this.missions.forEach(
-            (item) => {
-              this._ProjectService.selectProjectByMissionId(item.id).subscribe(
-                data => {
-                  console.log(data)
-                  item.porjectName = data.missionTitle;
-
-                },
-                error => console.log("exception" + error)
-              )
-            }
-          )
-
-
-
-          for (var i = 0; i < this.missions.length; i++) {
-            this.missionId.push("missionId-" + i);
-            this.clientNameMission.push("clientNameMission-" + i);
-            this.debutMission.push("debutMission-" + i);
-            this.nameMission.push("nameMission-" + i);
-            this.refClientMission.push("refClientMission-" + i);
-            this.finMission.push("finMission-" + i);
+          }else {
+            this.missions = [];
+            this.nbResultat = 0
           }
 
+          this.nbResultat = this.missions.length;
 
-          this.nbResultat = this.missions.length
-          if(this.nbResultat= 0){
-            this.error = " aucun resultat";
-          }
         },
         error => console.log("exception" + error)
       )
@@ -151,41 +149,43 @@ export class MissionComponent implements OnInit {
       this._MissionService.searchMissionByClientName(this.clientName).subscribe(
         data => {
           this.missions = data;
+          if (this.missions.length != 0) {
 
 
-          this.missions.forEach(
-            (item) => {
-              this._ClientService.selectClientById(item.client.id).subscribe(
-                data => {
-                  if (item != null) {
-                    item.clientName = data.name;
-                    item.clientref = data.ref;
-                    item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
-                    item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
+            this.missions.forEach(
+              (item) => {
+                this._ClientService.selectClientById(item.client.id).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.clientName = data.name;
+                      item.clientref = data.ref;
+                      item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
+                      item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
 
-                  }
-                },
-                error => console.log("exception" + error)
-              )
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+
+
+            for (var i = 0; i < this.missions.length; i++) {
+              this.missionId.push("missionId-" + i);
+              this.clientNameMission.push("clientNameMission-" + i);
+              this.debutMission.push("debutMission-" + i);
+              this.nameMission.push("nameMission-" + i);
+              this.refClientMission.push("refClientMission-" + i);
+              this.finMission.push("finMission-" + i);
             }
-          )
 
-
-          for (var i = 0; i < this.missions.length; i++) {
-            this.missionId.push("missionId-" + i);
-            this.clientNameMission.push("clientNameMission-" + i);
-            this.debutMission.push("debutMission-" + i);
-            this.nameMission.push("nameMission-" + i);
-            this.refClientMission.push("refClientMission-" + i);
-            this.finMission.push("finMission-" + i);
+          }else {
+            this.missions = [];
+            this.nbResultat = 0
           }
-
-
 
           this.nbResultat = this.missions.length;
-          if(this.nbResultat= 0){
-            this.error = " aucun resultat";
-          }
+
         },
         error => console.log("exception" + error)
       )
@@ -206,43 +206,46 @@ export class MissionComponent implements OnInit {
       this._MissionService.searchMissionByDate(this.date1, this.date2).subscribe(
         data => {
           this.missions = data;
+          if (this.missions.length != 0) {
 
 
-          this.missions.forEach(
-            (item) => {
-              this._ClientService.selectClientById(item.client.id).subscribe(
-                data => {
-                  if (item != null) {
-                    item.clientName = data.name;
-                    item.clientref = data.ref;
-                    item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
-                    item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
+            this.missions.forEach(
+              (item) => {
+                this._ClientService.selectClientById(item.client.id).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.clientName = data.name;
+                      item.clientref = data.ref;
+                      item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
+                      item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
 
 
 
-                  }
-                },
-                error => console.log("exception" + error)
-              )
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+
+
+            for (var i = 0; i < this.missions.length; i++) {
+              this.missionId.push("missionId-" + i);
+              this.clientNameMission.push("clientNameMission-" + i);
+              this.debutMission.push("debutMission-" + i);
+              this.nameMission.push("nameMission-" + i);
+              this.refClientMission.push("refClientMission-" + i);
+              this.finMission.push("finMission-" + i);
             }
-          )
 
 
-          for (var i = 0; i < this.missions.length; i++) {
-            this.missionId.push("missionId-" + i);
-            this.clientNameMission.push("clientNameMission-" + i);
-            this.debutMission.push("debutMission-" + i);
-            this.nameMission.push("nameMission-" + i);
-            this.refClientMission.push("refClientMission-" + i);
-            this.finMission.push("finMission-" + i);
+          }else {
+            this.missions = [];
+            this.nbResultat = 0
           }
-
-
 
           this.nbResultat = this.missions.length;
-          if(this.nbResultat= 0){
-            this.error = " aucun resultat";
-          }
+
         },
         error => console.log("exception" + error)
       )
@@ -262,49 +265,61 @@ export class MissionComponent implements OnInit {
       this._MissionService.searchAllMission().subscribe(
         data => {
           this.missions = data;
+          if (this.missions.length != 0) {
 
 
-          this.missions.forEach(
-            (item) => {
-              this._ClientService.selectClientById(item.client.id).subscribe(
-                data => {
-                  if (item != null) {
-                    item.clientName = data.name;
-                    item.clientref = data.ref;
-                    item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
-                    item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
-                  }
-                },
-                error => console.log("exception" + error)
-              )
-              this._ProjectService.selectProjectByMissionId(item.id).subscribe(
-                data => {
-                  item.porjectName = data.missionTitle;
-                },
-                error => console.log("exception" + error)
-              )
+            this.missions.forEach(
+              (item) => {
+                this._ClientService.selectClientById(item.client.id).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.clientName = data.name;
+                      item.clientref = data.ref;
+                      item.oldStartDate = this.pipeDate.transform(item.startDate, 'yyyy-MM-dd') || '2000-02-14';
+                      item.oldEndDate = this.pipeDate.transform(item.endDate, 'yyyy-MM-dd') || '2000-02-14';
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+                this._ProjectService.selectProjectByMissionId(item.id).subscribe(
+                  data => {
+                    item.porjectName = data.missionTitle;
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+
+            for (var i = 0; i < this.missions.length; i++) {
+              this.missionId.push("missionId-" + i);
+              this.clientNameMission.push("clientNameMission-" + i);
+              this.debutMission.push("debutMission-" + i);
+              this.nameMission.push("nameMission-" + i);
+              this.refClientMission.push("refClientMission-" + i);
+              this.finMission.push("finMission-" + i);
             }
-          )
 
-          for (var i = 0; i < this.missions.length; i++) {
-            this.missionId.push("missionId-" + i);
-            this.clientNameMission.push("clientNameMission-" + i);
-            this.debutMission.push("debutMission-" + i);
-            this.nameMission.push("nameMission-" + i);
-            this.refClientMission.push("refClientMission-" + i);
-            this.finMission.push("finMission-" + i);
+          }else {
+            this.missions = [];
+            this.nbResultat = 0
           }
-
-
 
           this.nbResultat = this.missions.length;
-          if(this.nbResultat= 0){
-            this.error = " aucun resultat";
-          }
+          
         },
         error => console.log("exception" + error)
       )
     } else {
+
+      this.missions =[];
+      this.nbResultat = 0;
+      this.missionId = [];
+      this.clientNameMission = [];
+      this.debutMission = [];
+      this.nameMission = [];
+      this.refClientMission = [];
+      this.finMission = [];
+
 
       this.error = "Merci de vérifier que les deux champs dates  ont été bien remplies.";
 
@@ -320,6 +335,9 @@ export class MissionComponent implements OnInit {
 
   newStartDate!: string;
   newEndDate!: string;
+
+  missionIsUpdated!:string;
+  missionNotUpdated!: string;
 
   updateMission(indexOfElement: number) {
 
@@ -341,12 +359,15 @@ export class MissionComponent implements OnInit {
             this._MissionService.addAndUpdateMission(this.updatedMission, this.newStartDate, this.newEndDate).subscribe(
               data => {
                 console.log("update effectué");
+                this.missionIsUpdated = "La mission a bien été mise à jour.";
+                this.missionNotUpdated = "";
               },
               error => {
                 console.log("erreur ajout non-effectué")
+                this.missionIsUpdated = "";
+                this.missionNotUpdated = "La mission n'a pas été mise à jour.";
               }
             )
-            window.location.reload();
           },
           error => console.log("exception" + error),
         )
@@ -380,11 +401,18 @@ export class MissionComponent implements OnInit {
 
 
 
-  deleteTheProject(idProject: number) {
+  deleteTheProject(idProject: number, project:Project,AllProject: Project[]) {
 
 
     this._ProjectService.deleteProjectById(idProject).subscribe(
-      data => console.log("delete effectué"),
+      data => {console.log("delete effectué");
+    
+      const index = AllProject.indexOf(project);
+      if (index > -1) {
+        AllProject.splice(index, 1);
+      }
+    
+    },
       error => console.log("delete non effectué")
     )
 
@@ -412,25 +440,18 @@ export class MissionComponent implements OnInit {
 
   projectToUpdateName = new Array();
 
-  OnInitModal(missionId: number,indexOfelement:number) {
+  OnInitModal(missionId: number, indexOfelement: number) {
     this.projectToUpdateName = [];
-
-
     this._ProjectService.selectAllProjectByMissionId(missionId).subscribe(
       data => {
         this.allProjectOfMission = data;
-
-
-          for (var i = 0; i < this.allProjectOfMission.length; i++) {
-            this.projectToUpdateName.push("projectToUpdateName-" + i+ "-"  + indexOfelement);
-            console.log(this.projectToUpdateName)
+        for (var i = 0; i < this.allProjectOfMission.length; i++) {
+          this.projectToUpdateName.push("projectToUpdateName-" + i + "-" + indexOfelement);
+          console.log(this.projectToUpdateName)
         }
 
-        },
+      },
     )
-
-
-
   }
 
 
@@ -439,21 +460,26 @@ export class MissionComponent implements OnInit {
   newtitle!: string;
   valeur!: string;
 
+  projectIsUpdated!: string;
+  projectNoUpdated!: string;
+
+
   majTheProject(idProject: number, indexOfElement: number) {
 
     this._ProjectService.selectProjectById(idProject).subscribe(
       data => {
         this.projectToUpdate = data;
-
-        console.log((<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value)
         this.projectToUpdate.projectTitle = (<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value;
-
-        console.log(this.projectToUpdate.projectTitle)
-
-
         this._ProjectService.addAndUpdateProject2(this.projectToUpdate).subscribe(
-          data => console.log("maj reussie"),
-          error => console.log("maj echoué")
+          data => {console.log("maj reussie")
+          this.projectIsUpdated="Le(s) projet(s) ont bien été mis à jour.";
+          this.projectNoUpdated = "";
+          ;},
+          error =>{ console.log("maj echoué");
+          this.projectIsUpdated="";
+          this.projectNoUpdated = "Les projets n'ont pas été mis à jour.";
+
+        },
         )
 
       },

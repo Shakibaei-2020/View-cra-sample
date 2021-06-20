@@ -14,13 +14,13 @@ import { Project } from 'src/app/z-model/Project/project';
 })
 export class AddProjectComponent implements OnInit {
 
-  constructor( 
-    private _service:NgserviceService,
-    private _route:Router,
+  constructor(
+    private _service: NgserviceService,
+    private _route: Router,
     private _MissionService: MissionService,
-    private _ProjectService : ProjectService,
+    private _ProjectService: ProjectService,
 
-    ) { }
+  ) { }
 
   missions!: Mission[];
 
@@ -31,34 +31,55 @@ export class AddProjectComponent implements OnInit {
   ngOnInit(): void {
 
     this._MissionService.selectAllMission().subscribe(
-      data=>this.missions = data,
-      error=>console.log("exception" + error),
+      data => this.missions = data,
+      error => console.log("exception" + error),
     )
 
   }
 
   missionToAdd = new Mission();
-  projectToAdd= new Project();
+  projectToAdd = new Project();
 
-  addProject(){
+  projectAdded!: string;
+  projectNotAdded!: string;
+
+  addProject() {
+
+
     this._MissionService.selectMissionById(this.missionOfproject).subscribe(
-      data=>{this.missionToAdd = data;
-      
+      data => {
+        this.missionToAdd = data;
+
         this.projectToAdd.projectTitle = this.projectTitle;
         this.projectToAdd.mission = this.missionToAdd;
 
-      this._ProjectService.addAndUpdateProject(this.projectToAdd).subscribe(
-        data=>console.log("ajout reussie"),
-        error=>console.log("exception"+error)
-      )
+        if (this.projectToAdd.projectTitle != "" && this.projectToAdd.projectTitle != undefined) {
+
+
+          this._ProjectService.addAndUpdateProject(this.projectToAdd).subscribe(
+            data => {console.log("ajout reussie");
+
+            this.projectAdded = "Le projet a bien été ajouté.";
+            this.projectNotAdded ="";
+          },
+            error =>{ console.log("exception" + error);
+            this.projectAdded = "";
+            this.projectNotAdded ="Le projet n'a pas été ajouté.";
+          },
+          )
+
+        }else{
+          this.projectNotAdded ="Le projet n'a pas été ajouté. Merci de bien remplir tous les champs.";
+        }
+
       },
-      error=>console.log("exception"+error)
+      error => console.log("exception" + error)
     )
-    
+
   }
 
 
-  goToSearch(){
+  goToSearch() {
     this._route.navigate(['searchProject']);
 
   }

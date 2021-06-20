@@ -55,9 +55,12 @@ export class AddMissionComponent implements OnInit {
 
   projects = new Array();
   projectsToinsert = new Array();
-
-
   addedMission!: Mission;
+
+  
+  
+  validation!: string;
+  notValidation!: string;
 
   addMission() {
 
@@ -68,16 +71,22 @@ export class AddMissionComponent implements OnInit {
     for (var i = 0; i < this.fieldArray.length; i++) {
       this.projectsToinsert.push((<HTMLInputElement>document.getElementById(this.projects[i])).value)
     }
-
     this.newMission.client.id = this.idClientByRef;
 
+
+    if(this.newMission.missionTitle != "" && this.newMission.missionTitle != undefined){
 
 
     this._MissionService.addAndUpdateMission(this.newMission, this.startDate, this.endDate).subscribe(
       data => {
         console.log("ajout effectué")
+        this.validation = "L'ajout a bien été effectué.";
+        this.notValidation = "";
+
 
         this.addedMission = data;
+
+
 
 
         this.projectsToinsert.forEach(
@@ -95,26 +104,26 @@ export class AddMissionComponent implements OnInit {
                 )
               },
               error => console.log("exception" + error)
+              
             )
           }
         )
 
 
 
+
+
       },
       error => {
-        console.log("Remplissé tout les champs !")
+        console.log("Remplissé tout les champs !");
+        this.validation = "";
+        this.notValidation = "L'ajout n'a pas été effectué. Merci de remplir tous les champs.";
       }
-
-
     )
-
-    console.log(this.addedMission)
-
-
-
-
-
+  }else{
+    this.validation = "";
+    this.notValidation = "L'ajout n'a pas été effectué. Merci de remplir tous les champs.";
+  }
 
 
   }

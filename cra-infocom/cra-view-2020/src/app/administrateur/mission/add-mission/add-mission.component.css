@@ -23,6 +23,13 @@
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
+
+  .validation{
+    color:green;
+  }
+  .notValidation{
+    color:red;
+  }
   
   
   .container {

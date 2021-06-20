@@ -69,6 +69,7 @@ export class CollaborateurComponent implements OnInit {
     this._route.navigate(['/addCollaborateur']);
   }
 
+  /** redirection vers accueil administrateur */
   goToAccueil(){
     this._route.navigate(['/administrateur']);
 

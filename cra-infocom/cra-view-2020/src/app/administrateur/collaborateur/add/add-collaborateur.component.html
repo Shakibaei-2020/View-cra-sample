@@ -15,19 +15,21 @@
                 <div class="col-md-6">
                     <div class="form">
                         <div class="inputbox mt-3"> <span for="lastName">Nom :</span>
-                            <input autocomplete="off" type="text" placeholder="Nom de famille" required [(ngModel)]="collaborator.lastName" name="lastName">
+                            <input autocomplete="off" type="text" placeholder="Nom de famille" required
+                                [(ngModel)]="collaborator.lastName" name="lastName">
                         </div>
-                      
+
                         <div class="inputbox mt-3">
                             <span for="email">Adresse mail:</span>
-                            <input autocomplete="off" type="text" placeholder="Adresse mail" required [(ngModel)]="collaborator.email" name="email">
+                            <input autocomplete="off" type="text" placeholder="Adresse mail" required
+                                [(ngModel)]="collaborator.email" name="email">
                         </div>
 
                         <div class="inputbox mt-3">
                             <span for="dateOfEntry">Date d'entrée :</span>
                             <input type="date" required [(ngModel)]="dateEntre" name="dateEntre">
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -37,32 +39,65 @@
 
                         <div class="inputbox mt-3">
                             <span for="firstName">Prénom :</span>
-                            <input autocomplete="off" type="text" placeholder="Prenom" required [(ngModel)]="collaborator.firstName" name="firstName">
+                            <input autocomplete="off" type="text" placeholder="Prenom" required
+                                [(ngModel)]="collaborator.firstName" name="firstName">
                         </div>
 
                         <div class="inputbox mt-3"><span>Type :</span><br>
-                            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfCollType" name="idOfCollType" (change)="getCollType()">
-                                <option *ngFor="let allTypeCollaborators of allTypeCollaborator"  value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}
+                            <select class="form-input" aria-label="Default select example" required
+                                [(ngModel)]="idOfCollType" name="idOfCollType" (change)="getCollType()">
+                                <option *ngFor="let allTypeCollaborators of allTypeCollaborator"
+                                    value="{{allTypeCollaborators.id}}">{{allTypeCollaborators.type}}
                             </select>
                         </div>
 
 
-                      
+
 
                         <div class="inputbox mt-3">
                             <span for="dateOfRelease">Date de sortie :</span>
                             <input type="date" required [(ngModel)]="dateSortie" name="dateSortie">
-
                         </div>
-                     
+
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <span class="validation">{{validation}}</span>
+                    <span class="notValidation"> {{notValidation}}</span>
                 </div>
+                <br>
+
                 <div class="col-md-6">
                     <button class="btnEditer" (click)="goToSearch()">Retour</button>
-                    <button class="btnEditer" (click)="addCollabFormSubmit()">Ajouter</button>
+                    <button class="btnEditer" data-toggle="modal" data-target="#DeleteModal">Ajouter</button>
+
                 </div>
+
+
+
+
+                <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Alert ajout</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Êtes-vous sur de vouloir ajouter ce collaborateur?                          
+                              </div>
+                            <div class="modal-footer">
+                                <button class="btnEditer2" data-dismiss="modal">Annuler</button>
+                                <button class="btnEditer2"   data-dismiss="modal" (click)="addCollabFormSubmit()">Ajouter</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

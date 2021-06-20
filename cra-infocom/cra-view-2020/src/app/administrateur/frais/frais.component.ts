@@ -45,13 +45,13 @@ export class FraisComponent implements OnInit {
 
 
   constructor(
-    private _service: NgserviceService, 
+    private _service: NgserviceService,
     private _route: Router,
-    private _CollaboratorService:CollaboratorService,
-    private _ExpenseService:ExpenseService,
-    private _TypeExpenseService:TypeExpenseService,
+    private _CollaboratorService: CollaboratorService,
+    private _ExpenseService: ExpenseService,
+    private _TypeExpenseService: TypeExpenseService,
 
-    ) { }
+  ) { }
 
   ngOnInit(): void {
 
@@ -66,57 +66,61 @@ export class FraisComponent implements OnInit {
     this._route.navigate(['/editFrais']);
   }
 
-  
+
   searchExpenses() {
 
     if ((this.date1 != undefined && this.date2 != undefined) && (this.searchStatus != undefined && this.searchStatus != "") && (this.lastNameCollab != undefined && this.lastNameCollab != "")) {
 
       this.expenseRequestId = [];
-      this.dateExpense  = [];
+      this.dateExpense = [];
       this.expenseBillable = [];
       this.expenseCostHT = [];
-      this.expenseCostTVA  = [];
-      this.dateExpenseRequest  = [];
-      this.expenseStatus  = [];
-      this.expenseType  = [];
-      this.newCostTTC  = [];
+      this.expenseCostTVA = [];
+      this.dateExpenseRequest = [];
+      this.expenseStatus = [];
+      this.expenseType = [];
+      this.newCostTTC = [];
 
       this._ExpenseService.searchExpense(this.date1, this.date2, this.searchStatus, this.lastNameCollab).subscribe(
         data => {
           this.expenses = data;
+          if (this.expenses.length != 0) {
 
-          for (var i = 0; i < this.expenses.length; i++) {
-            this.expenseRequestId.push("expenseRequestId-" + i);
-            this.dateExpense.push("dateExpense-" + i);
-            this.expenseBillable.push("expenseBillable-" + i);
-            this.expenseCostHT.push("expenseCostHT-" + i);
-            this.expenseCostTVA.push("expenseCostTVA-" + i);
-            this.dateExpenseRequest.push("dateExpenseRequest-" + i);
-            this.expenseStatus.push("expenseStatus-" + i);
-            this.expenseType.push("expenseType-" + i);
-            this.newCostTTC.push("newCostTTC" + i);
+            for (var i = 0; i < this.expenses.length; i++) {
+              this.expenseRequestId.push("expenseRequestId-" + i);
+              this.dateExpense.push("dateExpense-" + i);
+              this.expenseBillable.push("expenseBillable-" + i);
+              this.expenseCostHT.push("expenseCostHT-" + i);
+              this.expenseCostTVA.push("expenseCostTVA-" + i);
+              this.dateExpenseRequest.push("dateExpenseRequest-" + i);
+              this.expenseStatus.push("expenseStatus-" + i);
+              this.expenseType.push("expenseType-" + i);
+              this.newCostTTC.push("newCostTTC" + i);
+            }
+
+
+            this.nbResultat = this.expenses.length;
+
+            this.expenses.forEach(
+              (item) => {
+                this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.nomCollab = data.lastName;
+                      item.prenomCollab = data.firstName;
+                      item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+          } else {
+            this.expenses = [];
+            this.nbResultat = 0
           }
 
-
-          this.nbResultat = this.expenses.length;
-
-          this.expenses.forEach(
-            (item) => {
-              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
-                data => {
-                  if (item != null) {
-                    item.nomCollab = data.lastName;
-                    item.prenomCollab = data.firstName;
-                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
-
-                  }
-                },
-                error => console.log("exception" + error)
-              )
-            }
-          )
-
-          
         },
         error => console.log("exception" + error)
       )
@@ -128,50 +132,57 @@ export class FraisComponent implements OnInit {
     } else if ((this.date1 != undefined && this.date2 != undefined) && (this.searchStatus === undefined || this.searchStatus === "") && (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
 
       this.expenseRequestId = [];
-      this.dateExpense  = [];
+      this.dateExpense = [];
       this.expenseBillable = [];
       this.expenseCostHT = [];
-      this.expenseCostTVA  = [];
-      this.dateExpenseRequest  = [];
-      this.expenseStatus  = [];
-      this.expenseType  = [];
-      this.newCostTTC  = [];
+      this.expenseCostTVA = [];
+      this.dateExpenseRequest = [];
+      this.expenseStatus = [];
+      this.expenseType = [];
+      this.newCostTTC = [];
 
 
       this._ExpenseService.searchExpenseByDate(this.date1, this.date2).subscribe(
         data => {
           this.expenses = data;
 
-          for (var i = 0; i < this.expenses.length; i++) {
-            this.expenseRequestId.push("expenseRequestId-" + i);
-            this.dateExpense.push("dateExpense-" + i);
-            this.expenseBillable.push("expenseBillable-" + i);
-            this.expenseCostHT.push("expenseCostHT-" + i);
-            this.expenseCostTVA.push("expenseCostTVA-" + i);
-            this.dateExpenseRequest.push("dateExpenseRequest-" + i);
-            this.expenseStatus.push("expenseStatus-" + i);
-            this.expenseType.push("expenseType-" + i);
-            this.newCostTTC.push("newCostTTC" + i);
-          }
+          if (this.expenses.length != 0) {
 
 
-          this.nbResultat = this.expenses.length;
-
-          this.expenses.forEach(
-            (item) => {
-              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
-                data => {
-                  if (item != null) {
-                    item.nomCollab = data.lastName;
-                    item.prenomCollab = data.firstName;
-                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
-
-                  }
-                },
-                error => console.log("exception" + error)
-              )
+            for (var i = 0; i < this.expenses.length; i++) {
+              this.expenseRequestId.push("expenseRequestId-" + i);
+              this.dateExpense.push("dateExpense-" + i);
+              this.expenseBillable.push("expenseBillable-" + i);
+              this.expenseCostHT.push("expenseCostHT-" + i);
+              this.expenseCostTVA.push("expenseCostTVA-" + i);
+              this.dateExpenseRequest.push("dateExpenseRequest-" + i);
+              this.expenseStatus.push("expenseStatus-" + i);
+              this.expenseType.push("expenseType-" + i);
+              this.newCostTTC.push("newCostTTC" + i);
             }
-          )
+
+
+            this.nbResultat = this.expenses.length;
+
+            this.expenses.forEach(
+              (item) => {
+                this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.nomCollab = data.lastName;
+                      item.prenomCollab = data.firstName;
+                      item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+          }else {
+            this.expenses = [];
+            this.nbResultat = 0
+          }
         },
         error => console.log("exception" + error)
       )
@@ -186,49 +197,54 @@ export class FraisComponent implements OnInit {
     } else if ((this.date1 != undefined && this.date2 != undefined) && (this.searchStatus === undefined || this.searchStatus === "") && (this.lastNameCollab != undefined && this.lastNameCollab != "")) {
 
       this.expenseRequestId = [];
-      this.dateExpense  = [];
+      this.dateExpense = [];
       this.expenseBillable = [];
       this.expenseCostHT = [];
-      this.expenseCostTVA  = [];
-      this.dateExpenseRequest  = [];
-      this.expenseStatus  = [];
-      this.expenseType  = [];
-      this.newCostTTC  = [];
+      this.expenseCostTVA = [];
+      this.dateExpenseRequest = [];
+      this.expenseStatus = [];
+      this.expenseType = [];
+      this.newCostTTC = [];
 
 
       this._ExpenseService.searchExpenseByDateName(this.date1, this.date2, this.lastNameCollab).subscribe(
         data => {
           this.expenses = data;
+          if (this.expenses.length != 0) {
 
-          for (var i = 0; i < this.expenses.length; i++) {
-            this.expenseRequestId.push("expenseRequestId-" + i);
-            this.dateExpense.push("dateExpense-" + i);
-            this.expenseBillable.push("expenseBillable-" + i);
-            this.expenseCostHT.push("expenseCostHT-" + i);
-            this.expenseCostTVA.push("expenseCostTVA-" + i);
-            this.dateExpenseRequest.push("dateExpenseRequest-" + i);
-            this.expenseStatus.push("expenseStatus-" + i);
-            this.expenseType.push("expenseType-" + i);
-            this.newCostTTC.push("newCostTTC" + i);
-          }
-
-          this.nbResultat = this.expenses.length;
-
-          this.expenses.forEach(
-            (item) => {
-              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
-                data => {
-                  if (item != null) {
-                    item.nomCollab = data.lastName;
-                    item.prenomCollab = data.firstName;
-                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
-
-                  }
-                },
-                error => console.log("exception" + error)
-              )
+            for (var i = 0; i < this.expenses.length; i++) {
+              this.expenseRequestId.push("expenseRequestId-" + i);
+              this.dateExpense.push("dateExpense-" + i);
+              this.expenseBillable.push("expenseBillable-" + i);
+              this.expenseCostHT.push("expenseCostHT-" + i);
+              this.expenseCostTVA.push("expenseCostTVA-" + i);
+              this.dateExpenseRequest.push("dateExpenseRequest-" + i);
+              this.expenseStatus.push("expenseStatus-" + i);
+              this.expenseType.push("expenseType-" + i);
+              this.newCostTTC.push("newCostTTC" + i);
             }
-          )
+
+            this.nbResultat = this.expenses.length;
+
+            this.expenses.forEach(
+              (item) => {
+                this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.nomCollab = data.lastName;
+                      item.prenomCollab = data.firstName;
+                      item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+          }else {
+            this.expenses = [];
+            this.nbResultat = 0
+          }
         },
         error => console.log("exception" + error)
       )
@@ -243,52 +259,57 @@ export class FraisComponent implements OnInit {
     } else if ((this.date1 != undefined || this.date2 != undefined) && (this.searchStatus != undefined && this.searchStatus != "") && (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
 
       this.expenseRequestId = [];
-      this.dateExpense  = [];
+      this.dateExpense = [];
       this.expenseBillable = [];
       this.expenseCostHT = [];
-      this.expenseCostTVA  = [];
-      this.dateExpenseRequest  = [];
-      this.expenseStatus  = [];
-      this.expenseType  = [];
-      this.newCostTTC  = [];
+      this.expenseCostTVA = [];
+      this.dateExpenseRequest = [];
+      this.expenseStatus = [];
+      this.expenseType = [];
+      this.newCostTTC = [];
 
 
       this._ExpenseService.searchExpenseByDateStatus(this.date1, this.date2, this.searchStatus).subscribe(
         data => {
           this.expenses = data;
+          if (this.expenses.length != 0) {
 
-          for (var i = 0; i < this.expenses.length; i++) {
-            this.expenseRequestId.push("expenseRequestId-" + i);
-            this.dateExpense.push("dateExpense-" + i);
-            this.expenseBillable.push("expenseBillable-" + i);
-            this.expenseCostHT.push("expenseCostHT-" + i);
-            this.expenseCostTVA.push("expenseCostTVA-" + i);
-            this.dateExpenseRequest.push("dateExpenseRequest-" + i);
-            this.expenseStatus.push("expenseStatus-" + i);
-            this.expenseType.push("expenseType-" + i);
-            this.newCostTTC.push("newCostTTC" + i);
-
-       
-          }
+            for (var i = 0; i < this.expenses.length; i++) {
+              this.expenseRequestId.push("expenseRequestId-" + i);
+              this.dateExpense.push("dateExpense-" + i);
+              this.expenseBillable.push("expenseBillable-" + i);
+              this.expenseCostHT.push("expenseCostHT-" + i);
+              this.expenseCostTVA.push("expenseCostTVA-" + i);
+              this.dateExpenseRequest.push("dateExpenseRequest-" + i);
+              this.expenseStatus.push("expenseStatus-" + i);
+              this.expenseType.push("expenseType-" + i);
+              this.newCostTTC.push("newCostTTC" + i);
 
 
-          this.nbResultat = this.expenses.length;
-
-          this.expenses.forEach(
-            (item) => {
-              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
-                data => {
-                  if (item != null) {
-                    item.nomCollab = data.lastName;
-                    item.prenomCollab = data.firstName;
-                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
-
-                  }
-                },
-                error => console.log("exception" + error)
-              )
             }
-          )
+
+
+            this.nbResultat = this.expenses.length;
+
+            this.expenses.forEach(
+              (item) => {
+                this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.nomCollab = data.lastName;
+                      item.prenomCollab = data.firstName;
+                      item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+          }else {
+            this.expenses = [];
+            this.nbResultat = 0
+          }
         },
         error => console.log("exception" + error)
       )
@@ -303,51 +324,56 @@ export class FraisComponent implements OnInit {
     } else if ((this.date1 === undefined || this.date2 === undefined) && (this.searchStatus === undefined || this.searchStatus === "") && (this.lastNameCollab != undefined && this.lastNameCollab != "")) {
 
       this.expenseRequestId = [];
-      this.dateExpense  = [];
+      this.dateExpense = [];
       this.expenseBillable = [];
       this.expenseCostHT = [];
-      this.expenseCostTVA  = [];
-      this.dateExpenseRequest  = [];
-      this.expenseStatus  = [];
-      this.expenseType  = [];
-      this.newCostTTC  = [];
+      this.expenseCostTVA = [];
+      this.dateExpenseRequest = [];
+      this.expenseStatus = [];
+      this.expenseType = [];
+      this.newCostTTC = [];
 
 
       this._ExpenseService.searchExpenseByName(this.lastNameCollab).subscribe(
         data => {
           this.expenses = data;
 
+          if (this.expenses.length != 0) {
 
-          for (var i = 0; i < this.expenses.length; i++) {
-            this.expenseRequestId.push("expenseRequestId-" + i);
-            this.dateExpense.push("dateExpense-" + i);
-            this.expenseBillable.push("expenseBillable-" + i);
-            this.expenseCostHT.push("expenseCostHT-" + i);
-            this.expenseCostTVA.push("expenseCostTVA-" + i);
-            this.dateExpenseRequest.push("dateExpenseRequest-" + i);
-            this.expenseStatus.push("expenseStatus-" + i);
-            this.expenseType.push("expenseType-" + i);
-            this.newCostTTC.push("newCostTTC" + i);
-          }
-
-
-          this.nbResultat = this.expenses.length;
-
-          this.expenses.forEach(
-            (item) => {
-              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
-                data => {
-                  if (item != null) {
-                    item.nomCollab = data.lastName;
-                    item.prenomCollab = data.firstName;
-                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
-
-                  }
-                },
-                error => console.log("exception" + error)
-              )
+            for (var i = 0; i < this.expenses.length; i++) {
+              this.expenseRequestId.push("expenseRequestId-" + i);
+              this.dateExpense.push("dateExpense-" + i);
+              this.expenseBillable.push("expenseBillable-" + i);
+              this.expenseCostHT.push("expenseCostHT-" + i);
+              this.expenseCostTVA.push("expenseCostTVA-" + i);
+              this.dateExpenseRequest.push("dateExpenseRequest-" + i);
+              this.expenseStatus.push("expenseStatus-" + i);
+              this.expenseType.push("expenseType-" + i);
+              this.newCostTTC.push("newCostTTC" + i);
             }
-          )
+
+
+            this.nbResultat = this.expenses.length;
+
+            this.expenses.forEach(
+              (item) => {
+                this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.nomCollab = data.lastName;
+                      item.prenomCollab = data.firstName;
+                      item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+          }else {
+            this.expenses = [];
+            this.nbResultat = 0
+          }
         },
         error => console.log("exception" + error)
       )
@@ -362,50 +388,55 @@ export class FraisComponent implements OnInit {
     } else if ((this.date1 === undefined && this.date2 === undefined) && (this.searchStatus != undefined && this.searchStatus != "") && (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
 
       this.expenseRequestId = [];
-      this.dateExpense  = [];
+      this.dateExpense = [];
       this.expenseBillable = [];
       this.expenseCostHT = [];
-      this.expenseCostTVA  = [];
-      this.dateExpenseRequest  = [];
-      this.expenseStatus  = [];
-      this.expenseType  = [];
-      this.newCostTTC  = [];
+      this.expenseCostTVA = [];
+      this.dateExpenseRequest = [];
+      this.expenseStatus = [];
+      this.expenseType = [];
+      this.newCostTTC = [];
 
 
       this._ExpenseService.searchExpenseByStatus(this.searchStatus).subscribe(
         data => {
           this.expenses = data;
+          if (this.expenses.length != 0) {
 
-          for (var i = 0; i < this.expenses.length; i++) {
-            this.expenseRequestId.push("expenseRequestId-" + i);
-            this.dateExpense.push("dateExpense-" + i);
-            this.expenseBillable.push("expenseBillable-" + i);
-            this.expenseCostHT.push("expenseCostHT-" + i);
-            this.expenseCostTVA.push("expenseCostTVA-" + i);
-            this.dateExpenseRequest.push("dateExpenseRequest-" + i);
-            this.expenseStatus.push("expenseStatus-" + i);
-            this.expenseType.push("expenseType-" + i);
-            this.newCostTTC.push("newCostTTC" + i);
-          }
-
-
-          this.nbResultat = this.expenses.length;
-
-          this.expenses.forEach(
-            (item) => {
-              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
-                data => {
-                  if (item != null) {
-                    item.nomCollab = data.lastName;
-                    item.prenomCollab = data.firstName;
-                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
-
-                  }
-                },
-                error => console.log("exception" + error)
-              )
+            for (var i = 0; i < this.expenses.length; i++) {
+              this.expenseRequestId.push("expenseRequestId-" + i);
+              this.dateExpense.push("dateExpense-" + i);
+              this.expenseBillable.push("expenseBillable-" + i);
+              this.expenseCostHT.push("expenseCostHT-" + i);
+              this.expenseCostTVA.push("expenseCostTVA-" + i);
+              this.dateExpenseRequest.push("dateExpenseRequest-" + i);
+              this.expenseStatus.push("expenseStatus-" + i);
+              this.expenseType.push("expenseType-" + i);
+              this.newCostTTC.push("newCostTTC" + i);
             }
-          )
+
+
+            this.nbResultat = this.expenses.length;
+
+            this.expenses.forEach(
+              (item) => {
+                this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.nomCollab = data.lastName;
+                      item.prenomCollab = data.firstName;
+                      item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+          }else {
+            this.expenses = [];
+            this.nbResultat = 0
+          }
         },
         error => console.log("exception" + error)
       )
@@ -417,52 +448,58 @@ export class FraisComponent implements OnInit {
       this.error = "";
 
     } else if ((this.date1 === undefined || this.date2 === undefined) && (this.searchStatus != undefined && this.searchStatus != "") && (this.lastNameCollab != undefined && this.lastNameCollab != "")) {
-      
+
       this.expenseRequestId = [];
-      this.dateExpense  = [];
+      this.dateExpense = [];
       this.expenseBillable = [];
       this.expenseCostHT = [];
-      this.expenseCostTVA  = [];
-      this.dateExpenseRequest  = [];
-      this.expenseStatus  = [];
-      this.expenseType  = [];
-      this.newCostTTC  = [];
+      this.expenseCostTVA = [];
+      this.dateExpenseRequest = [];
+      this.expenseStatus = [];
+      this.expenseType = [];
+      this.newCostTTC = [];
 
-      
+
       this._ExpenseService.searchExpenseByNameStatus(this.searchStatus, this.lastNameCollab).subscribe(
         data => {
           this.expenses = data;
+          if (this.expenses.length != 0) {
 
-          for (var i = 0; i < this.expenses.length; i++) {
-            this.expenseRequestId.push("expenseRequestId-" + i);
-            this.dateExpense.push("dateExpense-" + i);
-            this.expenseBillable.push("expenseBillable-" + i);
-            this.expenseCostHT.push("expenseCostHT-" + i);
-            this.expenseCostTVA.push("expenseCostTVA-" + i);
-            this.dateExpenseRequest.push("dateExpenseRequest-" + i);
-            this.expenseStatus.push("expenseStatus-" + i);
-            this.expenseType.push("expenseType-" + i);
-            this.newCostTTC.push("newCostTTC" + i);
-          }
-
-          this.nbResultat = this.expenses.length;
-
-          this.expenses.forEach(
-            (item) => {
-              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
-                data => {
-                  if (item != null) {
-                    item.nomCollab = data.lastName;
-                    item.prenomCollab = data.firstName;
-                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
-
-                  }
-                },
-                error => console.log("exception" + error)
-              )
+            for (var i = 0; i < this.expenses.length; i++) {
+              this.expenseRequestId.push("expenseRequestId-" + i);
+              this.dateExpense.push("dateExpense-" + i);
+              this.expenseBillable.push("expenseBillable-" + i);
+              this.expenseCostHT.push("expenseCostHT-" + i);
+              this.expenseCostTVA.push("expenseCostTVA-" + i);
+              this.dateExpenseRequest.push("dateExpenseRequest-" + i);
+              this.expenseStatus.push("expenseStatus-" + i);
+              this.expenseType.push("expenseType-" + i);
+              this.newCostTTC.push("newCostTTC" + i);
             }
-          )
+
+            this.nbResultat = this.expenses.length;
+
+            this.expenses.forEach(
+              (item) => {
+                this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.nomCollab = data.lastName;
+                      item.prenomCollab = data.firstName;
+                      item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+          }else {
+            this.expenses = [];
+            this.nbResultat = 0
+          }
         },
+
         error => console.log("exception" + error)
       )
       setTimeout(() => {
@@ -473,55 +510,60 @@ export class FraisComponent implements OnInit {
       this.error = "";
 
 
-    } else if ((this.date1 === undefined && this.date2 === undefined) && (this.searchStatus === undefined || this.searchStatus === "")&& (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
-      
+    } else if ((this.date1 === undefined && this.date2 === undefined) && (this.searchStatus === undefined || this.searchStatus === "") && (this.lastNameCollab === undefined || this.lastNameCollab === "")) {
+
       this.expenseRequestId = [];
-      this.dateExpense  = [];
+      this.dateExpense = [];
       this.expenseBillable = [];
       this.expenseCostHT = [];
-      this.expenseCostTVA  = [];
-      this.dateExpenseRequest  = [];
-      this.expenseStatus  = [];
-      this.expenseType  = [];
-      this.newCostTTC  = [];
+      this.expenseCostTVA = [];
+      this.dateExpenseRequest = [];
+      this.expenseStatus = [];
+      this.expenseType = [];
+      this.newCostTTC = [];
 
-      
+
       this._ExpenseService.searchAllExpense().subscribe(
         data => {
           this.expenses = data;
+          if (this.expenses.length != 0) {
 
 
-          for (var i = 0; i < this.expenses.length; i++) {
-            this.expenseRequestId.push("expenseRequestId-" + i);
-            this.dateExpense.push("dateExpense-" + i);
-            this.expenseBillable.push("expenseBillable-" + i);
-            this.expenseCostHT.push("expenseCostHT-" + i);
-            this.expenseCostTVA.push("expenseCostTVA-" + i);
-            this.dateExpenseRequest.push("dateExpenseRequest-" + i);
-            this.expenseStatus.push("expenseStatus-" + i);
-            this.expenseType.push("expenseType-" + i);
-            this.newCostTTC.push("newCostTTC" + i);
+            for (var i = 0; i < this.expenses.length; i++) {
+              this.expenseRequestId.push("expenseRequestId-" + i);
+              this.dateExpense.push("dateExpense-" + i);
+              this.expenseBillable.push("expenseBillable-" + i);
+              this.expenseCostHT.push("expenseCostHT-" + i);
+              this.expenseCostTVA.push("expenseCostTVA-" + i);
+              this.dateExpenseRequest.push("dateExpenseRequest-" + i);
+              this.expenseStatus.push("expenseStatus-" + i);
+              this.expenseType.push("expenseType-" + i);
+              this.newCostTTC.push("newCostTTC" + i);
 
 
-          }
-      
-          this.nbResultat = this.expenses.length;
-
-          this.expenses.forEach(
-            (item) => {
-              this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
-                data => {
-                  if (item != null) {
-                    item.nomCollab = data.lastName;
-                    item.prenomCollab = data.firstName;
-                    item.oldDateExpense =   this.pipeDate.transform( item.dateExpense, 'yyyy-MM-dd') || '2000-02-14' ;
-
-                  }
-                },
-                error => console.log("exception" + error)
-              )
             }
-          )
+
+            this.nbResultat = this.expenses.length;
+
+            this.expenses.forEach(
+              (item) => {
+                this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
+                  data => {
+                    if (item != null) {
+                      item.nomCollab = data.lastName;
+                      item.prenomCollab = data.firstName;
+                      item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                    }
+                  },
+                  error => console.log("exception" + error)
+                )
+              }
+            )
+          }else {
+            this.expenses = [];
+            this.nbResultat = 0
+          }
         },
         error => console.log("exception" + error)
       )
@@ -532,11 +574,30 @@ export class FraisComponent implements OnInit {
       this.searchStatus = "";
       this.error = "";
 
+
+    } else if (this.nbResultat = 0) {
+
+      this.expenses = [];
+
     } else {
+
+      this.expenseRequestId = [];
+      this.dateExpense = [];
+      this.expenseBillable = [];
+      this.expenseCostHT = [];
+      this.expenseCostTVA = [];
+      this.dateExpenseRequest = [];
+      this.expenseStatus = [];
+      this.expenseType = [];
+      this.newCostTTC = [];
+
+      this.expenses = [];
+
       this.error = "Merci de vérifier que les deux champs dates  ont été bien remplies.";
       this.nbResultat = 0;
     }
   }
+
 
 
   goToAccueil() {
@@ -545,12 +606,12 @@ export class FraisComponent implements OnInit {
 
 
   TTCvalue!: number;
-  updateTTC(i : number){
-  this.TTCvalue =   +(<HTMLInputElement>document.getElementById(this.expenseCostHT[i])).value + +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[i])).value ;
+  updateTTC(i: number) {
+    this.TTCvalue = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[i])).value + +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[i])).value;
   }
 
 
-  deleteExpenseById(value: number,expensesTodel:Expense[],expense:Expense) {
+  deleteExpenseById(value: number, expensesTodel: Expense[], expense: Expense) {
 
     this._ExpenseService.deleteOneExpense(value).subscribe(
       data => {
@@ -579,10 +640,13 @@ export class FraisComponent implements OnInit {
   expenseToUpdate = new Expense();
   newTypeExpense = new TypeExpense();
 
+  validation!: string;
+  notValidation!: string;
+
+
   updateExpense(indexOfElement: number) {
 
 
-    
     this._ExpenseService.selectOneExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseRequestId[indexOfElement])).value).subscribe(
       data1 => {
         this.expenseToUpdate = data1;
@@ -596,19 +660,23 @@ export class FraisComponent implements OnInit {
             this.updatedExpense.typeExpense = this.newTypeExpense || this.expenseToUpdate.typeExpense
             this.newDateExpense = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateExpense[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
             this.newDateRequest = this.pipeDate.transform(this.expenseToUpdate.dateRequest, 'yyyy-MM-dd') || '2000-02-14';
-            this.updatedExpense.billable = !(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value ;
+            this.updatedExpense.billable = !(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value;
             this.updatedExpense.status = (<HTMLInputElement>document.getElementById(this.expenseStatus[indexOfElement])).value || this.expenseToUpdate.status;
             this.updatedExpense.costHT = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[indexOfElement])).value || this.expenseToUpdate.costHT;
             this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[indexOfElement])).value || this.expenseToUpdate.costTVA;
             this.updatedExpense.costTTC = this.updatedExpense.costHT + this.updatedExpense.costTVA || this.expenseToUpdate.costTTC;
             this.TTCvalue = this.updatedExpense.costTTC;
-            
+
             this._ExpenseService.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
               data => {
                 console.log("ajout effectué");
+                this.validation = "Les mises à jour ont bien été effectuées.";
+                this.notValidation = "";
               },
               error => {
-                console.log("erreur ajout non-effectué")
+                console.log("erreur ajout non-effectué");
+                this.notValidation = "Les mises à jour n'ont pas été effectuées.";
+                this.validation = "";
               }
             )
             //window.location.reload();

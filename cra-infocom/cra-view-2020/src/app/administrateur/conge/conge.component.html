@@ -1,8 +1,5 @@
 <app-administrateur></app-administrateur>
 
-
-
-
 <div class="font-div1">
   <div class="container">
 
@@ -17,10 +14,7 @@
       </button>
       <h2 class="page">Gestion des demandes de congés </h2>
     </span>
-
-
     <hr>
-
 
     <div class="container">
 
@@ -31,11 +25,11 @@
       </div>
       <div class="row">
         <div class="col-sm-4">
-          <input type="date" required [(ngModel)]="date1" name="date1">
+          <input type="date" required [(ngModel)]="dateDebut" name="dateDebut">
         </div>
 
         <div class="col-sm-4">
-          <input type="date" required [(ngModel)]="date2" name="date2">
+          <input type="date" required [(ngModel)]="dateFin" name="dateFin">
         </div>
 
         <div class="col-sm-4">
@@ -57,11 +51,14 @@
         </div>
 
 
+        <div class="col-sm-8"><br>
+          <p class="error">{{error}}</p>
+        </div>        
+
       </div>
       <br><br>
    <div *ngIf="leaves">
-      <h2>Résultat : {{nbResultat}} </h2>      
-      <p class="error">{{error}}</p>
+      <h2>Résultat : {{nbResultat}} résultat trouvé pour cette recherche.</h2>      
       <table   class="table table-striped table-bordered">
     
 
@@ -211,75 +208,31 @@
                     <input type="text" placeholder=" {{dayNumber}}" disabled>
                   </div>
 
+
+
                 </div>
+                
+
                 </div>
+
+         
+    
               </div>
+
+     
               <div class="modal-footer">
-                <button type="button" class="btnModal"  data-toggle="modal" data-target="#updateModal">Maj</button>
-                <button type="button" class="btnModal"  data-toggle="modal" data-target="#deleteModal">Supprimer</button>
-
+                <div class="container">
+                  <p class="validation" >{{validation}}</p>
+                  <p class="notValidation">{{notValidation}}</p>
+                </div>
+                <button class="btnModal" type="submit" (click)="updateLeaveFromCollab(indexOfelement)">Maj</button>
+                <button class="btnModal" type="submit"  data-dismiss="modal"(click)="deleteLeaveFromCollab(leave.id,leaves,leave)">Supprimer</button>
               </div>
-
-
-                   <!-- modal de validation suppression-->
-           <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Supression de la demande de congé</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  Êtes-vous sûr de vouloir supprimer cet demande ?                </div>
-                <div class="modal-footer">
-                  <button class="btnModal"  data-dismiss="modal">Fermer</button>
-                  <button class="btnModal" type="submit"  data-dismiss="modal"(click)="deleteLeaveFromCollab(leave.id,leaves,leave)">Supprimer</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- modal validation mise à jour-->
-          <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Mise à jour de la  demande de congé</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  Êtes-vous sûr de vouloir mettre à jour cet demande ?                </div>
-                <div class="modal-footer">
-                  <button class="btnModal"  data-dismiss="modal">Fermer</button>
-                  <button class="btnModal" type="submit" (click)="updateLeaveFromCollab(indexOfelement)">Maj</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
             </div>
           </div>
         </div>
-
-      
-          
       </div>
     </div>
-
-
-
-
-      
-
- 
-
-
     </div>
   </div>
 

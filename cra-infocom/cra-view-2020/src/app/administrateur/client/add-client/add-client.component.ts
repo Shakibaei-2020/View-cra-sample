@@ -14,12 +14,12 @@ import { TypeClient } from 'src/app/z-model/Client/type-client';
 export class AddClientComponent implements OnInit {
 
   constructor(
-    private _route: Router, 
+    private _route: Router,
     private _service: NgserviceService,
     private _ClientService: ClientService,
     private _TypeClientService: TypeClientService,
 
-    ) { }
+  ) { }
 
   ngOnInit(): void {
 
@@ -48,24 +48,41 @@ export class AddClientComponent implements OnInit {
   newClient = new Client();
   allClientType!: TypeClient[]
 
+  validation!: string;
+  notValidation!: string;
+
+
   addClient() {
 
-    this.newClient.typeClient  = this.clientType;
+    this.newClient.typeClient = this.clientType;
 
 
-    this._ClientService.addAndupdateClient(this.newClient).subscribe(
-      data => {
-        console.log("ajout effectué");
-      },
-      error => {
-        console.log("Remplissé tout les champs !")
-      }
-    )
+    if (this.newClient.name != "" && this.newClient != undefined && this.newClient.ref != "" && this.newClient.ref != undefined) {
+
+
+      this._ClientService.addAndupdateClient(this.newClient).subscribe(
+        data => {
+          console.log("ajout effectué");
+          this.validation = "L'ajout a bien été effectué.";
+          this.notValidation = "";
+        },
+        error => {
+          this.validation = "";
+          this.notValidation = "L'ajout n'a pas été effectué. Merci de remplir tous les champs.";
+        }
+      )
+    } else {
+      this.validation = "";
+      this.notValidation = "L'ajout n'a pas été effectué. Merci de remplir tous les champs.";
+    }
+
+
+
   }
 
-  goToSearch(){
+  goToSearch() {
     this._route.navigate(['/searchClient']);
   }
-    
+
 
 }
