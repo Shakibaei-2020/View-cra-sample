@@ -12,6 +12,9 @@ import { MissionService } from 'src/app/y-service/Mission/mission.service';
 import { ProjectService } from 'src/app/y-service/Project/project.service';
 import { ActivityService } from 'src/app/y-service/Activity/activity.service';
 import { TypeActivityService } from 'src/app/y-service/Activity/type-activity.service';
+import { CollabJoinProjectService } from 'src/app/y-service/CollabJoinProject/collab-join-project.service';
+import { ProjectCollaborator } from 'src/app/z-model/ProjectCollaborator/project-collaborator';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
 
 @Component({
   selector: 'app-declaration-activite',
@@ -27,8 +30,8 @@ export class DeclarationActiviteComponent implements OnInit {
   year!: number;
   day!: number;
   daysInMonth!: number;
-  
-  monthSelected = this.dt.getMonth()+1;
+
+  monthSelected = this.dt.getMonth() + 1;
   yearInput = this.dt.getFullYear();
 
   tabJours = new Array();
@@ -48,7 +51,7 @@ export class DeclarationActiviteComponent implements OnInit {
   /**  astreinte dynamique
    astreintePerDay = new Array();
    */
-   isLoading: boolean = true;
+  isLoading: boolean = true;
   astreintePerDay1 = new Array();
   astreintePerDay2 = new Array();
   astreintePerDay3 = new Array();
@@ -62,20 +65,21 @@ export class DeclarationActiviteComponent implements OnInit {
 
   constructor(
     private _route: Router,
-     private _service: NgserviceService,
-     private _MissionService: MissionService,
-     private _ProjectService: ProjectService,
-     private _ActivityService:ActivityService,
-     private _TypeActivityService:TypeActivityService,
-     ) {
+    private _MissionService: MissionService,
+    private _ProjectService: ProjectService,
+    private _ActivityService: ActivityService,
+    private _TypeActivityService: TypeActivityService,
+    private _CollabJoinProjectService: CollabJoinProjectService,
+    private _CollaboratorService: CollaboratorService,
+  ) {
   }
 
   public missions!: Mission[];
   public collaborateur!: Collaborator;
 
-  public projects!: Project[];
   public projectsByCollab!: Project[];
   lesTypeActivity: TypeActivity[] = [];
+  public projects!: ProjectCollaborator[];
 
   // Pour formater des dates faut faire appel à ce pipe comme l'exemple ci-dessous
   aujourdhuiTestFormat = new Date();
@@ -100,16 +104,19 @@ export class DeclarationActiviteComponent implements OnInit {
 
     // Pour récupérer la liste des projects affectés à un collaborateur : opérationnelle mais faut l'automatiser
     // TODO : attention c'es en dur
-    this._ProjectService.SelectAllProjectForOneCollab(2).subscribe(
-      data => {this.projects = data;},
+
+    this._CollabJoinProjectService.selectProjectCollabByCollabId(2).subscribe(
+      data => {
+        this.projects = data;
+      },
       error => console.log("exception" + error)
     )
 
     // Pour récupérer toutes les informations sur un collaborateur : opérationnelle mais faut l'automatiser
     // TODO : attention c'es en dur
 
-    /**  
-    this._service.selectOneCollabById(2).subscribe(
+
+    this._CollaboratorService.selectOneCollabById(2).subscribe(
       data => this.collaborateur = data,
       error => console.log("exception" + error)
     )
@@ -157,7 +164,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
     this.daysInMonth = new Date(this.year, this.month, 0).getDate();
     for (var i = 0; i < this.daysInMonth; i++) {
-      this.tabJours[i] = i + 1;      
+      this.tabJours[i] = i + 1;
       this.activitiesPerDay.push("jour-" + i);
       this.remotePerDay.push("remote-" + i);
     }
@@ -182,9 +189,6 @@ export class DeclarationActiviteComponent implements OnInit {
   }
 
   /** ACTIVITE1  */
-  /*  refinterne = new Number();
-  refClient !: string; */
-  // laMission = new Mission();
   dureeProjet1 = 0;
   tabAllInputedValue = new Array();
   selectedOption!: number;
@@ -192,22 +196,8 @@ export class DeclarationActiviteComponent implements OnInit {
   isRemote = false;
   activityNormal = new Activity;
 
-  // Cette méthode permetait de mettre à jour les informations pour la mission, je ne pesne pas qu'elle est utile maintenant
-  updatedAfterSelect() {
-    // Une fois le projet selectioné, on affecte un type d'activité "normale".
-    // this.refinterne = this.collaborateur.id;
-
-    /* this._service.selectMissionById(this.selectedOption).subscribe(
-      data => this.laMission = data,
-      error => console.log("exception" + error)
-    ) */
-    //console.log(this.refClient);
-    //this.refClient = this.laMission.client.ref;
-  }
-
   /** Remplissage automatique des remotes de l'Activité avec 0 et 1 */
   remoteRemplis = false;
-
   remplirRemoteP1() {
     if (this.remoteRemplis == true) {
       this.isRemote = false;
@@ -235,7 +225,6 @@ export class DeclarationActiviteComponent implements OnInit {
   }
   /** calcule du total du l'activité declaré N1 */
   totalProjet1 = 0;
-
   total() {
     this.totalProjet1 = 0;
     this.totalActivity = 0;
@@ -249,27 +238,16 @@ export class DeclarationActiviteComponent implements OnInit {
   }
 
   /** ACTIVITE2  */
+
   dureeProjet2 = 0;
-  refinterne2 = new Number();
-  refClient2 !: string;
-  laMission2 = new Mission();
   tabAllInputedValue2 = new Array();
-  j2!: number;
   selectedOption2!: number;
   ProjectActivity2!: Project;
   isRemote2 = false;
+  activity2 = new Activity;
 
-  updatedAfterSelect2() {
-    this.refinterne2 = this.collaborateur.id;
-    this._MissionService.selectMissionById(this.selectedOption2).subscribe(
-      data => this.laMission2 = data,
-      error => console.log("exception" + error)
-    )
-    this.refClient2 = this.laMission2.client.ref;
-  }
-
+  /** Remplissage automatique des remotes de l'Activité avec 0 et 1 */
   remoteRemplis2 = false;
-  /** Remplissage automatique des remotes de  l'Activité*/
   remplirRemoteP2() {
     if (this.remoteRemplis2 == true) {
       this.isRemote2 = false;
@@ -281,9 +259,7 @@ export class DeclarationActiviteComponent implements OnInit {
   }
 
   /** Remplissage automatique de l'Activité*/
-  totalProjet2 = 0;
   remplis2 = false;
-
   remplirProjet2() {
 
     if (this.remplis2 == true) {
@@ -295,42 +271,33 @@ export class DeclarationActiviteComponent implements OnInit {
       this.totalProjet2 = this.daysInMonth;
       this.remplis2 = true;
     }
+    this.totalAllActivity();
   }
-
-  /** total de l'activité */
+  /** calcule du total du l'activité declaré N1 */
+  totalProjet2 = 0;
   total2() {
-    var i;
     this.totalProjet2 = 0;
-    for (i = 0; i < this.daysInMonth; i++) {
+    this.totalActivity = 0;
+    for (var i = 0; i < this.daysInMonth; i++) {
       if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber != undefined) {
         this.totalProjet2 = this.totalProjet2 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
+        this.totalActivity = this.totalActivity + this.totalProjet2;
       }
     }
-    this.totalActivity = this.totalProjet1 + this.totalProjet2 + this.totalProjet3 + this.totalProjet4;
+    this.totalAllActivity();
   }
 
   /** ACTIVITE 3  */
   dureeProjet3 = 0;
-  refinterne3 = new Number();
-  refClient3 !: string;
-  laMission3 = new Mission();
   tabAllInputedValue3 = new Array();
-  j3!: number;
   selectedOption3!: number;
   ProjectActivity3!: Project;
   isRemote3 = false;
+  activity3 = new Activity();
 
-  updatedAfterSelect3() {
-    this.refinterne3 = this.collaborateur.id;
-    this._MissionService.selectMissionById(this.selectedOption3).subscribe(
-      data => this.laMission3 = data,
-      error => console.log("exception" + error)
-    )
-    this.refClient3 = this.laMission3.client.ref;
-  }
 
+  /** Remplissage automatique des remotes de l'Activité avec 0 et 1 */
   remoteRemplis3 = false;
-  /** Remplissage automatique des remotes de  l'Activité*/
   remplirRemoteP3() {
     if (this.remoteRemplis3 == true) {
       this.isRemote3 = false;
@@ -341,55 +308,45 @@ export class DeclarationActiviteComponent implements OnInit {
     }
   }
 
-  remplis3 = false;
   /** Remplissage automatique de l'Activité*/
-  totalProjet3 = 0;
-
+  remplis3 = false;
   remplirProjet3() {
+
     if (this.remplis3 == true) {
       this.dureeProjet3 = 0;
       this.totalProjet3 = 0;
-      this.remplis2 = false;
+      this.remplis3 = false;
     } else {
       this.dureeProjet3 = 1;
       this.totalProjet3 = this.daysInMonth;
       this.remplis3 = true;
     }
+    this.totalAllActivity();
   }
-
-  /** total de l'activité */
+  /** calcule du total du l'activité declaré N1 */
+  totalProjet3 = 0;
   total3() {
-    var i;
     this.totalProjet3 = 0;
-    for (i = 0; i < this.daysInMonth; i++) {
-      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber != undefined) {
+    this.totalActivity = 0;
+    for (var i = 0; i < this.daysInMonth; i++) {
+      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber != undefined) {
         this.totalProjet3 = this.totalProjet3 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
+        this.totalActivity = this.totalActivity + this.totalProjet3;
       }
     }
+    this.totalAllActivity();
   }
 
   /** ACTIVITE 4  */
   dureeProjet4 = 0;
-  refinterne4 = new Number();
-  refClient4!: string;
-  laMission4 = new Mission();
   tabAllInputedValue4 = new Array();
-  j4!: number;
   selectedOption4!: number;
   ProjectActivity4!: Project;
   isRemote4 = false;
+  activity4 = new Activity();
 
-  updatedAfterSelect4() {
-    this.refinterne4 = this.collaborateur.id;
-    this._MissionService.selectMissionById(this.selectedOption4).subscribe(
-      data => this.laMission4 = data,
-      error => console.log("exception" + error)
-    )
-    this.refClient4 = this.laMission4.client.ref;
-  }
-
+  /** Remplissage automatique des remotes de l'Activité avec 0 et 1 */
   remoteRemplis4 = false;
-  /** Remplissage automatique des remotes de  l'Activité*/
   remplirRemoteP4() {
     if (this.remoteRemplis4 == true) {
       this.isRemote4 = false;
@@ -400,11 +357,10 @@ export class DeclarationActiviteComponent implements OnInit {
     }
   }
 
-  remplis4 = false;
   /** Remplissage automatique de l'Activité*/
-  totalProjet4 = 0;
-
+  remplis4 = false;
   remplirProjet4() {
+
     if (this.remplis4 == true) {
       this.dureeProjet4 = 0;
       this.totalProjet4 = 0;
@@ -414,17 +370,20 @@ export class DeclarationActiviteComponent implements OnInit {
       this.totalProjet4 = this.daysInMonth;
       this.remplis4 = true;
     }
+    this.totalAllActivity();
   }
-
-  /** total de l'activité */
-
+  /** calcule du total du l'activité declaré N1 */
+  totalProjet4 = 0;
   total4() {
     this.totalProjet4 = 0;
+    this.totalActivity = 0;
     for (var i = 0; i < this.daysInMonth; i++) {
       if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber != undefined) {
         this.totalProjet4 = this.totalProjet4 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
+        this.totalActivity = this.totalActivity + this.totalProjet4;
       }
     }
+    this.totalAllActivity();
   }
 
   /** ASTREINTE 1 */
@@ -538,7 +497,7 @@ export class DeclarationActiviteComponent implements OnInit {
   projectAstreinte3 = new Project();
   laMissionAstreinte3 = new Mission();
   astreinte3remplis = false;
-  typeActivityNormal = new TypeActivity;      
+  typeActivityNormal = new TypeActivity;
 
   selectedProjectAstreint3!: number;
   selectedTypeUpdateValue3!: number;
@@ -595,76 +554,84 @@ export class DeclarationActiviteComponent implements OnInit {
   astreinte3 = new Activity();
   astreinte4 = new Activity();
 
-  activity = new Activity();
-  activity2 = new Activity();
-  activity3 = new Activity();
-  activity4 = new Activity();
 
   typeActivity = new TypeActivity();
   typeActivity2 = new TypeActivity();
   typeActivity3 = new TypeActivity();
   typeActivity4 = new TypeActivity();
 
+
+  selectedProject = new Project();
+  selectedProject2 = new Project();
+  selectedProject3 = new Project();
+  selectedProject4 = new Project();
+
   async EnregisterEtEnvoyer() {
 
     /** FOR ACTIVITY  */
-    // Faudra récupérer le type de l'activité dans le formulaire
-    /* this._service.selectTypeActivityById(2).subscribe(
-      data => this.typeActivity = data,
-      error => console.log("exception" + error)
-    ) */
 
-    this._TypeActivityService.selectTypeActivityById(2).subscribe(
-      data => this.typeActivity2 = data,
-      error => console.log("exception" + error)
-    )
-
-    this._TypeActivityService.selectTypeActivityById(2).subscribe(
-      data => this.typeActivity3 = data,
-      error => console.log("exception" + error)
-    )
-
-    this._TypeActivityService.selectTypeActivityById(2).subscribe(
-      data => this.typeActivity4 = data,
-      error => console.log("exception" + error)
-    )
-    
-
-    if (this.selectedOption != null) {
+    if (this.selectedOption != null && this.selectedOption != undefined) {
+      console.log("gello")
+      this._ProjectService.selectProjectById(this.selectedOption).subscribe(
+        data => {
+          this.selectedProject = data;
+          this.activityNormal.typeActivity = this.lesTypeActivity[0];
+          this.activityNormal.projectId = this.selectedProject.id;
+          this.activityNormal.collaboratorId = this.collaborateur.id;
+          console.log(this.activityNormal)
+        },
+        error => console.log("exception" + error)
+      )
       // Si un projet est selectioné, on atribue à l'activité un type et l'id du projet.
-      this.activityNormal.typeActivity=this.lesTypeActivity[0];
-      this.activityNormal.projectId = this.projects[this.selectedOption - 1].id;
-      this.activityNormal.collaboratorId = this.collaborateur.id;
+
     }
 
-    if (this.selectedOption2 != null) {
-      this._ProjectService.selectProjectByMissionId(this.selectedOption2).subscribe(
-        data => this.ProjectActivity2 = data,
+    console.log(this.selectedOption2)
+    if (this.selectedOption2 != null && this.selectedOption2 != undefined) {
+      this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
+        data => {
+          this.selectedProject2 = data;
+          this.activity2.typeActivity = this.lesTypeActivity[0];
+          this.activity2.projectId = this.selectedProject2.id;
+          this.activity2.collaboratorId = this.collaborateur.id;
+        },
         error => console.log("exception" + error)
       )
     }
 
-    if (this.selectedOption3 != null) {
-      this._ProjectService.selectProjectByMissionId(this.selectedOption3).subscribe(
-        data => this.ProjectActivity3 = data,
+    if (this.selectedOption3 != null && this.selectedOption3 != undefined) {
+      this._ProjectService.selectProjectById(this.selectedOption3).subscribe(
+        data => {
+          this.selectedProject3 = data;
+          this.activity3.typeActivity = this.lesTypeActivity[0];
+          this.activity3.projectId = this.selectedProject3.id;
+          this.activity3.collaboratorId = this.collaborateur.id;
+        },
         error => console.log("exception" + error)
       )
     }
 
-    if (this.selectedOption4 != null) {
-      this._ProjectService.selectProjectByMissionId(this.selectedOption4).subscribe(
-        data => this.ProjectActivity4 = data,
+    if (this.selectedOption4 != null && this.selectedOption4 != undefined) {
+      this._ProjectService.selectProjectById(this.selectedOption4).subscribe(
+        data => {
+          this.selectedProject4 = data;
+          this.activity4.typeActivity = this.lesTypeActivity[0];
+          this.activity4.projectId = this.selectedProject4.id;
+          this.activity4.collaboratorId = this.collaborateur.id;
+        },
         error => console.log("exception" + error)
       )
     }
 
     for (var i = 0; i < this.daysInMonth; i++) {
+
+
       /** ACTIVITY 1 activityNormal */
       if (this.totalProjet1 != 0) {
         this.activityNormal.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
         this.activityNormal.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
-        this.activityNormal.startDate = new Date(this.yearInput, this.monthSelected-1 , i+1);
+        this.activityNormal.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
         this.aujourdhui = this.pipeDate.transform(this.activityNormal.startDate, 'yyyy-MM-dd') || this.aujourdhui;
         // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
 
@@ -680,11 +647,12 @@ export class DeclarationActiviteComponent implements OnInit {
 
       /** ACTIVITY 2 */
       if (this.totalProjet2 != 0) {
-        this.activity2.collaboratorId = 1;
-        this.activity2.projectId = this.ProjectActivity2.id;
         this.activity2.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
         this.activity2.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked;
-        this.activity2.typeActivity = this.typeActivity2;
+        // on ajoute la date ici pourquoi la mettre en arguments
+        this.activity2.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+        this.aujourdhui = this.pipeDate.transform(this.activity2.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
 
         this._ActivityService.addAndUpdateActivity(this.activity2, this.aujourdhui).subscribe(
           data => {
@@ -699,35 +667,35 @@ export class DeclarationActiviteComponent implements OnInit {
       /** ACTIVITY 3 */
 
       if (this.totalProjet3 != 0) {
-
-        this.activity3.collaboratorId = 1;
-        this.activity3.projectId = this.ProjectActivity3.id;
         this.activity3.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
         this.activity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
-        this.activity3.typeActivity = this.typeActivity3;
+        // on ajoute la date ici pourquoi la mettre en arguments
+        this.activity3.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+        this.aujourdhui = this.pipeDate.transform(this.activity3.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
 
         this._ActivityService.addAndUpdateActivity(this.activity3, this.aujourdhui).subscribe(
           data => {
-            console.log("activity  3 ajouté");
+            console.log("activity 3 ajouté");
           },
           error => {
             console.log("erreur ajout non-effectué")
           }
         )
-
       }
 
       /** ACTIVITY 4 */
 
+  
       if (this.totalProjet4 != 0) {
-
-        this.activity4.collaboratorId = 1;
-        this.activity4.projectId = this.ProjectActivity4.id;
         this.activity4.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
         this.activity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
-        this.activity4.typeActivity = this.typeActivity4;
+        // on ajoute la date ici pourquoi la mettre en arguments
+        this.activity4.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+        this.aujourdhui = this.pipeDate.transform(this.activity4.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
 
-        this._ActivityService.addAndUpdateActivity(this.activity, this.aujourdhui).subscribe(
+        this._ActivityService.addAndUpdateActivity(this.activity4, this.aujourdhui).subscribe(
           data => {
             console.log("activity 4 ajouté");
           },
@@ -809,8 +777,10 @@ export class DeclarationActiviteComponent implements OnInit {
         )
       }
     }
-  }
 
+
+
+  }
   /** NAVIGATION */
   retour() {
     this._route.navigate(['/utilisateur']);
@@ -825,4 +795,5 @@ export class DeclarationActiviteComponent implements OnInit {
   totalAllActivity() {
     this.totalActivity = this.totalProjet1 + this.totalProjet2 + this.totalProjet3 + this.totalProjet4;
   }
+
 }

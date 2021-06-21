@@ -42,4 +42,8 @@ export class CollabJoinProjectService {
     return this._http.get<any[]>("http://localhost:8900/projetCollaborator/selectCollabNotAffectedToProject/" + idProject);
   }
 
+
+  selectProjectCollabByCollabId(idCollab:number):Observable<ProjectCollaborator[]>{
+    return this._http.get<ProjectCollaborator[]>("http://localhost:8900/projetCollaborator/selectProjectCollabByCollabId/" + idCollab);
+  }
 }
