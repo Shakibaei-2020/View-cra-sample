@@ -706,9 +706,7 @@ export class CongeComponent implements OnInit {
         if (index > -1) {
           leaves.splice(index, 1);
           this.nbResultat = this.nbResultat - 1;
-
         }
-
       },
       error => {
         console.log("erreur delete leave non-effectué")

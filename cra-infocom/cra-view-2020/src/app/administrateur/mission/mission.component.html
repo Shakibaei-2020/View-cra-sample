@@ -61,10 +61,11 @@
           <thead>
             <tr>
               <th>
-                <p class="titreTable">Nom de la mission </p>
+                <p class="titreTable">Nom du client</p>
+
               </th>
               <th>
-                <p class="titreTable">Nom du client</p>
+                <p class="titreTable">Nom de la mission </p>
               </th>
 
               <th>
@@ -81,10 +82,12 @@
           <tbody>
             <tr *ngFor="let mission of missions; let indexOfelement = index">
               <td>
-                <p class="contentTable">{{mission.missionTitle}}</p>
+                <p class="contentTable">{{mission.clientName }}</p>
+
               </td>
               <td>
-                <p class="contentTable">{{mission.clientName }}</p>
+                <p class="contentTable">{{mission.missionTitle}}</p>
+
               </td>
               <td>
                 <p class="contentTable">{{mission.startDate | date: 'dd/MM/yyyy' }}</p>

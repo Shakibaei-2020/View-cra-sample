@@ -499,11 +499,11 @@ export class ProjectComponent implements OnInit {
       this.collaboratorInputLastName.lastName = "";
     } else {
       this.nbResultatRecherche = 0;
+
       this._CollaboratorService.selectAllCollab().subscribe(
         data => {
           this.searchedCollabs = data;
           this.nbResultatRecherche = this.searchedCollabs.length;
-
         },
         error => console.log("exception" + error)
       )

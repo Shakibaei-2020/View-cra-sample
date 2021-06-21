@@ -377,7 +377,7 @@ export class EditCollaborateurComponent implements OnInit {
             this.updatedLeave.clientInformed = !(<HTMLInputElement>document.getElementById(this.leaveClientInformed[indexOfElement])).value || this.leaveRequestToUpdated.clientInformed;
             this.updatedLeave.statusDebut = (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[indexOfElement])).value || this.leaveRequestToUpdated.statusDebut;
             this.updatedLeave.statusFin = (<HTMLInputElement>document.getElementById(this.leaveStatusFin[indexOfElement])).value || this.leaveRequestToUpdated.statusFin;
-            this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.leaveStatus[indexOfElement])).value || this.leaveRequestToUpdated.statusFin;
+            this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.leaveStatus[indexOfElement])).value || this.leaveRequestToUpdated.status
             this.updatedLeave.nbJours = this.dayNumber || this.leaveRequestToUpdated.nbJours;
 
             this._LeaveService.addOrUpdateLeaveRequest(this.updatedLeave, this.dateOfDemandLeave, this.dateOfStartLeave, this.dateOfEndLeave).subscribe(

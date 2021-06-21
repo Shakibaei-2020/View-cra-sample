@@ -197,12 +197,13 @@
                   </div>
 
                 </div>
-              </div>
-              <div class="modal-footer">
-                <div class="container">
+                <div class="container"><br>
                   <p class="validation" >{{validation}}</p>
                   <p class="notValidation">{{notValidation}}</p>
                 </div>
+              </div>
+              <div class="modal-footer">
+        
                 <button class="btnModal" type="submit" (click)="updateExpense(indexOfelement)">Maj</button>
                 <button class="btnModal" type="submit"data-dismiss="modal"  (click)="deleteExpenseById(expense.id,expenses,expense)">Supprimer</button>
               </div>
