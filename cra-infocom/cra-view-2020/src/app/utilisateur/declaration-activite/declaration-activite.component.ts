@@ -714,7 +714,7 @@ export class DeclarationActiviteComponent implements OnInit {
           error => console.log("exception" + error)
         )
 
-        this.astreinte1.collaboratorId = 1;
+        this.astreinte1.collaboratorId = this.collaborateur.id;
         this.astreinte1.projectId = this.selectedProjectAstreint1;
         this.astreinte1.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
         this.astreinte1.typeActivity = this.theTypeActivity1;
@@ -727,7 +727,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
         this._ActivityService.addAndUpdateActivity(this.astreinte1, this.aujourdhui).subscribe(
           data => {
-            console.log("astreinte  ajouté");
+            console.log("astreinte 1  ajouté ");
           },
           error => {
             console.log("erreur ajout non-effectué")
@@ -744,14 +744,14 @@ export class DeclarationActiviteComponent implements OnInit {
           error => console.log("exception" + error)
         )
 
-        this.astreinte2.collaboratorId = 1;
+        this.astreinte2.collaboratorId = this.collaborateur.id;
         this.astreinte2.projectId = this.selectedProjectAstreint1;
         this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
         this.astreinte2.typeActivity = this.theTypeActivity2;
 
         this._ActivityService.addAndUpdateActivity(this.astreinte2, this.aujourdhui).subscribe(
           data => {
-            console.log("astreinte  ajouté");
+            console.log("astreinte 2 ajouté ");
           },
           error => {
             console.log("erreur ajout non-effectué")
@@ -762,14 +762,14 @@ export class DeclarationActiviteComponent implements OnInit {
       /** ASTREINTE 3 */
 
       if (this.totalAstreinte3 != 0) {
-        this.astreinte3.collaboratorId = 1;
+        this.astreinte3.collaboratorId = this.collaborateur.id;
         this.astreinte3.projectId = this.selectedProjectAstreint3;
         this.astreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
         this.astreinte3.typeActivity = this.theTypeActivity3;
 
         this._ActivityService.addAndUpdateActivity(this.astreinte3, this.aujourdhui).subscribe(
           data => {
-            console.log("astreinte  ajouté");
+            console.log("astreinte  3 ajouté");
           },
           error => {
             console.log("erreur ajout non-effectué")

@@ -183,7 +183,7 @@
             </td>
             <td>
               <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedTypeUpdateValue1"  (change)="selectedTypeUpdate1()">
-                <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
+                <option [disabled]="typeActivity.id === 1 "  [hidden]="typeActivity.id === 1 "   *ngFor="let typeActivity of lesTypeActivity"  value="{{typeActivity.id}}" selected="true" disabled="disabled" >{{typeActivity.type}}
                 </option>
               </select>
             </td>
