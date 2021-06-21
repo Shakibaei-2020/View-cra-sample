@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'selenium-webdriver';
 import { ActivityService } from 'src/app/y-service/Activity/activity.service';
-import { TypeActivityService } from 'src/app/y-service/Activity/type-activity.service';
-import { NgserviceService } from 'src/app/y-service/ngservice-service';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
 import { Activity } from 'src/app/z-model/Activity/activity';
+import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 
 @Component({
   selector: 'app-activite',
@@ -12,48 +13,66 @@ import { Activity } from 'src/app/z-model/Activity/activity';
 })
 export class ActiviteComponent implements OnInit {
 
-  date1!:Date;
-  date2!:Date;
-  lastName!:String;
+  monthActivity!: number;
+  yearActivity!: number;
+  firstNameCollab!: String;
   nbResultat!: number;
 
+  collaboratorsWithThisName!: Collaborator[];
+  idOfCollas!: number[];
+  public activitys!: Activity[];
+  resultat = new Array();
 
-  public activitys!:Activity[];  
 
   
   constructor(
-    private _service:NgserviceService, 
-    private _route:Router,
-    private _ActivityService:ActivityService,
-    private _TypeActivityService:TypeActivityService,
-    
-    ) { }
+    private _route: Router,
+    private _ActivityService: ActivityService,
+    private _CollaboratorService: CollaboratorService,
+  ) { }
 
   ngOnInit(): void {
+
+ 
   }
 
-  searchActivity(){
-    this._ActivityService.searchActivity(this.date1, this.date2, this.lastName).subscribe(
-      data=> {this.activitys = data;
-      this.nbResultat = this.activitys.length
-    },
-      error=>console.log("exception" +error)
-      )
+  searchActivity() {
+
+
+    this._CollaboratorService.selectCollabByName(this.firstNameCollab).subscribe(
+      data => {
+        this.collaboratorsWithThisName = data;
+        console.log(this.collaboratorsWithThisName)
+
+        for (var i = 0; i < this.collaboratorsWithThisName.length; i++) {
+          this._ActivityService.searchActivityByidCollMonthYear(this.monthActivity, this.yearActivity, this.collaboratorsWithThisName[i].id).subscribe(
+            data => {
+              this.activitys = data;
+              this.nbResultat = this.activitys.length
+              this.resultat.push(this.activitys)
+            },
+            error => console.log("exception" + error)
+          )
+        }
+      },
+      erorr => { }
+    );
+    console.log(this.resultat)
   }
-  
-  goToAddActivity(){
+
+  goToAddActivity() {
     this._route.navigate(['/addActivite']);
 
   }
-  
-  goGerer(){
+
+  goGerer() {
     this._route.navigate(['/editActivite']);
   }
 
-  goToAccueil(){
+  goToAccueil() {
     this._route.navigate(['/administrateur']);
 
   }
-  
+
 
 }

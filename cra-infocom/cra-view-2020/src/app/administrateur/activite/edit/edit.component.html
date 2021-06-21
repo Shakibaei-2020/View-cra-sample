@@ -2,106 +2,269 @@
 
 <br><br><br>
 
-
-<div class="container">
-<div class="panel">
-    <div class="bio-graph-heading-profil">
-    
-      <div class="container ">
-          <img class ="profil-image" src="https://qualium-investissement.com/wp-content/uploads/2017/05/inconnu-small.jpg">
-          <p class="titre">Gestion de l'activite de  Mohammad-Reza SHAKIBAEI  du 14/02/2000 </p>
-    
-      </div>
-    </div>
-    <br><br><br><br><br><br><br>
-    
-    
-    <div class="panel-body bio-graph-info">
-          <br>
-       <div class="row">
-    
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Durée :</span> <input type="text"  required [(ngModel)]="updatedActivity.duration" name="updatedActivity.duration" > </div>
-    
-            </div>
-            <div class="bio-row">
-              <div class="inputbox mt-1"><span class="input-title">Date début :</span> <input type="Date"   required [(ngModel)]="dateOfStart" name="dateOfStart"> </div>
-          </div>
-            <div class="bio-row">
-              
-              <div class="inputbox mt-1"> <div class="inputbox mt-1"><span class="input-title"class="input-title">Distentiel :</span><br>
-                <select class="form-input" aria-label="Default select example" required [(ngModel)]="updatedActivity.remote" name="updatedActivity.remote">
-                <option value="true">Oui</option>
-                <option value="false">Non</option>
-              </select>  </div></div>
-          </div>
-            <div class="bio-row">
-              <div class="inputbox mt-1"> <div class="inputbox mt-1"><span class="input-title">Nom projet :</span><br>
-                <select class="form-input" aria-label="Default select example">
-                <option value="1">project 1</option>
-                <option value="2">project 2</option>
-              </select> </div>
-            </div>
-           
-    </div>
-    
+<!-- Declaration d'activité  -->
 
 
-        <div class="bio-row"></div>
+<div class="contenue">
+  <div class="Frais">
 
-          <div class="bio-row">
-            <br>    <br>
+    <h2> Déclaration d'activité  de {{editedCollaborator.firstName}} {{editedCollaborator.lastName}} du </h2>
+  </div>
+  <select class="form-input2" aria-label="Default select example" [(ngModel)]="monthSelected" (change)="updateMonth()">
+    <option value="1">Janvier</option>
+    <option value="2">Février</option>
+    <option value="3">Mars</option>
+    <option value="4">Avril</option>
+    <option value="5">Mai</option>
+    <option value="6">Juin</option>
+    <option value="7">Juillet</option>
+    <option value="8">Août</option>
+    <option value="9">Septembre</option>
+    <option value="10">Octobre</option>
+    <option value="11">Novembre</option>
+    <option value="12">Décembre</option>
+  </select>
+  <select class="form-input3" aria-label="Default select example" value="2021" [(ngModel)]="yearInput" name="yearInput">
+    <option value="2021">2021</option>
+    <option value="2022">2022</option>
+    <option value="2023">2023</option>
+    <option value="2024">2024</option>
+  </select>
 
-            <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+  <!-- ACTIVITE 1-->
+  <table>
+    <thead>
+      <tr >
+        <th class="enTete">Projets </th>
+        <th class="enTete" >R.AUTO </th>
+        <th class="enTeteDates" *ngFor="let element of tabJours;">{{element}} </th>
+        <th class="enTete"  >total</th>
+      </tr>
+    </thead>
+    <tbody  (change)="totalAllActivity()">
+      <tr>
+        <td>
+          <select class="form-input choice" aria-label="Default select example" [(ngModel)]="selectedOption">
+            <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
+          </select>
+        </td>
+        <!-- <td><input class="form-input choice" value="{{refinterne}}"></td>
+        <td><input class="form-input choice" value="{{refClient}}"></td> -->
+        <td>
+          <button class="btnRemplirActivity" (click)="remplirProjet1()">Remplir</button>
+          <button class="btnRemplirActivity" (click)="remplirRemoteP1()">TAD</button>
+        </td>
+        <td *ngFor="let element of tabJours;let indexOfelement=index;">
+          <input class=" inputDay" step="0.25" min="0" max="1" name="jour-{{indexOfelement}}"
+            id="jour-{{indexOfelement}}" type="number" value="{{dureeProjet1}}" [disabled]="" (change)="total()"
+            value="0">
+          <input class="inputRemote" name="remote-{{indexOfelement}}" id="remote-{{indexOfelement}}" type="checkbox"
+            [checked]="isRemote" value="{{isRemote}}">
+        </td>
+        <td>
+          <input class="inputDay twolast" type="" value={{totalProjet1}} id="" required [(ngModel)]="totalProjet1"
+            name="totalProjet1">
+        </td>
+      </tr>
 
-            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Alert update</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Êtes vous sur de vouloir mettre à jour ?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateActivity()" >Sauvgarder</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <!-- ACTIVITE 2-->
+
+      <tr>
+        <td>
+          <select class="form-input choice" aria-label="Default select example" [(ngModel)]="selectedOption2">
+            <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
+          </select>
+        </td>
+        <!-- <td><input class="form-input choice"value="{{refinterne2}}"></td>
+        <td><input class="form-input choice" value="{{refClient2}}"></td> -->
+        <td>
+          <button class="btnRemplirActivity" (click)="remplirProjet2()">Remplir</button>
+          <button class="btnRemplirActivity" (click)="remplirRemoteP2()">TAD</button>
+        </td>
+        <td *ngFor="let element of tabJours;let indexOfelement=index;">
+          <input class=" inputDay" step="0.25" min="0" max="1" name="jour2-{{indexOfelement}}"
+            id="jour2-{{indexOfelement}}" type="number" value="{{dureeProjet2}}" [disabled]="" (change)="total2()"
+            value="0">
+          <input class="inputRemote" name="remote2-{{indexOfelement}}" id="remote2-{{indexOfelement}}" type="checkbox"
+            [checked]="isRemote2" value="{{isRemote2}}">
+        </td>
+        <td>
+          <input class="inputDay twolast" type="" value={{totalProjet2}} id="" required [(ngModel)]="totalProjet2"
+            name="totalProjet2">
+        </td>
+      </tr>
+
+      <!-- ACTIVITE 3-->
+
+      <tr>
+        <td>
+          <select class="form-input choice"  aria-label="Default select example" [(ngModel)]="selectedOption3">
+            <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
+          </select>
+        </td>
+        <!-- <td><input class="form-input choice" value="{{refinterne3}}"></td>
+        <td><input class="form-input choice" value="{{refClient3}}"></td> -->
+        <td>
+          <button class="btnRemplirActivity" (click)="remplirProjet3()">Remplir</button>
+          <button class="btnRemplirActivity" (click)="remplirRemoteP3()">TAD</button>
+        </td>
+        <td *ngFor="let element of tabJours;let indexOfelement=index;">
+          <input class=" inputDay" step="0.25" min="0" max="1" name="jour3-{{indexOfelement}}"
+            id="jour3-{{indexOfelement}}" type="number" value="{{dureeProjet3}}" [disabled]="" (change)="total3()"
+            value="0">
+          <input class="inputRemote" name="remote3-{{indexOfelement}}" id="remote3-{{indexOfelement}}" type="checkbox"
+            [checked]="isRemote3" value="{{isRemote3}}">
+        </td>
+        <td>
+          <input class="inputDay twolast" type="" value={{totalProjet3}} id="" required [(ngModel)]="totalProjet3"
+            name="totalProjet3">
+        </td>
+      </tr>
+
+      <!-- ACTIVITE 4-->
+
+      <tr>
+        <td>
+          <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedOption4">
+            <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
+          </select>
+        </td>
+        <!-- <td><input class="form-input choice" value="{{refinterne4}}"></td>
+        <td><input class="form-input choice"  value="{{refClient4}}"></td> -->
+        <td>
+          <button class="btnRemplirActivity" (click)="remplirProjet4()">Remplir</button>
+          <button class="btnRemplirActivity" (click)="remplirRemoteP4()">TAD</button>
+        </td>
+        <td *ngFor="let element of tabJours;let indexOfelement=index;">
+          <input class=" inputDay" step="0.25" min="0" max="1" name="jour4-{{indexOfelement}}"
+            id="jour4-{{indexOfelement}}" type="number" value="{{dureeProjet4}}" [disabled]="" (change)="total4()"
+            value="0">
+          <input class="inputRemote" name="remote4-{{indexOfelement}}" id="remote4-{{indexOfelement}}" type="checkbox"
+            [checked]="isRemote4" value="{{isRemote4}}">
+        </td>
+        <td>
+          <input class="inputDay twolast" type="" value={{totalProjet4}} id="" required [(ngModel)]="totalProjet4"
+            name="totalProjet4">
+        </td>
+      </tr>
 
 
+    </tbody>
+  </table>
+  <br>
 
-            <button class="button" data-toggle="modal" data-target="#DeleteModal">Supprimer</button>
+  <span>Total de jours travaillés :</span> <input class="inputDay2" type="" value={{totalActivity}} required [(ngModel)]="totalActivity" name="totalActivity">
 
-            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Alert delete</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Êtes vous sur de vouloir supprimer?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteActivity()"  >Supprimer</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-           
-    
-             
-          </div>
-    
-        </div>
-    </div>
-    </div></div>
+  <br>  <br>  <br>
+  <!-- ASTREINTE -->
+  
+
+      <h2> Astreinte </h2>
+      <table>
+        <thead>
+          <tr>
+            <th>PROJECT </th>
+            <th>TYPE </th>
+            <th>UNITE </th>
+            <th>R.AUTO </th>
+            <th *ngFor="let element of tabJours;">{{element}} </th>
+            <th>total</th>
+          </tr>
+        </thead>
+        <tbody>
+            <!-- ASTREINTE 1-->
+
+          <tr>
+            <td>
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedProjectAstreint1" (change)="updateAfterSelectAstreinte1()">
+                <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
+              </select>
+            </td>
+            <td>
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedTypeUpdateValue1"  (change)="selectedTypeUpdate1()">
+                <option [disabled]="typeActivity.id === 1 "  [hidden]="typeActivity.id === 1 "   *ngFor="let typeActivity of lesTypeActivity"  value="{{typeActivity.id}}" selected="true" disabled="disabled" >{{typeActivity.type}}
+                </option>
+              </select>
+            </td>
+            <td>
+              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedUniteAstreint1">
+                <option value="1">Heure</option>
+                <option value="2">Jour</option>
+              </select>
+            </td>
+            <td>
+              <button class="btnRemplir" (click)="remplirAstreinte1()">Remplir</button>
+            </td>
+            <td *ngFor="let element of tabJours;let indexOfelement=index;">
+              <input class=" inputDay2" name="jourAstreinte1-{{indexOfelement}}" id="jourAstreinte1-{{indexOfelement}}" type="number" value="{{dureeAstreinte1}}" (change)="total5()">
+            </td>
+            <td><input class=" inputDay2" type="" value={{totalAstreinte1}}></td>
+          </tr> 
+            <!-- ASTREINTE 2 -->
+          <tr>
+            <td>
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]= "selectedProjectAstreint2" (change)="updateAfterSelectAstreinte2()">
+                <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
+              </select>
+            </td>
+            <td>
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]= "selectedTypeUpdateValue2"  (change)="selectedTypeUpdate2()">
+                <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
+                </option>
+              </select>
+            </td>
+            <td>
+              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedUniteAstreint2">
+                <option value="1">Heure</option>
+                <option value="2">Jour</option>
+              </select>
+            </td>
+            <td>
+              <button class="btnRemplir" (click)="remplirAstreinte2()">Remplir</button>
+            </td>
+            <td *ngFor="let element of tabJours;let indexOfelement=index;">
+              <input class=" inputDay2" name="jourAstreinte2-{{indexOfelement}}" id="jourAstreinte2-{{indexOfelement}}" type="number" value="{{dureeAstreinte2}}" (change)="total6()">
+            </td>
+            <td><input class=" inputDay2" type="" value={{totalAstreinte2}}></td>
+          </tr>
+            <!-- ASTREINTE 3 -->
+
+          <tr>
+            <td>
+              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedProjectAstreint3" (change)="updateAfterSelectAstreinte3()">
+                <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
+              </select>
+            </td>
+            <td>
+              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedTypeUpdateValue3" (change)="selectedTypeUpdate3()">
+                <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
+                </option>
+              </select>
+            </td>
+            <td>
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedUniteAstreint3">
+                <option value="1">Heure</option>
+                <option value="2">Jour</option>
+              </select>
+            </td>
+            <td>
+              <button class="btnRemplir" (click)="remplirAstreinte3()">Remplir</button>
+            </td>
+            <td *ngFor="let element of tabJours;let indexOfelement=index;">
+              <input class="inputDay2" name="jourAstreinte3-{{indexOfelement}}" id="jourAstreinte3-{{indexOfelement}}"
+                type="number" value="{{dureeAstreinte3}}" (change)="total7()">
+            </td>
+            <td><input class="inputDay2" type="" value={{totalAstreinte3}}></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+  <div class="register">
+    <button class="send" (click)="EnregisterEtEnvoyer()">Sauvegarder</button>
+    <button class="send">Supprimer</button>
+    <button class="send" (click)="retour()">Retour</button>
+  </div>
+  <br><br><br><br>
+
+

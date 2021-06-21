@@ -27,4 +27,18 @@ export class ActivityService {
   DeleteActivityById(id: number): Observable<Activity> {
     return this._http.delete<Activity>("http://localhost:8800/activity/supprimer/" + id);
   }
+
+
+  
+
+  searchActivityByidCollMonthYear(month: number,year: number,idColl: number): Observable<Activity[]> {
+    return this._http.get<Activity[]>("http://localhost:8800/activity/searchActivityByidCollMonthYear/" + month + "/" + year + "/" + idColl);
+  }
+
+
+  searchTheActivityOfCollaboratorOfProject(month: number,year: number,idColl: number,idProject:number): Observable<Activity[]> {
+    return this._http.get<Activity[]>("http://localhost:8800/activity/searchTheActivityOfCollaboratorOfProject/" + month + "/" + year + "/" + idColl + "/" +idProject);
+  }
+
+
 }
