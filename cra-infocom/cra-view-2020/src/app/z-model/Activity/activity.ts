@@ -10,4 +10,7 @@ export class Activity {
 	public  remote!: boolean;
 	public typeActivity = new TypeActivity();
 
+	public nameCollab!: string;
+    public firstNameCollab!: string;
+
 }

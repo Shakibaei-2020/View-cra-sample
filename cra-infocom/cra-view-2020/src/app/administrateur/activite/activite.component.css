@@ -161,3 +161,205 @@ border-bottom: 2px solid #464646;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
+/** ACTIVITY14 */
+
+.modal-full {
+  min-width: 99%;
+  margin-left: 0.5%;
+}
+
+.modal-full .modal-content {
+  min-height: 70vh;
+}
+
+  
+
+
+
+  
+.inputDay{
+  width: 40px;
+  height: 18px;
+}
+
+.inputDay2{
+  width: 40px;
+  height: 18px;
+  margin-left: 5px;
+}
+
+.contenue{
+  margin-left: 30px;
+}
+
+
+.choice{
+  width: 100px;
+
+}
+.form-input{
+  height: 24.5px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #464646;
+}
+
+.form-input2{
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+    margin-left: 5px;
+}
+
+
+
+.form-input3{
+  width: 80px;
+    margin-bottom: 50px;
+    margin-left: 8px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #464646;
+}
+
+
+
+
+
+  
+  .btnAct:hover {background-color: #464646}
+  
+  .btnAct:active {
+    background-color: #363636;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+
+
+  .btnEditer {
+    float: left;
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    margin-bottom: 5%;
+  }
+
+  .inputRemote{
+    margin-top: 3px;
+    margin-left:30%;
+    width: 10px;
+  }
+
+  .btnRemplir{
+    float: left;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 5%;
+    height:23px;
+    width: 100%;
+  }
+
+  .btnRemplirActivity{
+    float: left;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 4px;
+    height:17px;
+    width: 100%;
+  }
+
+
+
+  .btnAjouterRow{
+    float: left;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    height:23px;
+    width: 25px;
+  }
+
+  .twolast{
+    margin-bottom: 26px;
+  }
+  
+  .btnGo{
+    float: left;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #363636;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 5%;
+    height:23px;
+    width: 30%;
+  }
+  
+  
+  .btnEditer:hover {background-color: #464646}
+  
+  .btnEditer:active {
+    background-color: #363636;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+.register{
+  margin-left: 30px;
+}
+
+.send{
+  margin-top: 50px;
+  margin-left: 10px;
+  height: 30px;
+  width: 160px;
+
+  float: left;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #363636;
+  border: none;
+  border-radius: 15px;
+  margin-bottom: 5%;
+}
+
+.enTete{
+  background-color: grey;
+}
+
+.enTeteDates{
+  background-color: grey;
+
+}

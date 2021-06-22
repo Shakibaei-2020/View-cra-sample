@@ -87,6 +87,10 @@ export class EditComponent implements OnInit {
 
 
   activity1ToEdit!: Activity[];
+  idOfDaysActivity1 = new Array();
+  idProjectActivity1 = new Array();
+  idCollaboratorActivity1 = new Array();
+
   activity2ToEdit!: Activity[];
   activity3ToEdit!: Activity[];
   activity4ToEdit!: Activity[];
@@ -166,10 +170,17 @@ export class EditComponent implements OnInit {
     this._ActivityService.searchTheActivityOfCollaboratorOfProject(6,2021,2,33).subscribe(
      data=>{this.activity1ToEdit = data;
       for(var i = 0 ; i< this.tabJours.length; i++){
-        console.log(this.activity1ToEdit[i].duration);
         (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber = this.activity1ToEdit[i].duration;
         (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked =  this.activity1ToEdit[i].remote;
         this.selectedOption=this.activity1ToEdit[i].projectId;
+        this.idOfDaysActivity1.push(this.activity1ToEdit[i].id)
+        console.log(this.idOfDaysActivity1)
+        //console.log(this.idProjectActivity1)
+        //console.log(this.idCollaboratorActivity1)
+        this.activityNormal.projectId = 6;
+        this.activityNormal.collaboratorId = 2;
+        this.selectedOption = 33;
+        console.log(this.tabJours.length)
       }
     },
      error=>console.log("exception" +error)
@@ -260,7 +271,7 @@ export class EditComponent implements OnInit {
     for (var i = 0; i < this.daysInMonth; i++) {
       if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber != undefined) {
         this.totalProjet1 = this.totalProjet1 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
-        this.totalActivity = this.totalActivity + this.totalProjet1;
+           this.totalActivity = this.totalActivity + this.totalProjet1;
       }
     }
     this.totalAllActivity();
@@ -607,7 +618,6 @@ export class EditComponent implements OnInit {
           this.activityNormal.typeActivity = this.lesTypeActivity[0];
           this.activityNormal.projectId = this.selectedProject.id;
           this.activityNormal.collaboratorId = this.collaborateur.id;
-          console.log(this.activityNormal)
         },
         error => console.log("exception" + error)
       )
@@ -657,6 +667,9 @@ export class EditComponent implements OnInit {
 
       /** ACTIVITY 1 activityNormal */
       if (this.totalProjet1 != 0) {
+
+        this.activityNormal.id = this.idOfDaysActivity1[i];
+        this.activityNormal.collaboratorId = this.idCollaboratorActivity1[i];
         this.activityNormal.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
         this.activityNormal.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
@@ -666,10 +679,10 @@ export class EditComponent implements OnInit {
 
         this._ActivityService.addAndUpdateActivity(this.activityNormal, this.aujourdhui).subscribe(
           data => {
-            console.log("activity 1 ajouté");
+            console.log("activity 1 updated");
           },
           error => {
-            console.log("erreur ajout non-effectué")
+            console.log("erreur mise à jour non-effectué")
           }
         )
       }
@@ -806,10 +819,9 @@ export class EditComponent implements OnInit {
         )
       }
     }
-
-
-
   }
+
+  
   /** NAVIGATION */
   retour() {
     this._route.navigate(['/administrateur']);
