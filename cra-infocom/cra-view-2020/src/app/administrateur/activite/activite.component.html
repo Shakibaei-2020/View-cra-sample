@@ -303,7 +303,7 @@
                               </select>
                             </td>
                             <td>
-                              <select type="number" class="form-input" [(ngModel)]="selectedUniteAstreint1">
+                              <select type="number" class="" [(ngModel)]="selectedUniteAstreint1">
                                 <option value="1">Heure</option>
                                 <option value="2">Jour</option>
                               </select>
@@ -330,7 +330,7 @@
                               </select>
                             </td>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedUniteAstreint2">
+                              <select type="number" class="" aria-label="Default select example" [(ngModel)]="selectedUniteAstreint2">
                                 <option value="1">Heure</option>
                                 <option value="2">Jour</option>
                               </select>
@@ -347,18 +347,18 @@
                 
                           <tr>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedProjectAstreint3" (change)="onChangeProjectAstreinte3()">
+                              <select type="number" class="" aria-label="Default select example" [(ngModel)]="selectedProjectAstreint3" (change)="onChangeProjectAstreinte3()">
                                 <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
                               </select>
                             </td>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedTypeUpdateValue3"  (change)="onChangeTypeAstreinte3()">
+                              <select type="number" class="" aria-label="Default select example" [(ngModel)]="selectedTypeUpdateValue3"  (change)="onChangeTypeAstreinte3()">
                                 <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
                                 </option>
                               </select>
                             </td>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedUniteAstreint3">
+                              <select type="number" class="" aria-label="Default select example"  [(ngModel)]="selectedUniteAstreint3">
                                 <option value="1">Heure</option>
                                 <option value="2">Jour</option>
                               </select>

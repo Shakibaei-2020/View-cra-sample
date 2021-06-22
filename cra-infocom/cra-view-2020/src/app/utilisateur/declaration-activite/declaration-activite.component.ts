@@ -719,11 +719,6 @@ export class DeclarationActiviteComponent implements OnInit {
         this.astreinte1.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
         this.astreinte1.typeActivity = this.theTypeActivity1;
 
-        console.log(this.astreinte1.collaboratorId)
-        console.log("id du cadsqdq :" + this.astreinte1.projectId)
-        console.log(this.astreinte1.duration)
-        console.log(this.astreinte1.typeActivity)
-
 
         this._ActivityService.addAndUpdateActivity(this.astreinte1, this.aujourdhui).subscribe(
           data => {
