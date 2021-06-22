@@ -100,7 +100,7 @@
             <td>{{activity.projectId}}</td>
             <td>
               <!--<button  class="btn btn-dark btn-block" type="submit" (click)="goGerer()">Gérer</button> -->
-              <button type="button" class="btn btn-dark btn-block" data-toggle="modal"[attr.data-target]=" '#myActivitymodal-'+ indexOfelement" (click)="onInitModal(activity)">Éditer</button>
+              <button type="button" class="btn btn-dark btn-block" data-toggle="modal"[attr.data-target]=" '#myActivitymodal-'+ indexOfelement" (click)="onInitModal(activity,activitys)">Éditer</button>
             </td>
           </tr>
         </tbody>
@@ -214,7 +214,7 @@
                 
                       <tr>
                         <td>
-                          <select class="form-input choice"  aria-label="Default select example" [(ngModel)]="selectedOption3">
+                          <select class=""   [(ngModel)]="selectedOption3"  (change)="onChangeSelectOption3()">
                             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
                           </select>
                         </td>
@@ -241,7 +241,7 @@
                 
                       <tr>
                         <td>
-                          <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedOption4">
+                          <select class=""  [(ngModel)]="selectedOption4"  (change)="onChangeSelectOption()">
                             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
                           </select>
                         </td>
@@ -292,18 +292,18 @@
                 
                           <tr>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedProjectAstreint1" (change)="updateAfterSelectAstreinte1()">
+                              <select type="number" class=""  [(ngModel)]="selectedProjectAstreint1" (change)="onChangeProjectAstreinte1()">
                                 <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
                               </select>
                             </td>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedTypeUpdateValue1"  (change)="selectedTypeUpdate1()">
+                              <select type="number" class=""  [(ngModel)]="selectedTypeUpdateValue1"  (change)="onChangeTypeAstreinte1()">
                                 <option [disabled]="typeActivity.id === 1 "  [hidden]="typeActivity.id === 1 "   *ngFor="let typeActivity of lesTypeActivity"  value="{{typeActivity.id}}" selected="true" disabled="disabled" >{{typeActivity.type}}
                                 </option>
                               </select>
                             </td>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedUniteAstreint1">
+                              <select type="number" class="form-input" [(ngModel)]="selectedUniteAstreint1">
                                 <option value="1">Heure</option>
                                 <option value="2">Jour</option>
                               </select>
@@ -319,12 +319,12 @@
                             <!-- ASTREINTE 2 -->
                           <tr>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]= "selectedProjectAstreint2" (change)="updateAfterSelectAstreinte2()">
+                              <select type="number" class=""  [(ngModel)]= "selectedProjectAstreint2" (change)="onChangeProjectAstreinte2()">
                                 <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
                               </select>
                             </td>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]= "selectedTypeUpdateValue2"  (change)="selectedTypeUpdate2()">
+                              <select type="number" class=""  [(ngModel)]= "selectedTypeUpdateValue2"   (change)="onChangeTypeAstreinte2()">
                                 <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
                                 </option>
                               </select>
@@ -347,12 +347,12 @@
                 
                           <tr>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedProjectAstreint3" (change)="updateAfterSelectAstreinte3()">
+                              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedProjectAstreint3" (change)="onChangeProjectAstreinte3()">
                                 <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
                               </select>
                             </td>
                             <td>
-                              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedTypeUpdateValue3" (change)="selectedTypeUpdate3()">
+                              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedTypeUpdateValue3"  (change)="onChangeTypeAstreinte3()">
                                 <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
                                 </option>
                               </select>

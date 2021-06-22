@@ -76,33 +76,61 @@ export class ActiviteComponent implements OnInit {
   editedCollaborator!: Collaborator;
 
 
+  /** ACTIVITY */
+  activity1ToEdit!: Activity[];
   idOfDaysActivity1 = new Array();
   idOfCollabActivity1 = new Array();
   idOfProjectActivity1 = new Array();
   idOfTypeActivity1 = new Array();
+  projectActivityNormal!: Project;
 
-
+  activity2ToEdit!: Activity[];
   idOfDaysActivity2 = new Array();
   idOfCollabActivity2 = new Array();
   idOfProjectActivity2 = new Array();
-  idOfTypeActivity2 =new Array();
+  idOfTypeActivity2 = new Array();
+  projectActivity2!: Project;
 
+  activity3ToEdit!: Activity[];
   idOfDaysActivity3 = new Array();
   idOfCollabActivity3 = new Array();
   idOfProjectActivity3 = new Array();
   idOfTypeActivity3 = new Array();
+  projectActivity3!: Project;
 
+  activity4ToEdit!: Activity[];
   idOfDaysActivity4 = new Array();
   idOfCollabActivity4 = new Array();
   idOfProjectActivity4 = new Array();
   idOfTypeActivity4 = new Array();
+  projectActivity4!: Project;
+  /** ASTREINTE */
+
+  astreinte1ToEdit!: Activity[];
+  idOfDaysAstreinte1 = new Array();
+  idOfCollabAstreinte1 = new Array();
+  idOfProjectAstreinte1 = new Array();
+  idOfTypeAstreinte1 = new Array();
+  projectAstreinte1 !: Project;
+  typeAstreinte1!: TypeActivity;
+
+  astreinte2ToEdit!: Activity[];
+  idOfDaysAstreinte2 = new Array();
+  idOfCollabAstreinte2 = new Array();
+  idOfProjectAstreinte2 = new Array();
+  idOfTypeAstreinte2 = new Array();
+  projectAstreinte2 !: Project;
+  typeAstreinte2!: TypeActivity;
 
 
+  astreinte3ToEdit!: Activity[];
+  idOfDaysAstreinte3 = new Array();
+  idOfCollabAstreinte3 = new Array();
+  idOfProjectAstreinte3 = new Array();
+  idOfTypeAstreinte3 = new Array();
+  projectAstreinte3 !: Project;
+  typeAstreinte3!: TypeActivity;
 
-  activity1ToEdit!: Activity[];
-  activity2ToEdit!: Activity[];
-  activity3ToEdit!: Activity[];
-  activity4ToEdit!: Activity[];
 
 
   /** from here */
@@ -173,12 +201,20 @@ export class ActiviteComponent implements OnInit {
 
 
   selectedOption1!: number;
+
+
+
+
+  allAstreinteToEdit!: Activity[];
+  nbAstreinteWithId = new Array();
+  nbAstreinteTypeWithId = new Array();
+
   allActivityToEdit!: Activity[];
   nbActivityWithId = new Array();
   /** GESTION ACTIVIY */
 
 
-  onInitModal(activityFromModal: Activity) {
+  onInitModal(activityFromModal: Activity, activitysFromModal: Activity[]) {
 
     /** Collaborateur en cours de mofification */
     this._CollaboratorService.selectOneCollabById(2).subscribe(
@@ -249,12 +285,15 @@ export class ActiviteComponent implements OnInit {
       this.astreintePerDay4.push("jourAstreinte4-" + i);
     }
 
+    this.nbActivityWithId = [];
 
     this._ActivityService.activityGroupByProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId).subscribe(
       data => {
+
         this.allActivityToEdit = data;
         for (i = 0; i < this.allActivityToEdit.length; i++) {
           this.nbActivityWithId.push(this.allActivityToEdit[i].projectId);
+          console.log(this.nbActivityWithId)
         }
 
         /** ACTIVITY 1 */
@@ -267,19 +306,20 @@ export class ActiviteComponent implements OnInit {
               for (var i = 0; i < this.tabJours.length; i++) {
                 (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber = this.activity1ToEdit[i].duration;
                 (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked = this.activity1ToEdit[i].remote;
+                (<HTMLInputElement>document.getElementById(this.remotePerDay[1])).checked = true;
+                console.log(this.activity1ToEdit[i].remote)
+
 
                 this.idOfDaysActivity1.push(this.activity1ToEdit[i].id);
                 this.idOfCollabActivity1.push(this.activity1ToEdit[i].collaboratorId);
                 this.idOfProjectActivity1.push(this.activity1ToEdit[i].projectId);
                 this.idOfTypeActivity1.push(this.activity1ToEdit[i].typeActivity);
-                this.selectedOption= this.nbActivityWithId[0];
+                this.selectedOption = this.nbActivityWithId[0];
 
                 this._ProjectService.selectProjectById(this.selectedOption).subscribe(
                   data => this.projectActivityNormal = data,
                   error => console.log("exception" + error)
                 )
-
-
               }
               this.total()
             },
@@ -287,7 +327,8 @@ export class ActiviteComponent implements OnInit {
           )
         }
 
- 
+        /** ACTIVITY 2 */
+
         if (typeof this.nbActivityWithId[1] !== undefined) {
           this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[1]).subscribe(
             data => {
@@ -300,16 +341,68 @@ export class ActiviteComponent implements OnInit {
                 this.idOfCollabActivity2.push(this.activity2ToEdit[i].collaboratorId);
                 this.idOfProjectActivity2.push(this.activity2ToEdit[i].projectId);
                 this.idOfTypeActivity2.push(this.activity2ToEdit[i].typeActivity);
-
-                this.selectedOption2= this.nbActivityWithId[1];
+                this.selectedOption2 = this.nbActivityWithId[1];
 
                 this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
                   data => this.projectActivity2 = data,
                   error => console.log("exception" + error)
                 )
-
               }
               this.total2()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+        /** ACTIVITY 3 */
+
+        if (typeof this.nbActivityWithId[2] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[2]).subscribe(
+            data => {
+              this.activity3ToEdit = data;
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber = this.activity3ToEdit[i].duration;
+                (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked = this.activity3ToEdit[i].remote;
+
+                this.idOfDaysActivity3.push(this.activity3ToEdit[i].id)
+                this.idOfCollabActivity3.push(this.activity3ToEdit[i].collaboratorId);
+                this.idOfProjectActivity3.push(this.activity3ToEdit[i].projectId);
+                this.idOfTypeActivity3.push(this.activity3ToEdit[i].typeActivity);
+                this.selectedOption3 = this.nbActivityWithId[2];
+
+                this._ProjectService.selectProjectById(this.selectedOption3).subscribe(
+                  data => this.projectActivity3 = data,
+                  error => console.log("exception" + error)
+                )
+              }
+              this.total3()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+        /** ACTIVITY 4 */
+
+        if (typeof this.nbActivityWithId[3] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[3]).subscribe(
+            data => {
+              this.activity4ToEdit = data;
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber = this.activity4ToEdit[i].duration;
+                (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked = this.activity4ToEdit[i].remote;
+
+                this.idOfDaysActivity4.push(this.activity4ToEdit[i].id)
+                this.idOfCollabActivity4.push(this.activity4ToEdit[i].collaboratorId);
+                this.idOfProjectActivity4.push(this.activity4ToEdit[i].projectId);
+                this.idOfTypeActivity4.push(this.activity4ToEdit[i].typeActivity);
+                this.selectedOption4 = this.nbActivityWithId[3];
+
+                this._ProjectService.selectProjectById(this.selectedOption4).subscribe(
+                  data => this.projectActivity4 = data,
+                  error => console.log("exception" + error)
+                )
+              }
+              this.total4()
             },
             error => console.log("exception" + error)
           )
@@ -317,6 +410,125 @@ export class ActiviteComponent implements OnInit {
       },
       error => console.log("exception" + error)
     )
+
+
+
+    this.nbAstreinteWithId = [];
+    this.nbAstreinteTypeWithId =[];
+
+    this._ActivityService.astreinteGroupByProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId).subscribe(
+      data => {
+        this.allAstreinteToEdit = data;
+
+        console.log(this.allAstreinteToEdit)
+
+        for (i = 0; i < this.allAstreinteToEdit.length; i++) {
+          this.nbAstreinteWithId.push(this.allAstreinteToEdit[i].projectId);
+          this.nbAstreinteTypeWithId.push(this.allAstreinteToEdit[i].typeActivity.id);
+          console.log("dqskdlq 1" +this.nbAstreinteWithId)
+          console.log("dqskdlq 2" +this.nbAstreinteTypeWithId)
+        }
+
+        /** Astreinte 1 */
+        if (typeof this.nbAstreinteWithId[0] !== undefined) {
+          this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[0]).subscribe(
+            data => {
+              this.astreinte1ToEdit = data;
+
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber = this.astreinte1ToEdit[i].duration;
+
+                this.idOfDaysAstreinte1.push(this.astreinte1ToEdit[i].id);
+                this.idOfCollabAstreinte1.push(this.astreinte1ToEdit[i].collaboratorId);
+                this.idOfProjectAstreinte1.push(this.astreinte1ToEdit[i].projectId);
+                this.idOfTypeAstreinte1.push(this.astreinte1ToEdit[i].typeActivity);
+                this.selectedProjectAstreint1 = this.nbAstreinteWithId[0];
+                this.selectedTypeUpdateValue1 = this.nbAstreinteTypeWithId[0];
+
+                this._ProjectService.selectProjectById(this.selectedProjectAstreint1).subscribe(
+                  data => this.projectAstreinte1 = data,
+                  error => console.log("exception" + error)
+                )
+                this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue1).subscribe(
+                  data => this.typeAstreinte1 = data,
+                  error => console.log("exception" + error)
+                )
+              }
+              this.total5()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+         /** Astreinte 2 */
+         if (typeof this.nbAstreinteWithId[1] !== undefined) {
+          this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[1]).subscribe(
+            data => {
+              this.astreinte2ToEdit = data;
+
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber = this.astreinte2ToEdit[i].duration;
+
+                this.idOfDaysAstreinte2.push(this.astreinte2ToEdit[i].id);
+                this.idOfCollabAstreinte2.push(this.astreinte2ToEdit[i].collaboratorId);
+                this.idOfProjectAstreinte2.push(this.astreinte2ToEdit[i].projectId);
+                this.idOfTypeAstreinte2.push(this.astreinte2ToEdit[i].typeActivity);
+                this.selectedProjectAstreint2 = this.nbAstreinteWithId[1];
+                this.selectedTypeUpdateValue2 = this.nbAstreinteTypeWithId[1];
+
+                this._ProjectService.selectProjectById(this.selectedProjectAstreint2).subscribe(
+                  data => this.projectAstreinte2 = data,
+                  error => console.log("exception" + error)
+                )
+                this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue2).subscribe(
+                  data => this.typeAstreinte2 = data,
+                  error => console.log("exception" + error)
+                )
+              }
+              this.total6()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+
+             /** Astreinte 3 */
+             if (typeof this.nbAstreinteWithId[2] !== undefined) {
+              this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[2]).subscribe(
+                data => {
+                  this.astreinte3ToEdit = data;
+    
+                  for (var i = 0; i < this.tabJours.length; i++) {
+                    (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber = this.astreinte3ToEdit[i].duration;
+    
+                    this.idOfDaysAstreinte3.push(this.astreinte3ToEdit[i].id);
+                    this.idOfCollabAstreinte3.push(this.astreinte3ToEdit[i].collaboratorId);
+                    this.idOfProjectAstreinte3.push(this.astreinte3ToEdit[i].projectId);
+                    this.idOfTypeAstreinte3.push(this.astreinte3ToEdit[i].typeActivity);
+                    this.selectedProjectAstreint3 = this.nbAstreinteWithId[2];
+                    this.selectedTypeUpdateValue3 = this.nbAstreinteTypeWithId[2];
+    
+                    this._ProjectService.selectProjectById(this.selectedProjectAstreint3).subscribe(
+                      data => this.projectAstreinte3 = data,
+                      error => console.log("exception" + error)
+                    )
+                    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue3).subscribe(
+                      data => this.typeAstreinte3 = data,
+                      error => console.log("exception" + error)
+                    )
+                  }
+                  this.total7()
+                },
+                error => console.log("exception" + error)
+              )
+            }
+    
+       
+      },
+      error => console.log("exception" + error)
+    )
+
+
   }
 
   /** total temps d'activité */
@@ -407,14 +619,14 @@ export class ActiviteComponent implements OnInit {
     this.totalAllActivity();
   }
 
-  projectActivityNormal!: Project;
-  onChangeSelectOption(){
+  onChangeSelectOption() {
     this._ProjectService.selectProjectById(this.selectedOption).subscribe(
       data => this.projectActivityNormal = data,
       error => console.log("exception" + error)
     )
   }
 
+ 
 
   typeActivityNormal!: TypeActivity;
 
@@ -423,7 +635,6 @@ export class ActiviteComponent implements OnInit {
   dureeProjet2 = 0;
   tabAllInputedValue2 = new Array();
   selectedOption2!: number;
-  ProjectActivity2!: Project;
   isRemote2 = false;
   activity2 = new Activity;
 
@@ -468,9 +679,8 @@ export class ActiviteComponent implements OnInit {
     this.totalAllActivity();
   }
 
-  
-  projectActivity2!: Project;
-  onChangeSelectOption2(){
+
+  onChangeSelectOption2() {
     this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
       data => this.projectActivity2 = data,
       error => console.log("exception" + error)
@@ -529,6 +739,16 @@ export class ActiviteComponent implements OnInit {
     this.totalAllActivity();
   }
 
+
+  onChangeSelectOption3() {
+    this._ProjectService.selectProjectById(this.selectedOption3).subscribe(
+      data => this.projectActivity3 = data,
+      error => console.log("exception" + error)
+    )
+  }
+
+
+
   /** ACTIVITE 4  */
   dureeProjet4 = 0;
   tabAllInputedValue4 = new Array();
@@ -578,11 +798,19 @@ export class ActiviteComponent implements OnInit {
     this.totalAllActivity();
   }
 
+
+  onChangeSelectOption4() {
+    this._ProjectService.selectProjectById(this.selectedOption4).subscribe(
+      data => this.projectActivity4 = data,
+      error => console.log("exception" + error)
+    )
+  }
+
+
   /** ASTREINTE 1 */
 
   dureeAstreinte1 = 0;
   totalAstreinte1 = 0;
-  projectAstreinte1 = new Project();
   laMissionAstreinte1 = new Mission();
   astreinte1remplis = false;
 
@@ -603,23 +831,8 @@ export class ActiviteComponent implements OnInit {
     }
   }
 
-  updateAfterSelectAstreinte1() {
-    this._MissionService.selectMissionById(this.selectedProjectAstreint1).subscribe(
-      data => this.laMissionAstreinte1 = data,
-      error => console.log("exception" + error)
-    )
-  }
 
-  /** Select Type activité via l'id */
-  theTypeActivity1 = new TypeActivity();
-  selectedTypeUpdate1() {
-
-    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue1).subscribe(
-      data => this.theTypeActivity1 = data,
-      error => console.log("exception" + error)
-    )
-  }
-
+  /** total astreinte 1 */
   total5() {
     var i;
     this.totalAstreinte1 = 0;
@@ -630,10 +843,24 @@ export class ActiviteComponent implements OnInit {
     }
   }
 
+  onChangeProjectAstreinte1(){
+    this._ProjectService.selectProjectById(this.selectedProjectAstreint1).subscribe(
+      data => this.projectAstreinte1 = data,
+      error => console.log("exception" + error)
+    ) 
+  }
+
+  onChangeTypeAstreinte1(){
+    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue1).subscribe(
+      data =>{ this.typeAstreinte1 = data;
+      },
+      error => console.log("exception" + error)
+    ) 
+  }
+
   /** ASTREINTE 2 */
   dureeAstreinte2 = 0;
   totalAstreinte2 = 0;
-  projectAstreinte2 = new Project();
   laMissionAstreinte2 = new Mission();
   astreinte2remplis = false;
 
@@ -654,25 +881,6 @@ export class ActiviteComponent implements OnInit {
     }
   }
 
-  updateAfterSelectAstreinte2() {
-    this._MissionService.selectMissionById(this.selectedProjectAstreint2).subscribe(
-      data => this.laMissionAstreinte2 = data,
-      error => console.log("exception" + error)
-    )
-  }
-
-  theTypeActivity2 = new TypeActivity();
-
-  /** Select Type activité via l'id */
-  selectedTypeUpdate2() {
-
-    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue2).subscribe(
-      data => this.theTypeActivity2 = data,
-      error => console.log("exception" + error)
-    )
-    this.astreinte2.typeActivity = this.theTypeActivity2;
-  }
-
   total6() {
     var i;
     this.totalAstreinte2 = 0;
@@ -683,10 +891,26 @@ export class ActiviteComponent implements OnInit {
     }
   }
 
+
+  onChangeProjectAstreinte2(){
+    this._ProjectService.selectProjectById(this.selectedProjectAstreint2).subscribe(
+      data => this.projectAstreinte2 = data,
+      error => console.log("exception" + error)
+    ) 
+  }
+
+  onChangeTypeAstreinte2(){
+    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue2).subscribe(
+      data =>{ this.typeAstreinte2 = data;
+      },
+      error => console.log("exception" + error)
+    ) 
+  }
+
+
   /** ASTREINTE 3 */
   dureeAstreinte3 = 0;
   totalAstreinte3 = 0;
-  projectAstreinte3 = new Project();
   laMissionAstreinte3 = new Mission();
   astreinte3remplis = false;
 
@@ -707,25 +931,6 @@ export class ActiviteComponent implements OnInit {
     }
   }
 
-  updateAfterSelectAstreinte3() {
-    this._MissionService.selectMissionById(this.selectedProjectAstreint3).subscribe(
-      data => this.laMissionAstreinte3 = data,
-      error => console.log("exception" + error)
-    )
-  }
-
-  theTypeActivity3 = new TypeActivity();
-
-  /** Select Type activité via l'id */
-
-  selectedTypeUpdate3() {
-    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue3).subscribe(
-      data => this.theTypeActivity3 = data,
-      error => console.log("exception" + error)
-    )
-    this.astreinte3.typeActivity = this.theTypeActivity3;
-  }
-
   total7() {
     var i;
     this.totalAstreinte3 = 0;
@@ -735,6 +940,22 @@ export class ActiviteComponent implements OnInit {
       }
     }
   }
+
+  onChangeProjectAstreinte3(){
+    this._ProjectService.selectProjectById(this.selectedProjectAstreint3).subscribe(
+      data => this.projectAstreinte3 = data,
+      error => console.log("exception" + error)
+    ) 
+  }
+
+  onChangeTypeAstreinte3(){
+    this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue3).subscribe(
+      data =>{ this.typeAstreinte3 = data;
+      },
+      error => console.log("exception" + error)
+    ) 
+  }
+
 
   /** COMMUN ACTIVITY + ASTREINTE*/
 
@@ -759,54 +980,6 @@ export class ActiviteComponent implements OnInit {
 
   async EnregisterEtEnvoyer() {
 
-    /** FOR ACTIVITY  */
-
-    if (this.selectedOption != null && this.selectedOption != undefined) {
-      this._ProjectService.selectProjectById(this.selectedOption).subscribe(
-        data => {
-          this.selectedProject = data;
-          this.activityNormal.projectId = this.selectedProject.id;
-        },
-        error => console.log("exception" + error)
-      )
-      // Si un projet est selectioné, on atribue à l'activité un type et l'id du projet.
-
-    }
-
-    console.log(this.selectedOption2)
-    if (this.selectedOption2 != null && this.selectedOption2 != undefined) {
-      this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
-        data => {
-          this.selectedProject2 = data;
-          this.activity2.projectId = this.selectedProject2.id;
-        },
-        error => console.log("exception" + error)
-      )
-    }
-
-    if (this.selectedOption3 != null && this.selectedOption3 != undefined) {
-      this._ProjectService.selectProjectById(this.selectedOption3).subscribe(
-        data => {
-          this.selectedProject3 = data;
-          this.activity3.typeActivity = this.lesTypeActivity[0];
-          this.activity3.projectId = this.selectedProject3.id;
-          this.activity3.collaboratorId = this.collaborateur.id;
-        },
-        error => console.log("exception" + error)
-      )
-    }
-
-    if (this.selectedOption4 != null && this.selectedOption4 != undefined) {
-      this._ProjectService.selectProjectById(this.selectedOption4).subscribe(
-        data => {
-          this.selectedProject4 = data;
-          this.activity4.typeActivity = this.lesTypeActivity[0];
-          this.activity4.projectId = this.selectedProject4.id;
-          this.activity4.collaboratorId = this.collaborateur.id;
-        },
-        error => console.log("exception" + error)
-      )
-    }
     this.activityNormal = new Activity;
     this.activity2 = new Activity;
     this.activity3 = new Activity;
@@ -848,7 +1021,7 @@ export class ActiviteComponent implements OnInit {
 
         this.activity2.collaboratorId = this.idOfCollabActivity2[i];
         this.activity2.projectId = this.projectActivity2.id;
-        this.activity2.typeActivity = this.idOfTypeActivity2[i];
+        this.activity2.typeActivity =this.idOfTypeActivity2[i];
 
 
         this.activity2.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
@@ -871,6 +1044,14 @@ export class ActiviteComponent implements OnInit {
       /** ACTIVITY 3 */
 
       if (this.totalProjet3 != 0) {
+
+        this.activity3.id = this.idOfDaysActivity3[i];
+
+        this.activity3.collaboratorId = this.idOfCollabActivity3[i];
+        this.activity3.projectId = this.projectActivity3.id;
+        this.activity3.typeActivity = this.idOfTypeActivity3[i];
+
+
         this.activity3.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
         this.activity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
@@ -892,6 +1073,15 @@ export class ActiviteComponent implements OnInit {
 
 
       if (this.totalProjet4 != 0) {
+
+
+        this.activity4.id = this.idOfDaysActivity4[i];
+
+        this.activity4.collaboratorId = this.idOfCollabActivity4[i];
+        this.activity4.projectId = this.projectActivity4.id;
+        this.activity4.typeActivity =this.idOfTypeActivity4[i];
+
+
         this.activity4.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
         this.activity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
@@ -910,55 +1100,47 @@ export class ActiviteComponent implements OnInit {
       }
 
       /** ASTREINTE 1  */
+      this.astreinte1 = new Activity;
+      this.astreinte2 = new Activity;
+      this.astreinte3 = new Activity;
+      this.astreinte4 = new Activity;
 
       if (this.totalAstreinte1 != 0) {
 
-        this._ProjectService.selectProjectByMissionId(2).subscribe(
-          data => this.projectAstreinte1 = data,
-          error => console.log("exception" + error)
-        )
-
-        this.astreinte1.collaboratorId = this.collaborateur.id;
-        this.astreinte1.projectId = this.selectedProjectAstreint1;
+   
+        this.astreinte1.id = this.idOfDaysAstreinte1[i];
+        this.astreinte1.collaboratorId = this.idOfCollabAstreinte1[i];
+        this.astreinte1.projectId = this.projectAstreinte1.id;
+        this.astreinte1.typeActivity =  this.typeAstreinte1;
         this.astreinte1.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
-        this.astreinte1.typeActivity = this.theTypeActivity1;
-
-        console.log(this.astreinte1.collaboratorId)
-        console.log("id du cadsqdq :" + this.astreinte1.projectId)
-        console.log(this.astreinte1.duration)
-        console.log(this.astreinte1.typeActivity)
-
 
         this._ActivityService.addAndUpdateActivity(this.astreinte1, this.aujourdhui).subscribe(
           data => {
-            console.log("astreinte 1  ajouté ");
+            console.log("astreinte 1  updated ");
           },
           error => {
-            console.log("erreur ajout non-effectué")
+            console.log("erreur update non-effectué")
           }
         )
       }
+
 
       /** ASTREINTE 2  */
 
       if (this.totalAstreinte2 != 0) {
 
-        this._ProjectService.selectProjectByMissionId(2).subscribe(
-          data => this.projectAstreinte2 = data,
-          error => console.log("exception" + error)
-        )
-
-        this.astreinte2.collaboratorId = this.collaborateur.id;
-        this.astreinte2.projectId = this.selectedProjectAstreint1;
+        this.astreinte2.id = this.idOfDaysAstreinte2[i];
+        this.astreinte2.collaboratorId = this.idOfCollabAstreinte2[i];
+        this.astreinte2.projectId = this.projectAstreinte2.id;
+        this.astreinte2.typeActivity =  this.typeAstreinte2;
         this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
-        this.astreinte2.typeActivity = this.theTypeActivity2;
 
         this._ActivityService.addAndUpdateActivity(this.astreinte2, this.aujourdhui).subscribe(
           data => {
-            console.log("astreinte 2 ajouté ");
+            console.log("astreinte 2 updated ");
           },
           error => {
-            console.log("erreur ajout non-effectué")
+            console.log("erreur update non-effectué")
           }
         )
       }
@@ -966,17 +1148,20 @@ export class ActiviteComponent implements OnInit {
       /** ASTREINTE 3 */
 
       if (this.totalAstreinte3 != 0) {
-        this.astreinte3.collaboratorId = this.collaborateur.id;
-        this.astreinte3.projectId = this.selectedProjectAstreint3;
+       
+
+        this.astreinte3.id = this.idOfDaysAstreinte3[i];
+        this.astreinte3.collaboratorId = this.idOfCollabAstreinte3[i];
+        this.astreinte3.projectId = this.projectAstreinte3.id;
+        this.astreinte3.typeActivity =  this.typeAstreinte3;
         this.astreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
-        this.astreinte3.typeActivity = this.theTypeActivity3;
 
         this._ActivityService.addAndUpdateActivity(this.astreinte3, this.aujourdhui).subscribe(
           data => {
-            console.log("astreinte  3 ajouté");
+            console.log("astreinte  3 updated");
           },
           error => {
-            console.log("erreur ajout non-effectué")
+            console.log("erreur update non-effectué")
           }
         )
       }

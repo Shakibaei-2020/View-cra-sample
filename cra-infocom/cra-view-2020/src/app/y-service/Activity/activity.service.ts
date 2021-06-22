@@ -39,10 +39,19 @@ export class ActivityService {
     return this._http.get<Activity[]>("http://localhost:8800/activity/activityGroupByProject/" + month + "/" + year + "/" + idColl);
   }
 
+  astreinteGroupByProject(month: number,year: number,idColl: number): Observable<Activity[]> {
+    return this._http.get<Activity[]>("http://localhost:8800/activity/astreinteGroupByProject/" + month + "/" + year + "/" + idColl);
+  }
+
+
 
   searchTheActivityOfCollaboratorOfProject(month:number, year: number,idColl: number,idProject:number): Observable<Activity[]> {
       return this._http.get<Activity[]>("http://localhost:8800/activity/searchTheActivityOfCollaboratorOfProject/" +month + "/"+ year + "/" + idColl + "/" +idProject);
   }
 
+
+  searchTheAstreinteOfCollaboratorOfProject(month:number, year: number,idColl: number,idProject:number): Observable<Activity[]> {
+    return this._http.get<Activity[]>("http://localhost:8800/activity/searchTheAstreinteOfCollaboratorOfProject/" +month + "/"+ year + "/" + idColl + "/" +idProject);
+}
 
 }
