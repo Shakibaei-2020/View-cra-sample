@@ -303,7 +303,7 @@ export class ActiviteComponent implements OnInit {
         this.idOfProjectActivity1 = [];
         this.idOfTypeActivity1= [];
 
-        if (typeof this.nbActivityWithId[0] !== undefined) {
+        if ( this.nbActivityWithId[0] !== undefined) {
           this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[0]).subscribe(
             data => {
               this.activity1ToEdit = data;
@@ -338,7 +338,7 @@ export class ActiviteComponent implements OnInit {
         this.idOfProjectActivity2 = [];
         this.idOfTypeActivity2= [];
 
-        if (typeof this.nbActivityWithId[1] !== undefined) {
+        if ( this.nbActivityWithId[1] !== undefined) {
           this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[1]).subscribe(
             data => {
               this.activity2ToEdit = data;
@@ -371,7 +371,7 @@ export class ActiviteComponent implements OnInit {
         this.idOfTypeActivity3= [];
 
 
-        if (typeof this.nbActivityWithId[2] !== undefined) {
+        if ( this.nbActivityWithId[2] !== undefined) {
           this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[2]).subscribe(
             data => {
               this.activity3ToEdit = data;
@@ -403,7 +403,7 @@ export class ActiviteComponent implements OnInit {
         this.idOfProjectActivity4 = [];
         this.idOfTypeActivity4= [];
 
-        if (typeof this.nbActivityWithId[3] !== undefined) {
+        if ( this.nbActivityWithId[3] !== undefined) {
           this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[3]).subscribe(
             data => {
               this.activity4ToEdit = data;
@@ -459,7 +459,7 @@ export class ActiviteComponent implements OnInit {
         this.idOfProjectAstreinte1 = [];
         this.idOfTypeAstreinte1 = [];
 
-        if (typeof this.nbAstreinteWithId[0] !== undefined) {
+        if ( this.nbAstreinteWithId[0] !== undefined) {
           this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[0]).subscribe(
             data => {
               this.astreinte1ToEdit = data;
@@ -497,7 +497,7 @@ export class ActiviteComponent implements OnInit {
         this.idOfTypeAstreinte2 = [];
 
         /** Astreinte 2 */
-        if (typeof this.nbAstreinteWithId[1] !== undefined) {
+        if ( this.nbAstreinteWithId[1] !== undefined) {
           this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[1]).subscribe(
             data => {
               this.astreinte2ToEdit = data;
@@ -539,7 +539,7 @@ export class ActiviteComponent implements OnInit {
         this.idOfTypeAstreinte3 = [];
 
 
-        if (typeof this.nbAstreinteWithId[2] !== undefined) {
+        if ( this.nbAstreinteWithId[2] !== undefined) {
           this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[2]).subscribe(
             data => {
               this.astreinte3ToEdit = data;

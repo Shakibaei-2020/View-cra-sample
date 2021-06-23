@@ -44,7 +44,7 @@
     <tbody  (change)="totalAllActivity()">
       <tr>
         <td>
-          <select class="form-input choice" aria-label="Default select example" [(ngModel)]="selectedOption">
+          <select class="form-input choice"  [(ngModel)]="selectedOption" (change)="onChangeSelectOption()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
           </select>
         </td>
@@ -70,7 +70,7 @@
 
       <tr>
         <td>
-          <select class="form-input choice" aria-label="Default select example" [(ngModel)]="selectedOption2">
+          <select class="form-input choice"  [(ngModel)]="selectedOption2" (change)="onChangeSelectOption2()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
           </select>
         </td>
@@ -97,7 +97,7 @@
 
       <tr>
         <td>
-          <select class="form-input choice"  aria-label="Default select example" [(ngModel)]="selectedOption3">
+          <select class="form-input choice" [(ngModel)]="selectedOption3" (change)="onChangeSelectOption3()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
           </select>
         </td>
@@ -124,7 +124,7 @@
 
       <tr>
         <td>
-          <select class="form-input" aria-label="Default select example" [(ngModel)]="selectedOption4">
+          <select class="form-input" [(ngModel)]="selectedOption4" (change)="onChangeSelectOption4()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
           </select>
         </td>
@@ -266,6 +266,5 @@
     <button class="send" (click)="retour()">Retour</button>
   </div>
   <br><br><br><br>
-  <button (click)="test()">test</button>
 
 
