@@ -16,6 +16,7 @@ import { CollabJoinProjectService } from 'src/app/y-service/CollabJoinProject/co
 import { ProjectCollaborator } from 'src/app/z-model/ProjectCollaborator/project-collaborator';
 import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { error } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-declaration-activite',
@@ -64,6 +65,12 @@ export class DeclarationActiviteComponent implements OnInit {
 
   toalDuTotalAcitivty = 0;
 
+
+  totalActivity1 = "totalProjet1"
+  totalActivity2 = "totalProjet2"
+  totalActivity3 = "totalProjet3"
+  totalActivity4 = "totalProjet4"
+
   constructor(
     private _route: Router,
     private _MissionService: MissionService,
@@ -86,6 +93,21 @@ export class DeclarationActiviteComponent implements OnInit {
   aujourdhuiTestFormat = new Date();
   pipeDate = new DatePipe('fr-FR');
   aujourdhuiTestFormatFormatee = this.pipeDate.transform(this.aujourdhuiTestFormat, 'yyyy-MM-dd');
+
+  /** ACTIVITY */
+  activity1ToEdit!: Activity[];
+  idOfDaysActivity1 = new Array();
+
+
+  activity2ToEdit!: Activity[];
+  idOfDaysActivity2 = new Array();
+
+  activity3ToEdit!: Activity[];
+  idOfDaysActivity3 = new Array();
+
+
+  activity4ToEdit!: Activity[];
+  idOfDaysActivity4 = new Array();
 
 
   ngOnInit(): void {
@@ -119,8 +141,13 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
     this._CollaboratorService.selectOneCollabById(2).subscribe(
-      data => this.collaborateur = data,
+      data => {
+        this.collaborateur = data;
+        this.getTheActivityAtTime(this.collaborateur.id);
+        this.ActivitiesToUpdate(this.collaborateur.id)
+      },
       error => console.log("exception" + error)
+
     )
 
     // Afin de récupérer le nombre de jour dans un mois : opérationnelle mais on peut faire mieux or at least extract this methode outside ngOnInit()
@@ -149,10 +176,80 @@ export class DeclarationActiviteComponent implements OnInit {
       this.astreintePerDay3.push("jourAstreinte3-" + i);
       this.astreintePerDay4.push("jourAstreinte4-" + i);
     }
-
-    this.getTheActivityAtTime();
-
   }
+
+
+  ActivitiesToUpdate(idCollab: number) {
+    this.nbActivityWithId = [];
+    this.allActivityToEdit = [];
+    this._ActivityService.activityGroupByProject(this.monthSelected, this.yearInput, idCollab).subscribe(
+      data => {
+        this.allActivityToEdit = data;
+        for (var i = 0; i < this.allActivityToEdit.length; i++) {
+          this.nbActivityWithId.push(this.allActivityToEdit[i].projectId);
+        }
+        /** ACTIVITY 1 */
+        this.idOfDaysActivity1 = [];
+        if (this.nbActivityWithId[0] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, idCollab, this.nbActivityWithId[0]).subscribe(
+            data => {
+              this.activity1ToEdit = data;
+              for (var i = 0; i < this.tabJours.length; i++) {
+                this.idOfDaysActivity1.push(this.activity1ToEdit[i].id);
+                console.log(this.idOfDaysActivity1)
+              }
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+        /** ACTIVITY 2 */
+        this.idOfDaysActivity2 = [];
+
+        if (this.nbActivityWithId[1] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, idCollab, this.nbActivityWithId[1]).subscribe(
+            data => {
+              this.activity2ToEdit = data;
+              for (var i = 0; i < this.tabJours.length; i++) {
+                this.idOfDaysActivity2.push(this.activity2ToEdit[i].id)
+              }
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+        /** ACTIVITY 3 */
+        this.idOfDaysActivity3 = [];
+        if (this.nbActivityWithId[2] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, idCollab, this.nbActivityWithId[2]).subscribe(
+            data => {
+              this.activity3ToEdit = data;
+              for (var i = 0; i < this.tabJours.length; i++) {
+                this.idOfDaysActivity3.push(this.activity3ToEdit[i].id)
+              }
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+        /** ACTIVITY 4 */
+        this.idOfDaysActivity4 = [];
+        if (this.nbActivityWithId[3] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, idCollab, this.nbActivityWithId[3]).subscribe(
+            data => {
+              this.activity4ToEdit = data;
+              for (var i = 0; i < this.tabJours.length; i++) {
+                this.idOfDaysActivity4.push(this.activity4ToEdit[i].id)
+              }
+            },
+            error => console.log("exception" + error)
+          )
+        }
+      },
+      error => console.log("exception" + error)
+    )
+  }
+
 
   /** total temps d'activité */
   updateMonth() {
@@ -160,6 +257,13 @@ export class DeclarationActiviteComponent implements OnInit {
     this.tabJours = [];
     this.activitiesPerDay = [];
     this.remotePerDay = [];
+    this.activitiesPerDay2 = [];
+    this.remotePerDay2 = [];
+    this.activitiesPerDay3 = [];
+    this.remotePerDay3 = [];
+    this.activitiesPerDay4 = [];
+    this.remotePerDay4 = [];
+
     this.dt.setMonth(this.monthSelected - 1);
     this.dt.setFullYear(this.yearInput)
 
@@ -168,10 +272,26 @@ export class DeclarationActiviteComponent implements OnInit {
     this.day = this.dt.getDay();
 
     this.daysInMonth = new Date(this.year, this.month, 0).getDate();
+
     for (var i = 0; i < this.daysInMonth; i++) {
+
       this.tabJours[i] = i + 1;
       this.activitiesPerDay.push("jour-" + i);
       this.remotePerDay.push("remote-" + i);
+
+      this.activitiesPerDay2.push("jour2-" + i);
+      this.remotePerDay2.push("remote2-" + i);
+
+      this.activitiesPerDay3.push("jour3-" + i);
+      this.remotePerDay3.push("remote3-" + i);
+
+      this.activitiesPerDay4.push("jour4-" + i);
+      this.remotePerDay4.push("remote4-" + i);
+
+      this.astreintePerDay1.push("jourAstreinte1-" + i);
+      this.astreintePerDay2.push("jourAstreinte2-" + i);
+      this.astreintePerDay3.push("jourAstreinte3-" + i);
+      this.astreintePerDay4.push("jourAstreinte4-" + i);
     }
   }
 
@@ -248,6 +368,7 @@ export class DeclarationActiviteComponent implements OnInit {
       data => this.selectedProject = data,
       error => console.log("exception" + error)
     )
+    return this.selectedProject.id;
   }
 
 
@@ -777,6 +898,7 @@ export class DeclarationActiviteComponent implements OnInit {
       }
     }
 
+    window.location.reload();
 
 
   }
@@ -797,57 +919,28 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
 
-
-
-
-
-
-  activity1ToEdit!: Activity[];
-  activity2ToEdit!: Activity[];
-  activity3ToEdit!: Activity[];
-  activity4ToEdit!: Activity[];
-
-
-
   nbActivityWithId = new Array();
   allActivityToEdit!: Activity[];
-
-
   toDay = new Date();
   thisMonth!: number;
   thisyear!: number;
 
-  maxDayInMonth = 35;
+  /** HISTORIQUE DES DECLARATION */
+  getTheActivityAtTime(idCollab: number) {
 
-  getTheActivityAtTime() {
+
 
     this.thisMonth = this.toDay.getMonth() + 1;
     this.nbActivityWithId = [];
     this.allActivityToEdit = [];
 
-    for (var i = 0; i < this.daysInMonth; i++) {
-      this.tabJours[i] = i + 1;
-      
-      this.activitiesPerDay.push("jour-" + i);
-      this.remotePerDay.push("remote-" + i);
-
-      this.activitiesPerDay2.push("jour2-" + i);
-      this.remotePerDay2.push("remote2-" + i);
-
-      this.activitiesPerDay3.push("jour3-" + i);
-      this.remotePerDay3.push("remote3-" + i);
-
-      this.activitiesPerDay4.push("jour4-" + i);
-      this.remotePerDay4.push("remote4-" + i);
-    }
-
 
     /** IMPORTANT année */
-    /** DEMANDE D ACTIVITE MODIFIABLE (CE MOI + LE MOIS D'AVANT)*/
+    /** ACTUEL ACTIVITY AND LESS OLDER THAN 1 MONTH   */
     if (((this.monthSelected == (this.thisMonth - 1)) || (this.monthSelected == this.thisMonth)) && (this.yearInput == this.toDay.getFullYear())) {
 
       /** COMMUN*/
-      this._ActivityService.activityGroupByProject(this.monthSelected, this.yearInput, 2).subscribe(
+      this._ActivityService.activityGroupByProject(this.monthSelected, this.yearInput, idCollab).subscribe(
         data => {
           this.allActivityToEdit = data;
           for (var i = 0; i < this.tabJours.length; i++) {
@@ -855,11 +948,33 @@ export class DeclarationActiviteComponent implements OnInit {
             if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).disabled == true) {
               (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).disabled = false;
               (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).disabled = false;
+              (<HTMLInputElement>document.getElementById(this.totalActivity1)).disabled = false;
             }
+
+            if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).disabled == true) {
+              (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).disabled = false;
+              (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).disabled = false;
+              (<HTMLInputElement>document.getElementById(this.totalActivity2)).disabled = false;
+            }
+
+            if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).disabled == true) {
+              (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).disabled = false;
+              (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).disabled = false;
+              (<HTMLInputElement>document.getElementById(this.totalActivity3)).disabled = false;
+            }
+
+            if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).disabled == true) {
+              (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).disabled = false;
+              (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).disabled = false;
+              (<HTMLInputElement>document.getElementById(this.totalActivity4)).disabled = false;
+            }
+
           }
+
           for (var i = 0; i < this.allActivityToEdit.length; i++) {
             this.nbActivityWithId.push(this.allActivityToEdit[i].projectId);
           }
+
           /** ACTIVITY 1 */
           if (this.nbActivityWithId[0] !== undefined) {
             this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[0]).subscribe(
@@ -869,6 +984,11 @@ export class DeclarationActiviteComponent implements OnInit {
                   (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber = this.activity1ToEdit[i].duration;
                   (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked = this.activity1ToEdit[i].remote;
                   this.selectedOption = this.nbActivityWithId[0];
+                  this._ProjectService.selectProjectById(this.selectedOption).subscribe(
+                    data => this.selectedProject =data,
+                    error=>console.log("error"),
+                  )
+
                 }
                 this.total()
               },
@@ -886,6 +1006,10 @@ export class DeclarationActiviteComponent implements OnInit {
                   (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber = this.activity2ToEdit[i].duration;
                   (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked = this.activity2ToEdit[i].remote;
                   this.selectedOption2 = this.nbActivityWithId[1];
+                  this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
+                    data => this.selectedProject2 =data,
+                    error=>console.log("error"),
+                  )
                 }
                 this.total2()
               },
@@ -901,6 +1025,10 @@ export class DeclarationActiviteComponent implements OnInit {
                   (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber = this.activity3ToEdit[i].duration;
                   (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked = this.activity3ToEdit[i].remote;
                   this.selectedOption3 = this.nbActivityWithId[1];
+                  this._ProjectService.selectProjectById(this.selectedOption3).subscribe(
+                    data => this.selectedProject3 =data,
+                    error=>console.log("error"),
+                  )
                 }
                 this.total3()
               },
@@ -908,41 +1036,41 @@ export class DeclarationActiviteComponent implements OnInit {
             )
           }
 
-              /** ACTIVITY 4  */
-              if (this.nbActivityWithId[3] !== undefined) {
-                this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[3]).subscribe(
-                  data => {
-                    this.activity4ToEdit = data;
-                    for (var i = 0; i < this.tabJours.length; i++) {
-                      (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber = this.activity4ToEdit[i].duration;
-                      (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked = this.activity4ToEdit[i].remote;
-                      this.selectedOption4 = this.nbActivityWithId[1];
-                    }
-                    this.total4()
-                  },
-                  error => console.log("exception" + error)
-                )
-              }
-    
-    
-
-
-
+          /** ACTIVITY 4  */
+          if (this.nbActivityWithId[3] !== undefined) {
+            this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[3]).subscribe(
+              data => {
+                this.activity4ToEdit = data;
+                for (var i = 0; i < this.tabJours.length; i++) {
+                  (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber = this.activity4ToEdit[i].duration;
+                  (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked = this.activity4ToEdit[i].remote;
+                  this.selectedOption4 = this.nbActivityWithId[1];
+                  this._ProjectService.selectProjectById(this.selectedOption4).subscribe(
+                    data => this.selectedProject4 =data,
+                    error=>console.log("error"),
+                  )
+                }
+                this.total4()
+              },
+              error => console.log("exception" + error)
+            )
+          }
         },
         error => console.log("exception" + error)
       )
 
-      /** HISTORIQUE DES ACTIVITE DU MOIS PRECEDANT LE MOI ACTUEL*/
+      /** ACTIVITY OLDER THAN 1 MONTH */
     } else if ((this.monthSelected < (this.thisMonth - 1)) && (this.yearInput <= this.toDay.getFullYear())) {
 
-      this._ActivityService.activityGroupByProject(this.monthSelected, this.yearInput, this.collaborateur.id).subscribe(
+      this._ActivityService.activityGroupByProject(this.monthSelected, this.yearInput, idCollab).subscribe(
         data => {
           this.allActivityToEdit = data;
+
           for (var i = 0; i < this.allActivityToEdit.length; i++) {
             this.nbActivityWithId.push(this.allActivityToEdit[i].projectId);
           }
 
-          /** ACTIVITY 1 */
+          /** ACTIVITY 1  OLD*/
           if (this.nbActivityWithId[0] !== undefined) {
             this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[0]).subscribe(
               data => {
@@ -950,116 +1078,215 @@ export class DeclarationActiviteComponent implements OnInit {
                 for (var i = 0; i < this.tabJours.length; i++) {
                   (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber = this.activity1ToEdit[i].duration;
                   (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked = this.activity1ToEdit[i].remote;
+                  (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).disabled = true;
+                  (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).disabled = true;
+                  (<HTMLInputElement>document.getElementById(this.totalActivity1)).disabled = true;
                   this.selectedOption = this.nbActivityWithId[0];
                 }
                 this.total()
-              }, error => console.log("exception" + error)
+              },
+              error => console.log("exception" + error)
             )
-            for (var i = 0; i <= (this.tabJours.length - 1); i++) {
-              if (((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).disabled == false) && (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).disabled == false) {
-                (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).disabled = true;
-                (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).disabled = true;
-                this.selectedOption = 0;
-              }
-            }
           }
 
-            /** ACTIVITY 2 */
-            if (this.nbActivityWithId[1] !== undefined) {
-              this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[1]).subscribe(
-                data => {
-                  this.activity2ToEdit = data;
-                  for (var i = 0; i < this.tabJours.length; i++) {
-                    (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber = this.activity2ToEdit[i].duration;
-                    (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked = this.activity2ToEdit[i].remote;
-                    this.selectedOption2 = this.nbActivityWithId[1];
-                  }
-                  this.total2()
-                }, error => console.log("exception" + error)
-              )
-              for (var i = 0; i <= (this.tabJours.length - 1); i++) {
-                if (((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).disabled == false) && (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).disabled == false) {
+          /** ACTIVITY 2 OLD */
+          if (this.nbActivityWithId[1] !== undefined) {
+            this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[1]).subscribe(
+              data => {
+                this.activity2ToEdit = data;
+
+                for (var i = 0; i < this.tabJours.length; i++) {
+                  (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber = this.activity2ToEdit[i].duration;
+                  (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked = this.activity2ToEdit[i].remote;
                   (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).disabled = true;
                   (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).disabled = true;
-                  this.selectedOption2 = 0;
+                  (<HTMLInputElement>document.getElementById(this.totalActivity2)).disabled = true;
+                  this.selectedOption2 = this.nbActivityWithId[1];
                 }
-              }
-            }
-
-
-             /** ACTIVITY 3 */
-             if (this.nbActivityWithId[2] !== undefined) {
-              this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[2]).subscribe(
-                data => {
-                  this.activity3ToEdit = data;
-                  for (var i = 0; i < this.tabJours.length; i++) {
-                    (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber = this.activity3ToEdit[i].duration;
-                    (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked = this.activity3ToEdit[i].remote;
-                    this.selectedOption3 = this.nbActivityWithId[2];
-                  }
-                  this.total3()
-                }, error => console.log("exception" + error)
-              )
-              for (var i = 0; i <= (this.tabJours.length - 1); i++) {
-                if (((<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).disabled == false) && (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).disabled == false) {
+                this.total2()
+              },
+              error => console.log("exception" + error)
+            )
+          }
+          /** ACTIVITY 3  OLD*/
+          if (this.nbActivityWithId[2] !== undefined) {
+            this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[2]).subscribe(
+              data => {
+                this.activity3ToEdit = data;
+                for (var i = 0; i < this.tabJours.length; i++) {
+                  (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber = this.activity3ToEdit[i].duration;
+                  (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked = this.activity3ToEdit[i].remote;
                   (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).disabled = true;
                   (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).disabled = true;
-                  this.selectedOption3 = 0;
+                  (<HTMLInputElement>document.getElementById(this.totalActivity3)).disabled = true;
                 }
-              }
-            }
-
-               /** ACTIVITY 4 */
-               if (this.nbActivityWithId[3] !== undefined) {
-                this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[3]).subscribe(
-                  data => {
-                    this.activity4ToEdit = data;
-                    for (var i = 0; i < this.tabJours.length; i++) {
-                      (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber = this.activity4ToEdit[i].duration;
-                      (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked = this.activity4ToEdit[i].remote;
-                      this.selectedOption4 = this.nbActivityWithId[3];
-                    }
-                    this.total4()
-                  }, error => console.log("exception" + error)
-                )
-                for (var i = 0; i <= (this.tabJours.length - 1); i++) {
-                  if (((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).disabled == false) && (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).disabled == false) {
-                    (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).disabled = true;
-                    (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).disabled = true;
-                    this.selectedOption4 = 0;
-                  }
+                this.total3()
+              },
+              error => console.log("exception" + error)
+            )
+          }
+          /** ACTIVITY 4 OLD */
+          if (this.nbActivityWithId[3] !== undefined) {
+            this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[3]).subscribe(
+              data => {
+                this.activity4ToEdit = data;
+                for (var i = 0; i < this.tabJours.length; i++) {
+                  (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber = this.activity4ToEdit[i].duration;
+                  (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked = this.activity4ToEdit[i].remote;
+                  (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).disabled = true;
+                  (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).disabled = true;
+                  (<HTMLInputElement>document.getElementById(this.totalActivity4)).disabled = true;
+                  this.selectedOption4 = this.nbActivityWithId[3];
                 }
-              }
-  
-
-            
-
-
-
-
-
+                this.total4()
+              },
+              error => console.log("exception" + error)
+            )
+          }
         },
         error => console.log("exception" + error)
       )
-      /** FUTUR DECLARATION  D'ACTIVITE */
-    } else {
-
-      for (var i = 0; i < this.tabJours.length; i++) {
-        console.log(this.activitiesPerDay[i] + " doit etre egal a " + 0);
-
-        (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber = 0;
-        (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked = false;
-        this.selectedOption = this.nbActivityWithId[0];
-      }
-      this.total()
-
-      for (var i = 0; i <= (this.tabJours.length - 1); i++) {
-        (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).disabled = true;
-        (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).disabled = true;
-        this.selectedOption = 0;
-      }
 
     }
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  activityNewNormal = new Activity;
+  newActivity2 = new Activity;
+  newActivity3 = new Activity;
+  newActivity4 = new Activity;
+
+  async MajEtEnvoyer() {
+
+    this.ActivitiesToUpdate(this.collaborateur.id);
+
+    this.activityNewNormal = new Activity;
+    this.newActivity2 = new Activity;
+    this.newActivity3 = new Activity;
+    this.newActivity4 = new Activity;
+
+
+    for (var i = 0; i < this.daysInMonth; i++) {
+
+      /** ACTIVITY 1 activityNormal */
+      if (this.totalProjet1 != 0) {
+        this.activityNewNormal.id = this.idOfDaysActivity1[i];
+        this.activityNewNormal.typeActivity = this.lesTypeActivity[0];
+
+        this.activityNewNormal.collaboratorId = this.collaborateur.id;
+        this.activityNewNormal.projectId = this.onChangeSelectOption();
+
+        this.activityNewNormal.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
+        this.activityNewNormal.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked;
+        // on ajoute la date ici pourquoi la mettre en arguments
+        this.activityNewNormal.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+        this.aujourdhui = this.pipeDate.transform(this.activityNewNormal.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
+        console.log("eeo " + this.activityNewNormal.id)
+        console.log(this.idOfDaysActivity1[i])
+        this._ActivityService.addAndUpdateActivity(this.activityNewNormal, this.aujourdhui).subscribe(
+          data => {
+            console.log("activity 1 updated");
+          },
+          error => {
+            console.log("erreur mise à jour non-effectué")
+          }
+        )
+      }
+
+      /** ACTIVITY 2 */
+      if (this.totalProjet2 != 0) {
+        this.newActivity2.id = this.idOfDaysActivity2[i];
+
+        this.newActivity2.typeActivity = this.lesTypeActivity[0];
+        this.newActivity2.collaboratorId = this.collaborateur.id;
+        this.newActivity2.projectId = this.selectedProject2.id;
+
+        this.newActivity2.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
+        this.newActivity2.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked;
+
+        // on ajoute la date ici pourquoi la mettre en arguments
+        this.newActivity2.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+        this.aujourdhui = this.pipeDate.transform(this.newActivity2.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
+        this._ActivityService.addAndUpdateActivity(this.newActivity2, this.aujourdhui).subscribe(
+          data => {
+            console.log("activity 2 updated");
+          },
+          error => {
+            console.log("erreur updated non-effectué")
+          }
+        )
+      }
+
+      /** ACTIVITY 3 */
+
+      if (this.totalProjet3 != 0) {
+        this.newActivity3.id = this.idOfDaysActivity3[i]
+
+        this.newActivity3.typeActivity = this.lesTypeActivity[0];
+        this.newActivity3.collaboratorId = this.collaborateur.id;
+        this.newActivity3.projectId = this.selectedProject3.id;
+
+        this.newActivity3.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
+        this.newActivity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
+        // on ajoute la date ici pourquoi la mettre en arguments
+        this.newActivity3.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+        this.aujourdhui = this.pipeDate.transform(this.newActivity3.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
+        this._ActivityService.addAndUpdateActivity(this.newActivity3, this.aujourdhui).subscribe(
+          data => {
+            console.log("activity 3 updated");
+          },
+          error => {
+            console.log("erreur updated non-effectué")
+          }
+        )
+      }
+
+      /** ACTIVITY 4 */
+
+
+      if (this.totalProjet4 != 0) {
+        this.newActivity4.id = this.idOfDaysActivity4[i];
+
+        this.newActivity4.typeActivity = this.lesTypeActivity[0];
+        this.newActivity4.collaboratorId = this.collaborateur.id;
+        this.newActivity4.projectId = this.selectedProject4.id;
+
+        this.newActivity4.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
+        this.newActivity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
+        // on ajoute la date ici pourquoi la mettre en arguments
+        this.newActivity4.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+        this.aujourdhui = this.pipeDate.transform(this.newActivity4.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
+        this._ActivityService.addAndUpdateActivity(this.newActivity4, this.aujourdhui).subscribe(
+          data => {
+            console.log("activity 4 updated");
+          },
+          error => {
+            console.log("erreur updated non-effectué")
+          }
+        )
+      }
+    }
+    window.location.reload();
   }
 }
 

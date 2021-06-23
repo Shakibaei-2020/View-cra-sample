@@ -9,7 +9,7 @@
 
     <h2> Déclaration d'activité </h2>
   </div>
-  <select class="form-input2" aria-label="Default select example" [(ngModel)]="monthSelected" (change)="updateMonth()" (change)="getTheActivityAtTime()">
+  <select class="form-input2" aria-label="Default select example" [(ngModel)]="monthSelected" (change)="updateMonth()" (change)="getTheActivityAtTime(collaborateur.id)">
     <option value="1">Janvier</option>
     <option value="2">Février</option>
     <option value="3">Mars</option>
@@ -23,7 +23,7 @@
     <option value="11">Novembre</option>
     <option value="12">Décembre</option>
   </select>
-  <select class="form-input3" aria-label="Default select example" value="2021" [(ngModel)]="yearInput" name="yearInput" (change)="getTheActivityAtTime()">
+  <select class="form-input3" aria-label="Default select example" value="2021" [(ngModel)]="yearInput" name="yearInput" (change)="getTheActivityAtTime(collaborateur.id)">
     <option value="2021">2021</option>
     <option value="2022">2022</option>
     <option value="2023">2023</option>
@@ -61,7 +61,7 @@
             [checked]="isRemote" value="{{isRemote}}">
         </td>
         <td>
-          <input class="inputDay twolast" type="" value={{totalProjet1}} id="totalProjet1" required [(ngModel)]="totalProjet1"
+          <input class="inputDay twolast" type="" value={{totalProjet1}} id="totalProjet1" [disabled]="false" required [(ngModel)]="totalProjet1"
             name="totalProjet1">
         </td>
       </tr>
@@ -261,7 +261,7 @@
 
   <div class="register">
     <button class="send" (click)="EnregisterEtEnvoyer()">Enregister & Envoyer</button>
-    <button class="send" >Mise à jour</button>
+    <button class="send"  (click)="MajEtEnvoyer()">Mise à jour</button>
     <button class="send">Imprimer</button>
     <button class="send">Aide</button>
     <button class="send" (click)="retour()">Retour</button>
