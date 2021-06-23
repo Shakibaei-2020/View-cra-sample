@@ -147,6 +147,7 @@ export class DeclarationActiviteComponent implements OnInit {
       this.astreintePerDay3.push("jourAstreinte3-" + i);
       this.astreintePerDay4.push("jourAstreinte4-" + i);
     }
+
   }
 
   /** total temps d'activité */
@@ -237,6 +238,15 @@ export class DeclarationActiviteComponent implements OnInit {
     this.totalAllActivity();
   }
 
+
+  onChangeSelectOption() {
+    this._ProjectService.selectProjectById(this.selectedOption).subscribe(
+      data => this.selectedProject = data,
+      error => console.log("exception" + error)
+    )
+  }
+
+
   /** ACTIVITE2  */
 
   dureeProjet2 = 0;
@@ -286,6 +296,15 @@ export class DeclarationActiviteComponent implements OnInit {
     }
     this.totalAllActivity();
   }
+
+
+  onChangeSelectOption2() {
+    this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
+      data => this.selectedProject2 = data,
+      error => console.log("exception" + error)
+    )
+  }
+
 
   /** ACTIVITE 3  */
   dureeProjet3 = 0;
@@ -337,6 +356,15 @@ export class DeclarationActiviteComponent implements OnInit {
     this.totalAllActivity();
   }
 
+
+  
+  onChangeSelectOption3() {
+    this._ProjectService.selectProjectById(this.selectedOption3).subscribe(
+      data => this.selectedProject3 = data,
+      error => console.log("exception" + error)
+    )
+  }
+
   /** ACTIVITE 4  */
   dureeProjet4 = 0;
   tabAllInputedValue4 = new Array();
@@ -384,6 +412,14 @@ export class DeclarationActiviteComponent implements OnInit {
       }
     }
     this.totalAllActivity();
+  }
+
+    
+  onChangeSelectOption4() {
+    this._ProjectService.selectProjectById(this.selectedOption4).subscribe(
+      data => this.selectedProject4 = data,
+      error => console.log("exception" + error)
+    )
   }
 
   /** ASTREINTE 1 */
@@ -570,70 +606,25 @@ export class DeclarationActiviteComponent implements OnInit {
 
     /** FOR ACTIVITY  */
 
-    if (this.selectedOption != null && this.selectedOption != undefined) {
-      console.log("gello")
-      this._ProjectService.selectProjectById(this.selectedOption).subscribe(
-        data => {
-          this.selectedProject = data;
-          this.activityNormal.typeActivity = this.lesTypeActivity[0];
-          this.activityNormal.projectId = this.selectedProject.id;
-          this.activityNormal.collaboratorId = this.collaborateur.id;
-          console.log(this.activityNormal)
-        },
-        error => console.log("exception" + error)
-      )
-      // Si un projet est selectioné, on atribue à l'activité un type et l'id du projet.
-
-    }
-
-    console.log(this.selectedOption2)
-    if (this.selectedOption2 != null && this.selectedOption2 != undefined) {
-      this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
-        data => {
-          this.selectedProject2 = data;
-          this.activity2.typeActivity = this.lesTypeActivity[0];
-          this.activity2.projectId = this.selectedProject2.id;
-          this.activity2.collaboratorId = this.collaborateur.id;
-        },
-        error => console.log("exception" + error)
-      )
-    }
-
-    if (this.selectedOption3 != null && this.selectedOption3 != undefined) {
-      this._ProjectService.selectProjectById(this.selectedOption3).subscribe(
-        data => {
-          this.selectedProject3 = data;
-          this.activity3.typeActivity = this.lesTypeActivity[0];
-          this.activity3.projectId = this.selectedProject3.id;
-          this.activity3.collaboratorId = this.collaborateur.id;
-        },
-        error => console.log("exception" + error)
-      )
-    }
-
-    if (this.selectedOption4 != null && this.selectedOption4 != undefined) {
-      this._ProjectService.selectProjectById(this.selectedOption4).subscribe(
-        data => {
-          this.selectedProject4 = data;
-          this.activity4.typeActivity = this.lesTypeActivity[0];
-          this.activity4.projectId = this.selectedProject4.id;
-          this.activity4.collaboratorId = this.collaborateur.id;
-        },
-        error => console.log("exception" + error)
-      )
-    }
-
     for (var i = 0; i < this.daysInMonth; i++) {
 
 
       /** ACTIVITY 1 activityNormal */
       if (this.totalProjet1 != 0) {
+
+        console.log("selectedProject" + this.selectedProject.id)
+        this.activityNormal.typeActivity = this.lesTypeActivity[0];
+        this.activityNormal.collaboratorId = this.collaborateur.id;
+        this.activityNormal.projectId = this.selectedProject.id;
+
+
         this.activityNormal.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
         this.activityNormal.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
         this.activityNormal.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
         this.aujourdhui = this.pipeDate.transform(this.activityNormal.startDate, 'yyyy-MM-dd') || this.aujourdhui;
         // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
+        console.log("second type activity" + this.activityNormal)
 
         this._ActivityService.addAndUpdateActivity(this.activityNormal, this.aujourdhui).subscribe(
           data => {
@@ -647,6 +638,11 @@ export class DeclarationActiviteComponent implements OnInit {
 
       /** ACTIVITY 2 */
       if (this.totalProjet2 != 0) {
+
+        this.activity2.typeActivity = this.lesTypeActivity[0];
+        this.activity2.collaboratorId = this.collaborateur.id;
+        this.activity2.projectId = this.selectedProject2.id;
+
         this.activity2.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
         this.activity2.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
@@ -667,6 +663,11 @@ export class DeclarationActiviteComponent implements OnInit {
       /** ACTIVITY 3 */
 
       if (this.totalProjet3 != 0) {
+
+        this.activity3.typeActivity = this.lesTypeActivity[0];
+        this.activity3.collaboratorId = this.collaborateur.id;
+        this.activity3.projectId = this.selectedProject3.id;
+
         this.activity3.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
         this.activity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
@@ -686,8 +687,13 @@ export class DeclarationActiviteComponent implements OnInit {
 
       /** ACTIVITY 4 */
 
-  
+
       if (this.totalProjet4 != 0) {
+
+        this.activity4.typeActivity = this.lesTypeActivity[0];
+        this.activity4.collaboratorId = this.collaborateur.id;
+        this.activity4.projectId = this.selectedProject4.id;
+
         this.activity4.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
         this.activity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
