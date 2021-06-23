@@ -34,7 +34,7 @@
       <div class="row">
 
         <div class="col-sm-4">
-          <select class="modal-input" required [(ngModel)]="monthActivity" name="monthActivity">
+          <select class="modal-input" required [(ngModel)]="monthActivity" name="monthActivity" >
             <option value="1">Janvier</option>
             <option value="2">Férier</option>
             <option value="3">mars</option>
@@ -52,7 +52,6 @@
 
         <div class="col-sm-4">
           <input autocomplete="off" type="text" required [(ngModel)]="yearActivity" name="yearActivity">
-
         </div>
 
         <div class="col-sm-4">
@@ -83,10 +82,6 @@
             <th>
               <p class="titreTable">Date de la déclaration</p>
             </th>
-
-            <th>
-              <p class="titreTable">Projet</p>
-            </th>
             <th>
               <p class="titreTable">Action</p>
             </th>
@@ -97,9 +92,7 @@
             <td>{{activity.nameCollab}}</td>
             <td>{{activity.firstNameCollab}}</td>
             <td>{{activity.startDate | date: 'dd/MM/yyyy' }}</td>
-            <td>{{activity.projectId}}</td>
             <td>
-              <!--<button  class="btn btn-dark btn-block" type="submit" (click)="goGerer()">Gérer</button> -->
               <button type="button" class="btn btn-dark btn-block" data-toggle="modal"[attr.data-target]=" '#myActivitymodal-'+ indexOfelement" (click)="onInitModal(activity,activitys)">Éditer</button>
             </td>
           </tr>
@@ -127,27 +120,7 @@
       
                     <h2> Déclaration d'activité  dedu </h2>
                   </div>
-                  <select class="form-input2" aria-label="Default select example" [(ngModel)]="monthSelected" (change)="updateMonth()">
-                    <option value="1">Janvier</option>
-                    <option value="2">Février</option>
-                    <option value="3">Mars</option>
-                    <option value="4">Avril</option>
-                    <option value="5">Mai</option>
-                    <option value="6">Juin</option>
-                    <option value="7">Juillet</option>
-                    <option value="8">Août</option>
-                    <option value="9">Septembre</option>
-                    <option value="10">Octobre</option>
-                    <option value="11">Novembre</option>
-                    <option value="12">Décembre</option>
-                  </select>
-                  <select class="form-input3" aria-label="Default select example" value="2021" [(ngModel)]="yearInput" name="yearInput">
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                  </select>
-                
+            
                   <!-- ACTIVITE 1-->
                   <table>
                     <thead>
@@ -181,6 +154,7 @@
                           <input class="inputDay twolast" type="" value={{totalProjet1}} id="" required [(ngModel)]="totalProjet1"
                             name="totalProjet1">
                         </td>
+                   
                       </tr>
                 
                       <!-- ACTIVITE 2-->
@@ -375,9 +349,6 @@
                         </tbody>
                       </table>
                   </div>
-                
-           
-
               </div>
 
 

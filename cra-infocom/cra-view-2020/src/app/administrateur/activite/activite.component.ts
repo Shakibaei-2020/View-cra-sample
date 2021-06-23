@@ -296,7 +296,6 @@ export class ActiviteComponent implements OnInit {
         }
 
         /** ACTIVITY 1 */
-
         
         this.idOfDaysActivity1= [];
         this.idOfCollabActivity1= [];
@@ -311,7 +310,6 @@ export class ActiviteComponent implements OnInit {
               for (var i = 0; i < this.tabJours.length; i++) {
                 (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber = this.activity1ToEdit[i].duration;
                 (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked = this.activity1ToEdit[i].remote;
-                (<HTMLInputElement>document.getElementById(this.remotePerDay[1])).checked = true;
 
 
                 this.idOfDaysActivity1.push(this.activity1ToEdit[i].id);
@@ -568,28 +566,21 @@ export class ActiviteComponent implements OnInit {
             error => console.log("exception" + error)
           )
         }
-
-
       },
       error => console.log("exception" + error)
     )
-
-
   }
 
   /** total temps d'activité */
   updateMonth() {
-
     this.tabJours = [];
     this.activitiesPerDay = [];
     this.remotePerDay = [];
     this.dt.setMonth(this.monthSelected - 1);
     this.dt.setFullYear(this.yearInput)
-
     this.month = this.dt.getMonth() + 1;
     this.year = this.dt.getFullYear();
     this.day = this.dt.getDay();
-
     this.daysInMonth = new Date(this.year, this.month, 0).getDate();
     for (var i = 0; i < this.daysInMonth; i++) {
       this.tabJours[i] = i + 1;
@@ -1036,23 +1027,18 @@ export class ActiviteComponent implements OnInit {
 
     for (var i = 0; i < this.daysInMonth; i++) {
 
-
       /** ACTIVITY 1 activityNormal */
       if (this.totalProjet1 != 0) {
         this.activityNormal.id = this.idOfDaysActivity1[i];
-
         this.activityNormal.collaboratorId = this.idOfCollabActivity1[i];
         this.activityNormal.projectId = this.projectActivityNormal.id;
         this.activityNormal.typeActivity = this.idOfTypeActivity1[i];
-
         this.activityNormal.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
         this.activityNormal.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
         this.activityNormal.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
         this.aujourdhui = this.pipeDate.transform(this.activityNormal.startDate, 'yyyy-MM-dd') || this.aujourdhui;
         // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
-
-        console.log(this.activityNormal);
         this._ActivityService.addAndUpdateActivity(this.activityNormal, this.aujourdhui).subscribe(
           data => {
             console.log("activity 1 updated");
@@ -1065,21 +1051,16 @@ export class ActiviteComponent implements OnInit {
 
       /** ACTIVITY 2 */
       if (this.totalProjet2 != 0) {
-
         this.activity2.id = this.idOfDaysActivity2[i];
-
         this.activity2.collaboratorId = this.idOfCollabActivity2[i];
         this.activity2.projectId = this.projectActivity2.id;
         this.activity2.typeActivity = this.idOfTypeActivity2[i];
-
-
         this.activity2.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
         this.activity2.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
         this.activity2.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
         this.aujourdhui = this.pipeDate.transform(this.activity2.startDate, 'yyyy-MM-dd') || this.aujourdhui;
         // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
-
         this._ActivityService.addAndUpdateActivity(this.activity2, this.aujourdhui).subscribe(
           data => {
             console.log("activity 2 ajouté");
@@ -1093,21 +1074,16 @@ export class ActiviteComponent implements OnInit {
       /** ACTIVITY 3 */
 
       if (this.totalProjet3 != 0) {
-
         this.activity3.id = this.idOfDaysActivity3[i];
-
         this.activity3.collaboratorId = this.idOfCollabActivity3[i];
         this.activity3.projectId = this.projectActivity3.id;
         this.activity3.typeActivity = this.idOfTypeActivity3[i];
-
-
         this.activity3.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
         this.activity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
         this.activity3.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
         this.aujourdhui = this.pipeDate.transform(this.activity3.startDate, 'yyyy-MM-dd') || this.aujourdhui;
         // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
-
         this._ActivityService.addAndUpdateActivity(this.activity3, this.aujourdhui).subscribe(
           data => {
             console.log("activity 3 ajouté");
@@ -1122,22 +1098,16 @@ export class ActiviteComponent implements OnInit {
 
 
       if (this.totalProjet4 != 0) {
-
-
         this.activity4.id = this.idOfDaysActivity4[i];
-
         this.activity4.collaboratorId = this.idOfCollabActivity4[i];
         this.activity4.projectId = this.projectActivity4.id;
         this.activity4.typeActivity = this.idOfTypeActivity4[i];
-
-
         this.activity4.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
         this.activity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
         // on ajoute la date ici pourquoi la mettre en arguments
         this.activity4.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
         this.aujourdhui = this.pipeDate.transform(this.activity4.startDate, 'yyyy-MM-dd') || this.aujourdhui;
         // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
-
         this._ActivityService.addAndUpdateActivity(this.activity4, this.aujourdhui).subscribe(
           data => {
             console.log("activity 4 ajouté");
@@ -1155,14 +1125,11 @@ export class ActiviteComponent implements OnInit {
       this.astreinte4 = new Activity;
 
       if (this.totalAstreinte1 != 0) {
-
-
         this.astreinte1.id = this.idOfDaysAstreinte1[i];
         this.astreinte1.collaboratorId = this.idOfCollabAstreinte1[i];
         this.astreinte1.projectId = this.projectAstreinte1.id;
         this.astreinte1.typeActivity = this.typeAstreinte1;
         this.astreinte1.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
-
         this._ActivityService.addAndUpdateActivity(this.astreinte1, this.aujourdhui).subscribe(
           data => {
             console.log("astreinte 1  updated ");
@@ -1177,13 +1144,11 @@ export class ActiviteComponent implements OnInit {
       /** ASTREINTE 2  */
 
       if (this.totalAstreinte2 != 0) {
-
         this.astreinte2.id = this.idOfDaysAstreinte2[i];
         this.astreinte2.collaboratorId = this.idOfCollabAstreinte2[i];
         this.astreinte2.projectId = this.projectAstreinte2.id;
         this.astreinte2.typeActivity = this.typeAstreinte2;
         this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
-
         this._ActivityService.addAndUpdateActivity(this.astreinte2, this.aujourdhui).subscribe(
           data => {
             console.log("astreinte 2 updated ");
@@ -1197,14 +1162,11 @@ export class ActiviteComponent implements OnInit {
       /** ASTREINTE 3 */
 
       if (this.totalAstreinte3 != 0) {
-
-
         this.astreinte3.id = this.idOfDaysAstreinte3[i];
         this.astreinte3.collaboratorId = this.idOfCollabAstreinte3[i];
         this.astreinte3.projectId = this.projectAstreinte3.id;
         this.astreinte3.typeActivity = this.typeAstreinte3;
         this.astreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
-
         this._ActivityService.addAndUpdateActivity(this.astreinte3, this.aujourdhui).subscribe(
           data => {
             console.log("astreinte  3 updated");
@@ -1216,6 +1178,7 @@ export class ActiviteComponent implements OnInit {
       }
     }
   }
+  
 
 
 
