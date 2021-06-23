@@ -428,6 +428,8 @@ export class DeclarationActiviteComponent implements OnInit {
       data => this.selectedProject2 = data,
       error => console.log("exception" + error)
     )
+    return this.selectedProject2.id;
+
   }
 
 
@@ -488,6 +490,8 @@ export class DeclarationActiviteComponent implements OnInit {
       data => this.selectedProject3 = data,
       error => console.log("exception" + error)
     )
+    return this.selectedProject3.id;
+
   }
 
   /** ACTIVITE 4  */
@@ -545,6 +549,7 @@ export class DeclarationActiviteComponent implements OnInit {
       data => this.selectedProject4 = data,
       error => console.log("exception" + error)
     )
+    return this.selectedProject4.id;
   }
 
   /** ASTREINTE 1 */
@@ -1216,7 +1221,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
         this.newActivity2.typeActivity = this.lesTypeActivity[0];
         this.newActivity2.collaboratorId = this.collaborateur.id;
-        this.newActivity2.projectId = this.selectedProject2.id;
+        this.newActivity2.projectId = this.onChangeSelectOption2();
 
         this.newActivity2.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
         this.newActivity2.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked;
@@ -1242,7 +1247,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
         this.newActivity3.typeActivity = this.lesTypeActivity[0];
         this.newActivity3.collaboratorId = this.collaborateur.id;
-        this.newActivity3.projectId = this.selectedProject3.id;
+        this.newActivity3.projectId = this.onChangeSelectOption3();
 
         this.newActivity3.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
         this.newActivity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
@@ -1268,7 +1273,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
         this.newActivity4.typeActivity = this.lesTypeActivity[0];
         this.newActivity4.collaboratorId = this.collaborateur.id;
-        this.newActivity4.projectId = this.selectedProject4.id;
+        this.newActivity4.projectId =this.onChangeSelectOption4();
 
         this.newActivity4.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
         this.newActivity4.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked;
