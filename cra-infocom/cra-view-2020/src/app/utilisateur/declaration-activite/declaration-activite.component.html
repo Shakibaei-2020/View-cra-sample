@@ -35,8 +35,7 @@
     <thead>
       <tr >
         <th class="enTete">Projets </th>
-        <!-- <th class="enTete">REF.INTERNE </th>
-        <th class="enTete">REF.CLIENT </th> -->
+
         <th class="enTete" >R.AUTO </th>
         <th class="enTeteDates" *ngFor="let element of tabJours;">{{element}} </th>
         <th class="enTete"  >total</th>
@@ -49,8 +48,7 @@
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option>
           </select>
         </td>
-        <!-- <td><input class="form-input choice" value="{{refinterne}}"></td>
-        <td><input class="form-input choice" value="{{refClient}}"></td> -->
+
         <td>
           <button class="btnRemplirActivity" (click)="remplirProjet1()">Remplir</button>
           <button class="btnRemplirActivity" (click)="remplirRemoteP1()">TAD</button>

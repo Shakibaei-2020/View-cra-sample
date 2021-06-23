@@ -740,7 +740,7 @@ export class DeclarationActiviteComponent implements OnInit {
         )
 
         this.astreinte2.collaboratorId = this.collaborateur.id;
-        this.astreinte2.projectId = this.selectedProjectAstreint1;
+        this.astreinte2.projectId = this.selectedProjectAstreint2;
         this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
         this.astreinte2.typeActivity = this.theTypeActivity2;
 
