@@ -113,7 +113,7 @@
           <td><p class="contentTable">{{expense.dateExpense | date: 'dd/MM/yyyy' }}</p></td>
           <td><p class="contentTable">{{expense.status}}</p></td>
           <td>
-            <button type="button"class="btn btn-dark btn-block"  data-toggle="modal" [attr.data-target]=" '#myExpenseModal-' + indexOfelement" >Éditer</button>
+            <button type="button"class="btn btn-dark btn-block" (click)="updateTTC(indexOfelement)"  data-toggle="modal" [attr.data-target]=" '#myExpenseModal-' + indexOfelement" >Éditer</button>
           </td>
         </tr>
       </tbody>
@@ -142,16 +142,16 @@
 
                   <div class="inputbox mt-1">
                     <span> Cout HT : </span><br>
-                    <input class="modal-input" type="text"  value="{{expense.costHT}} " name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
+                    <input class="modal-input"  autocomplete="off"   type="number"  value="{{expense.costHT}}" name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1">
                     <span> Cout TTC :</span><br>
-                    <input class="modal-input" type="text" name="newCostTTC-{{indexOfelement}}" id="newCostTTC-{{indexOfelement}}"  placeholder="{{TTCvalue}}" disabled>
+                    <input class="modal-input"  autocomplete="off"  type="number" value="" name="newCostTTC-{{indexOfelement}}" id="newCostTTC-{{indexOfelement}}"  placeholder="{{TTCvalue}}" disabled>
                   </div>
                  
                   <div class="inputbox mt-1">
-                    <span> Facturable :{{expense.billableFR}} </span><br>
+                    <span> Facturable : </span><br>
                     <select class="modal-input"  name="expenseBillable-{{indexOfelement}}" id="expenseBillable-{{indexOfelement}}">
                       <option hidden value="" disabled selected>{{expense.billableFR}} </option>
                       <option value="true">oui</option>
@@ -171,7 +171,7 @@
 
                   <div class="inputbox mt-1">
                     <span> CoutTVA : </span><br>
-                    <input class="modal-input" type="text" value="{{expense.costTVA}}"   name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
+                    <input class="modal-input" autocomplete="off" type="number" value="{{expense.costTVA}}"   name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1 toHide" >

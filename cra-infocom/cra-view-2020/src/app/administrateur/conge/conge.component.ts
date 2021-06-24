@@ -556,6 +556,13 @@ export class CongeComponent implements OnInit {
                       item.prenomCollab = data.firstName;
                       item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
                       item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
+
+                      if (item.clientInformed == true) {
+                        item.clientInformedFR = "oui";
+                      } else if (item.clientInformed == false) {
+                        item.clientInformedFR = "non";
+                      }
+
                     }
                     this.nbResultat = this.leaves.length;
                   },
@@ -639,7 +646,8 @@ export class CongeComponent implements OnInit {
             this.dateOfEndLeave = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndLeave[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.leaveRequestToUpdated.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
             this.dateOfDemandLeave = this.pipeDate.transform(this.leaveRequestToUpdated.dateOfDemand, 'yyyy-MM-dd') || '2000-02-14';
 
-            this.updatedLeave.clientInformed = !(<HTMLInputElement>document.getElementById(this.leaveClientInformed[indexOfElement])).value || this.leaveRequestToUpdated.clientInformed;
+            this.updatedLeave.clientInformed = (<HTMLInputElement>document.getElementById(this.leaveClientInformed[indexOfElement])).value === "true" ? true : false;
+          
             this.updatedLeave.statusDebut = (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[indexOfElement])).value || this.leaveRequestToUpdated.statusDebut;
             this.updatedLeave.statusFin = (<HTMLInputElement>document.getElementById(this.leaveStatusFin[indexOfElement])).value || this.leaveRequestToUpdated.statusFin;
             this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.leaveStatus[indexOfElement])).value || this.leaveRequestToUpdated.status;

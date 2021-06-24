@@ -24,6 +24,13 @@ export class ActivityService {
     return this._http.post<Activity>("http://localhost:8800/activity/update/" + startDate, activity);
   }
 
+
+  addAndUpdateActivity2(activity: Activity): Observable<Activity> {
+    return this._http.post<Activity>("http://localhost:8800/activity/ajouter/" , activity);
+  }
+
+  
+
   DeleteActivityById(id: number): Observable<Activity> {
     return this._http.delete<Activity>("http://localhost:8800/activity/supprimer/" + id);
   }
@@ -44,14 +51,21 @@ export class ActivityService {
   }
 
 
-
+  /** FOR ACTIVITY */
   searchTheActivityOfCollaboratorOfProject(month:number, year: number,idColl: number,idProject:number): Observable<Activity[]> {
       return this._http.get<Activity[]>("http://localhost:8800/activity/searchTheActivityOfCollaboratorOfProject/" +month + "/"+ year + "/" + idColl + "/" +idProject);
   }
 
-
+  /** FOR ASTREINTE */
   searchTheAstreinteOfCollaboratorOfProject(month:number, year: number,idColl: number,idProject:number): Observable<Activity[]> {
     return this._http.get<Activity[]>("http://localhost:8800/activity/searchTheAstreinteOfCollaboratorOfProject/" +month + "/"+ year + "/" + idColl + "/" +idProject);
 }
+
+
+  /** FOR ACTIVITY */
+  checkActivityEmpty(month:number, year: number,idColl: number,idProject:number): Observable<boolean> {
+    return this._http.get<boolean>("http://localhost:8800/activity/checkActivity1Empty/" +month + "/"+ year + "/" + idColl + "/" +idProject);
+}
+
 
 }

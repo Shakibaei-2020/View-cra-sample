@@ -20,7 +20,7 @@ export class ExpenseService {
   }
 
   addOneExpense(expense: Expense): Observable<Expense> {
-    return this._http.post<Expense>("http://localhost:7672/expenses/ajouter", expense);
+    return this._http.post<Expense>("http://localhost:7672/expenses/update", expense);
   }
 
   deleteOneExpense(id: number): Observable<Expense> {

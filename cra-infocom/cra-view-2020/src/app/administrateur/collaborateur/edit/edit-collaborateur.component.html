@@ -148,7 +148,7 @@
           </td>
        
           <td>
-            <button type="button" class="btn btn-dark btn-block"  data-toggle="modal" [attr.data-target]=" '#myExpenseModal-' + indexOfelement">Éditer</button>
+            <button type="button" class="btn btn-dark btn-block" (click)="updateTTC(indexOfelement)"  data-toggle="modal" [attr.data-target]=" '#myExpenseModal-' + indexOfelement">Éditer</button>
           </td>
         </tr>
       </tbody>
@@ -181,19 +181,19 @@
 
                   <div class="inputbox mt-1">
                     <span> Cout HT :</span><br>
-                    <input class="modal-input" type="text"  value="{{expense.costHT}}" name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
+                    <input class="modal-input" type="number"  value="{{expense.costHT}}" name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}" (input)="updateTTC(indexOfelement)">
                   </div>
 
                   <div class="inputbox mt-1">
                     <span> Cout TTC :</span><br>
-                    <input class="modal-input" type="text"  name="newCostTTC-{{indexOfelement}}" id="newCostTTC-{{indexOfelement}}"  placeholder="{{TTCvalue}}" disabled>
+                    <input class="modal-input" type="number"  name="newCostTTC-{{indexOfelement}}" id="newCostTTC-{{indexOfelement}}"  placeholder="{{TTCvalue}}" disabled>
                   </div>
                  
 
                   <div class="inputbox mt-1">
-                    <span> Facturable : {{expense.billable}}</span><br>
+                    <span> Facturable : </span><br>
                     <select class="modal-input"  name="expenseBillable-{{indexOfelement}}" id="expenseBillable-{{indexOfelement}}">
-                      <option hidden value="" disabled selected>{{expense.billable}} </option>
+                      <option hidden value="" disabled selected>{{expense.billableFR}} </option>
                       <option value="true">oui</option>
                       <option value="false">non</option>
                     </select>
@@ -387,7 +387,7 @@
                   <div class="inputbox mt-1">
                     <span> Client informé : </span><br>
                     <select class="modal-input" name="leaveClientInformed-{{indexOfelement}}" id="leaveClientInformed-{{indexOfelement}}">
-                      <option hidden value="" disabled selected>{{leave.clientInformed}} </option>
+                      <option hidden value="" disabled selected>{{leave.clientInformedFR}} </option>
                       <option value="true">Oui</option>
                       <option value="false">Non</option>
                     </select>
