@@ -193,11 +193,22 @@
                   <!-- Colonne 2-->
                   <div class="col-sm-6">
 
+<<<<<<< HEAD
                     <div class="inputbox mt-1 toHide">
                       <span> Date de demande : {{leave.dateOfDemand | date: 'dd/MM/yyyy'}}</span><br>
                       <input class="modal-input" type="date" name="dateLeaveRequest-{{indexOfelement}}"
                         id="dateLeaveRequest-{{indexOfelement}}" disabled>
                     </div>
+=======
+                  <div class="inputbox mt-1">
+                    <span> Client informé :</span><br>
+                    <select class="modal-input" name="leaveClientInformed-{{indexOfelement}}" id="leaveClientInformed-{{indexOfelement}}">
+                      <option hidden value="" disabled selected>{{leave.clientInformedFR}} </option>
+                      <option value="true">Oui</option>
+                      <option value="false">Non</option>
+                    </select>
+                  </div>
+>>>>>>> tmp
 
                     <div class="rightInputs">
                       <div class="inputbox mt-1">

@@ -25,7 +25,8 @@ export class Leave {
 	public prenomCollab!: string;
 
 	
-
+	clientInformedFR!: string;
+	
 	public leaveType = new TypeLeave();
 
 	

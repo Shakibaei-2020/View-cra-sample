@@ -24,7 +24,15 @@
     transform: translateY(4px);
   }
 
-  
+
+  .buttonModal{
+    margin-top: 16px;
+    height:5%;
+    width:40px;
+    float: right;
+
+  }
+
 .container {
     height: 100vh;
 }
@@ -198,7 +206,6 @@ input[type=text] {
 .bio-row {
     width: 50%;
     float: left;
-    margin-bottom: 10px;
     padding:0 30px;
 }
 
@@ -213,11 +220,7 @@ input[type=text] {
     height: 27px;
 }
 
-.profil-image{
-    height: 70px;
-    border-radius: 60px;
-    margin-bottom: 8px;
-}
+
 
   .form-input{
     width: 100%;

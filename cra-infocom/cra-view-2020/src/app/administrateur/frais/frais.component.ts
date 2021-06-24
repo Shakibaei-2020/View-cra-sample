@@ -109,6 +109,13 @@ export class FraisComponent implements OnInit {
                       item.prenomCollab = data.firstName;
                       item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
 
+                      if (item.billable == true) {
+                        item.billableFR = "oui";
+                      } else if (item.billable == false) {
+                        item.billableFR = "non";
+                      }
+
+
                     }
                   },
                   error => console.log("exception" + error)
@@ -172,13 +179,20 @@ export class FraisComponent implements OnInit {
                       item.prenomCollab = data.firstName;
                       item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
 
+                      if (item.billable == true) {
+                        item.billableFR = "oui";
+                      } else if (item.billable == false) {
+                        item.billableFR = "non";
+                      }
+
+
                     }
                   },
                   error => console.log("exception" + error)
                 )
               }
             )
-          }else {
+          } else {
             this.expenses = [];
             this.nbResultat = 0
           }
@@ -234,13 +248,19 @@ export class FraisComponent implements OnInit {
                       item.prenomCollab = data.firstName;
                       item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
 
+                      if (item.billable == true) {
+                        item.billableFR = "oui";
+                      } else if (item.billable == false) {
+                        item.billableFR = "non";
+                      }
+
                     }
                   },
                   error => console.log("exception" + error)
                 )
               }
             )
-          }else {
+          } else {
             this.expenses = [];
             this.nbResultat = 0
           }
@@ -299,13 +319,20 @@ export class FraisComponent implements OnInit {
                       item.prenomCollab = data.firstName;
                       item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
 
+                      if (item.billable == true) {
+                        item.billableFR = "oui";
+                      } else if (item.billable == false) {
+                        item.billableFR = "non";
+                      }
+
+
                     }
                   },
                   error => console.log("exception" + error)
                 )
               }
             )
-          }else {
+          } else {
             this.expenses = [];
             this.nbResultat = 0
           }
@@ -363,13 +390,20 @@ export class FraisComponent implements OnInit {
                       item.prenomCollab = data.firstName;
                       item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
 
+                      if (item.billable == true) {
+                        item.billableFR = "oui";
+                      } else if (item.billable == false) {
+                        item.billableFR = "non";
+                      }
+
+
                     }
                   },
                   error => console.log("exception" + error)
                 )
               }
             )
-          }else {
+          } else {
             this.expenses = [];
             this.nbResultat = 0
           }
@@ -426,13 +460,20 @@ export class FraisComponent implements OnInit {
                       item.prenomCollab = data.firstName;
                       item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
 
+                      if (item.billable == true) {
+                        item.billableFR = "oui";
+                      } else if (item.billable == false) {
+                        item.billableFR = "non";
+                      }
+
+
                     }
                   },
                   error => console.log("exception" + error)
                 )
               }
             )
-          }else {
+          } else {
             this.expenses = [];
             this.nbResultat = 0
           }
@@ -487,13 +528,20 @@ export class FraisComponent implements OnInit {
                       item.prenomCollab = data.firstName;
                       item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
 
+                      if (item.billable == true) {
+                        item.billableFR = "oui";
+                      } else if (item.billable == false) {
+                        item.billableFR = "non";
+                      }
+
+
                     }
                   },
                   error => console.log("exception" + error)
                 )
               }
             )
-          }else {
+          } else {
             this.expenses = [];
             this.nbResultat = 0
           }
@@ -553,13 +601,19 @@ export class FraisComponent implements OnInit {
                       item.prenomCollab = data.firstName;
                       item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
 
+                      if (item.billable == true) {
+                        item.billableFR = "oui";
+                      } else if (item.billable == false) {
+                        item.billableFR = "non";
+                      }
+
                     }
                   },
                   error => console.log("exception" + error)
                 )
               }
             )
-          }else {
+          } else {
             this.expenses = [];
             this.nbResultat = 0
           }
@@ -653,13 +707,14 @@ export class FraisComponent implements OnInit {
         this.updatedExpense.collaboratorId = this.expenseToUpdate.collaboratorId;
         this._TypeExpenseService.selectTypeExpenseById(+(<HTMLInputElement>document.getElementById(this.expenseType[indexOfElement])).value).subscribe(
           data2 => {
-            console.log(!(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value)
 
             this.newTypeExpense = data2;
             this.updatedExpense.typeExpense = this.newTypeExpense || this.expenseToUpdate.typeExpense
             this.newDateExpense = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateExpense[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
             this.newDateRequest = this.pipeDate.transform(this.expenseToUpdate.dateRequest, 'yyyy-MM-dd') || '2000-02-14';
-            this.updatedExpense.billable = !(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value;
+            
+            this.updatedExpense.billable = (<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value === "true" ? true : false;
+
             this.updatedExpense.status = (<HTMLInputElement>document.getElementById(this.expenseStatus[indexOfElement])).value || this.expenseToUpdate.status;
             this.updatedExpense.costHT = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[indexOfElement])).value || this.expenseToUpdate.costHT;
             this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[indexOfElement])).value || this.expenseToUpdate.costTVA;
@@ -687,5 +742,7 @@ export class FraisComponent implements OnInit {
     )
 
   }
+
+
 
 }

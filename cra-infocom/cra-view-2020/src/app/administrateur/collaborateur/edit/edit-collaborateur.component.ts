@@ -33,19 +33,19 @@ export class EditCollaborateurComponent implements OnInit {
 
   constructor(
     private _service: NgserviceService,
-     private _route: Router,
+    private _route: Router,
 
-     private _CollaboratorService:CollaboratorService,
-     private _TypeCollaboratorService:TypeCollaboratorService,
+    private _CollaboratorService: CollaboratorService,
+    private _TypeCollaboratorService: TypeCollaboratorService,
 
-     private _ExpenseService:ExpenseService,
-     private _TypeExpenseService:TypeExpenseService,
+    private _ExpenseService: ExpenseService,
+    private _TypeExpenseService: TypeExpenseService,
 
-     
-     private _LeaveService:LeaveService,
-     private _TypeLeaveService:TypeLeaveService,
-     
-     ) { }
+
+    private _LeaveService: LeaveService,
+    private _TypeLeaveService: TypeLeaveService,
+
+  ) { }
 
 
 
@@ -94,13 +94,14 @@ export class EditCollaborateurComponent implements OnInit {
 
   ngOnInit() {
 
+
     /**  Collaborator info*/
     this._CollaboratorService.selectOneCollabById(2).subscribe(
       data => {
         this.collaborateur = data;
 
         this.collaborateur.oldDateOfEntry = this.pipeDate.transform(data.dateOfEntry, 'yyyy-MM-dd') || '2000-02-14';
-        this.collaborateur.oldDateOfRelease =this.pipeDate.transform(data.dateOfRelease, 'yyyy-MM-dd') || '2000-02-14';
+        this.collaborateur.oldDateOfRelease = this.pipeDate.transform(data.dateOfRelease, 'yyyy-MM-dd') || '2000-02-14';
 
         this._TypeCollaboratorService.selectTypeCollaboratorById(this.collaborateur.typeCollaborator.id).subscribe(
           data => this.typeCollaborator = data,
@@ -154,6 +155,11 @@ export class EditCollaborateurComponent implements OnInit {
                   item.prenomCollab = data.firstName;
                   item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
 
+                  if (item.billable == true) {
+                    item.billableFR = "oui";
+                  } else if (item.billable == false) {
+                    item.billableFR = "non";
+                  }
                 }
               },
               error => console.log("exception" + error)
@@ -201,6 +207,12 @@ export class EditCollaborateurComponent implements OnInit {
                   item.prenomCollab = data.firstName;
                   item.oldDateOfStartLeave = this.pipeDate.transform(item.dateOfStartLeave, 'yyyy-MM-dd') || '2000-02-14';
                   item.oldDateOfEndLeave = this.pipeDate.transform(item.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
+
+                  if (item.clientInformed == true) {
+                    item.clientInformedFR = "oui";
+                  } else if (item.clientInformed == false) {
+                    item.clientInformedFR = "non";
+                  }
                 }
               },
               error => console.log("exception" + error)
@@ -305,12 +317,13 @@ export class EditCollaborateurComponent implements OnInit {
             this.updatedExpense.typeExpense = this.newTypeExpense || this.expenseToUpdate.typeExpense
             this.newDateExpense = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateExpense[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.expenseToUpdate.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
             this.newDateRequest = this.pipeDate.transform(this.expenseToUpdate.dateRequest, 'yyyy-MM-dd') || '2000-02-14';
-            this.updatedExpense.billable = !(<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value || this.expenseToUpdate.billable;;
+            this.updatedExpense.billable = (<HTMLInputElement>document.getElementById(this.expenseBillable[indexOfElement])).value === "true" ? true : false;
             this.updatedExpense.status = (<HTMLInputElement>document.getElementById(this.expenseStatus[indexOfElement])).value || this.expenseToUpdate.status;
             this.updatedExpense.costHT = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[indexOfElement])).value || this.expenseToUpdate.costHT;
             this.updatedExpense.costTVA = +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[indexOfElement])).value || this.expenseToUpdate.costTVA;
             this.updatedExpense.costTTC = this.updatedExpense.costHT + this.updatedExpense.costTVA || this.expenseToUpdate.costTTC;
             this.TTCvalue = this.updatedExpense.costTTC;
+            
             this._ExpenseService.addAndUpdateExpense(this.updatedExpense, this.newDateExpense, this.newDateRequest).subscribe(
               data => {
                 console.log("ajout effectué");
@@ -374,7 +387,11 @@ export class EditCollaborateurComponent implements OnInit {
             this.dateOfEndLeave = this.pipeDate.transform((<HTMLInputElement>document.getElementById(this.dateEndLeave[indexOfElement])).valueAsDate, 'yyyy-MM-dd') || this.pipeDate.transform(this.leaveRequestToUpdated.dateOfEndLeave, 'yyyy-MM-dd') || '2000-02-14';
             this.dateOfDemandLeave = this.pipeDate.transform(this.leaveRequestToUpdated.dateOfDemand, 'yyyy-MM-dd') || '2000-02-14';
 
-            this.updatedLeave.clientInformed = !(<HTMLInputElement>document.getElementById(this.leaveClientInformed[indexOfElement])).value || this.leaveRequestToUpdated.clientInformed;
+            this.updatedLeave.clientInformed = (<HTMLInputElement>document.getElementById(this.leaveClientInformed[indexOfElement])).value === "true" ? true : false;
+
+
+
+
             this.updatedLeave.statusDebut = (<HTMLInputElement>document.getElementById(this.leaveStatusDebut[indexOfElement])).value || this.leaveRequestToUpdated.statusDebut;
             this.updatedLeave.statusFin = (<HTMLInputElement>document.getElementById(this.leaveStatusFin[indexOfElement])).value || this.leaveRequestToUpdated.statusFin;
             this.updatedLeave.status = (<HTMLInputElement>document.getElementById(this.leaveStatus[indexOfElement])).value || this.leaveRequestToUpdated.status
@@ -445,9 +462,10 @@ export class EditCollaborateurComponent implements OnInit {
 
   TTCvalue!: number;
   updateTTC(i: number) {
-
     this.TTCvalue = +(<HTMLInputElement>document.getElementById(this.expenseCostHT[i])).value + +(<HTMLInputElement>document.getElementById(this.expenseCostTVA[i])).value;
-
   }
 
+
+
+  
 }

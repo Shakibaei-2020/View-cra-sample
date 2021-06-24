@@ -5,17 +5,18 @@
 <div class="container">
   <h2>Ajouter une note de frais </h2>
   <hr>
-  <div class="panel">
-    <div class="panel-body bio-graph-info">
+  <div class="">
+    <div class="">
       <br>
       <div class="row">
 
         <div class="bio-row">
-          <div   class="inputbox mt-1"><span class="input-title">Coût HT :</span> 
-            <input autocomplete="off"  type="text" requireds [(ngModel)]="expense.costHT" name="expense.costHT" (input)="updateTTC()">
-           </div>
+          <div class="inputbox mt-1"><span class="input-title">Coût HT :</span>
+            <input autocomplete="off" type="text" requireds [(ngModel)]="expense.costHT" name="expense.costHT"
+              (input)="updateTTC()">
+          </div>
 
-           <div class="inputbox mt-1">
+          <div class="inputbox mt-1">
             <span>Facturable :</span><br>
             <select class="form-input" aria-label="Default select example" required [(ngModel)]="expense.billable"
               name="expense.billable">
@@ -26,42 +27,41 @@
 
           <div class="inputbox mt-1">
             <span>Nature des frais :</span><br>
-            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfExpenseType"  name="idOfExpenseType" (change)="getExpenseType()">
-              <option *ngFor="let typeExpense of allTypeExpense"  value="{{typeExpense.id}}">{{typeExpense.type}}</option> 
+            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfExpenseType"
+              name="idOfExpenseType" (change)="getExpenseType()">
+              <option *ngFor="let typeExpense of allTypeExpense" value="{{typeExpense.id}}">{{typeExpense.type}}
+              </option>
             </select>
           </div>
-
-
         </div>
-
 
         <div class="bio-row">
           <div class="inputbox mt-1">
             <span class="input-title">Coût TVA :</span>
-            <input autocomplete="off"  type="text" required [(ngModel)]="expense.costTVA" (input)="updateTTC()"> 
+            <input autocomplete="off" type="text" required [(ngModel)]="expense.costTVA" (input)="updateTTC()">
           </div>
 
           <div class="inputbox mt-1">
             <span class="input-title">Coût TTC :</span>
-            <input autocomplete="off"  type="text" placeholder="{{costTTC}}" disabled> 
+            <input autocomplete="off" type="text" placeholder="{{costTTC}}" disabled>
           </div>
 
           <div class="inputbox mt-1">
             <span class="input-title">Date de frais :</span>
-             <input type="Date" placeholder="13 juillet 1983" required [(ngModel)]="dateExpense" name="dateExpense"> 
-            </div>
+            <input type="Date" required [(ngModel)]="dateExpense" name="dateExpense">
+          </div>
         </div>
 
-       
-
-    
-      
 
         <div class="bio-row"></div>
 
         <div class="bio-row">
           <button class="button" (click)="retour()">Retour</button>
           <button class="button" data-toggle="modal" data-target="#updateModal">Ajouter</button>
+
+
+
+
           <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -86,41 +86,161 @@
         </div>
       </div>
     </div>
+    <div>
 
 
-    <h2>Vos demandes :</h2>
-    <table class="table table-condensed">
-      <thead>
-        <tr>
-          <th><p>Date de la demande</p></th>
-          <th><p>Date de frais</p></th>
-          <th><p>Coût HT</p></th>
-          <th><p>Coût TVA </p></th>
-          <th><p>Coût TTC </p></th>
-          <th><p>État de la demande</p></th>
-          <th ><p class="Action" >Action</p></th>
-
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let expense of expensesOfCollab">
-          <td>{{expense.dateRequest | date: 'dd/MM/yyyy'}}</td>
-          <td>{{expense.dateExpense | date: 'dd/MM/yyyy' }}</td>
-          <td>{{expense.costHT}} €</td>
-          <td>{{expense.costTVA}} €</td>
-          <td>{{expense.costTTC}} €</td>
-          <td>{{expense.status}}</td>
-          <td><button class="btnEditer" (click)="deleteExpenseById(expense.id)">Supprimer</button></td>
-        </tr>
-      </tbody>
-      
-    </table>
-    <hr>
- 
-  </div>
+      <span>Remboursement de frais du </span>
+      <select class="form-input2" aria-label="Default select example" required [(ngModel)]="monthSelected"
+        name="monthSelected" (change)="updateDate()">
+        <option value="1">Janvier</option>
+        <option value="2">Février</option>
+        <option value="3">Mars</option>
+        <option value="4">Avril</option>
+        <option value="5">Mai</option>
+        <option value="6">Juin</option>
+        <option value="7">Juillet</option>
+        <option value="8">Août</option>
+        <option value="9">Septembre</option>
+        <option value="10">Octobre</option>
+        <option value="11">Novembre</option>
+        <option value="12">Décembre</option>
+      </select>
+      <select class="form-input3" aria-label="Default select example" required [(ngModel)]="yearSelected"
+        name="yearSelected" (change)="updateDate()">
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+      </select>
 
 
+      <hr>
 
-</div>
+      <div class="row">
+        <div class="bio-row">
+          <div class="inputbox mt-1">
+            <span class="input-title">Panier repas :</span>
+            <input autocomplete="off" type="text" required [(ngModel)]="panierRepas" name="panierRepas">
+          </div>
 
+          <div class="inputbox mt-1">
+            <span class="input-title">Abonnement transport: Prise en charge par infocom 50%</span><br>
+            <input  type="text" autocomplete="off">
+          </div>
+
+
+
+
+
+        </div>
+
+        <div class="bio-row">
+
+
+          <div class="inputbox mt-1">
+            <span class="input-title">Voiture:</span>
+            <input autocomplete="off" type="text">
+          </div>
+
+
+
+          <div class="inputbox mt-1">
+            <span class="input-title">Autres :</span>
+            <div class="projectTable">
+              <table class="table">
+                <tbody>
+                  <div *ngFor="let field of fieldArray; let indexOfElement = index">
+                    <input class="input-modalOther" type="text" [(ngModel)]="field.code" autocomplete="off" name="{{field.code}}"
+                      id="projectName-{{indexOfElement}}" disabled />
+                    <button class="btn btn-dark buttonModal " type="button" (click)="deleteFieldValue(indexOfElement)">-</button>
+                  </div>
+
+                  <div>
+                    <input class="input-modalOther"   type="text" placeholder="Autres frais" autocomplete="off" id="newAttributeCode"
+                      [(ngModel)]="newAttribute.code" name="newAttributeCode" />
+                    <button class="btn  btn-dark buttonModal" type="button" (click)="addFieldValue()">+</button>
+                  </div>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="inputbox mt-1">
+          <span class="input-title">Justificatifs :</span>
+          <div class="projectTable">
+            <table class="table">
+              <tbody>
+                <div *ngFor="let field of fieldArrayJustificatif; let indexOfElement = index">
+                  <input class="input-modal"  type="file"    accept="image/png, image/jpeg"class="input-modal" [(ngModel)]="field.code"
+                    autocomplete="off" name="{{field.code}}" disabled />
+                  <button class="btn btn-dark " type="button"
+                    (click)="deleteFieldJustificatif(indexOfElement)">-</button>
+                </div>
+
+                <div>
+                  <input class="input-modal" type="file"   accept="image/png, image/jpeg" placeholder="Ajouter un projet" autocomplete="off"
+                    id="newAttributeJustificatif" [(ngModel)]="newAttributeJustificatif.code"
+                    name="newAttributeJustificatif" />
+                  <button class="btn  btn-dark " type="button" (click)="addFieldJustificatif()">+</button>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+        <h2>Vos demandes :</h2>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>
+                <p>Date de la demande</p>
+              </th>
+              <th>
+                <p>Date de frais</p>
+              </th>
+              <th>
+                <p>Coût HT</p>
+              </th>
+              <th>
+                <p>Coût TVA </p>
+              </th>
+              <th>
+                <p>Coût TTC </p>
+              </th>
+              <th>
+                <p>État de la demande</p>
+              </th>
+              <th>
+                <p class="Action">Action</p>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expense of expensesOfCollab">
+              <td>{{expense.dateRequest | date: 'dd/MM/yyyy'}}</td>
+              <td>{{expense.dateExpense | date: 'dd/MM/yyyy' }}</td>
+              <td>{{expense.costHT}} €</td>
+              <td>{{expense.costTVA}} €</td>
+              <td>{{expense.costTTC}} €</td>
+              <td>{{expense.status}}</td>
+              <td><button class="btnEditer" (click)="deleteExpenseById(expense.id)">Supprimer</button></td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+
+
+
+    </div>
