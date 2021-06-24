@@ -122,7 +122,7 @@ export class MissionComponent implements OnInit {
             }
 
 
-          }else {
+          } else {
             this.missions = [];
             this.nbResultat = 0
           }
@@ -179,7 +179,7 @@ export class MissionComponent implements OnInit {
               this.finMission.push("finMission-" + i);
             }
 
-          }else {
+          } else {
             this.missions = [];
             this.nbResultat = 0
           }
@@ -239,7 +239,7 @@ export class MissionComponent implements OnInit {
             }
 
 
-          }else {
+          } else {
             this.missions = [];
             this.nbResultat = 0
           }
@@ -299,19 +299,19 @@ export class MissionComponent implements OnInit {
               this.finMission.push("finMission-" + i);
             }
 
-          }else {
+          } else {
             this.missions = [];
             this.nbResultat = 0
           }
 
           this.nbResultat = this.missions.length;
-          
+
         },
         error => console.log("exception" + error)
       )
     } else {
 
-      this.missions =[];
+      this.missions = [];
       this.nbResultat = 0;
       this.missionId = [];
       this.clientNameMission = [];
@@ -336,7 +336,7 @@ export class MissionComponent implements OnInit {
   newStartDate!: string;
   newEndDate!: string;
 
-  missionIsUpdated!:string;
+  missionIsUpdated!: string;
   missionNotUpdated!: string;
 
   updateMission(indexOfElement: number) {
@@ -401,18 +401,19 @@ export class MissionComponent implements OnInit {
 
 
 
-  deleteTheProject(idProject: number, project:Project,AllProject: Project[]) {
+  deleteTheProject(idProject: number, project: Project, AllProject: Project[]) {
 
 
     this._ProjectService.deleteProjectById(idProject).subscribe(
-      data => {console.log("delete effectué");
-    
-      const index = AllProject.indexOf(project);
-      if (index > -1) {
-        AllProject.splice(index, 1);
-      }
-    
-    },
+      data => {
+        console.log("delete effectué");
+
+        const index = AllProject.indexOf(project);
+        if (index > -1) {
+          AllProject.splice(index, 1);
+        }
+
+      },
       error => console.log("delete non effectué")
     )
 
@@ -471,15 +472,18 @@ export class MissionComponent implements OnInit {
         this.projectToUpdate = data;
         this.projectToUpdate.projectTitle = (<HTMLInputElement>document.getElementById(this.projectToUpdateName[indexOfElement])).value;
         this._ProjectService.addAndUpdateProject2(this.projectToUpdate).subscribe(
-          data => {console.log("maj reussie")
-          this.projectIsUpdated="Le(s) projet(s) ont bien été mis à jour.";
-          this.projectNoUpdated = "";
-          ;},
-          error =>{ console.log("maj echoué");
-          this.projectIsUpdated="";
-          this.projectNoUpdated = "Les projets n'ont pas été mis à jour.";
+          data => {
+            console.log("maj reussie")
+            this.projectIsUpdated = "Le(s) projet(s) ont bien été mis à jour.";
+            this.projectNoUpdated = "";
+            ;
+          },
+          error => {
+            console.log("maj echoué");
+            this.projectIsUpdated = "";
+            this.projectNoUpdated = "Les projets n'ont pas été mis à jour.";
 
-        },
+          },
         )
 
       },
