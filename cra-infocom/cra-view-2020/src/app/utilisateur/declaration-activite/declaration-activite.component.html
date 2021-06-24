@@ -175,7 +175,7 @@
 
           <tr>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedProjectAstreint1" (change)="updateAfterSelectAstreinte1()">
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]="selectedProjectAstreint1" (change)="onChangeProjectAstreinte1()">
                 <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
               </select>
             </td>
@@ -202,7 +202,7 @@
             <!-- ASTREINTE 2 -->
           <tr>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]= "selectedProjectAstreint2" (change)="updateAfterSelectAstreinte2()">
+              <select type="number" class="form-input" aria-label="Default select example"  [(ngModel)]= "selectedProjectAstreint2" (change)="onChangeProjectAstreinte2()">
                 <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
               </select>
             </td>
@@ -230,7 +230,7 @@
 
           <tr>
             <td>
-              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedProjectAstreint3" (change)="updateAfterSelectAstreinte3()">
+              <select type="number" class="form-input" aria-label="Default select example" [(ngModel)]="selectedProjectAstreint3" (change)="onChangeProjectAstreinte3()">
                 <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}</option> 
               </select>
             </td>
