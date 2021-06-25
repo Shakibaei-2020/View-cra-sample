@@ -38,7 +38,7 @@
   </select>
 
   <!-- ACTIVITE 1-->
-  <table>
+  <table id="pdfTable" #pdfTable>
     <thead>
       <tr>
         <th class="enTete">Projets </th>
@@ -282,6 +282,18 @@
   <button class="send">Aide</button>
   <button class="send" (click)="retour()">Retour</button>
 </div>
+
+
+
+
+<button class="send" (click)="generatePdf()">download</button>
+
+
+
+
+
+
+
 <br><br><br><br>
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Activity } from 'src/app/z-model/Activity/activity';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
@@ -20,6 +20,12 @@ import { Expense } from 'src/app/z-model/Expense/expense';
 import { ExpenseService } from 'src/app/y-service/Expense/expense.service';
 import { TypeExpenseService } from 'src/app/y-service/Expense/type-expense.service';
 import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
+
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import { table } from 'node:console';
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
   selector: 'app-declaration-activite',
@@ -1213,7 +1219,7 @@ export class DeclarationActiviteComponent implements OnInit {
 
   historique() {
 
- 
+
 
     this.thisMonth = this.toDay.getMonth() + 1;
     this.thisyear = this.toDay.getFullYear();
@@ -1222,7 +1228,7 @@ export class DeclarationActiviteComponent implements OnInit {
     this.allActivityToEdit = [];
 
     if (((this.monthSelected == (this.thisMonth - 1)) || (this.monthSelected == this.thisMonth)) && (this.yearInput == this.thisyear)) {
-  
+
       this._ActivityService.activityGroupByProject(this.monthSelected, this.yearInput, 2).subscribe(
         data => {
           this.allActivityToEdit = data;
@@ -1286,7 +1292,7 @@ export class DeclarationActiviteComponent implements OnInit {
         },
         error => console.log("exception" + error)
       )
-      
+
 
       /** ACTIVITY OLDER THAN 1 MONTH */
     } else if ((this.monthSelected < (this.thisMonth - 1)) && (this.yearInput <= this.thisyear)) {
@@ -1509,8 +1515,58 @@ export class DeclarationActiviteComponent implements OnInit {
   retour() {
     this._route.navigate(['/utilisateur']);
   }
+  name = 'Angular';
+
+
+
+  generatePdf() {
+
+    console.log(this.tabJours.length);
+    var rows = [];
+    var tableOfindex = [];
+
+    for (var i = 0; i < this.tabJours.length; i++) {
+      tableOfindex.push([this.tabJours[i]]);
+    }
+    rows.push(tableOfindex)
+
+
+    for (var i of [1, 2, 3, 4]) {
+      rows.push(tableOfindex)
+    }
+
+
+    var dd = {
+
+      pageSize: { width: 1250.4, height: 600.9 },
+
+      content: [
+
+
+        'First paragraph',
+
+        'table:', {
+          table: {
+            widths: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',],
+            body: rows,
+          }
+        }
+
+
+      ]
+    }
+
+
+    const documentDefinition = {
+
+
+
+
+    };
+    pdfMake.createPdf(dd).download();
+  }
+
 
 }
-
 
 
