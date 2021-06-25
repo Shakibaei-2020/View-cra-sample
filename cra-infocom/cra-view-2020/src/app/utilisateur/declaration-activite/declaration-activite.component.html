@@ -9,7 +9,7 @@
 
     <h2> Déclaration d'activité </h2>
   </div>
-  <select class="form-input2" [(ngModel)]="monthSelected" (change)="updateMonth()">
+  <select class="form-input2" [(ngModel)]="monthSelected"  (change)="historique()">
     <option value="1">Janvier</option>
     <option value="2">Février</option>
     <option value="3">Mars</option>
@@ -25,7 +25,7 @@
     <option value="12">Décembre</option>
   -->
   </select>
-  <select class="form-input3" value="2021" [(ngModel)]="yearInput" name="yearInput">
+  <select class="form-input3" value="2021" [(ngModel)]="yearInput" name="yearInput"  (change)="historique()">
     <option value="2021">2021</option>
 
     <option value="2022">2022</option>
@@ -69,7 +69,7 @@
             [checked]="isRemote" value="{{isRemote}}">
         </td>
         <td>
-          <input class="inputDay twolast" type="" value={{totalProjet1}} id="totalProjet1" [disabled]="false" required
+          <input class="inputDay twolast" type="number" value={{totalProjet1}} id="totalProjet1" [disabled]="false" required
             [(ngModel)]="totalProjet1" name="totalProjet1">
         </td>
       </tr>
@@ -96,7 +96,7 @@
             [checked]="isRemote2" value="{{isRemote2}}">
         </td>
         <td>
-          <input class="inputDay twolast" type="" value={{totalProjet2}} id="totalProjet2" required
+          <input class="inputDay twolast" type="number" value={{totalProjet2}} id="totalProjet2" required
             [(ngModel)]="totalProjet2" name="totalProjet2">
         </td>
       </tr>
@@ -122,7 +122,7 @@
             [checked]="isRemote3" value="{{isRemote3}}">
         </td>
         <td>
-          <input class="inputDay twolast" type="" value={{totalProjet3}} id="totalProjet3" required
+          <input class="inputDay twolast" type="number" value={{totalProjet3}} id="totalProjet3" required
             [(ngModel)]="totalProjet3" name="totalProjet3">
         </td>
       </tr>
@@ -148,7 +148,7 @@
             [checked]="isRemote4" value="{{isRemote4}}">
         </td>
         <td>
-          <input class="inputDay twolast" type="" value={{totalProjet4}} id="totalProjet4" required
+          <input class="inputDay twolast" type="number" value={{totalProjet4}} id="totalProjet4" required
             [(ngModel)]="totalProjet4" name="totalProjet4">
         </td>
       </tr>
@@ -158,7 +158,7 @@
   </table>
   <br>
 
-  <span>Total de jours travaillés :</span> <input class="inputDay2" type="" value={{totalActivity}} required
+  <span>Total de jours travaillés :</span> <input class="inputDay2" type="number" value={{totalActivity}} required
     [(ngModel)]="totalActivity" name="totalActivity">
 
   <br> <br> <br>

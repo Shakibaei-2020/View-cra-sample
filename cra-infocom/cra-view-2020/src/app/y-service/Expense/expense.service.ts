@@ -64,4 +64,16 @@ export class ExpenseService {
     return this._http.get<Expense[]>("http://localhost:7672/expenses/lister");
   }
 
+
+  
+  /** FOR expense */
+  checkExpenseExist(month:number, year: number,idColl: number): Observable<boolean> {
+    return this._http.get<boolean>("http://localhost:7672/expenses/checkExpenseExist/" +month + "/"+ year + "/" + idColl );
+}
+
+expenseToUpdate(month:number, year: number,idColl: number): Observable<Expense> {
+  return this._http.get<Expense>("http://localhost:7672/expenses/expenseToUpdate/" +month + "/"+ year + "/" + idColl );
+}
+
+
 }
