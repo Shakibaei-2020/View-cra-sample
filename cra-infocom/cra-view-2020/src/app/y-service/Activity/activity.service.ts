@@ -50,6 +50,7 @@ export class ActivityService {
     return this._http.get<Activity[]>("http://localhost:8800/activity/astreinteGroupByProject/" + month + "/" + year + "/" + idColl);
   }
 
+  
 
   /** FOR ACTIVITY */
   searchTheActivityOfCollaboratorOfProject(month:number, year: number,idColl: number,idProject:number): Observable<Activity[]> {
@@ -64,7 +65,13 @@ export class ActivityService {
 
   /** FOR ACTIVITY */
   checkActivityEmpty(month:number, year: number,idColl: number,idProject:number): Observable<boolean> {
-    return this._http.get<boolean>("http://localhost:8800/activity/checkActivity1Empty/" +month + "/"+ year + "/" + idColl + "/" +idProject);
+    return this._http.get<boolean>("http://localhost:8800/activity/checkActivityEmpty/" +month + "/"+ year + "/" + idColl + "/" +idProject);
+}
+
+
+  /** FOR ACTIVITY */
+  checkAstreinteEmpty(month:number, year: number,idColl: number,idProject:number): Observable<boolean> {
+    return this._http.get<boolean>("http://localhost:8800/activity/checkAstreinteEmpty/" +month + "/"+ year + "/" + idColl + "/" +idProject);
 }
 
 

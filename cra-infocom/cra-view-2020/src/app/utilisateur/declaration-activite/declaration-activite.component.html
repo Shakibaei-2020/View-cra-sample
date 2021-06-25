@@ -83,8 +83,7 @@
             </option>
           </select>
         </td>
-        <!-- <td><input class="form-input choice"value="{{refinterne2}}"></td>
-        <td><input class="form-input choice" value="{{refClient2}}"></td> -->
+
         <td>
           <button class="btnRemplirActivity" (click)="remplirProjet2()">Remplir</button>
           <button class="btnRemplirActivity" (click)="remplirRemoteP2()">TAD</button>
@@ -111,8 +110,6 @@
             </option>
           </select>
         </td>
-        <!-- <td><input class="form-input choice" value="{{refinterne3}}"></td>
-        <td><input class="form-input choice" value="{{refClient3}}"></td> -->
         <td>
           <button class="btnRemplirActivity" (click)="remplirProjet3()">Remplir</button>
           <button class="btnRemplirActivity" (click)="remplirRemoteP3()">TAD</button>
@@ -139,8 +136,6 @@
             </option>
           </select>
         </td>
-        <!-- <td><input class="form-input choice" value="{{refinterne4}}"></td>
-        <td><input class="form-input choice"  value="{{refClient4}}"></td> -->
         <td>
           <button class="btnRemplirActivity" (click)="remplirProjet4()">Remplir</button>
           <button class="btnRemplirActivity" (click)="remplirRemoteP4()">TAD</button>
@@ -187,7 +182,7 @@
 
       <tr>
         <td>
-          <select type="number" class="form-input" [(ngModel)]="selectedProjectAstreint1">
+          <select type="number" class="form-input" [(ngModel)]="selectedProjectAstreint1" (change)="onChangeSelectprojectAstreinte1()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}
             </option>
           </select>
@@ -219,7 +214,7 @@
       <!-- ASTREINTE 2 -->
       <tr>
         <td>
-          <select type="number" class="form-input" [(ngModel)]="selectedProjectAstreint2">
+          <select type="number" class="form-input" [(ngModel)]="selectedProjectAstreint2"  (change)="onChangeSelectprojectAstreinte2()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}
             </option>
           </select>
@@ -250,7 +245,7 @@
 
       <tr>
         <td>
-          <select type="number" class="form-input" [(ngModel)]="selectedProjectAstreint3">
+          <select type="number" class="form-input" [(ngModel)]="selectedProjectAstreint3"  (change)="onChangeSelectprojectAstreinte3()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}
             </option>
           </select>
@@ -283,7 +278,6 @@
 
 <div class="register">
   <button class="send" (click)="EnregisterEtEnvoyer()">Enregister & Envoyer</button>
-  <button class="send" (click)="MajEtEnvoyer()">Mise à jour</button>
   <button class="send">Imprimer</button>
   <button class="send">Aide</button>
   <button class="send" (click)="retour()">Retour</button>
@@ -291,4 +285,3 @@
 <br><br><br><br>
 
 
-<button (click)="getActivity1Size()">test</button>
