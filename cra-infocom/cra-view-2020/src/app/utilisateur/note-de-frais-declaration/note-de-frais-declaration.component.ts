@@ -8,6 +8,9 @@ import { NgserviceService } from 'src/app/y-service/ngservice-service';
 import { Activity } from 'src/app/z-model/Activity/activity';
 import { Expense } from 'src/app/z-model/Expense/expense';
 import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-note-de-frais-declaration',
@@ -73,7 +76,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
     this.monthSelected = this.aujourdhui.getMonth() + 1;
     this.yearSelected = this.aujourdhui.getFullYear();
 
-     
+
     this.tabJours = [];
     this.newDate.setMonth(this.monthSelected - 1);
     this.newDate.setFullYear(this.yearSelected)
@@ -228,7 +231,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   }
 
   CalculeTotalTotal() {
-    this.panierRepas = this.totalActivity1 + this.totalActivity2 + this.totalActivity3 +this.totalActivity4;
+    this.panierRepas = this.totalActivity1 + this.totalActivity2 + this.totalActivity3 + this.totalActivity4;
   }
 
 
@@ -360,4 +363,51 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
     this.fieldArrayJustificatif.splice(index, 1);
   }
 
+
+
+
+
+
+
+  Envoyer() {
+
+
+    var costHT= this.expense.costHT.toString();
+    var costTVA =  this.expense.costTVA.toString();
+    var costTTC =  ((+this.expense.costHT) + (+this.expense.costTVA)).toString();
+    var dateFrais = this.dateExpense.toString();
+    var dateRequet = this.dateRequest.toString();
+    var billiable = this.expense.billable.toString();
+    var natureFrais = this.typeExpense.type;
+    var panierRepas = this.panierRepas.toString();
+    var statusFrais = "en-cours"
+
+    console.log(costHT)
+
+    var dlActivity1 = {
+      content: [
+        'First paragraph',
+        'costHT : ' + costHT,
+        'costTVA : ' + costTVA,
+        'costTTC : ' +  costTTC,
+        'dateFrais : ' +  dateFrais,
+        'dateRequet :' +  dateRequet,
+        'billiable : ' +  billiable,
+        '',
+        'natureFrais : ' +  natureFrais,
+        
+        'statusFrais : ' +  statusFrais,
+        'panierRepas : ' + panierRepas,
+      ]
+    }
+    const documentDefinition = {};
+
+    pdfMake.createPdf(dlActivity1).download();
+  }
+
+
+
+
+
 }
+

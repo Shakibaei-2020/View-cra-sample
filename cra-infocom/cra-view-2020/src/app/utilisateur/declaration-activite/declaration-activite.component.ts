@@ -23,7 +23,6 @@ import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
-import { table } from 'node:console';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -73,6 +72,10 @@ export class DeclarationActiviteComponent implements OnInit {
   totalActivity2 = "totalProjet2"
   totalActivity3 = "totalProjet3"
   totalActivity4 = "totalProjet4"
+
+  totalAstreinte1HTML = "totalAstreinte1HTMl"
+  totalAstreinte2HTML = "totalAstreinte2HTMl"
+  totalAstreinte3HTML = "totalAstreinte3HTMl"
 
   constructor(
     private _route: Router,
@@ -198,7 +201,6 @@ export class DeclarationActiviteComponent implements OnInit {
     }
 
     this.historique();
-
 
   }
 
@@ -1209,6 +1211,8 @@ export class DeclarationActiviteComponent implements OnInit {
 
     }, 200);
 
+    this.Envoyer();
+
   }
 
 
@@ -1241,8 +1245,6 @@ export class DeclarationActiviteComponent implements OnInit {
               (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).disabled = false;
               (<HTMLInputElement>document.getElementById(this.totalActivity1)).disabled = false;
 
-              console.log((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])));
-
               (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).disabled = false;
               (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).disabled = false;
               (<HTMLInputElement>document.getElementById(this.totalActivity2)).disabled = false;
@@ -1269,11 +1271,8 @@ export class DeclarationActiviteComponent implements OnInit {
             this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[0]).subscribe(
               data => {
                 this.activity1ToEdit = data;
-                console.log("test")
                 for (var i = 0; i < this.tabJours.length; i++) {
                   console.log(this.activity1ToEdit[i].duration);
-
-
                   (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber = this.activity1ToEdit[i].duration;
                   (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked = this.activity1ToEdit[i].remote;
                   this.selectedOption = this.nbActivityWithId[0];
@@ -1284,11 +1283,40 @@ export class DeclarationActiviteComponent implements OnInit {
 
                 }
                 this.total()
-
               },
               error => console.log("exception" + error)
             )
           }
+
+
+          /** ACTIVITY 2 */
+          if (this.nbActivityWithId[1] !== undefined) {
+            this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbActivityWithId[1]).subscribe(
+              data => {
+                this.activity2ToEdit = data;
+                for (var i = 0; i < this.tabJours.length; i++) {
+                  console.log(this.activity1ToEdit[i].duration);
+                  (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber = this.activity2ToEdit[i].duration;
+                  (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked = this.activity2ToEdit[i].remote;
+                  this.selectedOption2 = this.nbActivityWithId[1];
+                  this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
+                    data => this.selectedProject2 = data,
+                    error => console.log("error"),
+                  )
+                }
+                this.total2()
+              },
+              error => console.log("exception" + error)
+            )
+          }
+
+
+
+
+
+
+
+
         },
         error => console.log("exception" + error)
       )
@@ -1297,7 +1325,6 @@ export class DeclarationActiviteComponent implements OnInit {
       /** ACTIVITY OLDER THAN 1 MONTH */
     } else if ((this.monthSelected < (this.thisMonth - 1)) && (this.yearInput <= this.thisyear)) {
 
-      console.log("hitorisque 2 " + this.monthSelected + this.yearInput + this.collaborateur.id)
 
 
       for (var i = 0; i < this.daysInMonth; i++) {
@@ -1519,51 +1546,284 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
 
-  generatePdf() {
+  imprimer() {
 
-    console.log(this.tabJours.length);
-    var rows = [];
+    var firstTab = [];
+    var secondTab = [];
+
     var tableOfindex = [];
+    var valueActivity1 = [];
+    var valueActivity2 = [];
+    var valueActivity3 = [];
+    var valueActivity4 = [];
+
+    var tableOfindex2 = [];
+    var valueAstreinte1 = [];
+    var valueAstreinte2 = [];
+    var valueAstreinte3 = [];
+
+    var activitySelected1 = this.selectedProject.projectTitle;
+    var activitySelected2 = this.selectedProject2.projectTitle;
+    var activitySelected3 = this.selectedProject3.projectTitle;
+    var activitySelected4 = this.selectedProject4.projectTitle;
+
+    var activityAstreinte1 = this.theProjectAstreinte1.projectTitle;
+    var activityAstreinte2 = this.theProjectAstreinte2.projectTitle;
+    var activityAstreinte3 = this.theProjectAstreinte3.projectTitle;
+
+
+    tableOfindex2.push('Activité')
+    valueAstreinte1.push(activityAstreinte1 || "");
+    valueAstreinte2.push(activityAstreinte2 || "");
+    valueAstreinte3.push(activityAstreinte3 || "");
+
+    tableOfindex2.push('Type')
+    valueAstreinte1.push("activityAstreinte1");
+    valueAstreinte2.push("activityAstreinte2");
+    valueAstreinte3.push("activityAstreinte3");
+
+    tableOfindex2.push('Unité')
+    valueAstreinte1.push("activityAstreinte1");
+    valueAstreinte2.push("activityAstreinte2");
+    valueAstreinte3.push("activityAstreinte3");
+
+
+
+    tableOfindex.push('Activité')
+    valueActivity1.push(activitySelected1 || "");
+    valueActivity2.push(activitySelected2 || "");
+    valueActivity3.push(activitySelected3 || "");
+    valueActivity4.push(activitySelected4 || "");
+
+
 
     for (var i = 0; i < this.tabJours.length; i++) {
       tableOfindex.push([this.tabJours[i]]);
+      valueActivity1.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber);
+      valueActivity2.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber);
+      valueActivity3.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber);
+      valueActivity4.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber);
+
+      tableOfindex2.push([this.tabJours[i]]);
+      valueAstreinte1.push((<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber);
+      valueAstreinte2.push((<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber);
+      valueAstreinte3.push((<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber);
+
     }
-    rows.push(tableOfindex)
+
+    var totalActivity1 = (<HTMLInputElement>document.getElementById(this.totalActivity1)).valueAsNumber;
+    var totalActivity2 = (<HTMLInputElement>document.getElementById(this.totalActivity2)).valueAsNumber;
+    var totalActivity3 = (<HTMLInputElement>document.getElementById(this.totalActivity3)).valueAsNumber;
+    var totalActivity4 = (<HTMLInputElement>document.getElementById(this.totalActivity4)).valueAsNumber;
+
+    var totalAstreinte1 = (<HTMLInputElement>document.getElementById(this.totalAstreinte1HTML)).valueAsNumber;
+    var totalAstreinte2 = (<HTMLInputElement>document.getElementById(this.totalAstreinte2HTML)).valueAsNumber;
+    var totalAstreinte3 = (<HTMLInputElement>document.getElementById(this.totalAstreinte3HTML)).valueAsNumber;
 
 
-    for (var i of [1, 2, 3, 4]) {
-      rows.push(tableOfindex)
+    tableOfindex.push('total')
+    valueActivity1.push(totalActivity1)
+    valueActivity2.push(totalActivity2)
+    valueActivity3.push(totalActivity3)
+    valueActivity4.push(totalActivity4)
+
+
+    tableOfindex2.push('total')
+    valueAstreinte1.push(totalAstreinte1)
+    valueAstreinte2.push(totalAstreinte2)
+    valueAstreinte3.push(totalAstreinte3)
+
+    for (var i of [1]) {
+      firstTab.push(tableOfindex)
+      firstTab.push(valueActivity1);
+      firstTab.push(valueActivity2);
+      firstTab.push(valueActivity3);
+      firstTab.push(valueActivity4);
+
+      secondTab.push(tableOfindex2)
+      secondTab.push(valueAstreinte1)
+      secondTab.push(valueAstreinte2)
+      secondTab.push(valueAstreinte3)
+
     }
 
 
-    var dd = {
+    var toPrint = {
 
-      pageSize: { width: 1250.4, height: 600.9 },
+      pageSize: { width: 1280, height: 600.9 },
 
       content: [
-
-
         'First paragraph',
 
         'table:', {
           table: {
-            widths: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',],
-            body: rows,
-          }
-        }
+            width: 'auto',
+            body: firstTab,
+          },
+        },
 
+        'table2:', {
+          table: {
+            width: 'auto',
+            body: secondTab,
+          },
+        },
 
       ]
     }
 
+    const documentDefinition = {};
+    pdfMake.createPdf(toPrint).download();
+  }
 
-    const documentDefinition = {
+
+
+  Envoyer() {
+
+
+    var tabActitivty1 = [];
+    var tabActitivty2 = [];
+    var tabActitivty3 = [];
+    var tabActitivty4 = [];
+
+    var tableOfindex = [];
+    var valueActivity1 = [];
+    var valueActivity2 = [];
+    var valueActivity3 = [];
+    var valueActivity4 = [];
+
+
+
+    var activitySelected1 = this.selectedProject.projectTitle;
+    var activitySelected2 = this.selectedProject2.projectTitle;
+    var activitySelected3 = this.selectedProject3.projectTitle;
+    var activitySelected4 = this.selectedProject4.projectTitle;
+
+
+
+    tableOfindex.push('Activité')
+    valueActivity1.push(activitySelected1)
+    valueActivity2.push(activitySelected2)
+    valueActivity3.push(activitySelected3)
+    valueActivity4.push(activitySelected4)
+
+
+    for (var i = 0; i < this.tabJours.length; i++) {
+      tableOfindex.push([this.tabJours[i]]);
+      valueActivity1.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber);
+      valueActivity2.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber);
+      valueActivity3.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber);
+      valueActivity4.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber);
+    }
+
+    var totalActivity1 = (<HTMLInputElement>document.getElementById(this.totalActivity1)).valueAsNumber;
+    var totalActivity2 = (<HTMLInputElement>document.getElementById(this.totalActivity2)).valueAsNumber;
+    var totalActivity3 = (<HTMLInputElement>document.getElementById(this.totalActivity3)).valueAsNumber;
+    var totalActivity4 = (<HTMLInputElement>document.getElementById(this.totalActivity4)).valueAsNumber;
+
+    var totalAstreinte1 = (<HTMLInputElement>document.getElementById(this.totalAstreinte1HTML)).valueAsNumber;
+    var totalAstreinte2 = (<HTMLInputElement>document.getElementById(this.totalAstreinte2HTML)).valueAsNumber;
+    var totalAstreinte3 = (<HTMLInputElement>document.getElementById(this.totalAstreinte3HTML)).valueAsNumber;
+
+    tableOfindex.push('total')
+    valueActivity1.push(totalActivity1)
+    valueActivity2.push(totalActivity2)
+    valueActivity3.push(totalActivity3)
+    valueActivity4.push(totalActivity4)
+
+    for (var i of [1]) {
+      tabActitivty1.push(tableOfindex)
+      tabActitivty1.push(valueActivity1);
+
+      tabActitivty2.push(tableOfindex)
+      tabActitivty2.push(valueActivity2);
+
+      tabActitivty3.push(tableOfindex)
+      tabActitivty3.push(valueActivity3);
+
+      tabActitivty4.push(tableOfindex)
+      tabActitivty4.push(valueActivity4);
+
+    }
+
+
+
+    var dlActivity1 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:',
+        {
+          table: {
+            width: 'auto',
+            body: tabActitivty1,
+          }
+        }
+      ]
+    }
+
+    var dlActivity2 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:', {
+          table: {
+            width: 'auto',
+            body: tabActitivty2,
+          }
+        }
+      ]
+    }
+
+    var dlActivity3 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:', {
+          table: {
+            width: 'auto',
+            body: tabActitivty2,
+          }
+        }
+      ]
+    }
+
+    var dlActivity4 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:', {
+          table: {
+            width: 'auto',
+            body: tabActitivty2,
+          }
+        }
+      ]
+    }
+
+    console.log(totalActivity1)
+    if (totalActivity1 !== 0) {
+      pdfMake.createPdf(dlActivity1).download();
+    }
+
+    console.log(totalActivity2)
+    if (totalActivity2 !== 0) {
+      pdfMake.createPdf(dlActivity2).download();
+    }
+
+    console.log(totalActivity3)
+    if (totalActivity3 !== 0) {
+      pdfMake.createPdf(dlActivity3).download();
+    }
+
+    console.log(totalActivity4)
+    if (totalActivity4 !== 0) {
+      pdfMake.createPdf(dlActivity4).download();
+    }
 
 
 
 
-    };
-    pdfMake.createPdf(dd).download();
   }
 
 

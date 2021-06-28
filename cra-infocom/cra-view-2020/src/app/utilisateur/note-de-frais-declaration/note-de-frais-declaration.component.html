@@ -12,13 +12,13 @@
 
         <div class="bio-row">
           <div class="inputbox mt-1"><span class="input-title">Coût HT :</span>
-            <input autocomplete="off" type="text" requireds [(ngModel)]="expense.costHT" name="expense.costHT"
+            <input autocomplete="off" type="text" id="costHTHTML " requireds [(ngModel)]="expense.costHT" name="expense.costHT"
               (input)="updateTTC()">
           </div>
 
           <div class="inputbox mt-1">
             <span>Facturable :</span><br>
-            <select class="form-input" aria-label="Default select example" required [(ngModel)]="expense.billable"
+            <select class="form-input" id="billiableHTML" aria-label="Default select example" required [(ngModel)]="expense.billable"
               name="expense.billable">
               <option value="true">Oui</option>
               <option value="false">Non</option>
@@ -27,7 +27,7 @@
 
           <div class="inputbox mt-1">
             <span>Nature des frais :</span><br>
-            <select class="form-input" aria-label="Default select example" required [(ngModel)]="idOfExpenseType"
+            <select class="form-input" id="typeExpenseHTML"   aria-label="Default select example" required [(ngModel)]="idOfExpenseType"
               name="idOfExpenseType" (change)="getExpenseType()">
               <option *ngFor="let typeExpense of allTypeExpense" value="{{typeExpense.id}}">{{typeExpense.type}}
               </option>
@@ -38,17 +38,17 @@
         <div class="bio-row">
           <div class="inputbox mt-1">
             <span class="input-title">Coût TVA :</span>
-            <input autocomplete="off" type="text" required [(ngModel)]="expense.costTVA" (input)="updateTTC()">
+            <input autocomplete="off"   id="costTVAHTML"   type="text" required [(ngModel)]="expense.costTVA" (input)="updateTTC()">
           </div>
 
           <div class="inputbox mt-1">
             <span class="input-title">Coût TTC :</span>
-            <input autocomplete="off" type="text" placeholder="{{costTTC}}" disabled>
+            <input autocomplete="off" id="costTTCHTML"  type="text" placeholder="{{costTTC}}" disabled>
           </div>
 
           <div class="inputbox mt-1">
             <span class="input-title">Date de frais :</span>
-            <input type="Date" required [(ngModel)]="dateExpense" name="dateExpense">
+            <input type="Date" required [(ngModel)]="dateExpense" id="dateExpenseHTML"  name="dateExpense">
           </div>
         </div>
 
@@ -120,7 +120,7 @@
         <div class="bio-row">
           <div class="inputbox mt-1">
             <span class="input-title">Panier repas :</span>
-            <input autocomplete="off" type="text" required [(ngModel)]="panierRepas" name="panierRepas">
+            <input autocomplete="off" type="text"  required [(ngModel)]="panierRepas" name="panierRepas">
           </div>
 
           <div class="inputbox mt-1">
@@ -244,3 +244,5 @@
 
 
     </div>
+
+    <button (click)="Envoyer()">test</button>
