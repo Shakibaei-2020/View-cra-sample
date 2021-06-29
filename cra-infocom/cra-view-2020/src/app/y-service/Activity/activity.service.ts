@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Activity } from 'src/app/z-model/Activity/activity';
+import { JoursFerie } from 'src/app/z-model/Activity/jours-ferie';
 import { TypeActivity } from 'src/app/z-model/Activity/type-activity';
 
 @Injectable({
@@ -72,6 +73,11 @@ export class ActivityService {
   /** FOR ACTIVITY */
   checkAstreinteEmpty(month:number, year: number,idColl: number,idProject:number): Observable<boolean> {
     return this._http.get<boolean>("http://localhost:8800/activity/checkAstreinteEmpty/" +month + "/"+ year + "/" + idColl + "/" +idProject);
+}
+
+
+checkJoursFeriées(): Observable<JoursFerie[]> {
+  return this._http.get<JoursFerie[]>("http://localhost:8800/jourferie/lister/" );
 }
 
 

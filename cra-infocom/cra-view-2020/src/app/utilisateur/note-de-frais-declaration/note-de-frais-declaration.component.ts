@@ -10,6 +10,8 @@ import { Expense } from 'src/app/z-model/Expense/expense';
 import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator.service';
+import { FeedBack } from 'src/app/z-model/feed-back';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -34,6 +36,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
     private _ExpenseService: ExpenseService,
     private _TypeExpenseService: TypeExpenseService,
     private _ActivityService: ActivityService,
+    private _CollaboratorService: CollaboratorService,
 
 
   ) { }
@@ -367,14 +370,14 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
 
 
 
-
+file = new Blob;
 
   Envoyer() {
 
 
-    var costHT= this.expense.costHT.toString();
-    var costTVA =  this.expense.costTVA.toString();
-    var costTTC =  ((+this.expense.costHT) + (+this.expense.costTVA)).toString();
+    var costHT = this.expense.costHT.toString();
+    var costTVA = this.expense.costTVA.toString();
+    var costTTC = ((+this.expense.costHT) + (+this.expense.costTVA)).toString();
     var dateFrais = this.dateExpense.toString();
     var dateRequet = this.dateRequest.toString();
     var billiable = this.expense.billable.toString();
@@ -389,23 +392,37 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
         'First paragraph',
         'costHT : ' + costHT,
         'costTVA : ' + costTVA,
-        'costTTC : ' +  costTTC,
-        'dateFrais : ' +  dateFrais,
-        'dateRequet :' +  dateRequet,
-        'billiable : ' +  billiable,
+        'costTTC : ' + costTTC,
+        'dateFrais : ' + dateFrais,
+        'dateRequet :' + dateRequet,
+        'billiable : ' + billiable,
         '',
-        'natureFrais : ' +  natureFrais,
-        
-        'statusFrais : ' +  statusFrais,
+        'natureFrais : ' + natureFrais,
+
+        'statusFrais : ' + statusFrais,
         'panierRepas : ' + panierRepas,
       ]
     }
     const documentDefinition = {};
 
-    pdfMake.createPdf(dlActivity1).download();
+   pdfMake.createPdf(dlActivity1).getBlob;
   }
 
 
+
+
+  feedBack = new FeedBack;
+
+  EnvoyerMail() {
+
+    this.feedBack.email="mohashakibaei@outlook.fr";
+    this.feedBack.name="Mohammad";
+    this.feedBack.feedback="salut ca va ?";
+    
+    this._CollaboratorService.sendMessage(this.feedBack).subscribe()
+
+
+  }
 
 
 

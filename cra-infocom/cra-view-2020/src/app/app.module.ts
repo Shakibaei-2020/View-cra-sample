@@ -68,7 +68,7 @@ registerLocaleData(localeFr, 'fr');
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule    
+    FormsModule,
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent],

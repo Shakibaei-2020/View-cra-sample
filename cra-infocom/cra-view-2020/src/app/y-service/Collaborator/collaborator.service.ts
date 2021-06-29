@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
+import { FeedBack } from 'src/app/z-model/feed-back';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,15 @@ export class CollaboratorService {
     selectCollabByProjectId(id: number): Observable<any> {
     return this._http.get<any>("http://localhost:8900/collaborateurs/collabsByProjectId/" + id);
   }
+
+ 
+  sendMessage(feedBack: FeedBack): Observable<FeedBack> {
+    return this._http.post<FeedBack>("http://localhost:8900/collaborateurs/sendMessage/" ,feedBack);
+  }
+
+  sendMessageWithAttachment(to:string,subject:string,body:string,file:File): Observable<FeedBack> {
+    return this._http.get<FeedBack>("http://localhost:8900/collaborateurs/sendMailWithAttachment/" + to + "/" + subject + "/" + body + "/" + file);
+  }
+
 
 }

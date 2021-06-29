@@ -23,6 +23,7 @@ import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import { JoursFerie } from 'src/app/z-model/Activity/jours-ferie';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -199,9 +200,8 @@ export class DeclarationActiviteComponent implements OnInit {
       this.astreintePerDay3.push("jourAstreinte3-" + i);
       this.astreintePerDay4.push("jourAstreinte4-" + i);
     }
-
     this.historique();
-
+ 
   }
 
   nbTypeAstreinte = new Array();
@@ -1228,6 +1228,13 @@ export class DeclarationActiviteComponent implements OnInit {
     this.thisMonth = this.toDay.getMonth() + 1;
     this.thisyear = this.toDay.getFullYear();
 
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 200);
+
+  
+
+
     this.nbActivityWithId = [];
     this.allActivityToEdit = [];
 
@@ -1259,6 +1266,9 @@ export class DeclarationActiviteComponent implements OnInit {
               (<HTMLInputElement>document.getElementById(this.totalActivity4)).disabled = false;
 
             }
+            setTimeout(() => {
+              this.disableWeekend();
+            }, 200);
           }
 
           this.nbActivityWithId = [];
@@ -1310,15 +1320,10 @@ export class DeclarationActiviteComponent implements OnInit {
             )
           }
 
-
-
-
-
-
-
-
         },
         error => console.log("exception" + error)
+
+
       )
 
 
@@ -1398,6 +1403,8 @@ export class DeclarationActiviteComponent implements OnInit {
 
 
     }
+
+    
 
   }
 
@@ -1820,11 +1827,84 @@ export class DeclarationActiviteComponent implements OnInit {
     if (totalActivity4 !== 0) {
       pdfMake.createPdf(dlActivity4).download();
     }
+  }
 
+
+
+  joursFerie!: JoursFerie[];
+  LesJoursFerie: Date[] = [];
+
+  disableJoursFerie() {
+    this._ActivityService.checkJoursFeriées().subscribe(
+      data => {
+        this.joursFerie = data;
+        console.log("coucou")
+      },
+      error => console.log("error")
+    )
+    setTimeout(() => {
+
+      console.log(this.LesJoursFerie)
+      for (var t = 0; t < this.joursFerie.length; t++) {
+        this.LesJoursFerie[t] = new Date(this.joursFerie[t].date)
+      }
+      for (var i = 0; i < this.tabJours.length; i++) {
+        for (var j = 0; j < this.LesJoursFerie.length; j++) {
+          if (this.tabJours[i] == this.LesJoursFerie[j].getDate() && this.monthSelected == (this.LesJoursFerie[j].getMonth() + 1) && this.yearInput == this.LesJoursFerie[j].getFullYear()) {
+            console.log(this.LesJoursFerie[j].getDate() + "/" + this.LesJoursFerie[j].getMonth() + "/" + this.LesJoursFerie[j].getFullYear());
+
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay2[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay3[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay4[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+          }
+
+        }
+      }
+    }, 200);
+  }
+
+
+
+  allDaysOfTheMonth: Date[] = [];
+
+  disableWeekend() {
+
+
+    for (var i = 0; i < this.tabJours.length; i++) {
+      this.allDaysOfTheMonth[i] = new Date(this.yearInput, this.monthSelected - 1, this.tabJours[i]);
+      if (this.allDaysOfTheMonth[i].getDay() === 6 || this.allDaysOfTheMonth[i].getDay() === 0) {
+
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = true;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = true;
+
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = true;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = true;
+
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = true;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = true;
+
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = true;
+      }
+    }
 
 
 
   }
+
+
+
+
+
+
 
 
 }
