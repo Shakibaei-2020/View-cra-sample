@@ -50,7 +50,9 @@ export class ActivityService {
   astreinteGroupByProject(month: number,year: number,idColl: number): Observable<Activity[]> {
     return this._http.get<Activity[]>("http://localhost:8800/activity/astreinteGroupByProject/" + month + "/" + year + "/" + idColl);
   }
-
+  astreinteGroupByTypeActivity(month: number,year: number,idColl: number): Observable<Activity[]> {
+    return this._http.get<Activity[]>("http://localhost:8800/activity/astreinteGroupByTypeActivity/" + month + "/" + year + "/" + idColl);
+  }
   
 
   /** FOR ACTIVITY */
@@ -59,8 +61,8 @@ export class ActivityService {
   }
 
   /** FOR ASTREINTE */
-  searchTheAstreinteOfCollaboratorOfProject(month:number, year: number,idColl: number,idProject:number): Observable<Activity[]> {
-    return this._http.get<Activity[]>("http://localhost:8800/activity/searchTheAstreinteOfCollaboratorOfProject/" +month + "/"+ year + "/" + idColl + "/" +idProject);
+  searchTheAstreinteOfCollaboratorOfProject(month:number, year: number,idColl: number,idProject:number,idType:number): Observable<Activity[]> {
+    return this._http.get<Activity[]>("http://localhost:8800/activity/searchTheAstreinteOfCollaboratorOfProject/" +month + "/"+ year + "/" + idColl + "/" +idProject+ "/"+ idType);
 }
 
 
@@ -71,8 +73,8 @@ export class ActivityService {
 
 
   /** FOR ACTIVITY */
-  checkAstreinteEmpty(month:number, year: number,idColl: number,idProject:number): Observable<boolean> {
-    return this._http.get<boolean>("http://localhost:8800/activity/checkAstreinteEmpty/" +month + "/"+ year + "/" + idColl + "/" +idProject);
+  checkAstreinteEmpty(month:number, year: number,idColl: number,idProject:number, idType:number): Observable<boolean> {
+    return this._http.get<boolean>("http://localhost:8800/activity/checkAstreinteEmpty/" +month + "/"+ year + "/" + idColl + "/" +idProject + "/" + idType);
 }
 
 

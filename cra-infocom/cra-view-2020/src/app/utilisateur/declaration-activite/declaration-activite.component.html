@@ -182,14 +182,13 @@
 
       <tr>
         <td>
-          <select type="number" class="form-input" [(ngModel)]="selectedProjectAstreint1" (change)="onChangeSelectprojectAstreinte1()">
+          <select type="number" class="form-input"  id="selectedProjectAstreint1" [(ngModel)]="selectedProjectAstreint1" (change)="onChangeSelectprojectAstreinte1()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}
             </option>
           </select>
         </td>
         <td>
-          <select type="number" class="form-input" [(ngModel)]="selectedTypeUpdateValue1"
-            (change)="selectedTypeUpdate1()">
+          <select type="number" class="form-input"  id="selectedTypeUpdateValue1"  [(ngModel)]="selectedTypeUpdateValue1" (change)="selectedTypeUpdate1()">
             <option [disabled]="typeActivity.id === 1 " [hidden]="typeActivity.id === 1 "
               *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}" selected="true"
               disabled="disabled">{{typeActivity.type}}
@@ -203,18 +202,18 @@
           </select>
         </td>
         <td>
-          <button class="btnRemplir" (click)="remplirAstreinte1()">Remplir</button>
+          <button class="btnRemplir" id="idRemplirProjetAstreinte1" (click)="remplirAstreinte1()">Remplir</button>
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class=" inputDay2" name="jourAstreinte1-{{indexOfelement}}" id="jourAstreinte1-{{indexOfelement}}"
             type="number" value="{{dureeAstreinte1}}" (change)="total5()">
         </td>
-        <td><input class=" inputDay2" type="number"  id="totalAstreinte1HTMl" value={{totalAstreinte1}}></td>
+        <td><input class=" inputDay2" type="number"  id="totalAstreinte1HTMl"   [(ngModel)]="totalAstreinte1" value={{totalAstreinte1}}></td>
       </tr>
       <!-- ASTREINTE 2 -->
       <tr>
         <td>
-          <select type="number" class="form-input" [(ngModel)]="selectedProjectAstreint2"  (change)="onChangeSelectprojectAstreinte2()">
+          <select type="number"   class="form-input" [(ngModel)]="selectedProjectAstreint2"  (change)="onChangeSelectprojectAstreinte2()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}
             </option>
           </select>
@@ -233,13 +232,13 @@
           </select>
         </td>
         <td>
-          <button class="btnRemplir" (click)="remplirAstreinte2()">Remplir</button>
+          <button class="btnRemplir"  id="idRemplirProjetAstreinte2"  (click)="remplirAstreinte2()">Remplir</button>
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class=" inputDay2" name="jourAstreinte2-{{indexOfelement}}" id="jourAstreinte2-{{indexOfelement}}"
             type="number" value="{{dureeAstreinte2}}" (change)="total6()">
         </td>
-        <td><input class=" inputDay2" type="number" id="totalAstreinte2HTMl" value={{totalAstreinte2}}></td>
+        <td><input class=" inputDay2" type="number"   [(ngModel)]="totalAstreinte2" id="totalAstreinte2HTMl" value={{totalAstreinte2}}></td>
       </tr>
       <!-- ASTREINTE 3 -->
 
@@ -264,13 +263,13 @@
           </select>
         </td>
         <td>
-          <button class="btnRemplir" (click)="remplirAstreinte3()">Remplir</button>
+          <button class="btnRemplir" id="idRemplirProjetAstreinte3"   (click)="remplirAstreinte3()">Remplir</button>
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class="inputDay2" name="jourAstreinte3-{{indexOfelement}}" id="jourAstreinte3-{{indexOfelement}}"
             type="number" value="{{dureeAstreinte3}}" (change)="total7()">
         </td>
-        <td><input class="inputDay2" type="number" id="totalAstreinte3HTMl"  value={{totalAstreinte3}}></td>
+        <td><input class="inputDay2" type="number" [(ngModel)]="totalAstreinte3"  id="totalAstreinte3HTMl"  value={{totalAstreinte3}}></td>
       </tr>
     </tbody>
   </table>
@@ -284,7 +283,7 @@
 
   <button class="send" (click)="Envoyer()">Envoyé</button>
   <button class="send" (click)="disableWeekend()">JF</button>
-  <button class="send" (click)="  ActivitiesToUpdate()  ">activity to update</button>
+  <button class="send" (click)=" ActivitiesToUpdate()  ">activity to update</button>
 
 </div>
 
