@@ -51,15 +51,15 @@
     <tbody (change)="totalAllActivity()">
       <tr>
         <td>
-          <select class="form-input choice" [(ngModel)]="selectedOption" (change)="onChangeSelectOption()">
+          <select  id="selectedOption" class="form-input choice" [(ngModel)]="selectedOption" (change)="onChangeSelectOption()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}
             </option>
           </select>
         </td>
 
         <td>
-          <button class="btnRemplirActivity" (click)="remplirProjet1()">Remplir</button>
-          <button class="btnRemplirActivity" (click)="remplirRemoteP1()">TAD</button>
+          <button  id="remplirProjet1" class="btnRemplirActivity" (click)="remplirProjet1()">Remplir</button>
+          <button  id="remplirRemoteP1"  class="btnRemplirActivity" (click)="remplirRemoteP1()">TAD</button>
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class=" inputDay" step="0.25" min="0" max="1" name="jour-{{indexOfelement}}"
@@ -78,15 +78,15 @@
 
       <tr>
         <td>
-          <select class="form-input choice" [(ngModel)]="selectedOption2" (change)="onChangeSelectOption2()">
+          <select  id="selectedOption2"  class="form-input choice" [(ngModel)]="selectedOption2" (change)="onChangeSelectOption2()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}
             </option>
           </select>
         </td>
 
         <td>
-          <button class="btnRemplirActivity" (click)="remplirProjet2()">Remplir</button>
-          <button class="btnRemplirActivity" (click)="remplirRemoteP2()">TAD</button>
+          <button id="remplirProjet2" class="btnRemplirActivity" (click)="remplirProjet2()">Remplir</button>
+          <button id= "remplirRemoteP2" class="btnRemplirActivity" (click)="remplirRemoteP2()">TAD</button>
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class=" inputDay" step="0.25" min="0" max="1" name="jour2-{{indexOfelement}}"
@@ -105,14 +105,14 @@
 
       <tr>
         <td>
-          <select class="form-input choice" [(ngModel)]="selectedOption3" (change)="onChangeSelectOption3()">
+          <select id="selectedOption3"   class="form-input choice" [(ngModel)]="selectedOption3" (change)="onChangeSelectOption3()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}
             </option>
           </select>
         </td>
         <td>
-          <button class="btnRemplirActivity" (click)="remplirProjet3()">Remplir</button>
-          <button class="btnRemplirActivity" (click)="remplirRemoteP3()">TAD</button>
+          <button id="remplirProjet3" class="btnRemplirActivity" (click)="remplirProjet3()">Remplir</button>
+          <button id="remplirRemoteP3" class="btnRemplirActivity" (click)="remplirRemoteP3()">TAD</button>
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class=" inputDay" step="0.25" min="0" max="1" name="jour3-{{indexOfelement}}"
@@ -131,14 +131,14 @@
 
       <tr>
         <td>
-          <select class="form-input" [(ngModel)]="selectedOption4" (change)="onChangeSelectOption4()">
+          <select  id="selectedOption4"  class="form-input" [(ngModel)]="selectedOption4" (change)="onChangeSelectOption4()">
             <option *ngFor="let project of projects" value="{{project.project.id}}">{{project.project.projectTitle}}
             </option>
           </select>
         </td>
         <td>
-          <button class="btnRemplirActivity" (click)="remplirProjet4()">Remplir</button>
-          <button class="btnRemplirActivity" (click)="remplirRemoteP4()">TAD</button>
+          <button id="remplirProjet4" class="btnRemplirActivity" (click)="remplirProjet4()">Remplir</button>
+          <button id="remplirRemoteP4" class="btnRemplirActivity" (click)="remplirRemoteP4()">TAD</button>
         </td>
         <td *ngFor="let element of tabJours;let indexOfelement=index;">
           <input class=" inputDay" step="0.25" min="0" max="1" name="jour4-{{indexOfelement}}"
@@ -284,7 +284,7 @@
 
   <button class="send" (click)="Envoyer()">Envoyé</button>
   <button class="send" (click)="disableWeekend()">JF</button>
-
+  <button class="send" (click)="  ActivitiesToUpdate()  ">activity to update</button>
 
 </div>
 
