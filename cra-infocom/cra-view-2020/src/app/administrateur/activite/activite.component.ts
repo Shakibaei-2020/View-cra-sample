@@ -9,6 +9,7 @@ import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator
 import { MissionService } from 'src/app/y-service/Mission/mission.service';
 import { ProjectService } from 'src/app/y-service/Project/project.service';
 import { Activity } from 'src/app/z-model/Activity/activity';
+import { JoursFerie } from 'src/app/z-model/Activity/jours-ferie';
 import { TypeActivity } from 'src/app/z-model/Activity/type-activity';
 import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 import { Mission } from 'src/app/z-model/Mission/mission';
@@ -212,363 +213,373 @@ export class ActiviteComponent implements OnInit {
   allActivityToEdit!: Activity[];
   nbActivityWithId = new Array();
   /** GESTION ACTIVIY */
-  
-
-  // onInitModal(activityFromModal: Activity, activitysFromModal: Activity[]) {
-
-  //   /** Collaborateur en cours de mofification */
-  //   this._CollaboratorService.selectOneCollabById(2).subscribe(
-  //     data => {
-  //       this.editedCollaborator = data;
-  //     },
-  //     error => console.log("exception" + error)
-  //   )
-
-  //   this.aujourdhui = this.formatageDate();
-
-  //   // Pour récupérer la liste des types d'activité : opérationnelle
-  //   this._TypeActivityService.selectAllTypeActivity().subscribe(
-  //     data => this.lesTypeActivity = data,
-  //     error => console.log("exception" + error),
-  //     () => this.isLoading = false
-  //   )
-
-  //   // Pour récupérer la liste des missions : opérationnelle mais avoir si on en a vraiment besoin
-  //   this._MissionService.selectAllMission().subscribe(
-  //     data => this.missions = data,
-  //     error => console.log("exception" + error)
-  //   )
-
-  //   // Pour récupérer la liste des projects affectés à un collaborateur : opérationnelle mais faut l'automatiser
-  //   // TODO : attention c'es en dur
-
-  //   this._CollabJoinProjectService.selectProjectCollabByCollabId(2).subscribe(
-  //     data => {
-  //       this.projects = data;
-  //     },
-  //     error => console.log("exception" + error)
-  //   )
-
-  //   // Pour récupérer toutes les informations sur un collaborateur : opérationnelle mais faut l'automatiser
-  //   // TODO : attention c'es en dur
-
-
-  //   this._CollaboratorService.selectOneCollabById(2).subscribe(
-  //     data => this.collaborateur = data,
-  //     error => console.log("exception" + error)
-  //   )
-
-  //   // Afin de récupérer le nombre de jour dans un mois : opérationnelle mais on peut faire mieux or at least extract this methode outside ngOnInit()
-  //   // En plus de calcul se refait dans la méthode updateMonth(), il sera mieux de le faire à un seul endroit et mettre la valeur de ce mois par défaut.
-  //   /* this.month = this.dt.getMonth() + 1;
-  //   this.year = this.dt.getFullYear();*/
-  //   this.daysInMonth = new Date(this.yearInput, this.monthSelected, 0).getDate();
-
-  //   // Cette bocle sert à affecter un nom à chaque case du calendrier en HTML pour les activités et les astreintes
-  //   for (var i = 0; i < this.daysInMonth; i++) {
-  //     this.tabJours[i] = i + 1;
-  //     this.activitiesPerDay.push("jour-" + i);
-  //     this.remotePerDay.push("remote-" + i);
-
-  //     this.activitiesPerDay2.push("jour2-" + i);
-  //     this.remotePerDay2.push("remote2-" + i);
-
-  //     this.activitiesPerDay3.push("jour3-" + i);
-  //     this.remotePerDay3.push("remote3-" + i);
-
-  //     this.activitiesPerDay4.push("jour4-" + i);
-  //     this.remotePerDay4.push("remote4-" + i);
-
-  //     this.astreintePerDay1.push("jourAstreinte1-" + i);
-  //     this.astreintePerDay2.push("jourAstreinte2-" + i);
-  //     this.astreintePerDay3.push("jourAstreinte3-" + i);
-  //     this.astreintePerDay4.push("jourAstreinte4-" + i);
-  //   }
-
-  //   this.nbActivityWithId = [];
-  //   this.allActivityToEdit =[];
-  //   this._ActivityService.activityGroupByProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId).subscribe(
-  //     data => {
-
-  //       this.allActivityToEdit = data;
-  //       for (i = 0; i < this.allActivityToEdit.length; i++) {
-  //         this.nbActivityWithId.push(this.allActivityToEdit[i].projectId);
-  //       }
-
-  //       /** ACTIVITY 1 */
-        
-  //       this.idOfDaysActivity1= [];
-  //       this.idOfCollabActivity1= [];
-  //       this.idOfProjectActivity1 = [];
-  //       this.idOfTypeActivity1= [];
-
-  //       if ( this.nbActivityWithId[0] !== undefined) {
-  //         this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[0]).subscribe(
-  //           data => {
-  //             this.activity1ToEdit = data;
-
-  //             for (var i = 0; i < this.tabJours.length; i++) {
-  //               (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber = this.activity1ToEdit[i].duration;
-  //               (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked = this.activity1ToEdit[i].remote;
-
-
-  //               this.idOfDaysActivity1.push(this.activity1ToEdit[i].id);
-  //               this.idOfCollabActivity1.push(this.activity1ToEdit[i].collaboratorId);
-  //               this.idOfProjectActivity1.push(this.activity1ToEdit[i].projectId);
-  //               this.idOfTypeActivity1.push(this.activity1ToEdit[i].typeActivity);
-  //               this.selectedOption = this.nbActivityWithId[0];
-
-  //               this._ProjectService.selectProjectById(this.selectedOption).subscribe(
-  //                 data => this.projectActivityNormal = data,
-  //                 error => console.log("exception" + error)
-  //               )
-  //             }
-  //             this.total()
-  //           },
-  //           error => console.log("exception" + error)
-  //         )
-  //       }
-
-  //       /** ACTIVITY 2 */
-
-  //       this.idOfDaysActivity2= [];
-  //       this.idOfCollabActivity2= [];
-  //       this.idOfProjectActivity2 = [];
-  //       this.idOfTypeActivity2= [];
-
-  //       if ( this.nbActivityWithId[1] !== undefined) {
-  //         this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[1]).subscribe(
-  //           data => {
-  //             this.activity2ToEdit = data;
-  //             for (var i = 0; i < this.tabJours.length; i++) {
-  //               (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber = this.activity2ToEdit[i].duration;
-  //               (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked = this.activity2ToEdit[i].remote;
-
-  //               this.idOfDaysActivity2.push(this.activity2ToEdit[i].id)
-  //               this.idOfCollabActivity2.push(this.activity2ToEdit[i].collaboratorId);
-  //               this.idOfProjectActivity2.push(this.activity2ToEdit[i].projectId);
-  //               this.idOfTypeActivity2.push(this.activity2ToEdit[i].typeActivity);
-  //               this.selectedOption2 = this.nbActivityWithId[1];
-
-  //               this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
-  //                 data => this.projectActivity2 = data,
-  //                 error => console.log("exception" + error)
-  //               )
-  //             }
-  //             this.total2()
-  //           },
-  //           error => console.log("exception" + error)
-  //         )
-  //       }
-
-  //       /** ACTIVITY 3 */
-
-  //       this.idOfDaysActivity3= [];
-  //       this.idOfCollabActivity3= [];
-  //       this.idOfProjectActivity3 = [];
-  //       this.idOfTypeActivity3= [];
-
-
-  //       if ( this.nbActivityWithId[2] !== undefined) {
-  //         this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[2]).subscribe(
-  //           data => {
-  //             this.activity3ToEdit = data;
-  //             for (var i = 0; i < this.tabJours.length; i++) {
-  //               (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber = this.activity3ToEdit[i].duration;
-  //               (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked = this.activity3ToEdit[i].remote;
-
-  //               this.idOfDaysActivity3.push(this.activity3ToEdit[i].id)
-  //               this.idOfCollabActivity3.push(this.activity3ToEdit[i].collaboratorId);
-  //               this.idOfProjectActivity3.push(this.activity3ToEdit[i].projectId);
-  //               this.idOfTypeActivity3.push(this.activity3ToEdit[i].typeActivity);
-  //               this.selectedOption3 = this.nbActivityWithId[2];
-
-  //               this._ProjectService.selectProjectById(this.selectedOption3).subscribe(
-  //                 data => this.projectActivity3 = data,
-  //                 error => console.log("exception" + error)
-  //               )
-  //             }
-  //             this.total3()
-  //           },
-  //           error => console.log("exception" + error)
-  //         )
-  //       }
-
-  //       /** ACTIVITY 4 */
-
-  //       this.idOfDaysActivity4= [];
-  //       this.idOfCollabActivity4= [];
-  //       this.idOfProjectActivity4 = [];
-  //       this.idOfTypeActivity4= [];
-
-  //       if ( this.nbActivityWithId[3] !== undefined) {
-  //         this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[3]).subscribe(
-  //           data => {
-  //             this.activity4ToEdit = data;
-  //             for (var i = 0; i < this.tabJours.length; i++) {
-  //               (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber = this.activity4ToEdit[i].duration;
-  //               (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked = this.activity4ToEdit[i].remote;
-
-  //               this.idOfDaysActivity4.push(this.activity4ToEdit[i].id)
-  //               this.idOfCollabActivity4.push(this.activity4ToEdit[i].collaboratorId);
-  //               this.idOfProjectActivity4.push(this.activity4ToEdit[i].projectId);
-  //               this.idOfTypeActivity4.push(this.activity4ToEdit[i].typeActivity);
-  //               this.selectedOption4 = this.nbActivityWithId[3];
-
-  //               this._ProjectService.selectProjectById(this.selectedOption4).subscribe(
-  //                 data => this.projectActivity4 = data,
-  //                 error => console.log("exception" + error)
-  //               )
-  //             }
-  //             this.total4()
-  //           },
-  //           error => console.log("exception" + error)
-  //         )
-  //       }
-  //     },
-  //     error => console.log("exception" + error)
-  //   )
-
-
-  //   /** Astreinte 1 */
-
-  //   this.nbAstreinteWithId = [];
-  //   this.nbAstreinteTypeWithId = [];
-  //   this.allAstreinteToEdit = [];
-
-
-
-  //   this._ActivityService.astreinteGroupByProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId).subscribe(
-  //     data => {
-  //       this.allAstreinteToEdit = data;
-
-  //       console.log(this.allAstreinteToEdit)
-
-  //       for (i = 0; i < this.allAstreinteToEdit.length; i++) {
-  //         this.nbAstreinteWithId.push(this.allAstreinteToEdit[i].projectId);
-  //         this.nbAstreinteTypeWithId.push(this.allAstreinteToEdit[i].typeActivity.id);
-  //         console.log("dqskdlq 1:" + this.nbAstreinteWithId)
-  //         console.log("dqskdlq 2:" + this.nbAstreinteTypeWithId)
-  //       }
-
-
-  //       this.idOfDaysAstreinte1 = [];
-  //       this.idOfCollabAstreinte1 = [];
-  //       this.idOfProjectAstreinte1 = [];
-  //       this.idOfTypeAstreinte1 = [];
-
-  //       if ( this.nbAstreinteWithId[0] !== undefined) {
-  //         this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[0]).subscribe(
-  //           data => {
-  //             this.astreinte1ToEdit = data;
-
-  //             for (var i = 0; i < this.tabJours.length; i++) {
-  //               (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber = this.astreinte1ToEdit[i].duration;
-
-  //               this.idOfDaysAstreinte1.push(this.astreinte1ToEdit[i].id);
-  //               this.idOfCollabAstreinte1.push(this.astreinte1ToEdit[i].collaboratorId);
-  //               this.idOfProjectAstreinte1.push(this.astreinte1ToEdit[i].projectId);
-  //               this.idOfTypeAstreinte1.push(this.astreinte1ToEdit[i].typeActivity);
-  //               this.selectedProjectAstreint1 = this.nbAstreinteWithId[0];
-  //               this.selectedTypeUpdateValue1 = this.nbAstreinteTypeWithId[0];
-
-  //               this._ProjectService.selectProjectById(this.selectedProjectAstreint1).subscribe(
-  //                 data => this.projectAstreinte1 = data,
-  //                 error => console.log("exception" + error)
-  //               )
-  //               this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue1).subscribe(
-  //                 data => this.typeAstreinte1 = data,
-  //                 error => console.log("exception" + error)
-  //               )
-
-  //               console.log(this.idOfDaysAstreinte1)
-  //             }
-  //             this.total5()
-  //           },
-  //           error => console.log("exception" + error)
-  //         )
-  //       }
-
-  //       this.idOfDaysAstreinte2 = [];
-  //       this.idOfCollabAstreinte2 = [];
-  //       this.idOfProjectAstreinte2 = [];
-  //       this.idOfTypeAstreinte2 = [];
-
-  //       /** Astreinte 2 */
-  //       if ( this.nbAstreinteWithId[1] !== undefined) {
-  //         this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[1]).subscribe(
-  //           data => {
-  //             this.astreinte2ToEdit = data;
-
-  //             for (var i = 0; i < this.tabJours.length; i++) {
-  //               (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber = this.astreinte2ToEdit[i].duration;
-
-  //               this.idOfDaysAstreinte2.push(this.astreinte2ToEdit[i].id);
-  //               this.idOfCollabAstreinte2.push(this.astreinte2ToEdit[i].collaboratorId);
-  //               this.idOfProjectAstreinte2.push(this.astreinte2ToEdit[i].projectId);
-  //               this.idOfTypeAstreinte2.push(this.astreinte2ToEdit[i].typeActivity);
-  //               this.selectedProjectAstreint2 = this.nbAstreinteWithId[1];
-  //               this.selectedTypeUpdateValue2 = this.nbAstreinteTypeWithId[1];
-
-  //               this._ProjectService.selectProjectById(this.selectedProjectAstreint2).subscribe(
-  //                 data => this.projectAstreinte2 = data,
-  //                 error => console.log("exception" + error)
-  //               )
-  //               this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue2).subscribe(
-  //                 data => this.typeAstreinte2 = data,
-  //                 error => console.log("exception" + error)
-  //               )
-
-  //               console.log(this.idOfDaysAstreinte2)
-
-  //             }
-  //             this.total6()
-  //           },
-  //           error => console.log("exception" + error)
-  //         )
-  //       }
-
-
-  //       /** Astreinte 3 */
-
-  //       this.idOfDaysAstreinte3 = [];
-  //       this.idOfCollabAstreinte3 = [];
-  //       this.idOfProjectAstreinte3 = [];
-  //       this.idOfTypeAstreinte3 = [];
-
-  //       if ( this.nbAstreinteWithId[2] !== undefined) {
-  //         this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[2]).subscribe(
-  //           data => {
-  //             this.astreinte3ToEdit = data;
-
-  //             for (var i = 0; i < this.tabJours.length; i++) {
-  //               (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber = this.astreinte3ToEdit[i].duration;
-
-  //               this.idOfDaysAstreinte3.push(this.astreinte3ToEdit[i].id);
-  //               this.idOfCollabAstreinte3.push(this.astreinte3ToEdit[i].collaboratorId);
-  //               this.idOfProjectAstreinte3.push(this.astreinte3ToEdit[i].projectId);
-  //               this.idOfTypeAstreinte3.push(this.astreinte3ToEdit[i].typeActivity);
-  //               this.selectedProjectAstreint3 = this.nbAstreinteWithId[2];
-  //               this.selectedTypeUpdateValue3 = this.nbAstreinteTypeWithId[2];
-
-  //               this._ProjectService.selectProjectById(this.selectedProjectAstreint3).subscribe(
-  //                 data => this.projectAstreinte3 = data,
-  //                 error => console.log("exception" + error)
-  //               )
-  //               this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue3).subscribe(
-  //                 data => this.typeAstreinte3 = data,
-  //                 error => console.log("exception" + error)
-  //               )
-  //             }
-  //             this.total7()
-  //           },
-  //           error => console.log("exception" + error)
-  //         )
-  //       }
-  //     },
-  //     error => console.log("exception" + error)
-  //   )
-  // }
+
+
+  onInitModal(activityFromModal: Activity, activitysFromModal: Activity[]) {
+
+
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 200);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 200);
+
+
+    /** Collaborateur en cours de mofification */
+    this._CollaboratorService.selectOneCollabById(2).subscribe(
+      data => {
+        this.editedCollaborator = data;
+      },
+      error => console.log("exception" + error)
+    )
+
+    this.aujourdhui = this.formatageDate();
+
+    // Pour récupérer la liste des types d'activité : opérationnelle
+    this._TypeActivityService.selectAllTypeActivity().subscribe(
+      data => this.lesTypeActivity = data,
+      error => console.log("exception" + error),
+      () => this.isLoading = false
+    )
+
+    // Pour récupérer la liste des missions : opérationnelle mais avoir si on en a vraiment besoin
+    this._MissionService.selectAllMission().subscribe(
+      data => this.missions = data,
+      error => console.log("exception" + error)
+    )
+
+    // Pour récupérer la liste des projects affectés à un collaborateur : opérationnelle mais faut l'automatiser
+    // TODO : attention c'es en dur
+
+    this._CollabJoinProjectService.selectProjectCollabByCollabId(2).subscribe(
+      data => {
+        this.projects = data;
+      },
+      error => console.log("exception" + error)
+    )
+
+    // Pour récupérer toutes les informations sur un collaborateur : opérationnelle mais faut l'automatiser
+    // TODO : attention c'es en dur
+
+
+    this._CollaboratorService.selectOneCollabById(2).subscribe(
+      data => this.collaborateur = data,
+      error => console.log("exception" + error)
+    )
+
+    // Afin de récupérer le nombre de jour dans un mois : opérationnelle mais on peut faire mieux or at least extract this methode outside ngOnInit()
+    // En plus de calcul se refait dans la méthode updateMonth(), il sera mieux de le faire à un seul endroit et mettre la valeur de ce mois par défaut.
+    /* this.month = this.dt.getMonth() + 1;
+    this.year = this.dt.getFullYear();*/
+    this.daysInMonth = new Date(this.yearInput, this.monthSelected, 0).getDate();
+
+    // Cette bocle sert à affecter un nom à chaque case du calendrier en HTML pour les activités et les astreintes
+    for (var i = 0; i < this.daysInMonth; i++) {
+      this.tabJours[i] = i + 1;
+      this.activitiesPerDay.push("jour-" + i);
+      this.remotePerDay.push("remote-" + i);
+
+      this.activitiesPerDay2.push("jour2-" + i);
+      this.remotePerDay2.push("remote2-" + i);
+
+      this.activitiesPerDay3.push("jour3-" + i);
+      this.remotePerDay3.push("remote3-" + i);
+
+      this.activitiesPerDay4.push("jour4-" + i);
+      this.remotePerDay4.push("remote4-" + i);
+
+      this.astreintePerDay1.push("jourAstreinte1-" + i);
+      this.astreintePerDay2.push("jourAstreinte2-" + i);
+      this.astreintePerDay3.push("jourAstreinte3-" + i);
+      this.astreintePerDay4.push("jourAstreinte4-" + i);
+    }
+
+    this.nbActivityWithId = [];
+    this.allActivityToEdit = [];
+    this._ActivityService.activityGroupByProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId).subscribe(
+      data => {
+
+        this.allActivityToEdit = data;
+        for (i = 0; i < this.allActivityToEdit.length; i++) {
+          this.nbActivityWithId.push(this.allActivityToEdit[i].projectId);
+        }
+
+        /** ACTIVITY 1 */
+
+        this.idOfDaysActivity1 = [];
+        this.idOfCollabActivity1 = [];
+        this.idOfProjectActivity1 = [];
+        this.idOfTypeActivity1 = [];
+
+        if (this.nbActivityWithId[0] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[0]).subscribe(
+            data => {
+              this.activity1ToEdit = data;
+
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber = this.activity1ToEdit[i].duration;
+                (<HTMLInputElement>document.getElementById(this.remotePerDay[i])).checked = this.activity1ToEdit[i].remote;
+
+
+                this.idOfDaysActivity1.push(this.activity1ToEdit[i].id);
+                this.idOfCollabActivity1.push(this.activity1ToEdit[i].collaboratorId);
+                this.idOfProjectActivity1.push(this.activity1ToEdit[i].projectId);
+                this.idOfTypeActivity1.push(this.activity1ToEdit[i].typeActivity);
+                this.selectedOption = this.nbActivityWithId[0];
+
+                this._ProjectService.selectProjectById(this.selectedOption).subscribe(
+                  data => this.projectActivityNormal = data,
+                  error => console.log("exception" + error)
+                )
+              }
+              this.total()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+        /** ACTIVITY 2 */
+
+        this.idOfDaysActivity2 = [];
+        this.idOfCollabActivity2 = [];
+        this.idOfProjectActivity2 = [];
+        this.idOfTypeActivity2 = [];
+
+        if (this.nbActivityWithId[1] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[1]).subscribe(
+            data => {
+              this.activity2ToEdit = data;
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber = this.activity2ToEdit[i].duration;
+                (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked = this.activity2ToEdit[i].remote;
+
+                this.idOfDaysActivity2.push(this.activity2ToEdit[i].id)
+                this.idOfCollabActivity2.push(this.activity2ToEdit[i].collaboratorId);
+                this.idOfProjectActivity2.push(this.activity2ToEdit[i].projectId);
+                this.idOfTypeActivity2.push(this.activity2ToEdit[i].typeActivity);
+                this.selectedOption2 = this.nbActivityWithId[1];
+
+                this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
+                  data => this.projectActivity2 = data,
+                  error => console.log("exception" + error)
+                )
+              }
+              this.total2()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+        /** ACTIVITY 3 */
+
+        this.idOfDaysActivity3 = [];
+        this.idOfCollabActivity3 = [];
+        this.idOfProjectActivity3 = [];
+        this.idOfTypeActivity3 = [];
+
+
+        if (this.nbActivityWithId[2] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[2]).subscribe(
+            data => {
+              this.activity3ToEdit = data;
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber = this.activity3ToEdit[i].duration;
+                (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked = this.activity3ToEdit[i].remote;
+
+                this.idOfDaysActivity3.push(this.activity3ToEdit[i].id)
+                this.idOfCollabActivity3.push(this.activity3ToEdit[i].collaboratorId);
+                this.idOfProjectActivity3.push(this.activity3ToEdit[i].projectId);
+                this.idOfTypeActivity3.push(this.activity3ToEdit[i].typeActivity);
+                this.selectedOption3 = this.nbActivityWithId[2];
+
+                this._ProjectService.selectProjectById(this.selectedOption3).subscribe(
+                  data => this.projectActivity3 = data,
+                  error => console.log("exception" + error)
+                )
+              }
+              this.total3()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+        /** ACTIVITY 4 */
+
+        this.idOfDaysActivity4 = [];
+        this.idOfCollabActivity4 = [];
+        this.idOfProjectActivity4 = [];
+        this.idOfTypeActivity4 = [];
+
+        if (this.nbActivityWithId[3] !== undefined) {
+          this._ActivityService.searchTheActivityOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbActivityWithId[3]).subscribe(
+            data => {
+              this.activity4ToEdit = data;
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber = this.activity4ToEdit[i].duration;
+                (<HTMLInputElement>document.getElementById(this.remotePerDay4[i])).checked = this.activity4ToEdit[i].remote;
+
+                this.idOfDaysActivity4.push(this.activity4ToEdit[i].id)
+                this.idOfCollabActivity4.push(this.activity4ToEdit[i].collaboratorId);
+                this.idOfProjectActivity4.push(this.activity4ToEdit[i].projectId);
+                this.idOfTypeActivity4.push(this.activity4ToEdit[i].typeActivity);
+                this.selectedOption4 = this.nbActivityWithId[3];
+
+                this._ProjectService.selectProjectById(this.selectedOption4).subscribe(
+                  data => this.projectActivity4 = data,
+                  error => console.log("exception" + error)
+                )
+              }
+              this.total4()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+      },
+      error => console.log("exception" + error)
+    )
+
+
+    /** Astreinte 1 */
+
+    this.nbAstreinteWithId = [];
+    this.nbAstreinteTypeWithId = [];
+    this.allAstreinteToEdit = [];
+
+
+
+    this._ActivityService.astreinteGroupByTypeActivityAndProjet(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId).subscribe(
+      data => {
+        this.allAstreinteToEdit = data;
+
+        console.log(this.allAstreinteToEdit)
+
+        for (i = 0; i < this.allAstreinteToEdit.length; i++) {
+          this.nbAstreinteWithId.push(this.allAstreinteToEdit[i].projectId);
+          this.nbAstreinteTypeWithId.push(this.allAstreinteToEdit[i].typeActivity.id);
+          console.log("dqskdlq 1:" + this.nbAstreinteWithId)
+          console.log("dqskdlq 2:" + this.nbAstreinteTypeWithId)
+        }
+
+
+        this.idOfDaysAstreinte1 = [];
+        this.idOfCollabAstreinte1 = [];
+        this.idOfProjectAstreinte1 = [];
+        this.idOfTypeAstreinte1 = [];
+
+        if (this.nbAstreinteWithId[0] !== undefined) {
+          this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[0], this.nbAstreinteTypeWithId[0]).subscribe(
+            data => {
+              this.astreinte1ToEdit = data;
+
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber = this.astreinte1ToEdit[i].duration;
+
+                this.idOfDaysAstreinte1.push(this.astreinte1ToEdit[i].id);
+                this.idOfCollabAstreinte1.push(this.astreinte1ToEdit[i].collaboratorId);
+                this.idOfProjectAstreinte1.push(this.astreinte1ToEdit[i].projectId);
+                this.idOfTypeAstreinte1.push(this.astreinte1ToEdit[i].typeActivity);
+                this.selectedProjectAstreint1 = this.nbAstreinteWithId[0];
+                this.selectedTypeUpdateValue1 = this.nbAstreinteTypeWithId[0];
+
+                this._ProjectService.selectProjectById(this.selectedProjectAstreint1).subscribe(
+                  data => this.projectAstreinte1 = data,
+                  error => console.log("exception" + error)
+                )
+                this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue1).subscribe(
+                  data => this.typeAstreinte1 = data,
+                  error => console.log("exception" + error)
+                )
+
+                console.log(this.idOfDaysAstreinte1)
+              }
+              this.total5()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+        this.idOfDaysAstreinte2 = [];
+        this.idOfCollabAstreinte2 = [];
+        this.idOfProjectAstreinte2 = [];
+        this.idOfTypeAstreinte2 = [];
+
+        /** Astreinte 2 */
+        if (this.nbAstreinteWithId[1] !== undefined) {
+          this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[1], this.nbAstreinteTypeWithId[1]).subscribe(
+            data => {
+              this.astreinte2ToEdit = data;
+
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber = this.astreinte2ToEdit[i].duration;
+
+                this.idOfDaysAstreinte2.push(this.astreinte2ToEdit[i].id);
+                this.idOfCollabAstreinte2.push(this.astreinte2ToEdit[i].collaboratorId);
+                this.idOfProjectAstreinte2.push(this.astreinte2ToEdit[i].projectId);
+                this.idOfTypeAstreinte2.push(this.astreinte2ToEdit[i].typeActivity);
+                this.selectedProjectAstreint2 = this.nbAstreinteWithId[1];
+                this.selectedTypeUpdateValue2 = this.nbAstreinteTypeWithId[1];
+
+                this._ProjectService.selectProjectById(this.selectedProjectAstreint2).subscribe(
+                  data => this.projectAstreinte2 = data,
+                  error => console.log("exception" + error)
+                )
+                this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue2).subscribe(
+                  data => this.typeAstreinte2 = data,
+                  error => console.log("exception" + error)
+                )
+
+                console.log(this.idOfDaysAstreinte2)
+
+              }
+              this.total6()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+
+
+        /** Astreinte 3 */
+
+        this.idOfDaysAstreinte3 = [];
+        this.idOfCollabAstreinte3 = [];
+        this.idOfProjectAstreinte3 = [];
+        this.idOfTypeAstreinte3 = [];
+
+        if (this.nbAstreinteWithId[2] !== undefined) {
+          this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthActivity, this.yearActivity, activityFromModal.collaboratorId, this.nbAstreinteWithId[2], this.nbAstreinteTypeWithId[2]).subscribe(
+            data => {
+              this.astreinte3ToEdit = data;
+
+              for (var i = 0; i < this.tabJours.length; i++) {
+                (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber = this.astreinte3ToEdit[i].duration;
+
+                this.idOfDaysAstreinte3.push(this.astreinte3ToEdit[i].id);
+                this.idOfCollabAstreinte3.push(this.astreinte3ToEdit[i].collaboratorId);
+                this.idOfProjectAstreinte3.push(this.astreinte3ToEdit[i].projectId);
+                this.idOfTypeAstreinte3.push(this.astreinte3ToEdit[i].typeActivity);
+                this.selectedProjectAstreint3 = this.nbAstreinteWithId[2];
+                this.selectedTypeUpdateValue3 = this.nbAstreinteTypeWithId[2];
+
+                this._ProjectService.selectProjectById(this.selectedProjectAstreint3).subscribe(
+                  data => this.projectAstreinte3 = data,
+                  error => console.log("exception" + error)
+                )
+                this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue3).subscribe(
+                  data => this.typeAstreinte3 = data,
+                  error => console.log("exception" + error)
+                )
+              }
+              this.total7()
+            },
+            error => console.log("exception" + error)
+          )
+        }
+      },
+      error => console.log("exception" + error)
+    )
+  }
 
   /** total temps d'activité */
   updateMonth() {
@@ -624,6 +635,14 @@ export class ActiviteComponent implements OnInit {
       this.isRemote = true;
       this.remoteRemplis = true;
     }
+
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
   }
 
   /** Remplissage automatique de l'Activité*/
@@ -639,19 +658,18 @@ export class ActiviteComponent implements OnInit {
       this.totalProjet1 = this.daysInMonth;
       this.remplis = true;
     }
-    this.totalAllActivity();
-  }
-  /** calcule du total du l'activité declaré N1 */
-  totalProjet1 = 0;
-  total() {
-    this.totalProjet1 = 0;
-    this.totalActivity = 0;
-    for (var i = 0; i < this.daysInMonth; i++) {
-      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber != undefined) {
-        this.totalProjet1 = this.totalProjet1 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
-        this.totalActivity = this.totalActivity + this.totalProjet1;
-      }
-    }
+
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
+    setTimeout(() => {
+      this.total();
+    }, 50);
+
     this.totalAllActivity();
   }
 
@@ -684,6 +702,13 @@ export class ActiviteComponent implements OnInit {
       this.isRemote2 = true;
       this.remoteRemplis2 = true;
     }
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
   }
 
   /** Remplissage automatique de l'Activité*/
@@ -699,22 +724,18 @@ export class ActiviteComponent implements OnInit {
       this.totalProjet2 = this.daysInMonth;
       this.remplis2 = true;
     }
-    this.totalAllActivity();
-  }
-  /** calcule du total du l'activité declaré N1 */
-  totalProjet2 = 0;
-  total2() {
-    this.totalProjet2 = 0;
-    this.totalActivity = 0;
-    for (var i = 0; i < this.daysInMonth; i++) {
-      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber != undefined) {
-        this.totalProjet2 = this.totalProjet2 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
-        this.totalActivity = this.totalActivity + this.totalProjet2;
-      }
-    }
-    this.totalAllActivity();
-  }
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
 
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
+    setTimeout(() => {
+      this.total2();
+    }, 50);
+    this.totalAllActivity();
+  }
 
   onChangeSelectOption2() {
     this._ProjectService.selectProjectById(this.selectedOption2).subscribe(
@@ -744,6 +765,13 @@ export class ActiviteComponent implements OnInit {
       this.isRemote3 = true;
       this.remoteRemplis3 = true;
     }
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
   }
 
   /** Remplissage automatique de l'Activité*/
@@ -759,21 +787,20 @@ export class ActiviteComponent implements OnInit {
       this.totalProjet3 = this.daysInMonth;
       this.remplis3 = true;
     }
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
+    setTimeout(() => {
+      this.total3();
+    }, 50);
     this.totalAllActivity();
   }
   /** calcule du total du l'activité declaré N1 */
-  totalProjet3 = 0;
-  total3() {
-    this.totalProjet3 = 0;
-    this.totalActivity = 0;
-    for (var i = 0; i < this.daysInMonth; i++) {
-      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber != undefined) {
-        this.totalProjet3 = this.totalProjet3 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
-        this.totalActivity = this.totalActivity + this.totalProjet3;
-      }
-    }
-    this.totalAllActivity();
-  }
+
 
 
   onChangeSelectOption3() {
@@ -803,6 +830,13 @@ export class ActiviteComponent implements OnInit {
       this.isRemote4 = true;
       this.remoteRemplis4 = true;
     }
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
   }
 
   /** Remplissage automatique de l'Activité*/
@@ -818,19 +852,17 @@ export class ActiviteComponent implements OnInit {
       this.totalProjet4 = this.daysInMonth;
       this.remplis4 = true;
     }
-    this.totalAllActivity();
-  }
-  /** calcule du total du l'activité declaré N1 */
-  totalProjet4 = 0;
-  total4() {
-    this.totalProjet4 = 0;
-    this.totalActivity = 0;
-    for (var i = 0; i < this.daysInMonth; i++) {
-      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber != undefined) {
-        this.totalProjet4 = this.totalProjet4 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
-        this.totalActivity = this.totalActivity + this.totalProjet4;
-      }
-    }
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
+    setTimeout(() => {
+      this.total2();
+    }, 50);
+
     this.totalAllActivity();
   }
 
@@ -846,7 +878,6 @@ export class ActiviteComponent implements OnInit {
   /** ASTREINTE 1 */
 
   dureeAstreinte1 = 0;
-  totalAstreinte1 = 0;
   laMissionAstreinte1 = new Mission();
   astreinte1remplis = false;
 
@@ -859,25 +890,23 @@ export class ActiviteComponent implements OnInit {
     if (this.astreinte1remplis == true) {
       this.dureeAstreinte1 = 0;
       this.astreinte1remplis = false;
-      this.totalAstreinte1 = 0;
     } else {
       this.dureeAstreinte1 = 1;
       this.astreinte1remplis = true;
-      this.totalAstreinte1 = this.daysInMonth;
     }
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
+    setTimeout(() => {
+      this.total5();
+    }, 50);
   }
 
 
-  /** total astreinte 1 */
-  total5() {
-    var i;
-    this.totalAstreinte1 = 0;
-    for (i = 0; i < this.daysInMonth; i++) {
-      if ((<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber != undefined) {
-        this.totalAstreinte1 = this.totalAstreinte1 + (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
-      }
-    }
-  }
 
   onChangeProjectAstreinte1() {
     this._ProjectService.selectProjectById(this.selectedProjectAstreint1).subscribe(
@@ -897,7 +926,6 @@ export class ActiviteComponent implements OnInit {
 
   /** ASTREINTE 2 */
   dureeAstreinte2 = 0;
-  totalAstreinte2 = 0;
   laMissionAstreinte2 = new Mission();
   astreinte2remplis = false;
 
@@ -910,23 +938,23 @@ export class ActiviteComponent implements OnInit {
     if (this.astreinte2remplis == true) {
       this.dureeAstreinte2 = 0;
       this.astreinte2remplis = false;
-      this.totalAstreinte2 = 0;
     } else {
       this.dureeAstreinte2 = 1;
       this.astreinte2remplis = true;
-      this.totalAstreinte2 = this.daysInMonth;
     }
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    }, 50);
+    setTimeout(() => {
+      this.total6();
+    }, 50);
   }
 
-  total6() {
-    var i;
-    this.totalAstreinte2 = 0;
-    for (i = 0; i < this.daysInMonth; i++) {
-      if ((<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber != undefined) {
-        this.totalAstreinte2 = this.totalAstreinte2 + (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
-      }
-    }
-  }
+
 
 
   onChangeProjectAstreinte2() {
@@ -948,7 +976,6 @@ export class ActiviteComponent implements OnInit {
 
   /** ASTREINTE 3 */
   dureeAstreinte3 = 0;
-  totalAstreinte3 = 0;
   laMissionAstreinte3 = new Mission();
   astreinte3remplis = false;
 
@@ -967,17 +994,18 @@ export class ActiviteComponent implements OnInit {
       this.astreinte3remplis = true;
       this.total7();
     }
+    setTimeout(() => {
+      this.disableJoursFerie();
+    }, 50);
+
+    setTimeout(() => {
+      this.disableWeekend();
+    },50);
+    setTimeout(() => {
+      this.total7();
+    }, 50);
   }
 
-  total7() {
-    var i;
-    this.totalAstreinte3 = 0;
-    for (i = 0; i < this.daysInMonth; i++) {
-      if ((<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber != undefined) {
-        this.totalAstreinte3 = this.totalAstreinte3 + (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
-      }
-    }
-  }
 
   onChangeProjectAstreinte3() {
     this._ProjectService.selectProjectById(this.selectedProjectAstreint3).subscribe(
@@ -1177,7 +1205,7 @@ export class ActiviteComponent implements OnInit {
       }
     }
   }
-  
+
 
 
 
@@ -1207,6 +1235,99 @@ export class ActiviteComponent implements OnInit {
 
 
 
+  totalProjet1 = 0;
+  total() {
+    this.totalProjet1 = 0;
+    this.totalActivity = 0;
+    for (var i = 0; i < this.tabJours.length; i++) {
+      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber != undefined) {
+        this.totalProjet1 = this.totalProjet1 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber;
+        this.totalActivity = this.totalActivity + this.totalProjet1;
+      }
+    }
+    this.totalAllActivity();
+    return this.totalProjet1;
+  }
+  totalProjet2 = 0;
+  total2() {
+    this.totalProjet2 = 0;
+    this.totalActivity = 0;
+    for (var i = 0; i < this.tabJours.length; i++) {
+      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber != undefined) {
+        this.totalProjet2 = this.totalProjet2 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
+        this.totalActivity = this.totalActivity + this.totalProjet2;
+      }
+    }
+    this.totalAllActivity();
+    return this.totalProjet2;
+
+  }
+  totalProjet3 = 0;
+  total3() {
+    this.totalProjet3 = 0;
+    this.totalActivity = 0;
+    for (var i = 0; i < this.tabJours.length; i++) {
+      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber != undefined) {
+        this.totalProjet3 = this.totalProjet3 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
+        this.totalActivity = this.totalActivity + this.totalProjet3;
+      }
+    }
+    this.totalAllActivity();
+    return this.totalProjet3;
+
+  }
+  totalProjet4 = 0;
+  total4() {
+    this.totalProjet4 = 0;
+    this.totalActivity = 0;
+    for (var i = 0; i < this.tabJours.length; i++) {
+      if ((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber != undefined) {
+        this.totalProjet4 = this.totalProjet4 + (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber;
+        this.totalActivity = this.totalActivity + this.totalProjet4;
+      }
+    }
+    this.totalAllActivity();
+    return this.totalProjet4;
+
+  }
+  totalAstreinte1 = 0;
+  total5() {
+    var i;
+    this.totalAstreinte1 = 0;
+    for (i = 0; i < this.tabJours.length; i++) {
+      if ((<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber != undefined) {
+        this.totalAstreinte1 = this.totalAstreinte1 + (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
+      }
+    }
+    return this.totalAstreinte1;
+
+  }
+  totalAstreinte2 = 0;
+  total6() {
+    var i;
+    this.totalAstreinte2 = 0;
+    for (i = 0; i < this.tabJours.length; i++) {
+      if ((<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber != undefined) {
+        this.totalAstreinte2 = this.totalAstreinte2 + (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
+      }
+    }
+    return this.totalAstreinte2;
+
+  }
+
+  totalAstreinte3 = 0;
+
+  total7() {
+    var i;
+    this.totalAstreinte3 = 0;
+    for (i = 0; i < this.tabJours.length - 1; i++) {
+      if ((<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber != undefined) {
+        this.totalAstreinte3 = this.totalAstreinte3 + (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
+      }
+    }
+    return this.totalAstreinte3;
+
+  }
 
 
 
@@ -1216,7 +1337,117 @@ export class ActiviteComponent implements OnInit {
 
 
 
+  joursFerie!: JoursFerie[];
+  LesJoursFerie: Date[] = [];
 
+  disableJoursFerie() {
+    this._ActivityService.checkJoursFeriées().subscribe(
+      data => {
+        this.joursFerie = data;
+      },
+      error => console.log("error")
+    )
+    setTimeout(() => {
+
+      for (var t = 0; t < this.joursFerie.length; t++) {
+        this.LesJoursFerie[t] = new Date(this.joursFerie[t].date)
+      }
+
+      for (var i = 0; i < this.tabJours.length; i++) {
+        for (var j = 0; j < this.LesJoursFerie.length; j++) {
+          if (this.tabJours[i] == this.LesJoursFerie[j].getDate() && this.monthSelected == (this.LesJoursFerie[j].getMonth() + 1) && this.yearInput == this.LesJoursFerie[j].getFullYear()) {
+
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay2[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay3[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay4[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+            (<HTMLInputElement>document.getElementById(this.remotePerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+          }
+
+        }
+      }
+    }, 250);
+  }
+
+
+
+  allDaysOfTheMonth: Date[] = [];
+
+  disableWeekend() {
+
+    for (var i = 0; i < this.tabJours.length; i++) {
+      this.allDaysOfTheMonth[i] = new Date(this.yearInput, this.monthSelected - 1, this.tabJours[i]);
+      if (this.allDaysOfTheMonth[i].getDay() === 6 || this.allDaysOfTheMonth[i].getDay() === 0) {
+
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+        (<HTMLInputElement>document.getElementById(this.remotePerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+      }
+    }
+
+
+
+  }
+
+
+  
 
 
 

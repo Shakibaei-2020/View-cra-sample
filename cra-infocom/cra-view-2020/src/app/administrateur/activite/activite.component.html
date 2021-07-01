@@ -93,7 +93,7 @@
             <td>{{activity.firstNameCollab}}</td>
             <td>{{activity.startDate | date: 'dd/MM/yyyy' }}</td>
             <td>
-            <!--   <button type="button" class="btn btn-dark btn-block" data-toggle="modal"[attr.data-target]=" '#myActivitymodal-'+ indexOfelement" (click)="onInitModal(activity,activitys)">Éditer</button>-->
+  <button type="button" class="btn btn-dark btn-block" data-toggle="modal"[attr.data-target]=" '#myActivitymodal-'+ indexOfelement" (click)="onInitModal(activity,activitys)">Éditer</button>
             </td>
           </tr>
         </tbody>
@@ -277,7 +277,7 @@
                               </select>
                             </td>
                             <td>
-                              <select type="number" class="" [(ngModel)]="selectedUniteAstreint1">
+                              <select type="number" class="" [(ngModel)]="selectedUniteAstreint1" >
                                 <option value="1">Heure</option>
                                 <option value="2">Jour</option>
                               </select>
