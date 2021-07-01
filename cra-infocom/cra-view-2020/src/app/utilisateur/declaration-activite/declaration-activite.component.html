@@ -15,15 +15,14 @@
     <option value="3">Mars</option>
     <option value="4">Avril</option>
     <option value="5">Mai</option>
-    <option value="6">Juin</option>
-    <!-- 
+    <option value="6">Juin</option> 
     <option value="7">Juillet</option>
     <option value="8">Août</option>
     <option value="9">Septembre</option>
     <option value="10">Octobre</option>
     <option value="11">Novembre</option>
     <option value="12">Décembre</option>
-  -->
+ 
   </select>
   <select class="form-input3" value="2021" [(ngModel)]="yearInput" name="yearInput"  (change)="historique()">
     <option value="2021">2021</option>
@@ -219,9 +218,10 @@
           </select>
         </td>
         <td>
-          <select type="number" class="form-input" [(ngModel)]="selectedTypeUpdateValue2"
-            (change)="selectedTypeUpdate2()">
-            <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
+          <select type="number" class="form-input"  id="selectedTypeUpdateValue2"  [(ngModel)]="selectedTypeUpdateValue2" (change)="selectedTypeUpdate2()">
+            <option [disabled]="typeActivity.id === 1 " [hidden]="typeActivity.id === 1 "
+              *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}" selected="true"
+              disabled="disabled">{{typeActivity.type}}
             </option>
           </select>
         </td>
@@ -250,9 +250,10 @@
           </select>
         </td>
         <td>
-          <select type="number" class="form-input" [(ngModel)]="selectedTypeUpdateValue3"
-            (change)="selectedTypeUpdate3()">
-            <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">{{typeActivity.type}}
+          <select type="number" class="form-input"  id="selectedTypeUpdateValue3"  [(ngModel)]="selectedTypeUpdateValue3" (change)="selectedTypeUpdate3()">
+            <option [disabled]="typeActivity.id === 1 " [hidden]="typeActivity.id === 1 "
+              *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}" selected="true"
+              disabled="disabled">{{typeActivity.type}}
             </option>
           </select>
         </td>

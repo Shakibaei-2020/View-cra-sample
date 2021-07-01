@@ -356,9 +356,7 @@ export class DeclarationActiviteComponent implements OnInit {
                   this.astreinte2ToEdit = data;
                   for (var i = 0; i < this.tabJours.length; i++) {
                     this.idOfDaysAstreinte2.push(this.astreinte2ToEdit[i].id);
-           
                   }
-            
                   this.total6()
                 },
                 error => console.log("exception" + error)
@@ -380,10 +378,7 @@ export class DeclarationActiviteComponent implements OnInit {
                 },
                 error => console.log("exception" + error)
               )
-
-
             }
-
           },
         )
 
@@ -745,7 +740,6 @@ export class DeclarationActiviteComponent implements OnInit {
   /** Select Type activité via l'id */
   theTypeActivity1 = new TypeActivity();
   selectedTypeUpdate1() {
-
     this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue1).subscribe(
       data => {
         this.theTypeActivity1 = data;
@@ -788,13 +782,14 @@ export class DeclarationActiviteComponent implements OnInit {
   theTypeActivity2 = new TypeActivity();
   /** Select Type activité via l'id */
   selectedTypeUpdate2() {
-
     this._TypeActivityService.selectTypeActivityById(this.selectedTypeUpdateValue2).subscribe(
-      data => this.theTypeActivity2 = data,
+      data => {
+        this.theTypeActivity2 = data;
+        return this.theTypeActivity2;
+      },
       error => console.log("exception" + error)
     )
   }
-
 
   theProjectAstreinte2 = new Project();
   onChangeSelectprojectAstreinte2() {
@@ -1045,7 +1040,6 @@ export class DeclarationActiviteComponent implements OnInit {
         }
       }
     }, 100);
-
     /** adding/update Activity 2 */
     setTimeout(() => {
       for (var i = 0; i < this.tabJours.length; i++) {
@@ -1159,7 +1153,6 @@ export class DeclarationActiviteComponent implements OnInit {
     }, 100);
 
 
-
     /** UPDATE ET AJOUT ASTREINTE 1 */
     setTimeout(() => {
       for (var i = 0; i < this.tabJours.length; i++) {
@@ -1200,12 +1193,87 @@ export class DeclarationActiviteComponent implements OnInit {
         }
       }
     }, 100);
+    /** UPDATE ET AJOUT ASTREINTE 2 */
+    setTimeout(() => {
+      for (var i = 0; i < this.tabJours.length; i++) {
+        if (this.isEmptyAstreinte2 === true) {
+          if (this.totalAstreinte2 != 0) {
+            this.astreinte2.collaboratorId = this.collaborateur.id;
+            this.astreinte2.projectId = this.theProjectAstreinte2.id;
+            this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
+            this.astreinte2.typeActivity = this.theTypeActivity2;
+            this.astreinte2.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+            this.aujourdhui = this.pipeDate.transform(this.astreinte2.startDate, 'yyyy-MM-dd') || this.aujourdhui;
 
+            this._ActivityService.addAndUpdateActivity(this.astreinte2, this.aujourdhui).subscribe(
+              data => { console.log("astreinte 2  ajouté "); },
+              error => { console.log("erreur ajout non-effectué") }
+            )
 
+          }
+        } else {
+          this.newAstreinte2 = new Activity;
+          if (this.totalAstreinte2 != 0) {
+            this.newAstreinte2.id = this.idOfDaysAstreinte2[i];
+            this.newAstreinte2.collaboratorId = this.collaborateur.id;
+            this.newAstreinte2.projectId = this.theProjectAstreinte2.id;
+            this.newAstreinte2.typeActivity = this.theTypeActivity2;
+            this.newAstreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
+            this.newAstreinte2.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+            this.aujourdhui = this.pipeDate.transform(this.newAstreinte2.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+
+            this._ActivityService.addAndUpdateActivity(this.newAstreinte2, this.aujourdhui).subscribe(
+              data => { console.log("astreinte 2 updated"); },
+              error => { console.log("erreur updated non-effectué") }
+            )
+          }
+
+        }
+      }
+    }, 100);
+    /** UPDATE ET AJOUT ASTREINTE 3 */
+    setTimeout(() => {
+      for (var i = 0; i < this.tabJours.length; i++) {
+        if (this.isEmptyAstreinte3 === true) {
+          if (this.totalAstreinte3 != 0) {
+            this.astreinte3.collaboratorId = this.collaborateur.id;
+            this.astreinte3.projectId = this.theProjectAstreinte3.id;
+            this.astreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
+            this.astreinte3.typeActivity = this.theTypeActivity3;
+            this.astreinte3.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+            this.aujourdhui = this.pipeDate.transform(this.astreinte3.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+
+            this._ActivityService.addAndUpdateActivity(this.astreinte3, this.aujourdhui).subscribe(
+              data => { console.log("astreinte 3  ajouté "); },
+              error => { console.log("erreur ajout non-effectué") }
+            )
+
+          }
+        } else {
+          this.newAstreinte3 = new Activity;
+          if (this.totalAstreinte3 != 0) {
+            this.newAstreinte3.id = this.idOfDaysAstreinte2[i];
+            this.newAstreinte3.collaboratorId = this.collaborateur.id;
+            this.newAstreinte3.projectId = this.theProjectAstreinte3.id;
+            this.newAstreinte3.typeActivity = this.theTypeActivity3;
+            this.newAstreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
+            this.newAstreinte3.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
+            this.aujourdhui = this.pipeDate.transform(this.newAstreinte3.startDate, 'yyyy-MM-dd') || this.aujourdhui;
+
+            this._ActivityService.addAndUpdateActivity(this.newAstreinte3, this.aujourdhui).subscribe(
+              data => { console.log("astreinte 2 updated"); },
+              error => { console.log("erreur updated non-effectué") }
+            )
+          }
+
+        }
+      }
+    }, 100);
     /** ajout expense */
     //await this.checkExpenseEmpty();
 
 
+    // note de frais ajout
     setTimeout(() => {
 
       if (!this.expenseExist) {
@@ -1221,6 +1289,7 @@ export class DeclarationActiviteComponent implements OnInit {
     }, 500);
 
 
+    // reloadpage
     setTimeout(() => {
       //location.reload();
     }, 200);
@@ -1427,6 +1496,7 @@ export class DeclarationActiviteComponent implements OnInit {
           this._ActivityService.astreinteGroupByProject(this.monthSelected, this.yearInput, this.collaborateur.id).subscribe(
             data => {
               this.allAstreinteToEdit = data;
+              
               this._ActivityService.astreinteGroupByTypeActivity(this.monthSelected, this.yearInput, this.collaborateur.id).subscribe(
                 data => {
                   this.allAstreinteTypeToEdit = data;
@@ -1440,21 +1510,22 @@ export class DeclarationActiviteComponent implements OnInit {
                       this.disableWeekend();
                     }, 200);
                   }
+                 
+
                   this.nbTypeAstreinteWithId = [];
                   this.nbAstreinteWithId = [];
-                  for (var i = 0; i < this.allAstreinteToEdit.length; i++) {
-                    this.nbAstreinteWithId.push(this.allAstreinteToEdit[i].projectId);
+                  for (var i = 0; i < this.allAstreinteTypeToEdit.length; i++) {
+                    this.nbAstreinteWithId.push(this.allAstreinteTypeToEdit[i].projectId);
                     this.nbTypeAstreinteWithId.push(this.allAstreinteTypeToEdit[i].typeActivity.id);
                   }
+          
                   /** astreinte 1  */
-                  console.log("cocuoucoucou")
                   if (this.nbTypeAstreinteWithId[0] !== undefined) {
                     this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbAstreinteWithId[0], this.nbTypeAstreinteWithId[0]).subscribe(
                       data => {
                         this.astreinte1ToEdit = data;
                         for (var i = 0; i < this.tabJours.length; i++) {
                           (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber = this.astreinte1ToEdit[i].duration;
-                          console.log(" coucou " + this.astreintePerDay1)
                           this._TypeActivityService.selectTypeActivityById(this.astreinte1ToEdit[i].typeActivity.id).subscribe(
                             data => {
                               this.theTypeActivity1 = data;
@@ -1462,7 +1533,6 @@ export class DeclarationActiviteComponent implements OnInit {
                             },
                             error => console.log("exception" + error)
                           )
-
                           this._ProjectService.selectProjectById(this.astreinte1ToEdit[i].projectId).subscribe(
                             data => {
                               this.theProjectAstreinte1 = data;
@@ -1470,7 +1540,6 @@ export class DeclarationActiviteComponent implements OnInit {
                             },
                             error => console.log("exception" + error)
                           )
-
                           this.total5();
                         }
                       },
@@ -1478,8 +1547,60 @@ export class DeclarationActiviteComponent implements OnInit {
                     )
                   }
                   /** astreinte 2 */
+                  if (this.nbTypeAstreinteWithId[1] !== undefined) {
+
+                    this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbAstreinteWithId[1], this.nbTypeAstreinteWithId[1]).subscribe(
+                      data => {
+                        this.astreinte2ToEdit = data;
+                        for (var i = 0; i < this.tabJours.length; i++) {
+                          (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber = this.astreinte2ToEdit[i].duration;
+                          this._TypeActivityService.selectTypeActivityById(this.astreinte2ToEdit[i].typeActivity.id).subscribe(
+                            data => {
+                              this.theTypeActivity2 = data;
+                              this.selectedTypeUpdateValue2 = this.theTypeActivity2.id;
+                            },
+                            error => console.log("exception" + error)
+                          )
+                          this._ProjectService.selectProjectById(this.astreinte2ToEdit[i].projectId).subscribe(
+                            data => {
+                              this.theProjectAstreinte2 = data;
+                              this.selectedProjectAstreint2 = this.theProjectAstreinte2.id;
+                            },
+                            error => console.log("exception" + error)
+                          )
+                          this.total6();
+                        }
+                      },
+                      error => console.log("exception" + error)
+                    )
+                  }
                   /** astreinte 3 */
-                  /** astreinte 4 */
+                  if (this.nbTypeAstreinteWithId[2] !== undefined) {
+                    this._ActivityService.searchTheAstreinteOfCollaboratorOfProject(this.monthSelected, this.yearInput, this.collaborateur.id, this.nbAstreinteWithId[2], this.nbTypeAstreinteWithId[2]).subscribe(
+                      data => {
+                        this.astreinte3ToEdit = data;
+                        for (var i = 0; i < this.tabJours.length; i++) {
+                          (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber = this.astreinte3ToEdit[i].duration;
+                          this._TypeActivityService.selectTypeActivityById(this.astreinte3ToEdit[i].typeActivity.id).subscribe(
+                            data => {
+                              this.theTypeActivity3 = data;
+                              this.selectedTypeUpdateValue3 = this.theTypeActivity3.id;
+                            },
+                            error => console.log("exception" + error)
+                          )
+                          this._ProjectService.selectProjectById(this.astreinte3ToEdit[i].projectId).subscribe(
+                            data => {
+                              this.theProjectAstreinte3 = data;
+                              this.selectedProjectAstreint3 = this.theProjectAstreinte3.id;
+                            },
+                            error => console.log("exception" + error)
+                          )
+                          this.total7();
+                        }
+                      },
+                      error => console.log("exception" + error)
+                    )
+                  }
 
 
                 },
@@ -2074,6 +2195,15 @@ export class DeclarationActiviteComponent implements OnInit {
             (<HTMLInputElement>document.getElementById(this.remotePerDay4[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
             (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
             (<HTMLInputElement>document.getElementById(this.remotePerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.LesJoursFerie[j].getDate() - 1])).disabled = true;
+            (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
           }
 
         }
@@ -2115,6 +2245,19 @@ export class DeclarationActiviteComponent implements OnInit {
         (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
         (<HTMLInputElement>document.getElementById(this.activitiesPerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
         (<HTMLInputElement>document.getElementById(this.remotePerDay4[this.allDaysOfTheMonth[i].getDate() - 1])).checked = false;
+
+
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay1[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay2[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
+
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).disabled = false;
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).style.backgroundColor = 'grey';
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay3[this.allDaysOfTheMonth[i].getDate() - 1])).valueAsNumber = 0;
       }
     }
 
