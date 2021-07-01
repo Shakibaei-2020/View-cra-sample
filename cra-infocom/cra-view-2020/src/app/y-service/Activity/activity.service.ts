@@ -53,6 +53,12 @@ export class ActivityService {
   astreinteGroupByTypeActivity(month: number,year: number,idColl: number): Observable<Activity[]> {
     return this._http.get<Activity[]>("http://localhost:8800/activity/astreinteGroupByTypeActivity/" + month + "/" + year + "/" + idColl);
   }
+
+  astreinteGroupByTypeActivityAndProjet(month: number,year: number,idColl: number): Observable<Activity[]> {
+    return this._http.get<Activity[]>("http://localhost:8800/activity/astreinteGroupByTypeActivityAndProjet/" + month + "/" + year + "/" + idColl);
+  }
+
+
   
 
   /** FOR ACTIVITY */
