@@ -190,6 +190,24 @@ input[type=text] {
   margin-bottom: 5%;
 }
 
+.message{
+  color:green;
+}
+.send2{
+  height: 30px;
+  width: 160px;
+
+  float: left;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #363636;
+  border: none;
+  border-radius: 15px;
+  margin-bottom: 5%;
+}
 
 
 th{

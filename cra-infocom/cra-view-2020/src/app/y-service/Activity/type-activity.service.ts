@@ -14,11 +14,20 @@ export class TypeActivityService {
     return this._http.get<TypeActivity>("http://localhost:8800/typesactivity/lister/" + id);
   }
 
+  findNormalActivity(): Observable<TypeActivity> {
+    return this._http.get<TypeActivity>("http://localhost:8800/typesactivity/Normal");
+  }
+
+
+  findPanierRepas(): Observable<TypeActivity> {
+    return this._http.get<TypeActivity>("http://localhost:8800/typesactivity/PanierRepas");
+  }
+
+
   selectAllTypeActivity(): Observable<TypeActivity[]> {
     return this._http.get<TypeActivity[]>("http://localhost:8800/typesactivity/lister/");
   }
 
-  
   addNewTypeActivit(typeActivity: TypeActivity): Observable<TypeActivity> {
     return this._http.post<TypeActivity>("http://localhost:8800/typesactivity/ajouter", typeActivity);
   }

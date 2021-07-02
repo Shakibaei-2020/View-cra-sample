@@ -15,6 +15,9 @@ import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 import { Mission } from 'src/app/z-model/Mission/mission';
 import { Project } from 'src/app/z-model/Project/project';
 import { ProjectCollaborator } from 'src/app/z-model/ProjectCollaborator/project-collaborator';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-activite',
@@ -29,6 +32,16 @@ export class ActiviteComponent implements OnInit {
   year!: number;
   day!: number;
   daysInMonth!: number;
+
+
+  totalActivity1 = "totalProjet1";
+  totalActivity2 = "totalProjet2";
+  totalActivity3 = "totalProjet3";
+  totalActivity4 = "totalProjet4";
+
+  totalAstreinte1HTML = "totalAstreinte1HTMl";
+  totalAstreinte2HTML = "totalAstreinte2HTMl";
+  totalAstreinte3HTML = "totalAstreinte3HTMl";
 
   monthSelected = this.dt.getMonth() + 1;
   yearInput = this.dt.getFullYear();
@@ -83,28 +96,28 @@ export class ActiviteComponent implements OnInit {
   idOfCollabActivity1 = new Array();
   idOfProjectActivity1 = new Array();
   idOfTypeActivity1 = new Array();
-  projectActivityNormal!: Project;
+  projectActivityNormal = new Project;
 
   activity2ToEdit!: Activity[];
   idOfDaysActivity2 = new Array();
   idOfCollabActivity2 = new Array();
   idOfProjectActivity2 = new Array();
   idOfTypeActivity2 = new Array();
-  projectActivity2!: Project;
+  projectActivity2 = new Project;
 
   activity3ToEdit!: Activity[];
   idOfDaysActivity3 = new Array();
   idOfCollabActivity3 = new Array();
   idOfProjectActivity3 = new Array();
   idOfTypeActivity3 = new Array();
-  projectActivity3!: Project;
+  projectActivity3 = new Project;
 
   activity4ToEdit!: Activity[];
   idOfDaysActivity4 = new Array();
   idOfCollabActivity4 = new Array();
   idOfProjectActivity4 = new Array();
   idOfTypeActivity4 = new Array();
-  projectActivity4!: Project;
+  projectActivity4 = new Project;
   /** ASTREINTE */
 
   astreinte1ToEdit!: Activity[];
@@ -453,7 +466,6 @@ export class ActiviteComponent implements OnInit {
       data => {
         this.allAstreinteToEdit = data;
 
-        console.log(this.allAstreinteToEdit)
 
         for (i = 0; i < this.allAstreinteToEdit.length; i++) {
           this.nbAstreinteWithId.push(this.allAstreinteToEdit[i].projectId);
@@ -883,7 +895,7 @@ export class ActiviteComponent implements OnInit {
 
   selectedProjectAstreint1!: number;
   selectedTypeUpdateValue1!: number;
-  selectedUniteAstreint1!: number;
+  selectedUniteAstreint1 = 2;
 
   /** Remplissage automatique de l'estreinte*/
   remplirAstreinte1() {
@@ -931,7 +943,7 @@ export class ActiviteComponent implements OnInit {
 
   selectedProjectAstreint2!: number;
   selectedTypeUpdateValue2!: number;
-  selectedUniteAstreint2!: number;
+  selectedUniteAstreint2 = 2;
 
   /** Remplissage automatique de l'estreinte*/
   remplirAstreinte2() {
@@ -981,7 +993,7 @@ export class ActiviteComponent implements OnInit {
 
   selectedProjectAstreint3!: number;
   selectedTypeUpdateValue3!: number;
-  selectedUniteAstreint3!: number;
+  selectedUniteAstreint3 = 2;
 
   /** Remplissage automatique de l'estreinte*/
   remplirAstreinte3() {
@@ -1000,7 +1012,7 @@ export class ActiviteComponent implements OnInit {
 
     setTimeout(() => {
       this.disableWeekend();
-    },50);
+    }, 50);
     setTimeout(() => {
       this.total7();
     }, 50);
@@ -1045,6 +1057,9 @@ export class ActiviteComponent implements OnInit {
   selectedProject3 = new Project();
   selectedProject4 = new Project();
 
+  message!: string;
+  messageErreur!: string;
+
   async EnregisterEtEnvoyer() {
 
     this.activityNormal = new Activity;
@@ -1071,7 +1086,9 @@ export class ActiviteComponent implements OnInit {
             console.log("activity 1 updated");
           },
           error => {
-            console.log("erreur mise à jour non-effectué")
+            console.log("erreur mise à jour non-effectué");
+            this.messageErreur = "Enregistrement non effectué !";
+
           }
         )
       }
@@ -1084,16 +1101,16 @@ export class ActiviteComponent implements OnInit {
         this.activity2.typeActivity = this.idOfTypeActivity2[i];
         this.activity2.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber;
         this.activity2.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay2[i])).checked;
-        // on ajoute la date ici pourquoi la mettre en arguments
         this.activity2.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
         this.aujourdhui = this.pipeDate.transform(this.activity2.startDate, 'yyyy-MM-dd') || this.aujourdhui;
-        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
         this._ActivityService.addAndUpdateActivity(this.activity2, this.aujourdhui).subscribe(
           data => {
             console.log("activity 2 ajouté");
           },
           error => {
-            console.log("erreur ajout non-effectué")
+            console.log("erreur ajout non-effectué");
+            this.messageErreur = "Enregistrement non effectué !";
+
           }
         )
       }
@@ -1107,16 +1124,16 @@ export class ActiviteComponent implements OnInit {
         this.activity3.typeActivity = this.idOfTypeActivity3[i];
         this.activity3.duration = (<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber;
         this.activity3.remote = (<HTMLInputElement>document.getElementById(this.remotePerDay3[i])).checked;
-        // on ajoute la date ici pourquoi la mettre en arguments
         this.activity3.startDate = new Date(this.yearInput, this.monthSelected - 1, i + 1);
         this.aujourdhui = this.pipeDate.transform(this.activity3.startDate, 'yyyy-MM-dd') || this.aujourdhui;
-        // Il faut faire en sorte d'ajouter en fonction mois choisi le jour ou de l'activité.
         this._ActivityService.addAndUpdateActivity(this.activity3, this.aujourdhui).subscribe(
           data => {
             console.log("activity 3 ajouté");
           },
           error => {
-            console.log("erreur ajout non-effectué")
+            console.log("erreur ajout non-effectué");
+            this.messageErreur = "Enregistrement non effectué !";
+
           }
         )
       }
@@ -1140,7 +1157,9 @@ export class ActiviteComponent implements OnInit {
             console.log("activity 4 ajouté");
           },
           error => {
-            console.log("erreur ajout non-effectué")
+            console.log("erreur ajout non-effectué");
+            this.messageErreur = "Enregistrement non effectué !";
+
           }
         )
       }
@@ -1156,13 +1175,23 @@ export class ActiviteComponent implements OnInit {
         this.astreinte1.collaboratorId = this.idOfCollabAstreinte1[i];
         this.astreinte1.projectId = this.projectAstreinte1.id;
         this.astreinte1.typeActivity = this.typeAstreinte1;
-        this.astreinte1.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
+
+
+
+        if (this.selectedUniteAstreint1 == 1) {
+          this.astreinte1.duration = +((<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber / 24).toFixed(2);
+        } else {
+          this.astreinte1.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber;
+        }
+
         this._ActivityService.addAndUpdateActivity(this.astreinte1, this.aujourdhui).subscribe(
           data => {
             console.log("astreinte 1  updated ");
           },
           error => {
             console.log("erreur update non-effectué")
+            this.messageErreur = "Enregistrement non effectué !";
+
           }
         )
       }
@@ -1175,13 +1204,21 @@ export class ActiviteComponent implements OnInit {
         this.astreinte2.collaboratorId = this.idOfCollabAstreinte2[i];
         this.astreinte2.projectId = this.projectAstreinte2.id;
         this.astreinte2.typeActivity = this.typeAstreinte2;
-        this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
+
+        if (this.selectedUniteAstreint2 == 1) {
+          this.astreinte2.duration = +((<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber / 24).toFixed(2);
+        } else {
+          this.astreinte2.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber;
+        }
+
         this._ActivityService.addAndUpdateActivity(this.astreinte2, this.aujourdhui).subscribe(
           data => {
             console.log("astreinte 2 updated ");
           },
           error => {
-            console.log("erreur update non-effectué")
+            console.log("erreur update non-effectué");
+            this.messageErreur = "Enregistrement non effectué !";
+
           }
         )
       }
@@ -1193,17 +1230,33 @@ export class ActiviteComponent implements OnInit {
         this.astreinte3.collaboratorId = this.idOfCollabAstreinte3[i];
         this.astreinte3.projectId = this.projectAstreinte3.id;
         this.astreinte3.typeActivity = this.typeAstreinte3;
-        this.astreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
+
+        if (this.selectedUniteAstreint3 == 1) {
+          this.astreinte3.duration = +((<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber / 24).toFixed(2);
+        } else {
+          this.astreinte3.duration = (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber;
+        }
         this._ActivityService.addAndUpdateActivity(this.astreinte3, this.aujourdhui).subscribe(
           data => {
             console.log("astreinte  3 updated");
           },
           error => {
             console.log("erreur update non-effectué")
+            this.messageErreur = "Enregistrement non effectué !";
+
           }
         )
       }
     }
+
+    this.message = "Enregistrement effectué !"
+
+    setTimeout(() => {
+      this.message = ""
+    }, 4000);
+
+
+    this.Envoyer();
   }
 
 
@@ -1447,7 +1500,156 @@ export class ActiviteComponent implements OnInit {
   }
 
 
-  
+
+
+  Envoyer() {
+
+    var tabActitivty1 = [];
+    var tabActitivty2 = [];
+    var tabActitivty3 = [];
+    var tabActitivty4 = [];
+
+    var tableOfindex = [];
+    var valueActivity1 = [];
+    var valueActivity2 = [];
+    var valueActivity3 = [];
+    var valueActivity4 = [];
+
+    
+
+    var activitySelected1 = this.projectActivityNormal.projectTitle || "";
+    var activitySelected2 = this.projectActivity2.projectTitle || "";
+    var activitySelected3 = this.projectActivity3.projectTitle || "";
+    var activitySelected4 = this.projectActivity4.projectTitle || "";
+
+    tableOfindex.push('Activité')
+    valueActivity1.push(activitySelected1 || "")
+    valueActivity2.push(activitySelected2 || "")
+    valueActivity3.push(activitySelected3 || "")
+    valueActivity4.push(activitySelected4 || "")
+
+
+    for (var i = 0; i < this.tabJours.length - 1; i++) {
+      tableOfindex.push([this.tabJours[i]]);
+      valueActivity1.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber) || "";
+      valueActivity2.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber) || "";
+      valueActivity3.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber) || "";
+      valueActivity4.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber) || "";
+
+    }
+
+    var totalActivity1 = this.totalProjet1
+    var totalActivity2 = this.totalProjet2
+    var totalActivity3 = this.totalProjet3
+    var totalActivity4 = this.totalProjet4
+
+
+
+    tableOfindex.push('total')
+    valueActivity1.push(totalActivity1 || "")
+    valueActivity2.push(totalActivity2 || "")
+    valueActivity3.push(totalActivity3 || "")
+    valueActivity4.push(totalActivity4 || "")
+
+
+
+    for (var i of [1]) {
+      tabActitivty1.push(tableOfindex)
+      tabActitivty1.push(valueActivity1);
+
+      tabActitivty2.push(tableOfindex)
+      tabActitivty2.push(valueActivity2);
+
+      tabActitivty3.push(tableOfindex)
+      tabActitivty3.push(valueActivity3);
+
+      tabActitivty4.push(tableOfindex)
+      tabActitivty4.push(valueActivity4);
+
+    }
+
+
+
+    var dlActivity1 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:',
+        {
+          table: {
+            width: 'auto',
+            body: tabActitivty1,
+          }
+        }
+      ]
+    }
+
+    var dlActivity2 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:', {
+          table: {
+            width: 'auto',
+            body: tabActitivty2,
+          }
+        }
+      ]
+    }
+
+    var dlActivity3 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:', {
+          table: {
+            width: 'auto',
+            body: tabActitivty2,
+          }
+        }
+      ]
+    }
+
+    var dlActivity4 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:', {
+          table: {
+            width: 'auto',
+            body: tabActitivty2,
+          }
+        }
+      ]
+    }
+
+    if (totalActivity1 !== 0) {
+      pdfMake.createPdf(dlActivity1).download();
+    }
+
+    if (totalActivity2 !== 0) {
+      pdfMake.createPdf(dlActivity2).download();
+    }
+
+    if (totalActivity3 !== 0) {
+      pdfMake.createPdf(dlActivity3).download();
+    }
+
+    if (totalActivity4 !== 0) {
+      pdfMake.createPdf(dlActivity4).download();
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
