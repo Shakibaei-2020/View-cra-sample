@@ -12,14 +12,18 @@
 
         <div class="bio-row">
           <div class="inputbox mt-1"><span class="input-title">Coût HT :</span>
-            <input autocomplete="off" type="text" id="costHTHTML " requireds [(ngModel)]="expense.costHT" name="expense.costHT"
-              (input)="updateTTC()">
+            <div class="input-group-prepend">
+              <input autocomplete="off" type="text" id="costHTHTML " requireds
+                [(ngModel)]="expense.costHT" name="expense.costHT" (input)="updateTTC()">
+              <span class="input-group-text devise">€</span> 
+            </div>
           </div>
+
 
           <div class="inputbox mt-1">
             <span>Facturable :</span><br>
-            <select class="form-input" id="billiableHTML" aria-label="Default select example" required [(ngModel)]="expense.billable"
-              name="expense.billable">
+            <select class="form-input" id="billiableHTML" aria-label="Default select example" required
+              [(ngModel)]="expense.billable" name="expense.billable">
               <option value="true">Oui</option>
               <option value="false">Non</option>
             </select>
@@ -27,8 +31,8 @@
 
           <div class="inputbox mt-1">
             <span>Nature des frais :</span><br>
-            <select class="form-input" id="typeExpenseHTML"   aria-label="Default select example" required [(ngModel)]="idOfExpenseType"
-              name="idOfExpenseType" (change)="getExpenseType()">
+            <select class="form-input" id="typeExpenseHTML" aria-label="Default select example" required
+              [(ngModel)]="idOfExpenseType" name="idOfExpenseType" (change)="getExpenseType()">
               <option *ngFor="let typeExpense of allTypeExpense" value="{{typeExpense.id}}">{{typeExpense.type}}
               </option>
             </select>
@@ -38,17 +42,28 @@
         <div class="bio-row">
           <div class="inputbox mt-1">
             <span class="input-title">Coût TVA :</span>
-            <input autocomplete="off"   id="costTVAHTML"   type="text" required [(ngModel)]="expense.costTVA" (input)="updateTTC()">
+            <div class="input-group-prepend">
+              <input autocomplete="off" id="costTVAHTML" type="text" required [(ngModel)]="expense.costTVA"
+              (input)="updateTTC()">
+              <span class="input-group-text devise">€</span>
+            </div>
+          
+        
           </div>
 
           <div class="inputbox mt-1">
             <span class="input-title">Coût TTC :</span>
-            <input autocomplete="off" id="costTTCHTML"  type="text" placeholder="{{costTTC}}" disabled>
+
+            <div class="input-group-prepend">
+              <input autocomplete="off" id="costTTCHTML" type="text" placeholder="{{costTTC}}" disabled>
+
+              <span class="input-group-text devise">€</span>
+            </div>
           </div>
 
           <div class="inputbox mt-1">
             <span class="input-title">Date de frais :</span>
-            <input type="Date" required [(ngModel)]="dateExpense" id="dateExpenseHTML"  name="dateExpense">
+            <input type="Date" required [(ngModel)]="dateExpense" id="dateExpenseHTML" name="dateExpense">
           </div>
         </div>
 
@@ -87,7 +102,7 @@
       </div>
     </div>
     <div>
-
+      <!-- 
 
       <span>Remboursement de frais du </span>
       <select class="form-input2" aria-label="Default select example" required [(ngModel)]="monthSelected"
@@ -189,61 +204,158 @@
               </tbody>
             </table>
           </div>
-        </div>
-
+        </div> 
         <br>
         <hr>
         <br>
+-->
 
-        <h2>Vos demandes :</h2>
-        <table class="table table-condensed">
-          <thead>
-            <tr>
-              <th>
-                <p>Date de la demande</p>
-              </th>
-              <th>
-                <p>Date de frais</p>
-              </th>
-              <th>
-                <p>Coût HT</p>
-              </th>
-              <th>
-                <p>Coût TVA </p>
-              </th>
-              <th>
-                <p>Coût TTC </p>
-              </th>
-              <th>
-                <p>État de la demande</p>
-              </th>
-              <th>
-                <p class="Action">Action</p>
-              </th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let expense of expensesOfCollab">
-              <td>{{expense.dateRequest | date: 'dd/MM/yyyy'}}</td>
-              <td>{{expense.dateExpense | date: 'dd/MM/yyyy' }}</td>
-              <td>{{expense.costHT}} €</td>
-              <td>{{expense.costTVA}} €</td>
-              <td>{{expense.costTTC}} €</td>
-              <td>{{expense.status}}</td>
-              <td><button class="btnEditer" (click)="deleteExpenseById(expense.id)">Supprimer</button></td>
-            </tr>
-          </tbody>
+      <h2>Vos demandes :</h2>
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>
+              <p>Date de la demande</p>
+            </th>
+            <th>
+              <p>Date de frais</p>
+            </th>
+            <th>
+              <p>Catégorie</p>
+            </th>
 
-        </table>
-        <button (click)="Envoyer()">test</button>
-        <button (click)="EnvoyerMail()">send Mail</button>
-        <a href="mailto:mohashakibaei@outlook.fr">Contact via E-mail</a>
+            <th>
+              <p>Coût total</p>
+            </th>
+            <th>
+              <p>État de la demande</p>
+            </th>
+            <th>
+              <p class="Action">Action</p>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let expense of expensesOfCollab; let indexOfelement =index;">
+            <td>{{expense.dateRequest | date: 'dd/MM/yyyy'}}</td>
+            <td>{{expense.dateExpense | date: 'dd/MM/yyyy' }}</td>
+            <td>{{expense.typeExpense.type}}</td>
+            <td>{{expense.costTTC}} €</td>
+            <td>{{expense.status}}</td>
+
+            <button type="button"class="btn btn-dark btn-block"  (click)="onInitModal(expense)" data-toggle="modal" [attr.data-target]=" '#myExpenseModal-' + indexOfelement" >Éditer</button>
+
+          </tr>
+        </tbody>
+
+      </table>
+
+
+
+          <!-- Modal -->
+    <div *ngFor="let expense of expensesOfCollab; let indexOfelement =index;">
+
+      <div class="modal fade" id="myExpenseModal-{{indexOfelement}}" role="dialog">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Gestion de la demande de frais de {{expense.nomCollab}} {{expense.prenomCollab}}  du {{expense.dateRequest  | date: 'dd/MM/yyyy'}}</h3>
+              <div class="toHide">
+                 <input type="text" value="{{expense.id}}" name="expenseRequestId-{{indexOfelement}}" id="expenseRequestId-{{indexOfelement}}" disabled> 
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+
+                <!-- Colonne 1-->
+                <div class="col-sm-6">
+
+                  <div class="inputbox mt-1">
+                    <span> Cout HT : </span><br>
+                    <input class="modal-input"  [(ngModel)]="costHTOfExpense"   autocomplete="off"   type="number"  value="{{expense.costHT}}" name="expenseCostHT-{{indexOfelement}}" id="expenseCostHT-{{indexOfelement}}" >
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> Cout TTC :</span><br>
+                    <input class="modal-input"   [(ngModel)]="costTTCOfExpense"   autocomplete="off"  type="number" value="" name="newCostTTC-{{indexOfelement}}" id="newCostTTC-{{indexOfelement}}"  placeholder="{{TTCvalue}}" disabled>
+                  </div>
+                 
+                  <div class="inputbox mt-1">
+                    <span> Facturable : </span><br>
+                    <select class="modal-input"  [(ngModel)]="billableOfExpense" name="expenseBillable-{{indexOfelement}}" id="expenseBillable-{{indexOfelement}}">
+                      <option hidden value="" disabled selected>{{expense.billableFR}} </option>
+                      <option value="true">oui</option>
+                      <option value="false">non</option>
+                    </select>
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> Date de frais : </span><br>
+                    <input class="modal-input" type="date"    [(ngModel)]="dateOfExpense"   value="{{expense.oldDateExpense}}" name="dateExpense-{{indexOfelement}}" id="dateExpense-{{indexOfelement}}">
+                  </div>
+
+                </div>
+
+                <!-- Colonne 2-->
+                <div class="col-sm-6">
+
+                  <div class="inputbox mt-1">
+                    <span> CoutTVA : </span><br>
+                    <input class="modal-input" autocomplete="off"   [(ngModel)]="costTVAOfExpense"  type="number" value="{{expense.costTVA}}"   name="expenseCostTVA-{{indexOfelement}}" id="expenseCostTVA-{{indexOfelement}}">
+                  </div>
+
+                  <div class="inputbox mt-1 toHide" >
+                    <span> Date demande : {{expense.dateRequest  | date: 'dd/MM/yyyy'}}</span><br>
+                    <input class="modal-input" type="date"   [(ngModel)]="dateRequestOfExpense"    name="dateExpenseRequest-{{indexOfelement}}" id="dateExpenseRequest-{{indexOfelement}}" disabled>
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> Type : </span><br>
+                    <select class="modal-input"   [(ngModel)]="typeOfExpense"   name="expenseType-{{indexOfelement}}" id="expenseType-{{indexOfelement}}">
+                      <option hidden value="" disabled selected>{{expense.typeExpense.type}} </option>
+
+                      <option *ngFor="let allExpenseTypes of allExpenseType" value="{{allExpenseTypes.id}}">{{allExpenseTypes.type}}
+                    </select>
+                  </div>
+
+                  <div class="inputbox mt-1">
+                    <span> État de la demande :</span><br>
+                    <select class="modal-input"   disabled [(ngModel)]="statusOfExpense"    name="expenseStatus-{{indexOfelement}}" id="expenseStatus-{{indexOfelement}}">
+                      <option hidden value="" disabled selected>{{expense.status}} </option>
+                      <option *ngFor="let statue of status" value={{statue}}>{{statue}}</option>
+                    </select>
+                  </div>
+
+                </div>
+                <div class="container"><br>
+                  <p class="validation" >{{validation}}</p>
+                  <p class="notValidation">{{notValidation}}</p>
+                </div>
+              </div>
+              <div class="modal-footer">
+        
+                <button class="btnModal" type="submit" (click)="updateExpense()">Maj</button>
+                <button class="btnModal" type="submit"data-dismiss="modal"  (click)="deleteExpenseById()">Supprimer</button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
       </div>
-
-
-
-
-
     </div>
 
+
+
+      <!-- <button (click)="Envoyer()">test</button>
+        <button (click)="EnvoyerMail()">send Mail</button>
+        <a href="mailto:mohashakibaei@outlook.fr">Contact via E-mail</a> -->
+    </div>
+
+
+
+
+
+  </div>

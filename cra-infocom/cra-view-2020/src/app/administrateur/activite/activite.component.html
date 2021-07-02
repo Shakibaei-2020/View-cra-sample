@@ -103,15 +103,15 @@
 
 
 
-
       <div *ngFor="let activity of activitys; let indexOfelement =index;">
 
-        <div class="modal fade" id="myActivitymodal-{{indexOfelement}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade modal-wide" id="myActivitymodal-{{indexOfelement}}" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-full" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Gestion déclaration d'activité.</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                <h2> Déclaration d'activité de {{activity.firstNameCollab}} {{activity.nameCollab}} du
+                  {{activity.startDate | date: 'dd/MM/yyyy' }} </h2>                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -120,11 +120,11 @@
                 <div class="contenue">
                   <div class="Frais">
 
-                    <h2> Déclaration d'activité de {{activity.firstNameCollab}} {{activity.nameCollab}}  du {{activity.startDate  | date: 'dd/MM/yyyy' }}   </h2>
+     
                   </div>
 
                   <!-- ACTIVITE 1-->
-                  <table>
+                  <table class="tableFont">
                     <thead>
                       <tr>
                         <th class="enTete">Projets </th>
@@ -154,7 +154,7 @@
                             type="checkbox" [checked]="isRemote" value="{{isRemote}}">
                         </td>
                         <td>
-                          <input class="inputDay twolast" id="totalActivity1" type="" value={{totalProjet1}} id=""
+                          <input class="inputDay twolast" id="totalActivity1" type="number" value={{totalProjet1}}
                             required [(ngModel)]="totalProjet1" name="totalProjet1">
                         </td>
 
@@ -182,7 +182,7 @@
                             type="checkbox" [checked]="isRemote2" value="{{isRemote2}}">
                         </td>
                         <td>
-                          <input class="inputDay twolast" id="totalActivity2" type="" value={{totalProjet2}} id=""
+                          <input class="inputDay twolast" id="totalActivity2" type="number" value={{totalProjet2}} 
                             required [(ngModel)]="totalProjet2" name="totalProjet2">
                         </td>
                       </tr>
@@ -209,7 +209,7 @@
                             type="checkbox" [checked]="isRemote3" value="{{isRemote3}}">
                         </td>
                         <td>
-                          <input class="inputDay twolast" type="" value={{totalProjet3}} id="" required
+                          <input class="inputDay twolast" id="totalActivity3" type="number" value={{totalProjet3}} required
                             [(ngModel)]="totalProjet3" name="totalProjet3">
                         </td>
                       </tr>
@@ -236,7 +236,7 @@
                             type="checkbox" [checked]="isRemote4" value="{{isRemote4}}">
                         </td>
                         <td>
-                          <input class="inputDay twolast" id="totalActivity4" type="" value={{totalProjet4}} id=""
+                          <input class="inputDay twolast" id="totalActivity4" type="number" value={{totalProjet4}}
                             required [(ngModel)]="totalProjet4" name="totalProjet4">
                         </td>
                       </tr>
@@ -245,16 +245,16 @@
                     </tbody>
                   </table>
                   <br>
-
-                  <span>Total de jours travaillés :</span> <input class="inputDay2" type="" value={{totalActivity}}
-                    required [(ngModel)]="totalActivity" name="totalActivity">
-
+                  <div class="tableFont">
+                    <span>Total de jours travaillés :</span> <input class="inputDay2" type="" value={{totalActivity}}
+                      required [(ngModel)]="totalActivity" name="totalActivity">
+                  </div>
                   <br> <br> <br>
                   <!-- ASTREINTE -->
 
 
                   <h2> Astreinte </h2>
-                  <table>
+                  <table class="tableFont">
                     <thead>
                       <tr>
                         <th class="enTete">PROJECT </th>
@@ -270,15 +270,15 @@
 
                       <tr>
                         <td>
-                          <select type="number" class="" id="idProjectAstreinte1" [(ngModel)]="selectedProjectAstreint1"
-                            (change)="onChangeProjectAstreinte1()">
+                          <select type="number" class="optionSelect1" id="idProjectAstreinte1"
+                            [(ngModel)]="selectedProjectAstreint1" (change)="onChangeProjectAstreinte1()">
                             <option *ngFor="let project of projects" value="{{project.project.id}}">
                               {{project.project.projectTitle}}</option>
                           </select>
                         </td>
                         <td>
-                          <select type="number" class="" id="idTypeAstreinte1" [(ngModel)]="selectedTypeUpdateValue1"
-                            (change)="onChangeTypeAstreinte1()">
+                          <select type="number" class="optionSelect2" id="idTypeAstreinte1"
+                            [(ngModel)]="selectedTypeUpdateValue1" (change)="onChangeTypeAstreinte1()">
                             <option [disabled]="typeActivity.id === 1 " [hidden]="typeActivity.id === 1 "
                               *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}" selected="true"
                               disabled="disabled">{{typeActivity.type}}
@@ -286,7 +286,8 @@
                           </select>
                         </td>
                         <td>
-                          <select type="number" class="" id="idUniteAstreinte1" [(ngModel)]="selectedUniteAstreint1">
+                          <select type="number" class="optionSelect3" id="idUniteAstreinte1"
+                            [(ngModel)]="selectedUniteAstreint1" (change)="onChangeUniteAstreinte1()">
                             <option value="1">Heure</option>
                             <option value="2">Jour</option>
                           </select>
@@ -295,32 +296,32 @@
                           <button class="btnRemplir" (click)="remplirAstreinte1()">Remplir</button>
                         </td>
                         <td *ngFor="let element of tabJours;let tabjoursElement=index;">
-                          <input class=" inputDay2" step="0.25" min="0" max="24"  name="jourAstreinte1-{{tabjoursElement}}"
-                            id="jourAstreinte1-{{tabjoursElement}}" type="number" value="{{dureeAstreinte1}}"
-                            (change)="total5()">
+                          <input class=" inputDay2" step="0.25" min="0" max="24"
+                            name="jourAstreinte1-{{tabjoursElement}}" id="jourAstreinte1-{{tabjoursElement}}"
+                            type="number" value="{{dureeAstreinte1}}" (change)="total5()">
                         </td>
-                        <td><input class=" inputDay2" id="totalAstreinte1HTML" type="" value={{totalAstreinte1}}></td>
+                        <td><input class="inputDay2" id="totalAstreinte1HTML" type="number" value={{totalAstreinte1}}></td>
                       </tr>
                       <!-- ASTREINTE 2 -->
                       <tr>
                         <td>
-                          <select type="number" class="" id="idProjectAstreinte2" [(ngModel)]="selectedProjectAstreint2"
-                            (change)="onChangeProjectAstreinte2()">
+                          <select type="number" class="optionSelect1" id="idProjectAstreinte2"
+                            [(ngModel)]="selectedProjectAstreint2" (change)="onChangeProjectAstreinte2()">
                             <option *ngFor="let project of projects" value="{{project.project.id}}">
                               {{project.project.projectTitle}}</option>
                           </select>
                         </td>
                         <td>
-                          <select type="number" class="" id="idTypeAstreinte2" [(ngModel)]="selectedTypeUpdateValue2"
-                            (change)="onChangeTypeAstreinte2()">
+                          <select type="number" class="optionSelect2" id="idTypeAstreinte2"
+                            [(ngModel)]="selectedTypeUpdateValue2" (change)="onChangeTypeAstreinte2()">
                             <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">
                               {{typeActivity.type}}
                             </option>
                           </select>
                         </td>
                         <td>
-                          <select type="number" class="" id="idUniteAstreinte2" aria-label="Default select example"
-                            [(ngModel)]="selectedUniteAstreint2">
+                          <select type="number" class="optionSelect3" id="idUniteAstreinte2"
+                          [(ngModel)]="selectedUniteAstreint2" (change)="onChangeUniteAstreinte2()">
                             <option value="1">Heure</option>
                             <option value="2">Jour</option>
                           </select>
@@ -329,33 +330,33 @@
                           <button class="btnRemplir" (click)="remplirAstreinte2()">Remplir</button>
                         </td>
                         <td *ngFor="let element of tabJours;let tabjoursElement=index;">
-                          <input class=" inputDay2" step="0.25" min="0" max="24" name="jourAstreinte2-{{tabjoursElement}}"
-                            id="jourAstreinte2-{{tabjoursElement}}" type="number" value="{{dureeAstreinte2}}"
-                            (change)="total6()">
+                          <input class=" inputDay2" step="0.25" min="0" max="24"
+                            name="jourAstreinte2-{{tabjoursElement}}" id="jourAstreinte2-{{tabjoursElement}}"
+                            type="number" value="{{dureeAstreinte2}}" (change)="total6()">
                         </td>
-                        <td><input class=" inputDay2" id="totalAstreinte2HTML" type="" value={{totalAstreinte2}}></td>
+                        <td><input class=" inputDay2" id="totalAstreinte2HTML" type="number" value={{totalAstreinte2}}></td>
                       </tr>
                       <!-- ASTREINTE 3 -->
 
                       <tr>
                         <td>
-                          <select type="number" class="" id="idProjectAstreinte3" aria-label="Default select example"
+                          <select type="number" class="optionSelect1" id="idProjectAstreinte3"
                             [(ngModel)]="selectedProjectAstreint3" (change)="onChangeProjectAstreinte3()">
                             <option *ngFor="let project of projects" value="{{project.project.id}}">
                               {{project.project.projectTitle}}</option>
                           </select>
                         </td>
                         <td>
-                          <select type="number" class="" id="idTypeAstreinte3" aria-label="Default select example"
-                            [(ngModel)]="selectedTypeUpdateValue3"  (change)="onChangeTypeAstreinte3()">
+                          <select type="number" class="optionSelect2" id="idTypeAstreinte3"
+                            [(ngModel)]="selectedTypeUpdateValue3" (change)="onChangeTypeAstreinte3()">
                             <option *ngFor="let typeActivity of lesTypeActivity" value="{{typeActivity.id}}">
                               {{typeActivity.type}}
                             </option>
                           </select>
                         </td>
                         <td>
-                          <select type="number" class="" id="idUniteAstreinte3" aria-label="Default select example"
-                            [(ngModel)]="selectedUniteAstreint3">
+                          <select type="number" class="optionSelect3" id="idUniteAstreinte3"
+                            [(ngModel)]="selectedUniteAstreint3" (change)="onChangeUniteAstreinte3()" >
                             <option value="1">Heure</option>
                             <option value="2">Jour</option>
                           </select>
@@ -364,23 +365,27 @@
                           <button class="btnRemplir" (click)="remplirAstreinte3()">Remplir</button>
                         </td>
                         <td *ngFor="let element of tabJours;let tabjoursElement=index;">
-                          <input class="inputDay2" step="0.25" min="0" max="24"   name="jourAstreinte3-{{tabjoursElement}}"
-                            id="jourAstreinte3-{{tabjoursElement}}" type="number" value="{{dureeAstreinte3}}"
-                            (change)="total7()">
+                          <input class="inputDay2" step="0.25" min="0" max="24"
+                            name="jourAstreinte3-{{tabjoursElement}}" id="jourAstreinte3-{{tabjoursElement}}"
+                            type="number" value="{{dureeAstreinte3}}" (change)="total7()">
                         </td>
-                        <td><input class="inputDay2" id="totalAstreinte3HTML" type="" value={{totalAstreinte3}}></td>
+                        <td><input class="inputDay2" id="totalAstreinte3HTML" type="number"  value={{totalAstreinte3}}></td>
                       </tr>
                     </tbody>
                   </table>
+                  <br>
+                  <br>
+                  <p class="validation">{{message}}</p>
+                  <p>{{messageErreur}}</p>
                 </div>
+      
               </div>
 
-              <p>{{message}}</p>
-              <p>{{messageErreur}}</p>
+
 
               <div class="modal-footer">
                 <div class="register">
-                  <button class="send" data-toggle="modal" data-target="#myModal">Enregistrer & Envoyer</button>
+                  <button class="send" data-toggle="modal" data-target="#TARGET2">Enregistrer & Envoyer</button>
                   <button class="send">Supprimer</button>
                   <button class="send" data-dismiss="modal">Retour</button>
                 </div>
@@ -388,26 +393,23 @@
 
 
 
-              <div id="myModal" class="modal fade" role="dialog"  data-target="TARGET-2">
+              <div id="TARGET2" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade " role="dialog">
                 <div class="modal-dialog">
 
                   <div class="modal-content">
                     <div class="modal-header">
                       <h4 class="modal-title">Alerte enregistrement et envoie </h4>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body ">
                       <p>Êtes-vous sur de vouloir enregistrer et envoyer ? </p>
 
-                      <br>
-                      <br>
-                      <p class="validation">{{message}}</p>
-                      <p>{{messageErreur}}</p>
                     </div>
                     <div class="modal-footer">
-                 
-                      <button type="button" (click)="EnregisterEtEnvoyer()" class="send2"
-                        data-target="#myModal">Confirmer</button>
-                      <button type="button" class="send2" data-target="TARGET-2" data-dismiss="modal" >Fermer</button>
+
+                      <button>click</button>
+                      <button type="button" (click)="EnregisterEtEnvoyer()" class="send2" data-toggle="modal" [attr.data-target]="'#TARGET2'">Enregistrer</button>
+
+                      <button type="button" class="send2"   data-toggle="modal" [attr.data-target]="'#TARGET2'">Fermer</button>
                     </div>
                   </div>
 

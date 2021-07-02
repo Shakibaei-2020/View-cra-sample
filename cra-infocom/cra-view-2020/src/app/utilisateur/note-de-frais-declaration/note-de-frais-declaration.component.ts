@@ -40,6 +40,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
 
 
   ) { }
+  pipeDate = new DatePipe('fr-FR');
 
   monthSelected!: number;
   yearSelected!: number;
@@ -72,7 +73,20 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
   allSumDays = new Array();
   totalofTotal = 0;
 
+  /** expense */
+  expenseRequestId = new Array();
+  dateExpenseToUpdated = new Array();
+  expenseBillable = new Array();
+  expenseCostHT = new Array();
+  expenseCostTVA = new Array();
+  dateExpenseRequest = new Array();
+  expenseStatus = new Array();
+  expenseType = new Array();
+  newCostTTC = new Array();
+
+
   ngOnInit(): void {
+
 
 
 
@@ -97,7 +111,33 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
 
     /** select all expense en-cours */
     this._ExpenseService.listExpenseByCollabId(2).subscribe(
-      data => this.expensesOfCollab = data,
+      data => {
+        this.expensesOfCollab = data;
+
+        this.expensesOfCollab.forEach(
+          (item) => {
+            this._CollaboratorService.selectOneCollabById(item.collaboratorId).subscribe(
+              data => {
+                if (item != null) {
+                  item.nomCollab = data.lastName;
+                  item.prenomCollab = data.firstName;
+                  item.oldDateExpense = this.pipeDate.transform(item.dateExpense, 'yyyy-MM-dd') || '2000-02-14';
+
+                  if (item.billable == true) {
+                    item.billableFR = "oui";
+                  } else if (item.billable == false) {
+                    item.billableFR = "non";
+                  }
+
+
+                }
+              },
+              error => console.log("exception" + error)
+            )
+          }
+        )
+
+      },
       error => console.log("exception " + error),
     )
 
@@ -302,15 +342,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
     )
   }
 
-  deleteExpenseById(expenseId: number) {
-    this._ExpenseService.deleteOneExpense(expenseId).subscribe(
-      data => {
-        console.log("delete effectué");
-        window.location.reload();
-      },
-      error => console.log("exception" + error),
-    )
-  }
+
 
   /** retour vers l'accueil utilisateur */
   retour() {
@@ -370,7 +402,7 @@ export class NoteDeFraisDeclarationComponent implements OnInit {
 
 
 
-file = new Blob;
+  file = new Blob;
 
   Envoyer() {
 
@@ -405,7 +437,7 @@ file = new Blob;
     }
     const documentDefinition = {};
 
-   pdfMake.createPdf(dlActivity1).getBlob;
+    pdfMake.createPdf(dlActivity1).getBlob;
   }
 
 
@@ -414,17 +446,82 @@ file = new Blob;
   feedBack = new FeedBack;
 
   EnvoyerMail() {
-
-    this.feedBack.email="mohashakibaei@outlook.fr";
-    this.feedBack.name="Mohammad";
-    this.feedBack.feedback="salut ca va ?";
-    
+    this.feedBack.email = "mohashakibaei@outlook.fr";
+    this.feedBack.name = "Mohammad";
+    this.feedBack.feedback = "salut ca va ?";
     this._CollaboratorService.sendMessage(this.feedBack).subscribe()
-
-
   }
 
 
+
+  TTCvalue!: number;
+  allExpenseType!: TypeExpense[]
+  status = ["en-cours", "validé", "refusé"]
+  validation = "";
+  notValidation = "";
+
+
+  expenseToUpdate = new Expense;
+  updatedExpense = new Expense;
+
+
+  /** ng Model */
+  typeOfExpense = new TypeExpense;
+  statusOfExpense!: string;
+  billableOfExpense!: boolean;
+  costHTOfExpense!: number;
+  costTTCOfExpense!: number;
+  costTVAOfExpense!: number;
+  dateOfExpense!: string;
+  dateRequestOfExpense!: Date;
+
+
+
+  oldExpense = new Expense;
+  onInitModal(expense: Expense) {
+
+    /** select all type Expense */
+    this._TypeExpenseService.selectAllTypeExpense().subscribe(
+      data => this.allExpenseType = data,
+      error => console.log("exception" + error)
+    )
+
+    this._ExpenseService.selectOneExpenseById(expense.id).subscribe(
+      data => {
+        this.oldExpense = data;
+        this.typeOfExpense = this.oldExpense.typeExpense;
+        this.statusOfExpense = this.oldExpense.status;
+        this.billableOfExpense = this.oldExpense.billable;
+        this.costHTOfExpense = this.oldExpense.costHT;
+        this.costTTCOfExpense = this.oldExpense.costTTC;
+        this.costTVAOfExpense = this.oldExpense.costTVA;
+        this.dateOfExpense = this.pipeDate.transform(this.oldExpense.dateExpense, 'yyyy-MM-dd') || this.dateOfExpense;
+        this.dateRequestOfExpense = this.oldExpense.dateRequest;
+
+      },
+    )
+  }
+
+
+  updateExpense() {
+
+    this.updatedExpense.id = this.oldExpense.id;
+    this.updatedExpense.collaboratorId = this.oldExpense.collaboratorId
+    this.updatedExpense.status = "en-cours"
+    this.updatedExpense.typeExpense = this.typeOfExpense;
+    this.updatedExpense.billable = this.billableOfExpense;
+    this.updatedExpense.costHT = this.costHTOfExpense;
+    this.updatedExpense.costTTC = (this.costHTOfExpense + this.costTVAOfExpense);
+    this.updatedExpense.costTVA = this.costTVAOfExpense;
+    this.updatedExpense.dateExpense = new Date(this.dateOfExpense);
+    this.updatedExpense.dateRequest = this.dateRequestOfExpense;
+    
+    this._ExpenseService.addOneExpense(this.updatedExpense).subscribe();
+  }
+
+  deleteExpenseById() {
+    this._ExpenseService.deleteOneExpense(this.oldExpense.id).subscribe();
+  }
 
 }
 

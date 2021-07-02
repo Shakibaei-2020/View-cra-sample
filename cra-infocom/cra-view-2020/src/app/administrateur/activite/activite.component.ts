@@ -34,14 +34,14 @@ export class ActiviteComponent implements OnInit {
   daysInMonth!: number;
 
 
-  totalActivity1 = "totalProjet1";
-  totalActivity2 = "totalProjet2";
-  totalActivity3 = "totalProjet3";
-  totalActivity4 = "totalProjet4";
+  totalActivity1 = "totalActivity1";
+  totalActivity2 = "totalActivity2";
+  totalActivity3 = "totalActivity3";
+  totalActivity4 = "totalActivity4";
 
-  totalAstreinte1HTML = "totalAstreinte1HTMl";
-  totalAstreinte2HTML = "totalAstreinte2HTMl";
-  totalAstreinte3HTML = "totalAstreinte3HTMl";
+  totalAstreinte1HTML = "totalAstreinte1HTML";
+  totalAstreinte2HTML = "totalAstreinte2HTML";
+  totalAstreinte3HTML = "totalAstreinte3HTML";
 
   monthSelected = this.dt.getMonth() + 1;
   yearInput = this.dt.getFullYear();
@@ -125,16 +125,16 @@ export class ActiviteComponent implements OnInit {
   idOfCollabAstreinte1 = new Array();
   idOfProjectAstreinte1 = new Array();
   idOfTypeAstreinte1 = new Array();
-  projectAstreinte1 !: Project;
-  typeAstreinte1!: TypeActivity;
+  projectAstreinte1 =new Project;
+  typeAstreinte1 = new TypeActivity;
 
   astreinte2ToEdit!: Activity[];
   idOfDaysAstreinte2 = new Array();
   idOfCollabAstreinte2 = new Array();
   idOfProjectAstreinte2 = new Array();
   idOfTypeAstreinte2 = new Array();
-  projectAstreinte2 !: Project;
-  typeAstreinte2!: TypeActivity;
+  projectAstreinte2 = new Project;
+  typeAstreinte2 = new TypeActivity;
 
 
   astreinte3ToEdit!: Activity[];
@@ -142,8 +142,8 @@ export class ActiviteComponent implements OnInit {
   idOfCollabAstreinte3 = new Array();
   idOfProjectAstreinte3 = new Array();
   idOfTypeAstreinte3 = new Array();
-  projectAstreinte3 !: Project;
-  typeAstreinte3!: TypeActivity;
+  projectAstreinte3= new Project;
+  typeAstreinte3 = new  TypeActivity;
 
 
 
@@ -1255,8 +1255,11 @@ export class ActiviteComponent implements OnInit {
       this.message = ""
     }, 4000);
 
+    setTimeout(() => {
 
     this.Envoyer();
+  }, 400);
+
   }
 
 
@@ -1501,7 +1504,6 @@ export class ActiviteComponent implements OnInit {
 
 
 
-
   Envoyer() {
 
     var tabActitivty1 = [];
@@ -1515,43 +1517,132 @@ export class ActiviteComponent implements OnInit {
     var valueActivity3 = [];
     var valueActivity4 = [];
 
-    
+    var activitySelected1 = this.projectActivityNormal.projectTitle;
+    var activitySelected2 = this.projectActivity2.projectTitle;
+    var activitySelected3 = this.projectActivity3.projectTitle;
+    var activitySelected4 = this.projectActivity4.projectTitle;
 
-    var activitySelected1 = this.projectActivityNormal.projectTitle || "";
-    var activitySelected2 = this.projectActivity2.projectTitle || "";
-    var activitySelected3 = this.projectActivity3.projectTitle || "";
-    var activitySelected4 = this.projectActivity4.projectTitle || "";
+
+    var tabAstreinte1 = [];
+    var tabAstreinte2 = [];
+    var tabAstreinte3 = [];
+
+
+    var tableOfindex2 = [];
+    var valueAstreinte1 = [];
+    var valueAstreinte2 = [];
+    var valueAstreinte3 = [];
+
+    var astreinteProject1 = this.projectAstreinte1.projectTitle;
+    var astreinteProject2 = this.projectAstreinte2.projectTitle;
+    var astreinteProject3 = this.projectAstreinte3.projectTitle;
+
+    var astreinteType1 = this.typeAstreinte1.type;
+    var astreinteType2 = this.typeAstreinte2.type;
+    var astreinteType3 = this.typeAstreinte3.type;
+
+
+    tableOfindex2.push('Activité')
+    valueAstreinte1.push(astreinteProject1 || "")
+    valueAstreinte2.push(astreinteProject2 || "")
+    valueAstreinte3.push(astreinteProject3 || "")
+
+
+    tableOfindex2.push('Unité')
+    valueAstreinte1.push("Heure");
+    valueAstreinte2.push("Heure");
+    valueAstreinte3.push("Heure");
+
+
+    tableOfindex2.push('Type astreinte')
+    valueAstreinte1.push(astreinteType1 || "")
+    valueAstreinte2.push(astreinteType2 || "")
+    valueAstreinte3.push(astreinteType3 || "")
+
 
     tableOfindex.push('Activité')
-    valueActivity1.push(activitySelected1 || "")
-    valueActivity2.push(activitySelected2 || "")
-    valueActivity3.push(activitySelected3 || "")
-    valueActivity4.push(activitySelected4 || "")
+    valueActivity1.push(activitySelected1)
+    valueActivity2.push(activitySelected2)
+    valueActivity3.push(activitySelected3)
+    valueActivity4.push(activitySelected4)
 
 
-    for (var i = 0; i < this.tabJours.length - 1; i++) {
+    for (var i = 0; i < this.tabJours.length; i++) {
       tableOfindex.push([this.tabJours[i]]);
-      valueActivity1.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber) || "";
-      valueActivity2.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber) || "";
-      valueActivity3.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber) || "";
-      valueActivity4.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber) || "";
+      valueActivity1.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay[i])).valueAsNumber);
+      valueActivity2.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay2[i])).valueAsNumber);
+      valueActivity3.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay3[i])).valueAsNumber);
+      valueActivity4.push((<HTMLInputElement>document.getElementById(this.activitiesPerDay4[i])).valueAsNumber);
+    }
+
+    for (var i = 0; i < this.tabJours.length; i++) {
+      tableOfindex2.push([this.tabJours[i]]);
+
+      if (this.selectedUniteAstreint1 == 2) {
+        valueAstreinte1.push(+((<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber * 24).toFixed(2));
+      } else {
+        valueAstreinte1.push((<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber);
+      }
+
+
+      if (this.selectedUniteAstreint2 == 2) {
+        valueAstreinte2.push(+((<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber * 24).toFixed(2));
+      } else {
+        valueAstreinte2.push((<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber);
+      }
+
+
+      if (this.selectedUniteAstreint3 == 2) {
+        valueAstreinte3.push(+((<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber * 24).toFixed(2));
+      } else {
+        valueAstreinte3.push((<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber);
+      }
+
 
     }
 
-    var totalActivity1 = this.totalProjet1
-    var totalActivity2 = this.totalProjet2
-    var totalActivity3 = this.totalProjet3
-    var totalActivity4 = this.totalProjet4
+    console.log((<HTMLInputElement>document.getElementById(this.totalActivity1)))
 
+    var totalActivity1 = (<HTMLInputElement>document.getElementById(this.totalActivity1)).valueAsNumber;
+    var totalActivity2 = (<HTMLInputElement>document.getElementById(this.totalActivity2)).valueAsNumber;
+    var totalActivity3 = (<HTMLInputElement>document.getElementById(this.totalActivity3)).valueAsNumber;
+    var totalActivity4 = (<HTMLInputElement>document.getElementById(this.totalActivity4)).valueAsNumber;
+
+
+    var totalAstreinte1;
+    if (this.selectedUniteAstreint1 == 2) {
+      totalAstreinte1 = +((<HTMLInputElement>document.getElementById(this.totalAstreinte1HTML)).valueAsNumber * 24)
+    } else {
+      totalAstreinte1 = (<HTMLInputElement>document.getElementById(this.totalAstreinte1HTML)).valueAsNumber;
+    }
+
+
+    var totalAstreinte2;
+    if (this.selectedUniteAstreint2 == 2) {
+      totalAstreinte2 = +((<HTMLInputElement>document.getElementById(this.totalAstreinte2HTML)).valueAsNumber * 24)
+    } else {
+      totalAstreinte2 = (<HTMLInputElement>document.getElementById(this.totalAstreinte2HTML)).valueAsNumber;
+    }
+
+
+    var totalAstreinte3;
+    if (this.selectedUniteAstreint3 == 2) {
+      totalAstreinte3 = +((<HTMLInputElement>document.getElementById(this.totalAstreinte3HTML)).valueAsNumber * 24)
+    } else {
+      totalAstreinte3 = (<HTMLInputElement>document.getElementById(this.totalAstreinte3HTML)).valueAsNumber;
+    }
 
 
     tableOfindex.push('total')
-    valueActivity1.push(totalActivity1 || "")
-    valueActivity2.push(totalActivity2 || "")
-    valueActivity3.push(totalActivity3 || "")
-    valueActivity4.push(totalActivity4 || "")
+    valueActivity1.push(totalActivity1)
+    valueActivity2.push(totalActivity2)
+    valueActivity3.push(totalActivity3)
+    valueActivity4.push(totalActivity4)
 
-
+    tableOfindex2.push('total')
+    valueAstreinte1.push(totalAstreinte1)
+    valueAstreinte2.push(totalAstreinte2)
+    valueAstreinte3.push(totalAstreinte3)
 
     for (var i of [1]) {
       tabActitivty1.push(tableOfindex)
@@ -1566,9 +1657,18 @@ export class ActiviteComponent implements OnInit {
       tabActitivty4.push(tableOfindex)
       tabActitivty4.push(valueActivity4);
 
+      tabAstreinte1.push(tableOfindex2)
+      tabAstreinte1.push(valueAstreinte1)
+
+      tabAstreinte2.push(tableOfindex2)
+      tabAstreinte2.push(valueAstreinte2)
+
+      tabAstreinte3.push(tableOfindex2)
+      tabAstreinte3.push(valueAstreinte3)
     }
 
 
+    console.log(tabActitivty1)
 
     var dlActivity1 = {
       pageSize: { width: 1280, height: 600.9 },
@@ -1623,6 +1723,46 @@ export class ActiviteComponent implements OnInit {
       ]
     }
 
+    var dlAstreinte1 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:', {
+          table: {
+            width: 'auto',
+            body: tabAstreinte1,
+          }
+        }
+      ]
+    }
+
+    var dlAstreinte2 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:', {
+          table: {
+            width: 'auto',
+            body: tabAstreinte2,
+          }
+        }
+      ]
+    }
+
+    var dlAstreinte3 = {
+      pageSize: { width: 1280, height: 600.9 },
+      content: [
+        'First paragraph',
+        'table:', {
+          table: {
+            width: 'auto',
+            body: tabAstreinte3,
+          }
+        }
+      ]
+    }
+
+
     if (totalActivity1 !== 0) {
       pdfMake.createPdf(dlActivity1).download();
     }
@@ -1638,6 +1778,18 @@ export class ActiviteComponent implements OnInit {
     if (totalActivity4 !== 0) {
       pdfMake.createPdf(dlActivity4).download();
     }
+
+
+    if (totalAstreinte1 !== 0) {
+      pdfMake.createPdf(dlAstreinte1).download();
+    }
+    if (totalAstreinte2 !== 0) {
+      pdfMake.createPdf(dlAstreinte2).download();
+    }
+
+    if (totalAstreinte3 !== 0) {
+      pdfMake.createPdf(dlAstreinte2).download();
+    }
   }
 
 
@@ -1649,6 +1801,42 @@ export class ActiviteComponent implements OnInit {
 
 
 
+
+  onChangeUniteAstreinte1(){
+    for (var i = 0; i < this.tabJours.length; i++) {
+      if (this.selectedUniteAstreint1 == 1) {
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber = ((<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber*24);
+      } else {
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber =  ((<HTMLInputElement>document.getElementById(this.astreintePerDay1[i])).valueAsNumber/24);
+      }
+    }
+    this.total5();
+  }
+
+  
+  onChangeUniteAstreinte2(){
+    for (var i = 0; i < this.tabJours.length; i++) {
+      if (this.selectedUniteAstreint2 == 1) {
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber = ((<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber*24);
+      } else {
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber =  ((<HTMLInputElement>document.getElementById(this.astreintePerDay2[i])).valueAsNumber/24);
+      }
+    }
+    this.total6();
+
+  }
+
+  
+  onChangeUniteAstreinte3(){
+    for (var i = 0; i < this.tabJours.length; i++) {
+      if (this.selectedUniteAstreint3 == 1) {
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber = ((<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber*24);
+      } else {
+        (<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber =  ((<HTMLInputElement>document.getElementById(this.astreintePerDay3[i])).valueAsNumber/24);
+      }
+    }
+    this.total7();
+  }
 
 
 

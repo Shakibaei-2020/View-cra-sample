@@ -1,139 +1,121 @@
 
+/**ici*/
+
+
 
 .button {
-    padding: 10px 25px;
-    margin-left: 4%;
-    width: 45%;
-    font-size: 15px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #464646;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    margin-bottom: 5%;
-  }
-  
-  .button:hover {background-color: #636363}
-  
-  .button:active {
-    background-color: #464646;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
-
-
-  .buttonModal{
-    margin-top: 16px;
-    height:5%;
-    width:40px;
-    float: right;
-
-  }
-
-.container {
-    height: 100vh;
+  padding: 10px 25px;
+  margin-left: 4%;
+  width: 45%;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #464646;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin-bottom: 5%;
 }
 
-.card {
-	   	border-radius: 45px;
+.devise{
+  margin-top: 6px;
+  height: 50px;
+  font-size: 13px;
+  background-color: white;
+  border-color: white;
+  border-bottom: grey;
+}
+.button:hover {background-color: #636363}
 
-    width: 100%;
-    padding: 30px;
+.button:active {
+  background-color: #464646;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+.buttonModal{
+  margin-top: 16px;
+  height:5%;
+  width:40px;
+  float: right;
 
 }
 
-.form {
-    padding: 20px
-}
-
-.form-control {
-    height: 50px;
-    background-color: #eee
-
-}
-
-.form-control:focus {
-    color: #495057;
-    background-color: #fff;
-    outline: 0;
-    box-shadow: none;
-    background-color: #eee
-}
 
 .inputbox {
-    margin-bottom: 15px
+  margin-bottom: 15px
 }
 
 .Action{
-    margin-left: 25%;
-    padding-top: 5px;
+  margin-left: 25%;
+  padding-top: 5px;
 }
 .btnEditer {
-    float: left;
-    padding: 10px 25px;
-    width: 100%;
-    font-size: 15px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #363636;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    margin-bottom: 5%;
-  }
-  
-  .btnEditer:hover {background-color: #464646}
-  
-  .btnEditer:active {
-    background-color: #363636;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
+  float: left;
+  padding: 10px 25px;
+  width: 100%;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #363636;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin-bottom: 5%;
+}
+
+.btnEditer:hover {background-color: #464646}
+
+.btnEditer:active {
+  background-color: #363636;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
 
 .input-title{
-    font-size: 13px;
-    font-weight: 300;
+  font-size: 13px;
+  font-weight: 300;
 }
 
 .div-edit{
-    margin-top: 4%;
+  margin-top: 4%;
 }
 
 
 
 .btnTab {
-    padding: 6px 25px;
-    padding-bottom: 25px;
-    margin-left: 5%;
-    width: 100%;
-    font-size: 14px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #464646;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    height: 5px;
-  }
-  
-  .btnTab:hover {background-color: #636363}
-  
-  .btnTab:active {
-    background-color: #464646;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
+  padding: 6px 25px;
+  padding-bottom: 25px;
+  margin-left: 5%;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #464646;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  height: 5px;
+}
+
+.btnTab:hover {background-color: #636363}
+
+.btnTab:active {
+  background-color: #464646;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
 
-
+/** et la */
 
 
 .profile-nav, .profile-info{
@@ -242,3 +224,76 @@ input[type=text] {
     border-bottom: 2px solid #464646;
     
   }
+
+  
+.modal-input{
+  width: 100%;
+  padding: 14px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #464646;
+
+}
+
+
+.toHide{
+  display: none;
+}
+
+.rightInputs{
+  margin-top: 23%;
+  margin-bottom: 50px;
+}
+
+
+.btnTab {
+  padding-bottom: 25px;
+  padding-top: 5px;
+  width: 50px;
+  font-size: 14px;
+  margin-top: 3px;
+  
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #464646;
+  border: none;
+  border-radius: 15px;
+  height: 5px;
+}
+
+.btnTab:hover {background-color: #636363}
+
+.btnTab:active {
+  background-color: #464646;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+.btnModal {
+  padding-bottom: 25px;
+  padding-top: 5px;
+  width: 100px;
+  font-size: 14px;
+  
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #464646;
+  border: none;
+  border-radius: 15px;
+  height: 5px;
+}
+
+.btnModal:hover {background-color: #636363}
+
+.btnModal:active {
+  background-color: #464646;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+

@@ -7,6 +7,11 @@
   box-sizing: border-box;
 }
 
+.modalHeight{
+  height: 300px;
+  margin-bottom: -200px;
+}
+
 .send2{
   height: 30px;
   width: 160px;
@@ -190,9 +195,26 @@ border-bottom: 2px solid #464646;
   min-height: 70vh;
 }
 
-  
 
 
+.modal-body {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+
+.tableFont{
+  font-size: 12px;
+}
+.optionSelect1{
+  width: 60px;
+}
+.optionSelect2{
+  width: 100px;
+}
+.optionSelect3{
+  width: 60px;
+}
 
   
 .inputDay{
