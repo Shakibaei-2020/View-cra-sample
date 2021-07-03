@@ -19,6 +19,12 @@ export class LeaveService {
     return this._http.delete<Leave>("http://localhost:8950/conge/supprimer/" + id);
   }
 
+  
+  addLeaveRequest(leave: Leave): Observable<Leave> {
+    return this._http.post<Leave>("http://localhost:8950/conge/ajouter/" ,leave);
+  }
+
+
   selectOneLeaveRequestById(id: number): Observable<Leave> {
     return this._http.get<Leave>("http://localhost:8950/conge/lister/" + id);
   }

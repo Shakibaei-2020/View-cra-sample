@@ -8,11 +8,14 @@ import { CollaboratorService } from 'src/app/y-service/Collaborator/collaborator
 import { TypeCollaboratorService } from 'src/app/y-service/Collaborator/type-collaborator.service';
 import { LeaveService } from 'src/app/y-service/Leave/leave.service';
 import { TypeLeaveService } from 'src/app/y-service/Leave/type-leave.service';
+import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 
 @Component({
   selector: 'app-conge-demande',
   templateUrl: './conge-demande.component.html',
-  styleUrls: ['./conge-demande.component.css']
+  styleUrls: ['./conge-demande.component.css',
+    './button.scss'
+  ]
 })
 export class CongeDemandeComponent implements OnInit {
 
@@ -20,38 +23,33 @@ export class CongeDemandeComponent implements OnInit {
   leaves!: Leave[];
   leaveType = new TypeLeave();
   aujourdhui !: string;
-  dateStartLeave!: string;
-  dateEndLeave !: string;
-  allLeaveType!: TypeLeave[];
-  idOfLeaveType!: number;
 
-  leaveEndStatus=  "leaveEndStatus"
+
+  allLeaveType!: TypeLeave[];
+
+  leaveEndStatus = "leaveEndStatus"
   leaveStartStatus = "leaveStartStatus"
 
-  config: any;
-  collection = [];
 
   constructor(
     private _route: Router,
-     private _service: NgserviceService,
+    private _LeaveService: LeaveService,
+    private _TypeLeaveService: TypeLeaveService,
+    private _Collaborator: CollaboratorService,
 
-     private _LeaveService: LeaveService,
-     private _TypeLeaveService: TypeLeaveService,
+  ) { }
 
-     ) { }
-
+  collaborator = new Collaborator;
   pageChange(newPage: number) {
-		this._route.navigate([''], { queryParams: { page: newPage } });
-	}
+    this._route.navigate([''], { queryParams: { page: newPage } });
+  }
 
   ngOnInit(): void {
 
     /** id du collaborateur connecté suite à la connexion */
-    this.leave.collaboratorId = 3;
-
-    /** on recupere la date d'aujourd'hui au bon format*/
-    this.aujourdhui = this.formatageDate()
-
+    this._Collaborator.selectOneCollabById(2).subscribe(
+      data => this.collaborator = data,
+    )
 
     /** on recupere tous les types */
     this._TypeLeaveService.selectAllLeaveType().subscribe(
@@ -67,36 +65,18 @@ export class CongeDemandeComponent implements OnInit {
 
   }
 
-  /** On recupere le congé selectionné a chaque <select> */
-  getTypeLeave() {
-    this._TypeLeaveService.selectLeaveTypeById(this.idOfLeaveType).subscribe(
-      data => { this.leaveType = data; },
-      error => console.log("exception" + error),
 
-    )
-    setTimeout(() => {
-    }, 10);
-
-  }
 
   /** Ajout de la demande de congé */
   addLeaveFormSubmit() {
 
-
-    this.leave.collaboratorId = 2;
+    this.leave.collaboratorId = this.collaborator.id;
     this.leave.status = 'en-cours';
-    this.leave.leaveType = this.leaveType
-    this.leave.nbJours = this.dayNumber;
-
-
-    this._LeaveService.addOrUpdateLeaveRequest(this.leave, this.aujourdhui, this.dateStartLeave, this.dateEndLeave).subscribe(
-      data => {
-        console.log("ajout effectué");
-        window.location.reload();
-      },
-      error => {
-        console.log("erreur ajout non-effectué")
-      }
+    this.leave.dateOfDemand = new Date(this.aujourdhui);
+    this.leave.dateOfEndLeave = new Date(this.leave.dateOfEndLeave);
+    this.leave.dateOfStartLeave = new Date(this.leave.dateOfStartLeave);
+    this._LeaveService.addLeaveRequest(this.leave).subscribe(
+      //  data => window.location.reload(),
     )
 
   }
@@ -111,32 +91,11 @@ export class CongeDemandeComponent implements OnInit {
   /** delete de la note de frais via l'id*/
   deleteLeaveById(value: number) {
     this._LeaveService.deleteOneLeaveRequest(value).subscribe(
-      data => {
-        console.log("delete effectué");
-        window.location.reload();
-      },
-      error => {
-        console.log("delete ajout non-effectué")
-      }
+      data => window.location.reload(),
     )
   }
 
 
-  /** formatage de la date YYYY-MM-DD */
-  formatageDate() {
-    var jour = new Date().getDay() + 6;
-    var jour_toString = jour.toString();
-    if (jour < 10) {
-      jour_toString = "0" + jour_toString;
-    }
-    var mois = new Date().getMonth() + 1;
-    var mois_toString = mois.toString();
-    if (mois < 10) {
-      mois_toString = "0" + mois_toString;
-    }
-    var annee = new Date().getFullYear();
-    return annee + '-' + mois_toString + '-' + jour_toString;
-  }
 
 
   dayNumber!: number;
@@ -144,28 +103,23 @@ export class CongeDemandeComponent implements OnInit {
   newDateEndLeave!: Date;
 
   howManyday() {
-
-    this.newDateStartLeave = new Date(this.dateStartLeave)
-    this.newDateEndLeave = new Date(this.dateEndLeave)
-
-    var Diff_temps = this.newDateEndLeave.getTime() - this.newDateStartLeave.getTime();
-    this.dayNumber = Diff_temps / (1000 * 3600 * 24);
-
+    var Diff_temps = (new Date(this.leave.dateOfEndLeave).getTime() - new Date(this.leave.dateOfStartLeave).getTime());
+    this.leave.nbJours = Diff_temps / (1000 * 3600 * 24);
   }
 
 
-  joursEntiers!:boolean;
+  joursEntiers!: boolean;
 
   joursEntiersChecked() {
 
-    if (this.joursEntiers=== true) {
+    if (this.joursEntiers === true) {
       (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).disabled = true;
       (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).value = "";
 
       (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).disabled = true;
       (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).value = "";
 
-    } else{
+    } else {
       (<HTMLInputElement>document.getElementById(this.leaveStartStatus)).disabled = false;
       (<HTMLInputElement>document.getElementById(this.leaveEndStatus)).disabled = false;
     }

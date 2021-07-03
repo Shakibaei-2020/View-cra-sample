@@ -1,40 +1,132 @@
+<head>
+
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" type="image/png"
+    href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+  <meta name="apple-mobile-web-app-title" content="CodePen">
+
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+  <link rel="mask-icon" type=""
+    href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+    color="#111">
 
 
-  <nav class="navbar navbar-expand-lg  bg">
+  <title>CodePen - Horizontal Menu</title>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <img class="logo" src="https://www.infocom-group.fr/dist/img/logo_symbole.png" (click)="retour()" width="80">
-    <h2 class="entreprise">Infocom Group</h2>
-  </nav>
-  
-  
-  
 
-  
-  <!--
+  <style>
 
-  <div class="collapse navbar-collapse justify-content-between" id="navbarToggle">
-    
-    <div class="text-nav">
-      <ul class="navbar-nav">
-        <li class="dropdown nav-item ">
-          <a class="dropdown-toggle nav-link link-page" data-toggle="dropdown" href="#">Informations
-            <span class="caret"></span></a>
-          <ul class="dropdown-menu ">
-            <li class="lien-pos"><a class="dropdown-link " href="#">Instructions</a></li>
-            <li class="lien-pos"><a class="dropdown-link  " href="#">Satistiques</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+  </style>
 
-  
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link link-page" href="#">Settings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link link-page" href="#">Disconnect</a>
-          </li>
-        </ul>
+  <script>
+    window.console = window.console || function (t) { };
+  </script>
+
+
+
+  <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage("resize", "*");
+    }
+  </script>
+
+
+</head>
+
+<div class="contenue shadow p-3 mb-5 bg-white rounded " id="gb78" translate="no">
+  <div id="wrapper">
+    <ul>
+
+      <li>
+        <a>
+          <i>
+            <img src=" https://www.infocom-group.fr/dist/img/logo_symbole.png " style="height: 50px;">
+          </i>
+          <div>
+            INFOCOM GROUP
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="goToActivity()">
+          <i class="fas fa-file-contract" ></i>
+          <div>
+            Déclaration d'activité
+          </div>
+        </a>
+      </li>
+
+
+
+
+      <li>
+        <a (click)="goToLeave()">
+          <i class="far fa-calendar-alt"></i>
+          <div>
+            Demande de congé
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="goToExpense()">
+          <i class="far fa-edit"></i>
+          <div>
+            Déclaration note de frais </div>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="goToCollaborator()">
+          <i class="fas fa-users"></i>
+          <div>
+            Collaborateur </div>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="goToClient()">
+          <i class="fas fa-user-tie"></i>
+          <div>
+            Client </div>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="goToMission()">
+          <i class="fas fa-bullseye"></i>
+          <div>
+            Mission </div>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="goToProject()">
+          <i class="fas fa-project-diagram"></i>
+          <div>
+            Projet </div>
+        </a>
+      </li>
+
+
+      <!-- <li>
+        <a (click)="goToActivity()">
+          <i class="far fa-user"></i>
+          <div>
+            Profile
+          </div>
+        </a>
+      </li> -->
+
+
+    </ul>
   </div>
-</nav>    -->
+
+
+
+</div>

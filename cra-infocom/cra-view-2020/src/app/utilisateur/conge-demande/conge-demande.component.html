@@ -6,8 +6,7 @@
 
   <div class="div-add">
     <div class="container ">
-      <h2>Demande de congé </h2>
-      <hr>
+
 
       <div class="row">
         <div class="col-md-6">
@@ -22,22 +21,23 @@
 
           <div class="inputbox mt-3">
             <span>Date de départ :</span>
-            <input type="date" required [(ngModel)]="dateStartLeave" name="dateStartLeave" (change)="howManyday()">
+            <input type="date" required [(ngModel)]="leave.dateOfStartLeave" name="dateStartLeave"
+              (change)="howManyday()">
           </div>
 
 
           <div class="inputbox mt-3"> <span>Date de retour :</span>
-            <input type="date" required [(ngModel)]="dateEndLeave" name="dateEndLeave" (change)="howManyday()">
+            <input type="date" required [(ngModel)]="leave.dateOfEndLeave" name="dateEndLeave" (change)="howManyday()">
           </div>
 
 
 
           <div class="inputbox mt-3"> <span>Type de congé :</span>
-            <select class="form-input" required [(ngModel)]="idOfLeaveType" name="getTypeLeave"
-              (change)="getTypeLeave()">
-              <option *ngFor="let typeConge of allLeaveType" value="{{typeConge.id}}">{{typeConge.type}}</option>
+            <select class="form-input" required [(ngModel)]="leave.leaveType" name="leave.leaveType">
+              <option *ngFor="let typeConge of allLeaveType" [ngValue]="typeConge">{{typeConge.type}}</option>
             </select>
           </div>
+
 
 
         </div>
@@ -50,7 +50,7 @@
           <div class="rightInputs">
             <div class="inputbox mt-3">
               <span>᲼᲼᲼</span>
-              <select class="form-input" required [(ngModel)]="leave.statusDebut" name="leaveStartStatus"
+              <select class="form-input" required [(ngModel)]="leave.statusDebut" name="leave.statusDebut"
                 id="leaveStartStatus">
                 <option value="matin">Matin</option>
                 <option value="après-midi">Apres-midi</option>
@@ -60,7 +60,7 @@
 
             <div class="inputbox mt-3">
               <span>᲼᲼᲼</span>
-              <select class="form-input" required [(ngModel)]="leave.statusFin" name="leaveEndStatus"
+              <select class="form-input" required [(ngModel)]="leave.statusFin" name="leave.statusFin"
                 id="leaveEndStatus">
                 <option value="matin">Matinée</option>
                 <option value="après-midi">Apres-midi</option>
@@ -78,13 +78,29 @@
 
             <div class="inputbox mt-3">
               <span>Total jours : </span>
-              <input type="text" placeholder=" {{dayNumber}}" disabled>
+              <input type="text" [(ngModel)]="leave.nbJours" name="leave.nbJours" placeholder="" disabled>
             </div>
 
-            <button class="btnForm" (click)="retour()">Retour</button>
-            <button class="btnForm" type="submit">Ajouter demande de congé</button>
+    
+
+            <br>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <button class=" btnForm gb gb-bordered hover-slide" id="gb9" type="submit">Ajouter</button>
+
+              </div>
+              <div class="col-sm-6">
+                <button class=" btnForm gb gb-bordered hover-slide" id="gb9" (click)="retour()">Retour</button>
+
+              </div>
+            </div>
+
 
           </div>
+
+
+
 
 
         </div>
@@ -96,8 +112,8 @@
 
 
   <div class="container">
-    <h2>Vos demandes :</h2>
-    <table class="table table-condensed">
+    <h2>Demandes en-cours :</h2>
+    <table class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Date début</th>
@@ -107,7 +123,6 @@
           <th>Etat de la demande</th>
           <th>Action</th>
 
-          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -118,7 +133,9 @@
 
           <td>{{leave.leaveType.type}}</td>
           <td>{{leave.status}}</td>
-          <td><button class="btnEditer" (click)="deleteLeaveById(leave.id)">Supprimer</button></td>
+
+
+          <td><button class=" btnEditer gb gb-bordered hover-slide" id="gb9" (click)="deleteLeaveById(leave.id)">Supprimer</button></td>
         </tr>
       </tbody>
     </table>

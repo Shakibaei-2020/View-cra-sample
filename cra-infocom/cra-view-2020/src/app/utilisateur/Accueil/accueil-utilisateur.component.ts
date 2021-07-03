@@ -8,9 +8,11 @@ import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 @Component({
   selector: 'app-accueil-utilisateur',
   templateUrl: './accueil-utilisateur.component.html',
-  styleUrls: ['./accueil-utilisateur.component.css']
+  styleUrls: ['./accueil-utilisateur.scss']
 })
 export class AccueilUtilisateurComponent implements OnInit {
+
+  
 
   collaborateur = new Collaborator();
 

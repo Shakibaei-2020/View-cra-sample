@@ -20,6 +20,7 @@ export class ExpenseService {
   }
 
   addOneExpense(expense: Expense): Observable<Expense> {
+    console.log(expense)
     return this._http.post<Expense>("http://localhost:7672/expenses/update", expense);
   }
 

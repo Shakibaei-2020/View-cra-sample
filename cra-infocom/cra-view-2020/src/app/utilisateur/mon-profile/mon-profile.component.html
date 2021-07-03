@@ -2,21 +2,20 @@
 
 
 
-<div class="div-edit">
+<div class="">
 
   <div class="container">
 
-    <div class="panel">
-      <div class="bio-graph-heading-profil">
+    <div >
+      <div >
 
-        <div class="container ">
+        <!-- <div class="container ">
           <img class="profil-image"
             src="https://qualium-investissement.com/wp-content/uploads/2017/05/inconnu-small.jpg">
           <p class="titre">Bonjour ! {{collaborateur.firstName}} {{collaborateur.lastName}} </p>
-        </div>
+        </div> -->
       </div>
-      <br><br><br><br>
-      <div class="panel-body bio-graph-info">
+      <div class="">
         <br>
         <br>
 
@@ -60,14 +59,29 @@
             </div>
             <p>{{alert}} </p>
 
+                  
+          <div class="row">
+            <div class="col-sm-6">
+              <button class=" btnForm gb gb-bordered hover-slide" id="gb9" (click)="retour()">Retour</button>
+
+
+  
+            </div>
+            <div class="col-sm-6">
+
+              <button class=" btnForm gb gb-bordered hover-slide" id="gb9" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
+
+            </div>
           </div>
-          <div class="bio-row">
+
+
           </div>
+  
+    
+
           <div class="bio-row">
 
-            <button class="button" (click)="retour()">Retour</button>
 
-            <button class="button" data-toggle="modal" data-target="#updateModal">Mettre à jour</button>
 
 
             <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
@@ -83,8 +97,8 @@
                     Êtes vous sur de vouloir mettre à jour ?
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" (click)="updateCollab()"> Sauvgarder</button>
+                    <button type="button" class="btn btnModal" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn  btnModal" (click)="updateCollab()"> Sauvgarder</button>
                   </div>
                 </div>
               </div>

@@ -31,7 +31,9 @@ import localeFr from '@angular/common/locales/fr';
 import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
 import { ProjectComponent } from './administrateur/project/project.component';
 import { AddProjectComponent } from './administrateur/project/add-project/add-project.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -61,6 +63,7 @@ registerLocaleData(localeFr, 'fr');
     AccueilAdministrateurComponent,
     ProjectComponent,
     AddProjectComponent,
+    
 
   ],
   imports: [
@@ -69,6 +72,9 @@ registerLocaleData(localeFr, 'fr');
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MDBBootstrapModule.forRoot(),
+
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent],

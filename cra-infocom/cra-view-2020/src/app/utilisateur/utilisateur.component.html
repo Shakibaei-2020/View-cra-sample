@@ -1,8 +1,97 @@
-<nav class="navbar navbar-expand-lg  bg">
+<head>
 
-  <img class="logo" src="https://www.infocom-group.fr/dist/img/logo_symbole.png" (click)="retour()" width="80">
-  <h2 class="entreprise">Infocom Group</h2>
-</nav>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" type="image/png"
+    href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+  <meta name="apple-mobile-web-app-title" content="CodePen">
+
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+  <link rel="mask-icon" type=""
+    href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+    color="#111">
+
+
+  <title>CodePen - Horizontal Menu</title>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+
+  <style>
+
+  </style>
+
+  <script>
+    window.console = window.console || function (t) { };
+  </script>
 
 
 
+  <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage("resize", "*");
+    }
+  </script>
+
+
+</head>
+
+<div class="contenue shadow p-3 mb-5 bg-white rounded " id="gb3" translate="no" >
+  <div id="wrapper">
+    <ul>
+
+      <li >
+        <a >
+          <i>
+            <img src=" https://www.infocom-group.fr/dist/img/logo_symbole.png " style="height: 50px;">
+          </i>
+          <div>
+            INFOCOM GROUP
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="goToDeclarationActivite()">
+          <i class="fas fa-file-contract"></i>
+          <div>
+            Déclaration d'activité
+          </div>
+        </a>
+      </li>
+
+
+
+
+      <li>
+        <a (click)="goToDemandeConge()">
+          <i class="far fa-calendar-alt"></i>
+          <div>
+            Demande de congé
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="goToAddNoteDeFrais()">
+          <i class="far fa-edit"></i>
+          <div>
+            Déclaration note de frais </div>
+        </a>
+      </li>
+
+      <li>
+        <a (click)="goToProfil()">
+          <i class="far fa-user"></i>
+          <div>
+            Profile
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+
+</div>

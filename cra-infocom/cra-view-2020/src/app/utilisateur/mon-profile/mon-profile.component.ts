@@ -8,7 +8,8 @@ import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 @Component({
   selector: 'app-mon-profile',
   templateUrl: './mon-profile.component.html',
-  styleUrls: ['./mon-profile.component.css']
+  styleUrls: ['./mon-profile.component.css',
+  '../button.scss']
 })
 export class MonProfileComponent implements OnInit {
 

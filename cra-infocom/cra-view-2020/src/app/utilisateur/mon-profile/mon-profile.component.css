@@ -66,10 +66,6 @@
     font-weight: 300;
 }
 
-.div-edit{
-    margin-top: 4%;
-}
-
 
 
 .btnTab {
@@ -100,35 +96,6 @@
 
 
 
-.profile-nav, .profile-info{
-    margin-top:30px;   
-}
-
-.profile-nav .user-heading {
-    background: #252525;
-    color: #fff;
-    border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-    text-align: center;
-    height:125px;
-    padding-top: 52px;
-    border-radius: 15px;
-
-}
-
-.profile-nav .user-heading.round a  {
-    border-radius: 8px;
-    -webkit-border-radius: 50%;
-    border: 10px solid rgba(255,255,255,0.3);
-    display: inline-block;
-}
-
-.profile-nav .user-heading h1 {
-    font-size: 22px;
-    font-weight: 300;
-    margin-bottom: 5px;
-
-}
 
 .form-input{
     width: 130px;
@@ -184,19 +151,6 @@ input[type=date] {
   }
 
 
-
-.bio-graph-heading-profil{
-    text-align: center;
-    padding: 5px 110px;
-    border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-    font-size: 8px;
-    height:30px;
-    border-radius: 15px;
-}
-.titre{
-    font-size: 15px;
-}
 .bio-row {
     width: 50%;
     float: left;
@@ -246,4 +200,13 @@ input[type=date] {
     border-radius: 100%;
     box-shadow: 0 9px #999;
     margin-bottom: 5%;
+  }
+  .btnForm{
+      width: 100%;
+  }
+
+  .btnModal{
+    color: white;
+    background-color: #0B5FEA;
+  
   }
