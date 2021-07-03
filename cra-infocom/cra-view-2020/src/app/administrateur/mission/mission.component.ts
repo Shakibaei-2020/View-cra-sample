@@ -15,7 +15,8 @@ import { Project } from 'src/app/z-model/Project/project';
 @Component({
   selector: 'app-mission',
   templateUrl: './mission.component.html',
-  styleUrls: ['./mission.component.css']
+  styleUrls: ['./mission.component.css',
+'./../button.scss']
 })
 export class MissionComponent implements OnInit {
 

@@ -5,8 +5,7 @@
         <div class="container ">
             <div>
                 <button class="img-fluid bouttonSousMenu">
-                    <img class="img1"
-                        src="https://img-premium.flaticon.com/png/512/1534/1534938.png?token=exp=1623225915~hmac=32088da7943da48bf7dadfe6039678cc">
+                    <i class="fas fa-plus"></i>
                 </button>
                 <h2 class="page">Ajouter un collaborateur</h2>
             </div>
@@ -60,6 +59,20 @@
                         </div>
 
                     </div>
+
+                    <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button class="btnForm gb2 gb-bordered hover-slide" id="gb79" (click)="goToSearch()">Retour</button>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btnForm gb2 gb-bordered hover-slide" id="gb79" data-toggle="modal"
+                            data-target="#DeleteModal">Ajouter</button>
+
+                    </div>
+                </div>
+
                 </div>
                 <div class="col-md-6">
                     <span class="validation">{{validation}}</span>
@@ -67,11 +80,7 @@
                 </div>
                 <br>
 
-                <div class="col-md-6">
-                    <button class="btnEditer" (click)="goToSearch()">Retour</button>
-                    <button class="btnEditer" data-toggle="modal" data-target="#DeleteModal">Ajouter</button>
 
-                </div>
 
 
 
@@ -87,11 +96,12 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Êtes-vous sur de vouloir ajouter ce collaborateur?                          
-                              </div>
+                                Êtes-vous sur de vouloir ajouter ce collaborateur?
+                            </div>
                             <div class="modal-footer">
-                                <button class="btnEditer2" data-dismiss="modal">Annuler</button>
-                                <button class="btnEditer2"   data-dismiss="modal" (click)="addCollabFormSubmit()">Ajouter</button>
+                                <button class="btnEditer2 btn" data-dismiss="modal">Annuler</button>
+                                <button class="btnEditer2 btn" data-dismiss="modal"
+                                    (click)="addCollabFormSubmit()">Ajouter</button>
 
                             </div>
                         </div>

@@ -26,30 +26,6 @@
   color: red;
 }
 
-.btnEditer {
-    padding: 10px 25px;
-    padding-bottom: 29px;
-    margin-left: 5%;
-    width: 100%;
-    font-size: 14px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #363636;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    height: 5px;
-  }
-  
-  .btnEditer:hover {background-color: #464646}
-  
-  .btnEditer:active {
-    background-color: #252525;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
 
   .btnTab {
     padding-bottom: 25px;
@@ -82,24 +58,18 @@
     padding-top: 5px;
     width: 100px;
     font-size: 14px;
-    
+    background-color: rgb(177, 13, 96);
+
     text-align: center;
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #464646;
     border: none;
-    border-radius: 15px;
+    border-radius: 4px;
     height: 5px;
   }
   
-  .btnModal:hover {background-color: #636363}
-  
-  .btnModal:active {
-    background-color: #464646;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
+
 
  
 
@@ -122,19 +92,10 @@
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #363636;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    height: 5px;
   }
   
-  .btnSearch:hover {background-color: #464646}
-  
-  .btnSearch:active {
-    background-color: #252525;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+  .btnEditer{
+    width: 100%;
   }
 
 
@@ -182,12 +143,7 @@ margin-top: 7px;
   height: 30px;
 }
 
-.bouttonMenu:hover {background-color: bl}
-  
-.bouttonMenu:active {
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
+
 
 .bouttonMenu {
     float: left;
@@ -198,7 +154,7 @@ margin-top: 7px;
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #ffbf35;
+    background-color: rgb(177, 13, 96);
     border: none;
     border-radius: 100%;
     margin-bottom: 5%;
@@ -215,20 +171,20 @@ margin-top: 7px;
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #ffbf35;
+    background-color: rgb(177, 13, 96);
     border: none;
     border-radius: 100%;
     margin-right: 10px;
   }
 
 
-.buttonAdd:hover {background-color: bl}
-  
-.buttonAdd:active {
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
+.btnViolet{
+  background-color: rgb(177, 13, 96);
+  color: white;
+  width: 100%;
+  margin-top: 5px;
 
+}
 /** FOR MODAL */
 
  .modal-input{

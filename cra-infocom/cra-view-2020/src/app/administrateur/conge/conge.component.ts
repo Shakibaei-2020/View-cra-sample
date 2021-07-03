@@ -13,7 +13,8 @@ import { TypeLeave } from 'src/app/z-model/Leave/type-leave';
 @Component({
   selector: 'app-conge',
   templateUrl: './conge.component.html',
-  styleUrls: ['./conge.component.css']
+  styleUrls: ['./conge.component.css',
+  '../button.scss']
 })
 export class CongeComponent implements OnInit {
 

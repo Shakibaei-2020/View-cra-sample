@@ -7,17 +7,17 @@
   <div class="container">
     <div>
       <button class="img-fluid bouttonMenu">
-        <img class="img1"
-          src="https://img-premium.flaticon.com/png/512/3233/3233497.png?token=exp=1623226098~hmac=3a138cb47c1e50795a2a9ef7a0d9e2e6">
-      </button>
+        <i class="fas fa-bullseye"></i>
 
+      </button>
+<!-- 
       <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
         <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
-      </button>
+      </button> -->
 
       <button (click)="goToAddMission()" class="img-fluid buttonAdd ">
-        <img class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
-      </button>
+        <i class="fas fa-plus"></i>  
+          </button>
 
 
       <h2 class="page">Gestion des missions</h2>
@@ -40,7 +40,7 @@
       <div class="row">
         <div class="col-sm-4"><input type="date" required [(ngModel)]="date1" name="date1"></div>
         <div class="col-sm-4"><input type="date" required [(ngModel)]="date2" name="date2"></div>
-        <div class="col-sm-4"><button class="btnSearch" type="submit" (click)="searchMission()">Chercher</button></div>
+        <div class="col-sm-4"><button class="btnSearch gb2 gb-bordered hover-slide" id="gb79"  type="submit" (click)="searchMission()">Chercher</button></div>
         <div class="col-sm-8"><br><br>
           <span>Nom du client : </span> <input type="text" autocomplete="off" required [(ngModel)]="clientName"
             name="clientName">
@@ -96,7 +96,7 @@
                 <p class="contentTable">{{mission.endDate | date: 'dd/MM/yyyy' }}</p>
               </td>
               <td>
-                <button type="button" class="btn btn-dark btn-block" data-toggle="modal"
+                <button type="button" class="btnEditer gb2 gb-bordered hover-slide" id="gb79" data-toggle="modal"
                   [attr.data-target]=" '#myMissionModal-' + indexOfelement"
                   (click)="OnInitModal(mission.id,indexOfelement)">Éditer</button>
               </td>
@@ -211,9 +211,9 @@
                             id="projectToUpdateName-{{i}}-{{indexOfelement}}" />
                         </td>
                         <td>
-                          <button class="btn btn-dark btn-block" type="button"
+                          <button class="btn btnViolet" type="button"
                             (click)="majTheProject(project.id,i)">Maj</button>
-                          <button class="btn btn-dark btn-block" type="button"
+                          <button class="btn btnViolet" type="button"
                             (click)="deleteTheProject(project.id,project,allProjectOfMission)">Supprimer</button>
                         </td>
                       </tr>
@@ -224,8 +224,8 @@
 
 
                 <div class="modal-footer">
-                  <button class="btnModal" type="submit" (click)="updateMission(indexOfelement)">Maj</button>
-                  <button class="btnModal" type="submit" (click)="deleteMission(mission.id)">Supprimer</button>
+                  <button class="btnModal btn" type="submit" (click)="updateMission(indexOfelement)">Maj</button>
+                  <button class="btnModal btn" type="submit" (click)="deleteMission(mission.id)">Supprimer</button>
                 </div>
 
 

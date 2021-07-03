@@ -13,7 +13,8 @@ import { Project } from 'src/app/z-model/Project/project';
 @Component({
   selector: 'app-add-mission',
   templateUrl: './add-mission.component.html',
-  styleUrls: ['./add-mission.component.css']
+  styleUrls: ['./add-mission.component.css',
+'../../button.scss']
 })
 export class AddMissionComponent implements OnInit {
 

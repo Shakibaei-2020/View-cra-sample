@@ -11,7 +11,9 @@ import { Collaborator } from 'src/app/z-model/Collaborator/collaborator';
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
-  styleUrls: ['./client.component.css']
+  styleUrls: ['./client.component.css',
+'./../button.scss'
+]
 })
 export class ClientComponent implements OnInit {
 

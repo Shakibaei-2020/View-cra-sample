@@ -17,9 +17,7 @@ import { ClientComponent } from './administrateur/client/client.component';
 import { AddMissionComponent } from './administrateur/mission/add-mission/add-mission.component';
 import { MissionComponent } from './administrateur/mission/mission.component';
 import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
-import { AccueilUtilisateurComponent } from './utilisateur/Accueil/accueil-utilisateur.component';
 import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-declaration/note-de-frais-declaration.component';
-import { AccueilAdministrateurComponent } from './administrateur/accueil-administrateur/accueil-administrateur.component';
 import { PreloadAllModules } from '@angular/router';
 import { ProjectComponent } from './administrateur/project/project.component';
 import { AddProjectComponent } from './administrateur/project/add-project/add-project.component';
@@ -34,8 +32,6 @@ export const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
   { path: 'declarationActivite', component: DeclarationActiviteComponent },
   { path: 'demandeConge', component: CongeDemandeComponent },
-  { path: 'utilisateur', component: AccueilUtilisateurComponent },
-  { path: 'administrateur', component: AccueilAdministrateurComponent },
   { path: 'searchLeave', component: CongeComponent },
   { path: 'editActivite', component: EditComponent },
   { path: 'addActivite', component: AddComponent },

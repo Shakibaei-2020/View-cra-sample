@@ -15,6 +15,15 @@ body {
     border-radius: 4px;
   }
   
+  .gb2{
+    padding: 8px 20px;
+    margin-right: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    
+    border-top-right-radius: 510px;
+    border-bottom-right-radius: 100px;
+  }
   
   $border-width: 4px;
   
@@ -105,10 +114,15 @@ body {
 
 
 #gb79 {
-    &:after {
-        background: linear-gradient(45deg, rgb(239, 7, 129) 0%, rgb(239, 7, 129) 6%,rgb(208, 10, 112) 6%, rgb(208, 10, 112) 25%,rgb(177, 13, 96) 25%, rgb(177, 13, 96) 40%,rgb(147, 16, 79) 40%, rgb(147, 16, 79) 45%,rgb(116, 19, 62) 45%, rgb(116, 19, 62) 53%,rgb(85, 22, 46) 53%, rgb(85, 22, 46) 66%,rgb(54, 25, 29) 66%, rgb(54, 25, 29) 100%);
-    }
-    }
+  background-color: transparent;
+  color: white;
+  &:after {
+    background-image: linear-gradient(45deg, rgb(239, 7, 129) 0%, rgb(239, 7, 129) 6%,rgb(208, 10, 112) 6%, rgb(208, 10, 112) 25%,rgb(177, 13, 96) 25%, rgb(177, 13, 96) 40%,rgb(147, 16, 79) 40%, rgb(147, 16, 79) 45%,rgb(116, 19, 62) 45%, rgb(116, 19, 62) 53%,rgb(85, 22, 46) 53%, rgb(85, 22, 46) 66%,rgb(54, 25, 29) 66%, rgb(54, 25, 29) 100%);
+  }
+  &:hover {
+    color: white;
+  }
+}
 
 
   #gb4 {

@@ -20,10 +20,8 @@
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #363636;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
+    background-color: rgb(177, 13, 96);
+
   }
 .btnEditer {
   margin-top: 6%;
@@ -36,20 +34,11 @@
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #363636;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    margin-bottom: 5%;
+    background-color: rgb(177, 13, 96);
+ 
   }
   
-  .btnEditer:hover {background-color: #464646}
-  
-  .btnEditer:active {
-    background-color: #363636;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
+
   input[type=text] {
     width: 100%;
     padding: 12px 20px;
@@ -97,13 +86,9 @@
     height: 30px;
   }
   
-  .bouttonMenu:hover {background-color: bl}
-    
-  .bouttonMenu:active {
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
-  
+.btnForm{
+  width: 100%;
+}
   .bouttonSousMenu {
       float: left;
       height: 40px;
@@ -113,7 +98,7 @@
       cursor: pointer;
       outline: none;
       color: #fff;
-      background-color: #ffbf35;
+      background-color: rgb(177, 13, 96);
       border: none;
       border-radius: 100%;
       margin-bottom: 5%;

@@ -5,20 +5,21 @@
   <div class="container">
     <div>
       <button class="img-fluid bouttonSousMenu">
-        <img class="img1"
-          src="https://img-premium.flaticon.com/png/512/1534/1534938.png?token=exp=1623225915~hmac=32088da7943da48bf7dadfe6039678cc">
+        <i class="fas fa-users"></i>
+
       </button>
 
 
-      <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
+      <!-- <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
         <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
       </button>
-
+ -->
 
 
       <button (click)="goToAddCollab()" class="img-fluid buttonAdd ">
-        <img class="img1" src="https://image.flaticon.com/icons/png/512/1632/1632686.png">
-      </button>
+        <i class="fas fa-plus"></i>      </button>
+
+      
       <h2 class="page">Gestion des collaborateurs</h2>
     </div>
 
@@ -28,7 +29,8 @@
         <form class="example" action="action_page.php" #addCollabForm="ngForm" (ngSubmit)="searchOneCollab()">
           <input type="text" autocomplete="off" placeholder="Prénom du collaborateur" required
             [(ngModel)]="collaboratorInputLastName.lastName" name="lastName">
-          <button type="submit">
+
+          <button  class="btnSearch gb2 gb-bordered hover-slide" id="gb79" >
             <p>Chercher</p>
           </button>
 
@@ -72,7 +74,7 @@
                 </td>
 
                 <td>
-                  <button class="btn btn-dark btn-block" type="submit" (click)="goToEditCollab()">Éditer </button>
+                  <button class="btnEditer gb2 gb-bordered hover-slide" id="gb79"  type="submit" (click)="goToEditCollab()">Éditer </button>
                 </td>
               </tr>
             </tbody>

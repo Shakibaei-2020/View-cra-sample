@@ -7,8 +7,8 @@
   <div class="panel">
     <div>
       <button class="img-fluid bouttonMenu">
-        <img class="img1"
-          src="https://img-premium.flaticon.com/png/512/3233/3233497.png?token=exp=1623226098~hmac=3a138cb47c1e50795a2a9ef7a0d9e2e6">
+        <i class="fas fa-bullseye"></i>
+
       </button>
       <h2>Ajouter nouvelle mission</h2>
     </div>
@@ -90,6 +90,20 @@
               </table>
 
             </div>
+
+            <br>
+            <div class="row">
+              <div class="col-sm-6">
+                <button class="btnTet gb-bordered hover-slide" id="gb79"  (click)="goToSearch()">Retour</button>
+
+              </div>
+              <div class="col-sm-6">
+                <button class="btnTet gb-bordered hover-slide" id="gb79" data-toggle="modal" data-target="#DeleteModal">Ajouter</button>
+
+              </div>
+            </div>
+
+
           </div>
         </div>
 
@@ -127,9 +141,10 @@
       <div class="bio-row">
 
 
-        <button class="button" (click)="goToSearch()">Retour</button>
 
-        <button class="button" data-toggle="modal" data-target="#DeleteModal">Ajouter</button>
+
+
+
 
         <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
@@ -145,8 +160,8 @@
                 Êtes vous sur de vouloir ajouter cet mission?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="addMission()">Ajouter</button>
+                <button type="button" class="btn btnViolet" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btnViolet" data-dismiss="modal" (click)="addMission()">Ajouter</button>
               </div>
             </div>
           </div>

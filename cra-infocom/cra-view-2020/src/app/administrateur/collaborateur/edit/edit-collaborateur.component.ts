@@ -18,7 +18,9 @@ import { TypeLeaveService } from 'src/app/y-service/Leave/type-leave.service';
 @Component({
   selector: 'app-edit-collaborateur',
   templateUrl: './edit-collaborateur.component.html',
-  styleUrls: ['./edit-collaborateur.component.css']
+  styleUrls: ['./edit-collaborateur.component.css',
+  '../../button.scss',
+]
 })
 export class EditCollaborateurComponent implements OnInit {
 

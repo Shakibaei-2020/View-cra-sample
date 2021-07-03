@@ -14,9 +14,9 @@
     float: left;
     width: 80%;
     background: #f1f1f1;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
-    height:47px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    height:57px;
 
   }
 
@@ -34,13 +34,7 @@ Table{
     width: 120px;
     padding-top: 12px;
 
-    background: #363636;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none; 
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+
 
   }
 
@@ -64,29 +58,9 @@ Table{
     display:none;
 }
 .btnEditer {
-    padding: 10px 25px;
-    padding-bottom: 29px;
-    margin-left: 5%;
-    width: 40%;
-    font-size: 14px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #363636;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    height: 5px;
+ width: 100%;
   }
   
-  .btnEditer:hover {background-color: #464646}
-  
-  .btnEditer:active {
-    background-color: #252525;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
 
 
 
@@ -111,7 +85,7 @@ Table{
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #ffbf35;
+    background-color: rgb(177, 13, 96);
     border: none;
     border-radius: 100%;
     margin-bottom: 5%;
@@ -128,19 +102,12 @@ Table{
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #ffbf35;
+    background-color: rgb(177, 13, 96);
     border: none;
     border-radius: 100%;
     margin-right: 10px;
   }
 
-
-.buttonAdd:hover {background-color: bl}
-  
-.buttonAdd:active {
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
 
 /** FOR MODAL */
 
@@ -182,36 +149,18 @@ Table{
   height: 5px;
 }
 
-.btnTab:hover {background-color: #636363}
-
-.btnTab:active {
-  background-color: #464646;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
 
 
 .btnModal {
   padding-bottom: 25px;
   padding-top: 5px;
-  width: 100px;
   font-size: 14px;
   
-  text-align: center;
-  cursor: pointer;
-  outline: none;
+
   color: #fff;
-  background-color: #464646;
-  border: none;
-  border-radius: 15px;
+
+  background-color: rgb(177, 13, 96);
+  
   height: 5px;
-}
-
-.btnModal:hover {background-color: #636363}
-
-.btnModal:active {
-  background-color: #464646;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
 }
 

@@ -12,7 +12,8 @@ import { TypeExpense } from 'src/app/z-model/Expense/type-expense';
 @Component({
   selector: 'app-frais',
   templateUrl: './frais.component.html',
-  styleUrls: ['./frais.component.css']
+  styleUrls: ['./frais.component.css',
+  '../button.scss']
 })
 export class FraisComponent implements OnInit {
 

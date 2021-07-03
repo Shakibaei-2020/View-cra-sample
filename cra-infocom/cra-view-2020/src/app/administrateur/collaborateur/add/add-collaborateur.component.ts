@@ -12,7 +12,9 @@ import { EditCollaborateurComponent } from '../edit/edit-collaborateur.component
 @Component({
   selector: 'app-add-collaborateur',
   templateUrl: './add-collaborateur.component.html',
-  styleUrls: ['./add-collaborateur.component.css']
+  styleUrls: ['./add-collaborateur.component.css',
+  '../../button.scss',
+]
 })
 export class AddCollaborateurComponent implements OnInit {
 

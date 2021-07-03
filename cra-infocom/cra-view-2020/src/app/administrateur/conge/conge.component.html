@@ -5,13 +5,12 @@
 
     <span>
       <button class="img-fluid bouttonMenu ">
-        <img class="img1" src="https://image.flaticon.com/icons/png/512/1719/1719522.png">
+        <i class="far fa-calendar-alt"></i>
       </button>
 
-
+<!-- 
       <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
-        <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
-      </button>
+        <i class="fas fa-plus"></i>      </button> -->
       <h2 class="page">Gestion des demandes de congés </h2>
     </span>
     <hr>
@@ -33,7 +32,7 @@
         </div>
 
         <div class="col-sm-4">
-          <button class="btnSearch" type="submit" (click)="searchConge()">Chercher</button>
+          <button class="btnSearch  gb gb-bordered hover-slide" id="gb79"  (click)="searchConge()">Chercher</button>
         </div>
 
         <div class="col-sm-8"><br>
@@ -116,7 +115,7 @@
                 <p class="contentTable">{{leave.leaveType.type }}</p>
               </td>
               <td>
-                <button class="btn btn-dark btn-block" data-toggle="modal"
+                <button class="btnEditer gb gb-bordered hover-slide" id="gb79"  data-toggle="modal"
                   [attr.data-target]=" '#myLeaveModal-' + indexOfelement">Éditer</button>
               </td>
             </tr>
@@ -193,13 +192,6 @@
                   <!-- Colonne 2-->
                   <div class="col-sm-6">
 
-<<<<<<< HEAD
-                    <div class="inputbox mt-1 toHide">
-                      <span> Date de demande : {{leave.dateOfDemand | date: 'dd/MM/yyyy'}}</span><br>
-                      <input class="modal-input" type="date" name="dateLeaveRequest-{{indexOfelement}}"
-                        id="dateLeaveRequest-{{indexOfelement}}" disabled>
-                    </div>
-=======
                   <div class="inputbox mt-1">
                     <span> Client informé :</span><br>
                     <select class="modal-input" name="leaveClientInformed-{{indexOfelement}}" id="leaveClientInformed-{{indexOfelement}}">
@@ -208,7 +200,6 @@
                       <option value="false">Non</option>
                     </select>
                   </div>
->>>>>>> tmp
 
                     <div class="rightInputs">
                       <div class="inputbox mt-1">
@@ -265,8 +256,8 @@
 
                 <div class="modal-footer">
 
-                  <button class="btnModal" type="submit" (click)="updateLeaveFromCollab(indexOfelement)">Maj</button>
-                  <button class="btnModal" type="submit" data-dismiss="modal"
+                  <button class="btn btnModal" type="submit" (click)="updateLeaveFromCollab(indexOfelement)">Maj</button>
+                  <button class="btn btnModal" type="submit" data-dismiss="modal"
                     (click)="deleteLeaveFromCollab(leave.id,leaves,leave)">Supprimer</button>
                 </div>
               </div>

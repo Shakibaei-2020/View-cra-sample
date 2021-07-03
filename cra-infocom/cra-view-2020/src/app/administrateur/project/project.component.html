@@ -4,12 +4,12 @@
 <div class="container">
     <div>
         <button class="img-fluid bouttonMenu">
-            <img class="img1" src="https://image.flaticon.com/icons/png/512/775/775578.png">
+            <i class="fas fa-project-diagram"></i>
         </button>
 
-        <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
+        <!-- <button (click)="goToAccueil()" class="img-fluid buttonAdd ">
             <img class="img1" src="https://image.flaticon.com/icons/png/512/1276/1276491.png">
-        </button>
+        </button> -->
 
     
 <!-- 
@@ -54,7 +54,7 @@
 
                         <div class="container"><br>
 
-                            <button class="btnSearch" type="submit">
+                            <button class="btnSearch gb2 gb-bordered hover-slide" id="gb79" type="submit">
                                 <p>Chercher</p>
                             </button>
                         </div>
@@ -104,7 +104,7 @@
 
                             </td>
                             <td>
-                                <button type="button" class="btn btn-dark btn-block" data-toggle="modal"
+                                <button type="button" class="btnEditer gb2 gb-bordered hover-slide" id="gb79" data-toggle="modal"
                                     [attr.data-target]=" '#myProjectModal-' + indexOfelement"
                                     (click)="modelInfo(project.id)">Éditer</button>
                             </td>
@@ -140,7 +140,7 @@
                                     </div>
 
                                     <div class="d-table-cell align-middle">
-                                        <button class="btnModal2" (click)="searchOneCollab()">Chercher</button>
+                                        <button class="btnModal2 btnViolet" (click)="searchOneCollab()">Chercher</button>
                                     </div>
                                 </div>
 
@@ -184,7 +184,7 @@
 
                                                     <td>
                                                         <!-- <button type="button" class="btnTab"  (click)="modelInfo(collaborator.id)">Affecter</button> -->
-                                                        <button type="button" class="btn btn-dark btn-block"
+                                                        <button type="button" class="btn btnViolet  btn-block"
                                                             (click)="affectCollabToProject(project.id,collaborator.id,searchedCollabs,collaborator)">Affecter</button>
                                                     </td>
                                                 </tr>
@@ -232,7 +232,7 @@
                                                         <p class="contentTable">{{collaborator.email}}</p>
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-dark btn-block"
+                                                        <button type="button" class="btn btnViolet btn-block"
                                                         data-dismiss="myProjectModal-indexOfelement"  (click)="deleteCollabOfProject(project.id,collaborator.id,allCollabOfProject,collaborator)">Supprimer</button>
 
                                                     </td>

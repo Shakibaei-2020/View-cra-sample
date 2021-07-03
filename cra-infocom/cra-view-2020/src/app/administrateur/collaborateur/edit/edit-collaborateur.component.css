@@ -9,24 +9,19 @@
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #464646;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    margin-bottom: 5%;
-  }
-  
-  .btnAction:hover {background-color: #636363}
-  
-  .btnAction:active {
-    background-color: #464646;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+
   }
 
-  
+  .btnEditer{
+    width: 100%;
+  }
 .container {
     height: 100vh;
+}
+.btnViolet{
+  background-color: rgb(177, 13, 96);
+  color:white;
+
 }
 
 .card {
@@ -303,13 +298,7 @@ input[type=date] {
 .img1{
     height: 30px;
   }
-  
-  .bouttonMenu:hover {background-color: bl}
-    
-  .bouttonMenu:active {
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
+ 
   
   .bouttonSousMenu {
       float: left;
@@ -320,7 +309,7 @@ input[type=date] {
       cursor: pointer;
       outline: none;
       color: #fff;
-      background-color: #ffbf35;
+      background-color: rgb(177, 13, 96);
       border: none;
       border-radius: 100%;
       margin-bottom: 5%;
@@ -352,7 +341,7 @@ input[type=date] {
       cursor: pointer;
       outline: none;
       color: #fff;
-      background-color: #ffbf35;
+      background-color: rgb(177, 13, 96);
       border: none;
       border-radius: 100%;
       margin-right: 10px;

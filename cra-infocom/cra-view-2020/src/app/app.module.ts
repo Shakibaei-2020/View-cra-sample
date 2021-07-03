@@ -23,9 +23,7 @@ import { AddClientComponent } from './administrateur/client/add-client/add-clien
 import { MissionComponent } from './administrateur/mission/mission.component';
 import { AddMissionComponent } from './administrateur/mission/add-mission/add-mission.component';
 import { MonProfileComponent } from './utilisateur/mon-profile/mon-profile.component';
-import { AccueilUtilisateurComponent } from './utilisateur/Accueil/accueil-utilisateur.component';
 import { NoteDeFraisDeclarationComponent } from './utilisateur/note-de-frais-declaration/note-de-frais-declaration.component';
-import { AccueilAdministrateurComponent } from './administrateur/accueil-administrateur/accueil-administrateur.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { EditCollaborateurComponent } from './administrateur/collaborateur/edit/edit-collaborateur.component';
@@ -58,9 +56,7 @@ registerLocaleData(localeFr, 'fr');
     MissionComponent,
     AddMissionComponent,
     MonProfileComponent,
-    AccueilUtilisateurComponent,
     NoteDeFraisDeclarationComponent,
-    AccueilAdministrateurComponent,
     ProjectComponent,
     AddProjectComponent,
     
