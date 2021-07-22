@@ -4,12 +4,12 @@
 
 export const environment = {
   production: false,
-  leaveBaseUrl: 'http://localhost:8950',
-  expenseBaseUrl: 'http://localhost:7672',
-  activityBaseUrl: 'http://localhost:8800',
-  collaboratorBaseUrl: 'http://localhost:8900',
-  clientBaseUrl: 'http://localhost:8801',
-  zuulBaseUrl: 'http://localhost:9003'
+  leaveBaseUrl: 'http://must-hp:8950',
+  expenseBaseUrl: 'http://must-hp:7672',
+  activityBaseUrl: 'http://must-hp:8800',
+  collaboratorBaseUrl: 'http://must-hp:8900',
+  clientBaseUrl: 'http://must-hp:8801',
+  zuulBaseUrl: 'http://must-hp:9003'
 };
 
 /*
